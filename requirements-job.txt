@@ -1,0 +1,7 @@
+# Installed by the SageMaker PyTorch 2.6 DLC on top of its own torch/numpy (staged as
+# requirements.txt). Never pin torch here: the DLC's CUDA build must stay.
+linear-attention-transformer==0.19.1
+einops==0.8.1
+lmdb==1.6.2
+scikit-learn==1.6.1
+pyyaml==6.0.2

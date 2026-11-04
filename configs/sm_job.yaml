@@ -1,0 +1,23 @@
+# <JOB_LIBRARY> JobConfig base. scripts/submit_job.py overlays per-stage fields via JobSpec.
+# Account <ACCOUNT_ID> (<PROVIDER>), region us-east-1, where the quota lives (verified 2026-10-14:
+# ml.g5.8xlarge = 144, ml.g5.2xlarge = 50 for training job usage).
+
+framework: pytorch
+framework_version: "2.6"     # SageMaker PyTorch DLC 2.6.0, py312 (matches the Mac pilot env)
+py_version: py312
+instance_type: ml.g5.8xlarge # 1 x A10G 24 GB, 128 GB RAM: the eval set fits in RAM as float32
+instance_count: 1
+distributed: false
+volume_size: 150             # CHB-MIT stores ~70 GB + activation dumps + headroom
+use_spot_instances: false
+region: us-east-1
+profile: <AWS_PROFILE>
+auto_refresh_credentials: false   # <JOB_LIBRARY>'s refresh omits --provider <PROVIDER>
+role: <SAGEMAKER_ROLE_ARN>
+output_path: s3://<BUCKET>/<PREFIX>/output/
+environment:
+  OMP_NUM_THREADS: "8"
+  PYTHONUNBUFFERED: "1"
+tags:
+  Owner: <OWNER>
+  Purpose: testing-DX

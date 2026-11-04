@@ -1,0 +1,45 @@
+# The layer registry's source. Loaded once into a frozen Registry (models/registry.py) and
+# injected; nothing else in the package names a module path.
+#
+# Checkpoints verified 2026-10-14 (EXECUTOR-PLAN.md Appendix A). BIOT publishes no hash, so
+# its sha256 below was computed on first download after the byte size matched (13,794,194).
+
+biot:
+  checkpoint:
+    file: weights/biot_EEG-SHHS+PREST-18-channels.ckpt
+    url: https://github.com/ycq091044/BIOT/raw/main/pretrained-models/EEG-SHHS%2BPREST-18-channels.ckpt
+    bytes: 13794194
+    sha256: 391b53f77d5060e43746f3ffd5aae8107785f4fd122bf2f87221a1b5b2854a84
+    loads_into: biot          # the ckpt is a BIOTEncoder state_dict; `prediction` is NOT in it
+  ctor: {emb_size: 256, heads: 8, depth: 4, n_channels: 18}
+  n_blocks: 4
+  max_tokens: 1024            # LinearAttentionTransformer(max_seq_len=1024)
+  fixed_params: [biot.index]
+  groups:
+    embed: [biot.patch_embedding., biot.channel_tokens.]
+    block: ["biot.transformer.layers.layers.{i}."]
+    head: [prediction.]
+  taps:
+    patch_embed: {module: biot.transformer, hook: input}
+    post_block: {module: "biot.transformer.layers.layers.{i}.1", hook: residual}
+    pooled_out: {module: biot, hook: output}
+
+cbramod:
+  checkpoint:
+    file: weights/cbramod_pretrained_weights.pth
+    url: https://huggingface.co/weighting666/CBraMod/resolve/main/pretrained_weights.pth
+    bytes: 19775842
+    sha256: 0792cb808c14e6b7a2bb2ce1dff379bc47bc54c49a779825bdfeb33bf8157178
+    loads_into: ""            # bare CBraMod state_dict, whole module
+  ctor: {in_dim: 200, out_dim: 200, d_model: 200, dim_feedforward: 800, seq_len: 30, n_layer: 12, nhead: 8}
+  n_blocks: 12
+  fixed_params: [patch_embedding.mask_encoding]   # the "200-param residual": requires_grad=False
+  groups:
+    embed: [patch_embedding.]
+    block: ["encoder.layers.{i}."]
+    head: [proj_out.]
+  taps:
+    patch_embed: {module: patch_embedding, hook: output}
+    post_block: {module: "encoder.layers.{i}", hook: output}
+    post_attn: {module: "encoder.layers.{i}.dropout1", hook: output}
+    pooled_out: {module: proj_out, hook: output}

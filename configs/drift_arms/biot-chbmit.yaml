@@ -1,0 +1,85 @@
+# Written by scripts/drift_stage.py from the design-A diagnostic. Do not edit.
+arms:
+  drift_top1_biot_chbmit:
+    groups:
+    - block03
+    - head
+    init: pretrained
+    model: biot
+  drift_top2_biot_chbmit:
+    groups:
+    - block03
+    - embed
+    - head
+    init: pretrained
+    model: biot
+  enum_embed_block00_biot_chbmit:
+    groups:
+    - embed
+    - block00
+    - head
+    init: pretrained
+    model: biot
+  enum_embed_block01_biot_chbmit:
+    groups:
+    - embed
+    - block01
+    - head
+    init: pretrained
+    model: biot
+  enum_embed_block02_biot_chbmit:
+    groups:
+    - embed
+    - block02
+    - head
+    init: pretrained
+    model: biot
+  enum_embed_block03_biot_chbmit:
+    groups:
+    - embed
+    - block03
+    - head
+    init: pretrained
+    model: biot
+  enum_block00_block01_biot_chbmit:
+    groups:
+    - block00
+    - block01
+    - head
+    init: pretrained
+    model: biot
+  enum_block00_block02_biot_chbmit:
+    groups:
+    - block00
+    - block02
+    - head
+    init: pretrained
+    model: biot
+  enum_block00_block03_biot_chbmit:
+    groups:
+    - block00
+    - block03
+    - head
+    init: pretrained
+    model: biot
+  enum_block01_block02_biot_chbmit:
+    groups:
+    - block01
+    - block02
+    - head
+    init: pretrained
+    model: biot
+  enum_block01_block03_biot_chbmit:
+    groups:
+    - block01
+    - block03
+    - head
+    init: pretrained
+    model: biot
+  enum_block02_block03_biot_chbmit:
+    groups:
+    - block02
+    - block03
+    - head
+    init: pretrained
+    model: biot

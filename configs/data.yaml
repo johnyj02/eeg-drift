@@ -1,0 +1,47 @@
+# Dataset stores and splits. Paths are relative to the job's data channel root
+# (/opt/ml/input/data/data in SageMaker, data/lmdb locally).
+
+chbmit:
+  ssl_store: chbmit_ssl30          # [16, 30, 200] float32 uV
+  eval_store: chbmit_eval10        # [16, 2000] float32 uV -> reshaped [16, 10, 200]
+  n_classes: 2
+  window_s: 10
+  eval_scale: 100.0                # upstream datasets/chbmit.py: data / 100
+  # Parity N. The paper reports N_total = 4,174 CHB-MIT SSL windows; their documented pipeline,
+  # reimplemented and run over chb01-chb22, yields far more (see notes/decisions.md D4). Parity
+  # runs use a seeded uniform subsample of exactly the paper's N. Decided BEFORE any result.
+  parity_n: 4174
+  parity_subsample_seed: 4174
+  drift_sample: {n: 2048, seed: 20261015}
+  rotations: {n_folds: 5, seed: 20261014}
+
+# D25-E33a: extended CHB-MIT eval store (scripts/preprocess_chbmit.py --extended): the upstream
+# file list plus every other chb01-chb24 EDF with all 16 BIOT channels by label (chb12, chb13,
+# chb17, chb02_16+, chb24_02, chb24_22). Same SSL store and constants as chbmit. 24 cases = 23
+# subjects, so its seed-20261014 rotations are NOT chbmit's. Data channel: lmdb/chbmit_x/.
+chbmit_x:
+  ssl_store: chbmit_ssl30
+  eval_store: chbmit_x_eval10
+  n_classes: 2
+  window_s: 10
+  eval_scale: 100.0
+  parity_n: 4174
+  parity_subsample_seed: 4174
+  drift_sample: {n: 2048, seed: 20261015}
+  rotations: {n_folds: 5, seed: 20261014}
+
+# Siena Scalp EEG (notes/siena-spec.md, decisions D21). Same constants as CHB-MIT. No paper split
+# exists: rotations only. Labels are the D18 overlap rule (no upstream rule exists), so the
+# oversampled windows are train-only; load_eval refuses any other labels for this dataset.
+siena:
+  ssl_store: siena_ssl30           # [16, 30, 200] float32 uV
+  eval_store: siena_eval10         # [16, 2000] float32 uV
+  n_classes: 2
+  window_s: 10
+  eval_scale: 100.0
+  labels: overlap
+  parity_n: 4174
+  parity_subsample_seed: 4174
+  drift_sample: {n: 2048, seed: 20261015}
+  rotations: {n_folds: 5, seed: 20261014}
+  pub_split: {test: [PN13, PN14, PN16, PN17], val: [PN10, PN12]}   # D25-E33b (CSBrain test set)

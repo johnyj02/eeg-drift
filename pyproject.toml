@@ -1,0 +1,43 @@
+[project]
+name = "eegdrift"
+version = "0.1.0"
+description = "Where does SSL adaptation pressure live in EEG foundation models? (BIOT, CBraMod)"
+requires-python = ">=3.11,<3.13"
+license = { text = "MIT" }
+# Pinned to match the SageMaker PyTorch 2.6 DLC (py312) so the Mac pilot and the jobs
+# run the same numerics. The container installs requirements-job.txt, not this list.
+dependencies = [
+    "torch==2.6.0",
+    "numpy==2.2.4",
+    "scipy==1.15.2",
+    "scikit-learn==1.6.1",
+    "lmdb==1.6.2",
+    "pyyaml==6.0.2",
+    "einops==0.8.1",
+    "linear-attention-transformer==0.19.1",
+    "boto3>=1.35",
+]
+
+[project.optional-dependencies]
+# EDF parsing runs only on the preprocessing host, never inside a GPU job.
+preprocess = ["mne==1.9.0"]
+# hydra-core is here ONLY to reproduce upstream's config behaviour in tests/test_upstream_audit.py.
+dev = ["pytest==8.3.5", "ruff==0.11.2", "hydra-core==1.3.2"]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 115
+target-version = "py311"
+extend-exclude = ["src/eegdrift/models/vendor"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

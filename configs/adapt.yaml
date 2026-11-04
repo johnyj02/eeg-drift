@@ -1,0 +1,63 @@
+# Arms, declaratively. The fan-out driver never computes an arm in code.
+# `groups` lists tap-group keys from the registry; the SSL head ("head") is ALWAYS included,
+# because upstream always trains it (BIOT `prediction`, CBraMod `proj_out`). Block keys are
+# resolved per model: LAST and LAST2 expand to the final block(s), so one arm means the same
+# thing on BIOT (4 blocks) and CBraMod (12 blocks).
+
+seeds: [42, 123, 2021, 3407, 8888]   # upstream README's five reported seeds
+
+arms:
+  lp:            {groups: [], adapt: false, init: pretrained}
+  last:          {groups: [LAST, head], init: pretrained}             # their method
+  last2:         {groups: [LAST2, head], init: pretrained}            # their Table 2 row
+  first:         {groups: [embed, block00, head], init: pretrained}   # our hypothesis
+  first2:        {groups: [embed, block00, block01, head], init: pretrained}
+  all:           {groups: [ALL], init: pretrained}                    # design A + capacity ceiling
+  # Release-code-faithful: upstream's SSL model loads pretrained weights only if
+  # cfg.model.foundation_dir is set, which no shipped config, README command or launcher does.
+  # This arm runs exactly what the documented command would: random encoder, last block + head.
+  last_randinit: {groups: [LAST, head], init: random}
+  # Reproduction screen R1 (NEXT-STEPS.md): the paper's Table 2 rows under the released path.
+  last2_randinit: {groups: [LAST2, head], init: random}
+  all_randinit:   {groups: [ALL], init: random}
+  # D17 control: the same seeded random encoder, NOT adapted. Separates "random features" from
+  # "SSL adaptation of a random encoder".
+  lp_randinit:    {groups: [], adapt: false, init: random}
+  # D19 controls for Paper B. first_block: depth contrast at equal parameter count to `last`;
+  # embed_only: the patch embedding's share of `first`; first_noise: `first` adapted on matched
+  # Gaussian noise instead of EEG (does the gain need EEG data, or any SSL-driven perturbation?).
+  first_block:    {groups: [block00, head], init: pretrained}
+  embed_only:     {groups: [embed, head], init: pretrained}
+  first_noise:    {groups: [embed, block00, head], init: pretrained, ssl_input: noise}
+  last_noise:     {groups: [LAST, head], init: pretrained, ssl_input: noise}   # D25-E27 control
+  # D22 single-group arms (block k + SSL head). BIOT has block01-block02 only below its last block.
+  single_b01:   {groups: [block01, head], init: pretrained}
+  single_b02:   {groups: [block02, head], init: pretrained}
+  single_b03:   {groups: [block03, head], init: pretrained}
+  single_b04:   {groups: [block04, head], init: pretrained}
+  single_b05:   {groups: [block05, head], init: pretrained}
+  single_b06:   {groups: [block06, head], init: pretrained}
+  single_b07:   {groups: [block07, head], init: pretrained}
+  single_b08:   {groups: [block08, head], init: pretrained}
+  single_b09:   {groups: [block09, head], init: pretrained}
+  single_b10:   {groups: [block10, head], init: pretrained}
+
+# drift_topk, enum_k (BIOT) and random_k (CBraMod) are appended by the drift stage once
+# design A has run; they are not defined before the diagnostic exists.
+
+protocols:
+  parity:          # their Table 1 path (src/trainer.py + src/conf)
+    batch: 256
+    epochs: {chbmit: 3, tuab: 3, tuev: 5, siena: 3, chbmit_x: 3}
+    lr: 3.0e-5
+    weight_decay: 5.0e-2
+    eta_min: 1.0e-6
+    clip: 1.0
+  fixed_c:         # their Fig. 1 path (ablation_diversityN): S = 4 * ceil(N_total / 128)
+    batch: 128
+    epochs_ref: 4
+    lr: 3.0e-5
+    weight_decay: 5.0e-2
+
+scale: {chbmit: 700.0, tuab: 100.0, tuev: 100.0, siena: 700.0, chbmit_x: 700.0}   # SSL input divisor, upstream trainer.py
+mask_ratio: 0.5

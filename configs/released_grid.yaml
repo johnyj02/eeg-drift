@@ -1,0 +1,149 @@
+# D25 wave C: the RELEASED code (c3n-group/efficient-eeg-adapt @ d056cdf) on SageMaker.
+# Items E4, E5 (screen seeds only), E6, E7, E30c, E31 of notes/completeness-audit.md, as written there
+# (adopted by notes/decisions.md D25). One job = one cell = one configuration x its seeds, run
+# sequentially (`parallel` > 1 packs seeds on one GPU; not used by default).
+#
+# Expansion (scripts/released/submit_released.py): cells = product of `factors`; each level is a
+# list of Hydra overrides; cell id = item id + level codes; a cell is dropped when all codes of
+# any `exclude` entry are among its codes. `audit_runs` = the audit's run count, asserted.
+# Placeholders resolved in the container: {data} = unpacked data root, {foundation} = '+'-free
+# symlink to the model's pretrained checkpoint. "@name" = E7 throwaway sed patch (entry script).
+# Every override list states model/method explicitly; nothing else deviates from the defaults
+# (full_ft True, batch 256, 10 epochs, train-mode probe, whole released LMDB, foundation_dir unset).
+
+defaults:
+  seeds: [42, 123]
+  parallel: 1
+  hours_per_run: 3.5     # provisional (audit: 3-6 h wall per run); the first real E4 job measures it
+  stage_hours: 0.4       # 141 GB File-mode download + unpack, per job
+  exclude: []
+
+items:
+  # E4: Table 1 cells as documented + the missing key, and the released random-features control.
+  E4:
+    entry: main
+    seeds: [42, 123, 2021, 3407, 8888]
+    audit_runs: 30
+    base: [dataset=chbmit]
+    factors:
+      model: {b: [model=biot], c: [model=cbramod]}
+      arm:
+        lp: [method=fm_freeze]
+        sa: [method=step_up, +method.spt_anchor_l2sp_lambda=0]
+        lprand: [method=fm_freeze, model.use_pretrained_weights=false]
+
+  # E5 LP: fm_freeze x full_ft {T, F} x batch {128, 256}; (T, 256) is E4 lp (its seeds 42/123).
+  E5-LP:
+    entry: main
+    audit_runs: 12
+    base: [dataset=chbmit, method=fm_freeze]
+    factors:
+      model: {b: [model=biot], c: [model=cbramod]}
+      ft: {ft1: [], ft0: [training.full_ft=False]}
+      bs: {b256: [], b128: [training.batch_size=128]}
+    exclude: [[ft1, b256]]
+
+  # E5 SA: step_up (key 0) x foundation_dir {unset, set} x full_ft x batch; for set also the SSL
+  # store {released LMDB, 4,174-key LMDB}. (unset, T, 256, released) is E4 sa.
+  E5-SA:
+    entry: main
+    audit_runs: 44
+    base: [dataset=chbmit, method=step_up, +method.spt_anchor_l2sp_lambda=0]
+    factors:
+      model: {b: [model=biot], c: [model=cbramod]}
+      fd: {fd0: [], fd1: ["+model.foundation_dir={foundation}"]}
+      ft: {ft1: [], ft0: [training.full_ft=False]}
+      bs: {b256: [], b128: [training.batch_size=128]}
+      ssl: {sR: [], s4174: ["dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb"]}
+    exclude: [[fd0, s4174], [fd0, ft1, b256, sR]]
+
+  # E5 noise floor: one same-seed repeat of E4 cbramod sa seed 42 (fixed before any run).
+  E5-noise:
+    entry: main
+    seeds: [42]
+    audit_runs: 1
+    base: [dataset=chbmit, method=step_up, +method.spt_anchor_l2sp_lambda=0]
+    factors:
+      model: {c: [model=cbramod]}
+
+  # E6: released Table 2 trainer; foundation_dir unset x 5 seeds, and set x seeds 42/123.
+  E6:
+    entry: layer
+    seeds: [42, 123, 2021, 3407, 8888]
+    audit_runs: 15
+    base: [dataset=chbmit, method=step_up, +method.spt_anchor_l2sp_lambda=0]
+    factors:
+      model: {b: [model=biot]}
+      layers: &layers
+        last1: [method.spt_unfreeze_layers=last1]
+        last2: [method.spt_unfreeze_layers=last2]
+        all: [method.spt_unfreeze_layers=all]
+  E6-fd:
+    entry: layer
+    audit_runs: 6
+    base: [dataset=chbmit, method=step_up, +method.spt_anchor_l2sp_lambda=0, "+model.foundation_dir={foundation}"]
+    factors:
+      model: {b: [model=biot]}
+      layers: *layers
+
+  # E7: probe tap x backbone mode for LP; (proj_out tap, train mode) = E4 lp / E5-LP ft0-b256.
+  E7-cbramod:
+    entry: main
+    audit_runs: 12
+    base: [dataset=chbmit, method=fm_freeze]
+    factors:
+      model: {c: [model=cbramod]}
+      tap: {tproj: [], tenc: ["@encoder_tap"]}
+      mode: {mtrain: [], meval: ["@backbone_eval"]}
+      ft: {ft1: [], ft0: [training.full_ft=False]}
+    exclude: [[tproj, mtrain]]
+  E7-biot:
+    entry: main
+    audit_runs: 4
+    base: [dataset=chbmit, method=fm_freeze]
+    factors:
+      model: {b: [model=biot]}
+      mode: {meval: ["@backbone_eval"]}
+      ft: {ft1: [], ft0: [training.full_ft=False]}
+
+  # E30c: released diversity trainers, key 0, released LMDB only.
+  E30c-N:
+    entry: divN
+    audit_runs: 32
+    base: [dataset=chbmit, method=step_up, +method.spt_anchor_l2sp_lambda=0]
+    factors:
+      model: {b: [model=biot], c: [model=cbramod]}
+      N:
+        N896: [dataset.compute_N=896]
+        N1664: [dataset.compute_N=1664]
+        N2048: [dataset.compute_N=2048]
+        N4174: [dataset.compute_N=4174]
+      fd: &fd {fd0: [], fd1: ["+model.foundation_dir={foundation}"]}
+  E30c-P:
+    entry: divP
+    audit_runs: 24
+    base: [dataset=chbmit, method=step_up, +method.spt_anchor_l2sp_lambda=0, dataset.compute_N=2048]
+    factors:
+      model: {b: [model=biot], c: [model=cbramod]}
+      P: {P3: [dataset.compute_P=3], P11: [dataset.compute_P=11], P21: [dataset.compute_P=21]}
+      fd: *fd
+
+  # E31: L2-SP sweep (lambda 0 comes from E4/E5/E6).
+  E31:
+    entry: main
+    audit_runs: 24
+    base: [dataset=chbmit, method=step_up]
+    factors:
+      model: {b: [model=biot], c: [model=cbramod]}
+      lam: &lam
+        l1e-4: [+method.spt_anchor_l2sp_lambda=0.0001]
+        l1e-2: [+method.spt_anchor_l2sp_lambda=0.01]
+        l1: [+method.spt_anchor_l2sp_lambda=1]
+      fd: *fd
+  E31-layer:
+    entry: layer
+    audit_runs: 6
+    base: [dataset=chbmit, method=step_up, method.spt_unfreeze_layers=all]
+    factors:
+      model: {b: [model=biot]}
+      lam: *lam

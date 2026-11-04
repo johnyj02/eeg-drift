@@ -1,0 +1,50 @@
+# Written by scripts/drift_stage.py from the design-A diagnostic. Do not edit.
+arms:
+  drift_top1_cbramod_chbmit:
+    groups:
+    - block11
+    - head
+    init: pretrained
+    model: cbramod
+  drift_top2_cbramod_chbmit:
+    groups:
+    - block11
+    - embed
+    - head
+    init: pretrained
+    model: cbramod
+  random_k2_0_cbramod_chbmit:
+    groups:
+    - block01
+    - block04
+    - head
+    init: pretrained
+    model: cbramod
+  random_k2_1_cbramod_chbmit:
+    groups:
+    - block02
+    - block08
+    - head
+    init: pretrained
+    model: cbramod
+  random_k2_2_cbramod_chbmit:
+    groups:
+    - block04
+    - embed
+    - head
+    init: pretrained
+    model: cbramod
+  random_k2_3_cbramod_chbmit:
+    groups:
+    - block06
+    - block07
+    - head
+    init: pretrained
+    model: cbramod
+  random_k2_4_cbramod_chbmit:
+    groups:
+    - block08
+    - embed
+    - head
+    init: pretrained
+    model: cbramod

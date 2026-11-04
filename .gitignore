@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+weights/
+data/
+artifacts/
+*.lmdb
+.box-run-id
+.DS_Store
+paper/tmlr/build/
+paper/tmlr/release/*.zip
+paper/tmlr/release/*.tar.gz
+paper/tmlr/release/*.pdf
+build.log

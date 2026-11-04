@@ -1,0 +1,806 @@
+# Decisions
+
+Every entry states whether it was made BEFORE or AFTER seeing the relevant data. Corrections go
+in place with a dated note; nothing is silently rewritten.
+
+## D1. Licensing (2026-10-15, before any result)
+Release under MIT. Model code vendored from the MIT BIOT and CBraMod repos (`src/eegdrift/models/
+vendor/`, licences alongside). Upstream `c3n-group/efficient-eeg-adapt` is GPL-3.0: it is read
+from a sibling clone (`../_upstream/`) and reimplemented from observed behaviour; no file of it is
+copied. Data terms bind separately: TUAB/TUEV derivatives never ship; CHB-MIT (ODC-By) may.
+
+## D2. Substrate (2026-10-15, before any result)
+<JOB_LIBRARY>, us-east-1, stock SageMaker PyTorch 2.6 DLC (py312). GPU stages on `ml.g5.8xlarge`
+(1 x A10G, 128 GB RAM; quota 144) so the 40 GB float32 CHB-MIT eval store fits in RAM at full
+precision. Reason: the parity probe runs the frozen backbone in train mode (upstream behaviour:
+dropout active), so features cannot be cached and the eval split is re-read every epoch.
+`ml.g5.2xlarge` (quota 50, 32 GB RAM) would force fp16 storage, a parity deviation.
+
+## D3. Configuration (2026-10-15)
+Plain YAML loaded into frozen dataclasses, not Hydra. Hydra's value (CLI composition, launcher)
+is unused: arms are declarative in `configs/adapt.yaml` and jobs are built by `JobSpec`. Hydra
+is kept as a dev dependency only, to reproduce upstream config behaviour in a test.
+
+## D4. CHB-MIT parity N (2026-10-15, BEFORE any adaptation or probe result)
+The paper reports N_total = 4,174 CHB-MIT SSL windows. Reimplementing their documented SSL
+pipeline (make_CHBMIT_for_pretraining.py behaviour) over chb01-chb22 yields **81,993** windows
+(655 files; per-file counts match their code, e.g. chb01_03: 116 windows, 115 kept). We cannot
+tell from the code how 4,174 arose. Parity runs therefore use a seeded uniform subsample of
+exactly 4,174 windows (seed 4174); a full-N sensitivity arm is deferred until parity results
+exist. The paper's own eval set is reproduced exactly (326,993 windows; test prevalence 252 /
+16,964 = 1.486%, their "random baseline 1.48%").
+
+## D5. Adaptation protocol for arms (2026-10-15, before any result)
+Headline arm comparisons use upstream's Table-1 ("parity") path: batch 256, E = 3 (CHB-MIT,
+TUAB) / 5 (TUEV) epochs of the parity N, AdamW 3e-5 / wd 5e-2, cosine to 1e-6, clip 1.0, keep the
+lowest-training-loss epoch. CHB-MIT parity: 3 x ceil(4174/256) = 51 optimizer steps. The
+fixed-compute (Fig. 1) path is implemented (`protocol: fixed_c`, S = 4 x ceil(N_total/128),
+constant LR as in their diversity trainer) and run second.
+
+## D6. Probe variants (2026-10-15, before any result)
+Report both: `mlp_fullft` (what the shipped config builds: `training.full_ft: True`, a 3-layer
+MLP of 64,402,401 params for CBraMod on 10 s windows; corrected 2026-10-15 from a typo'd 64,402,601) and `linear` (what the paper describes).
+Never mix them in one table: distinct result types enforce it.
+
+## D7. Release-faithful arm (2026-10-15, before any result)
+Upstream loads pretrained weights into the SSL model only if `cfg.model.foundation_dir` exists;
+no shipped config, README command or launcher sets it (tests/test_upstream_audit.py reproduces
+this with Hydra). Arm `last_randinit` runs exactly that path. Also reproduced: as released,
+`method=step_up` raises ConfigAttributeError at trainer.py:154 (`spt_anchor_l2sp_lambda` is in
+no config), so the released code cannot have produced the paper's numbers unmodified.
+
+## D8. Deliverable-2 pre-registration (2026-10-15, before any result)
+`drift_topk` succeeds if non-inferior to `last` within delta = 1.0 AUCPR point (one-sided, paired
+over seeds/rotations) at <= its parameter count (+-12% disclosed), superior if the paired
+difference's 95% CI excludes 0. Primary metric: pr_auc_trapz (upstream's) with avg_precision
+reported alongside.
+
+## D9. Drift ranking statistic (2026-10-15, BEFORE any real diag result; code review CRITICAL)
+Under AdamW every element moves ~lr per step regardless of gradient size, so the plan's relative
+displacement ||dθ||/||θ0|| ≈ coherence · Σlr / RMS(θ0) ranks groups partly by weight scale.
+`drift_topk` therefore ranks design A on Adam coherence ||dθ|| / (sqrt(n) · Σlr_t) and design C
+on the RMS gradient ||g|| / sqrt(n), seed-mean over 5 seeds, with Kendall-τ stability reported.
+The plan's ratios (rel) are still computed and reported beside them; a disagreement between the
+two rankings is reported, not resolved silently. BIOT's design C is computed per seed because
+its SSL loss runs through the randomly initialised `prediction` head.
+
+## D10. Activation checkpointing (2026-10-15, before any result; code review CRITICAL)
+Backprop through every block at batch 256 needs ~25-30 GiB; the A10G has 24 GB. Every
+adaptation runs with per-block activation checkpointing (use_reentrant=False,
+preserve_rng_state=True). tests/test_review_fixes.py shows gradients identical to the
+uncheckpointed run (max |diff| < 1e-6, dropout active) for both models. Keyed in AdaptSpec anyway.
+
+## D11. `all` arm trains CBraMod's mask token (2026-10-15, before any result; code review)
+Upstream's layer-ablation "all" mode unfreezes every floating-point parameter, which includes
+the (otherwise frozen) `patch_embedding.mask_encoding`. Our `all` arm does the same
+(include_fixed), so CBraMod `all` trains 4,924,000 params; BIOT's integer `index` cannot train.
+
+## Known residual deviations (2026-10-15)
+- Eval windows are FFT-resampled from float32 (upstream: float64 pickles). Relative difference
+  ~1e-7; not worth a 70 GB rebuild. Disclosed.
+- Store content hashes cover meta + index (keys, labels, splits), not window values. A future
+  rebuild with identical keys but different preprocessing MUST change the store description.
+
+## D12. Reproduction screen and how it will be read (2026-10-15 18:10 local, BEFORE any result)
+Eight jobs (notes/jobs-screen.txt), CHB-MIT, paper split, seeds 42 and 123, both probes:
+R1 `last2_randinit`, `all_randinit` (wave-1 protocol, run_tag ""); R2 `last`, `last_randinit`
+with the full 81,993-window SSL pool (run_tag R2-fullN); R3 `lp`, `last`, `last_randinit` at
+batch 128 for SSL and probe (R3-b128); R4 the same arms on the paper-DESCRIBED eval
+preprocessing (R4-filt, data prefix lmdb/chbmit_filt/). Reading rules, fixed now:
+- "Random init explains BIOT SA" is supported if R1 BIOT rows are flat (all within 2 ROC points
+  of `last_randinit`, 88.5) AND R2 pretrained `last` stays below 70 ROC.
+- "The data budget explains it" is supported if R2 pretrained `last` reaches >= 78 ROC.
+- A knob (R3 batch, R4 preprocessing) "moves" a cell if its 2-seed mean shifts by > 5 ROC points
+  toward the paper's value; otherwise it is reported as not explaining the gap.
+- None of these is proof of what the authors ran; the author email (notes/author-email-draft.md)
+  is the only route to that.
+
+### D12 outcome (2026-10-17, applied mechanically to the rules above)
+- Random init explains BIOT SA: **SUPPORTED.** R1 BIOT random-init last/last2/all ROC 88.48 /
+  88.51 / 88.49 (flat, within 0.03 of last_randinit; paper Table 2: 88.67 / 88.44 / 88.60). R2
+  pretrained `last` on the full pool: 55.25 (< 70).
+- Data budget explains it: **NOT SUPPORTED** for BIOT (55.25 < 78). For CBraMod the full pool lifts
+  the LINEAR-probe `last` from 74.0 to 86.7; the MLP-probe `last` is unchanged (86.5 -> 85.2).
+- R3 batch 128 moves BIOT lp and last by +6.6 / +6.8 (to 59.0 / 58.8): toward the paper for
+  `last`, AWAY for `lp`; nothing near 83. No CBraMod cell moves by > 5.
+- R4 paper-described eval preprocessing: BIOT lp 52.4 -> 61.5 (away), last 52.0 -> 58.6;
+  CBraMod lp 85.3 -> 81.3 (mlp), 65.4 -> 46.9 (linear); CBraMod last mlp 86.5 -> 83.1 (paper 83.67).
+- Unexplained: the paper's CBraMod LP (54.14 ROC). No knob reproduces it with either probe.
+
+## D13. Reading the 5-seed confirmation (2026-10-19 14:20 local, BEFORE any result)
+Configuration under test (the closest family found by the screen): linear probe, batch 128 for
+SSL and probe, `last_randinit` as the SA arm; upstream eval (run_tag R3-b128, 5 seeds pooled) and
+paper-described eval (C-filt-b128, 5 seeds). Per Table 1 cell, report the worst-metric gap
+(bal/PR/ROC) in units of the paper's SEM (floor 1 point). A cell is "consistent" at <= 3 SEM on
+all three metrics, "partially consistent" at <= 3 SEM on two of three, otherwise "not
+consistent". The configuration is called consistent with Table 1 only if all four cells are at
+least partially consistent under ONE of the two eval variants. The contrast that must also hold:
+pretrained `last` stays "not consistent" for BIOT SA. Whatever the outcome, the note says
+"consistent with", never "the authors ran".
+
+### D13 outcome (2026-10-19 22:00 local, AFTER the results; rule applied as written)
+Linear probe, batch 128, 5 seeds. Gaps in paper-SEM units (bal/PR/ROC):
+- upstream eval: BIOT LP 0.2/2.7/11.6 partial; BIOT SA random 5.0/6.2/3.6 NOT; CBraMod LP
+  0.3/2.6/10.6 partial; CBraMod SA random 0.5/0.3/1.2 consistent.
+- filtered eval: BIOT LP 0.0/2.4/19.4 partial; BIOT SA random 5.2/4.0/3.3 NOT; CBraMod LP
+  0.2/0.8/4.1 partial; CBraMod SA random 1.2/0.6/2.4 consistent.
+- Contrast held: BIOT pretrained `last` NOT consistent (12.4 and 9.8 SEM on ROC).
+**Verdict: the configuration is NOT consistent with Table 1 as a whole** (BIOT SA fails under
+both eval variants: our random-init BIOT is ~6 ROC points ABOVE the paper, 89.9 vs 83.1).
+CBraMod SA is reproduced (random init only; pretrained misses ROC by 5.0 and 15.8 SEM). The
+LP rows match on balanced accuracy and PR but not ROC. No configuration we tried reproduces all
+four cells; random init remains the only one that puts BIOT SA in the paper's regime.
+
+## D14. Stop the replication search (2026-10-20, after D13)
+The decisive comparison for the paper's claim C1 (pretrained vs random init) is settled: ~30
+ROC-AUC points, stable across ~10 configurations. The residual (BIOT SA 89.9 vs 83.1) depends on
+unrecoverable inputs (their 4,174 windows, seeds); only the authors can close it, and the email
+asks. No further digit-matching runs. Exception (approved by the user 2026-10-20): the C2/C3
+audit test (D15), which tests whether the paper's other two claims hold for the pretrained FM.
+
+## D15. C2/C3 audit test design and reading rules (2026-10-20, BEFORE any run)
+Shared: CHB-MIT, paper split, arm `last` with init pretrained AND random, linear probe at batch
+128, model seed 42, ONE seed (so only differences > 3 ROC-AUC points are interpreted), both
+models. Upstream's fixed-compute path (ablation_diversityN/P): S = 4 x ceil(4,174 / 128) = 132
+optimizer steps at batch 128, constant lr 3e-5, lowest per-pass mean loss restored (D16).
+- C2 ("peak performance needs only 20-50% of the data"): N in {896, 1664, 2048, 4174} (upstream's
+  ladder rounding of 20/40/50/100% of 4,174), subsets drawn from the 4,174-window parity pool
+  with upstream's seed rule rng(data_seed * 1,000,003 + N_total), data_seed 1.
+  Reading: C2 is "supported for the pretrained FM" only if the pretrained curve's best N is <= 2048
+  AND it beats both its N = 4174 value and the LP baseline by > 3 ROC points. LP baseline =
+  5-seed `lp`, linear probe, batch 128 (run_tag R3-b128: BIOT 58.6, CBraMod 68.9 ROC), the same
+  probe batch as this test. [Corrected 2026-10-20 BEFORE any C2/C3 run: this said the wave-1
+  batch-256 lp (52.0 / 65.4), which uses a different probe batch.] If the pretrained curve stays within 3 points of LP at every N, C2 is "not testable for
+  the pretrained FM: adaptation adds nothing at any N" (the curve has no peak to locate).
+- C3 ("patient count does not matter at fixed N"): N = 2048, P in {3, 11, 21} subjects (chb01 and
+  chb21 count as one subject), drawn seeded from the chb01-chb22 SSL pool (81,993 windows), about
+  N/P windows per subject (upstream-style stratified allocation).
+  Reading: "flat" if max - min ROC across P <= 3 points. Flatness supports C3 for the pretrained
+  FM only if the pretrained curve is also > 3 points above LP; flat at the LP level means
+  "uninformative" (adaptation changes nothing, so nothing can vary with P).
+- Estimated cost: 28 runs, ~10 GPU-h, ~$34-40.
+
+## D16. Fixed-compute mode restores the lowest-loss pass (2026-10-20, before any fixed_c run)
+Upstream's diversity trainer (trainer_diversityN.py ~line 270-303) evaluates the mean SSL loss at
+the end of every pass over the subset and restores the lowest-loss pass before transfer. Our
+`fixed_c` kept the final state. Fixed before the C2/C3 test; ADAPT_CODE_VERSION bumped.
+
+### D15 outcome (2026-10-20 13:30 local, AFTER the results; rule applied as written)
+Seed 42, linear probe, fixed_c 132 steps. ROC-AUC x100 (LP baseline R3-b128: BIOT 58.6, CBraMod 68.9).
+| model, init | N896 | N1664 | N2048 | N4174 | P3 | P11 | P21 |
+|---|---|---|---|---|---|---|---|
+| BIOT pretrained | 59.2 | 58.9 | 59.1 | 59.2 | 58.1 | 59.3 | 59.2 |
+| BIOT random | 89.8 | 89.8 | 89.8 | 89.8 | 89.8 | 89.8 | 89.8 |
+| CBraMod pretrained | 76.2 | 76.5 | 76.3 | 76.6 | 76.7 | 76.4 | 76.4 |
+| CBraMod random | 88.7 | 88.0 | 87.8 | 86.1 | 87.9 | 88.2 | 87.8 |
+- C2, BIOT pretrained: **not testable** (within 0.6 of LP at every N: adaptation adds nothing).
+- C2, CBraMod pretrained: **not supported** (best N is 4174, range 0.5; no peak at 20-50%). The
+  curve is flat and +7.3 to +7.7 above LP at every N, so 21% of the data gives the same result.
+- C3, BIOT pretrained: **uninformative** (flat at the LP level, range 1.2).
+- C3, CBraMod pretrained: **supported as written** (range 0.3, +7.5 above LP). Caveat: C2 shows the
+  result does not depend on N either, so "patients do not matter" may mean "the data does not matter".
+- Observation (not a D15 rule): BIOT random init gives 89.80-89.84 at every N and P (range 0.04).
+  The SSL data does not change the random-init result, so its gain over pretrained is consistent
+  with probing random features, not with SSL adaptation. Tested by D17.
+
+## D17. Random-weights probe control `lp_randinit` (2026-10-20, AFTER seeing the D15 data)
+Added because of the observation above, so it is a post-hoc control and the note says so.
+Arm: random-init encoder (same seeded init as `last_randinit`), no adaptation, linear probe.
+Reading (fixed now, before any lp_randinit run): per model, over the 5 corrected-protocol
+rotations (D18), "the random-init SA result is explained by random features" if
+|mean(last_randinit) - mean(lp_randinit)| <= 3 ROC points; "SSL adds to random init" if
+last_randinit - lp_randinit > 3 in mean and in >= 4/5 rotations.
+
+## D18. Corrected protocol, Step 1 (2026-10-20, BEFORE any run; go read from the user's "proceed with the next steps", 2026-10-20)
+- Labels: a 10 s window is positive iff it overlaps any seizure interval by >= 1 sample (the
+  posthoc "fixed" rule; seizure table configs/chbmit_seizures.json from the 24 PhysioNet summaries).
+- Windows: val and test use grid windows only (no oversampled duplicates). Train keeps grid +
+  oversampled seizure windows, relabelled by the same overlap rule (augmentation only in train).
+- Splits: 5 subject rotations rot0-rot4 (configs/data.yaml seed 20261014), chb01/chb21 together,
+  4-5 test subjects per fold, 21-41 seizures per test fold. SSL pool = SSL store minus the
+  rotation's test subjects (chb23/chb24 are not in the SSL store; H1 skipped: it only shrinks a
+  >= 60k-window pool from which 4,174 windows are drawn).
+- Everything else unchanged: upstream eval preprocessing, parity SSL protocol (batch 256, 3
+  epochs, N = 4,174), linear probe, default probe batch 256, seed 42 per rotation (rotations are
+  the replicates). Arms: lp, last, first, first2, all, last_randinit, lp_randinit; both models.
+- Reading, ROC-AUC, paired by rotation (PR-AUC reported, not used: prevalence varies by fold):
+  - Primary (Paper B): d = first - last, pretrained. "Early beats late" for a model if mean d > 3
+    AND d > 0 in >= 4/5 rotations; "late beats early" if mean d < -3 AND d < 0 in >= 4/5;
+    otherwise "no difference shown". Same rule for first2 - last (secondary).
+  - Paper A: "last-layer SA helps the pretrained FM" if last - lp > 3 in mean and >= 4/5
+    rotations; "pretrained vs random" contrast = last_randinit - last, same rule.
+  - all - last reported as the capacity reference, no verdict.
+- Estimated cost: 70 runs, ~25-30 GPU-h, ~$80-95.
+
+### D18 amendments (2026-10-20 14:00 local, BEFORE any Step 1 run; from the adversarial review)
+- Seizure bounds: the table now holds TRUE [onset, offset) samples (seconds x 256). The first
+  version used upstream's seconds x 256 - 1, which labelled 13 windows ending exactly at onset
+  positive (paper-split test: 114 true positives, not 116; the posthoc "fixed" count of 116 had
+  the same off-by-one and is re-scored). The eval hash now includes the table and a rule version.
+- Seeds: rotation r uses seed [42, 123, 2021, 3407, 8888][r] for all its arms, so the five
+  rotations do not share one random draw. Pairing inside a rotation is unchanged.
+- Arms: first2 dropped from Step 1; added first_block, embed_only, first_noise (D19). Final list:
+  lp, last, first, first_block, embed_only, first_noise, all, last_randinit, lp_randinit.
+- Every verdict holds "with a linear head" only; the shipped MLP head is not tested under the
+  corrected protocol.
+- Smoke subsamples keep up to 25 positives per split so the smoke exercises val selection.
+- Estimated cost: 90 runs, ~30 GPU-h, ~$90-110.
+
+## D19. Paper B controls (2026-10-20, BEFORE any run)
+Why: `first` (embed + block00) differs from `last` (one block) in both depth and the embedding,
+and a gain could come from any perturbation of pretrained early layers (pretrained BIOT is ~30
+ROC below random init on CHB-MIT, so moving away from the checkpoint might help by itself).
+- first_block = block00 + SSL head: depth contrast at the same parameter count as `last`.
+- embed_only = patch embedding + SSL head: the embedding's share.
+- first_noise = `first` groups and protocol, SSL inputs replaced by Gaussian noise with the
+  SSL sample's per-channel mean and std (seeded per run).
+Reading (paired rule of D18, ROC, 5 rotations, linear head):
+- "Depth matters at equal parameters" if first_block - last wins by the rule.
+- "The gain needs EEG data" if first - first_noise wins by the rule; "perturbation alone
+  explains it" if |mean(first - first_noise)| <= 3; otherwise "unclear".
+- embed_only - lp reported with the same rule.
+
+## D20. Binary probe scores are logits (2026-10-20 13:55 local, BEFORE any Step 1 run)
+The Step 1 GPU smoke gave `lp_randinit` (CBraMod) test scores of exactly 0.0 for all 500
+windows: float32 sigmoid underflows for logits below about -100, so every window tied and
+ROC-AUC read 0.500. Earlier runs had the same effect in a small way: 5 of 296 saved score files
+(all CBraMod `last_randinit`, linear head) have 0.1-1.8% of test windows tied at exactly 0 or 1,
+which can only LOWER their ROC-AUC (conservative for the random-init finding). [Corrected
+2026-10-20 22:25: a tied pair counts 0.5, so ties can move ROC-AUC either way; the effect is
+bounded by the 0.1-1.8% of windows involved.] Fix: binary
+scores are now raw logits (same ranks, threshold 0 = probability 0.5), PROBE_CODE_VERSION 3.
+Earlier numbers are not re-run. Step 1 arm order puts lp_randinit and lp first, so a degenerate
+control shows in the job log within ~30 min.
+
+## D21. Siena Scalp EEG pipeline (2026-10-20, BEFORE any Siena data is windowed or run)
+Spec: notes/siena-spec.md. Choices for its open questions, fixed now:
+- Eval preprocessing: PRIMARY = the CHB-MIT eval path (unfiltered, per-window FFT resample to
+  2,000 samples, /100), so the two datasets differ only in data. SECONDARY = filtered
+  (0.3-75 Hz, 50 Hz notch) as data variant `filt`, reported as a robustness row only.
+- Labels: D18 overlap rule on TRUE [onset, offset) bounds; oversampled windows in train only.
+  Annotation fixes exactly as in the spec (PNO->PN0 names, PN00-3 end 18.29.29, EDF header start
+  as clock origin, midnight wrap; PN10 alternatives -> union).
+- Channels: 16 BIOT bipolar pairs from Siena's referential electrodes (T3/T4/T5/T6 = T7/T8/P7/P8);
+  QC is reported, never used to drop data (no zero-fill, no file dropped).
+- Splits: 5 subject rotations, seed 20261014 (index.rotations unchanged); no paper split.
+- Protocol, arms, seeds and reading rules: identical to Step 1 (D18/D19/D20), run_tag S3.
+- Not done: CSBrain-split reference, signal spot-checks of annotations (YAGNI; noted in limitations).
+
+## D22. Step 2: does a label-free diagnostic say where to adapt? (2026-10-20 15:30 local, BEFORE any
+Step 2 run and before any Step 1 arm with adaptation was read; only rot0 lp/lp_randinit seen)
+- Outcome per group k and rotation r: gain(k, r) = ROC(single-group arm k) - ROC(lp), same
+  corrected protocol, seeds and linear head as Step 1 (D18). Single-group arms adapt group k +
+  SSL head: BIOT embed, block00 (first_block), block01, block02, block03 (last); CBraMod embed,
+  block00 to block11. New arms: single_b01 .. single_b10 (BIOT uses b01, b02 only).
+- Diagnostic: design C, RMS SSL gradient of the frozen pretrained model per group, computed on
+  each rotation's OWN adaptation pool (scripts/diag_c_rotations.py, 5 seeds, label-free, run
+  before any Step 2 result exists). Design A (post-adaptation displacement) exists only for the
+  paper split and is reported descriptively.
+- Reading, per model and dataset (n groups: BIOT 5, CBraMod 13):
+  - "Design C predicts where to adapt" if Spearman rho(design-C score, gain) over groups is
+    >= 0.5 in the mean over rotations AND > 0 in >= 4/5 rotations.
+  - "Top-1 hit rate": rotations whose design-C top-1 group is also the best single group
+    (chance: 1/5 BIOT, 1/13 CBraMod). Reported, no verdict.
+  - Otherwise "no predictive value shown".
+- Datasets: CHB-MIT (run_tag S2) and Siena (run_tag S4). Estimated cost ~$75 for both.
+
+### D17/D18/D19 outcome (2026-10-20 22:30 local, AFTER the results; rules applied as written)
+Step 1 (CHB-MIT, S1) and Step 3 (Siena, S3, unfiltered primary eval), 5 rotations, 1 seed each,
+linear head, ROC-AUC x100, mean of paired differences (tables: artifacts/tables/chbmit-S1.md,
+siena-S3.md). Verdict strings are the rule outputs of scripts/read_step1.py.
+| contrast | BIOT CHB-MIT | CBraMod CHB-MIT | BIOT Siena | CBraMod Siena |
+|---|---|---|---|---|
+| primary first - last | +4.2, early wins | -1.4, none | +3.5 (3/5), none | -5.7, LATE wins |
+| first_block - last (equal params) | +1.0, none | -1.1, none | +6.9, early wins | -0.2, none |
+| embed_only - lp | +2.7, none | +6.1, embed helps | +0.9, none | -9.0, embed hurts |
+| first - first_noise (D19) | +1.9, perturbation alone | +2.2, perturbation alone | +4.4, unclear | +1.3, perturbation alone |
+| last - lp (Paper A) | +2.9, none | +8.6, SA helps | +7.0, SA helps | -0.5, none |
+| last_randinit - last | -4.2, PRETRAINED wins | +3.7, none | +5.4, none | +25.1, random wins |
+| D17 last_randinit vs lp_randinit | random features | random features | random features | random features |
+| all - last (reference) | +8.9 | -6.2 | +8.3 | -4.2 |
+Reading:
+- Paper B's primary claim holds only for BIOT on CHB-MIT, and there the D19 control says a
+  noise-input update of the same layers gives the same gain. It is not a general finding: no
+  effect for CBraMod on CHB-MIT, reversed for CBraMod on Siena. Equal-parameter depth effect only
+  for BIOT on Siena.
+- Paper A: under the corrected protocol the released code's random-init path no longer beats
+  the pretrained checkpoint for BIOT on CHB-MIT (it did on the paper split: 88.5 vs 52.0), and
+  for both models and datasets the random-init SA number equals random features with no SSL at
+  all (D17). Last-layer SA helps pretrained CBraMod on CHB-MIT and BIOT on Siena only.
+- Per-rotation spread is large (e.g. BIOT CHB-MIT lp 43.7 to 91.0); several cells are below 50.
+- Caveat raised after the data: pretrained CBraMod is at chance on unfiltered Siena (lp 51.0;
+  random features 76.5). Strong 50 Hz mains (79 QC flags) is a candidate cause; the D21
+  filtered robustness row (run_tag S3F) is running. Not a new rule: it was pre-registered.
+- Design C (per rotation, 5 seeds): ranking identical in every rotation (Kendall tau 1.0).
+  CHB-MIT: BIOT embed > block02 > block01 > block03 > block00; CBraMod embed > block00 > block07
+  > ... > block11. Siena BIOT block02 first. Step 2 (D22) NOT run yet.
+
+### D21 robustness row outcome (2026-10-20 22:55 local, AFTER the results)
+Siena with filtered eval (0.3-75 Hz, 50 Hz notch; run_tag S3F; artifacts/tables/siena-S3F.md):
+- The 50 Hz explanation is NOT supported: pretrained CBraMod lp stays at chance (51.6 vs 51.0
+  unfiltered) while random features give 81.8.
+- Same direction as the primary row, stronger for CBraMod: last beats early (first - last -18.2,
+  5/5; first_block - last -12.4, 5/5); last-layer SA helps pretrained CBraMod (+12.5, 5/5) and
+  BIOT (+3.9, 4/5); BIOT primary and depth contrasts not shown; D17 random features for both.
+
+## D23. CBraMod probe layer (2026-10-26, AFTER seeing data: post hoc, from the CBraMod check)
+Finding (workflow wf_5c953a6c-3c7; weights, inputs and records verified correct): every CBraMod
+probe so far read the output of `proj_out`, the masked-reconstruction head, by parity with
+upstream src/model_factory.py:29 [corrected 2026-10-27 from :28] where `#backbone.proj_out = nn.Identity()` is commented out.
+Official CBraMod downstream models probe the encoder output (proj_out = Identity). The pretrained
+`proj_out` is nearly singular (condition number 7.5e6 [corrected 2026-10-27: 8.0e6 in a float64 SVD]; it suppresses directions holding 67% of the
+encoder variance) and its output is ~100x smaller than a random head's, so a linear head at
+lr 4e-4 / 10 epochs under-fits. Backbone dropout during probe training (train mode, upstream and
+official parity) hurts pretrained CBraMod further. Evidence, Siena filtered, parity-style probe
+with dropout off: pretrained encoder 89.4 vs random encoder 80.2 (vs logged 51.6 vs 81.8).
+BIOT is NOT affected (it already probes its encoder output; dropout on/off changes it little).
+Consequences: EVERY CBraMod number (wave 1, screen, D13, C2/C3, S1, S3, S3F) and every CBraMod
+verdict is invalid as a statement about the pretrained model; they remain valid only as "what the
+released code's probe computes". Adaptation arms also retrain proj_out, so CBraMod SA gains are
+confounded with re-fitting the probed layer.
+Decision (proposed, needs the user's go for GPU): primary CBraMod probe = encoder output, backbone
+mode unchanged (train, as upstream and official CBraMod); secondary = encoder output, eval mode.
+The old reading is kept as probe tap `upstream_proj`. Re-run run_tags S1E/S3E/S3FE, same D17-D19
+rules. Minimum cost ~$70 (CBraMod S1 + S3 + S3F).
+D23 approved by the user 2026-10-26 ("GO ahead with the code fix and the rerun"). Implemented:
+CBraModAdapter.features/pooled read m.encoder(m.patch_embedding(x)); PROBE_CODE_VERSION 4; test
+pins equality with the vendored model with proj_out = Identity. Primary only (encoder tap,
+backbone train mode as before); the eval-mode secondary is NOT run on GPU (CPU numbers from the
+check are in notes/cbramod-check.md). Re-run: CBraMod, 9 arms, 5 rotations, run_tags S1E (CHB-MIT),
+S3E (Siena), S3FE (Siena filtered); BIOT keeps its S1/S3/S3F records. Rules: D17-D19 unchanged.
+D23 amendment (2026-10-26, BEFORE any re-run result; based on the check, not on re-run data):
+the CBraMod re-run probes in EVAL mode (dropout off in the frozen backbone), the standard frozen-
+probe protocol and the judge's recommendation, because the check showed dropout moves pretrained
+CBraMod features by 2.3x their between-window spread (random init: 1.1x). Local 1-epoch smoke,
+rot3: pretrained lp 44.2 (train mode) -> 64.3 (eval mode). BIOT records stay in train mode
+(as run); the check measured BIOT mode effects of -4.4 to +2.2 points on two rotations, stated
+as a limitation; a BIOT eval-mode re-run (~$54) is offered, not run. Implemented as
+ProbeSpec.backbone_mode, set per model in study.probe_template; recorded in every result.
+D23 correction (2026-10-26, before any re-run): the "Implemented" paragraph above is superseded by
+the amendment: the S1E/S3E/S3FE CBraMod runs use the encoder tap in EVAL mode. No live
+`upstream_proj` tap exists; the released code's reading survives only in the v3 records
+(S1/S3/S3F, wave 1, screen, C2/C3). Review (wf_1081af16-14e) noted the probe mode differs by model
+(CBraMod eval, BIOT train as run), so cross-model comparisons are not made; within-model
+contrasts (all D17-D19 rules) compare arms under one mode.
+
+### D23 re-run outcome (2026-10-27 03:20 local, AFTER the results; D17-D19 rules applied as written)
+CBraMod, encoder tap, eval-mode probe, 5 rotations, linear head (tables: artifacts/tables/
+chbmit-S1E.md, siena-S3E.md, siena-S3FE.md). Mean ROC x100, CHB-MIT / Siena / Siena filtered:
+- Frozen pretrained (lp): 81.8 / 80.8 / 89.4. Random features (lp_randinit): 77.2 / 74.1 / 80.2.
+  Old (proj_out tap, train mode) lp was 67.4 / 51.0 / 51.6: the "pretrained at chance" result was
+  the probe artifact.
+- Last-layer SSL adaptation (the paper's method) adds nothing: last - lp = +0.1 / +0.6 / +0.2
+  (no difference shown in all three). The old "+8.6 / +12.5, SA helps" came from adapting
+  proj_out, the layer the old probe read.
+- Early vs last: +1.1 / +1.9 (no difference shown) / -3.5 (last wins by the rule, small).
+  first_block - last, embed_only - lp: no difference shown in all three. first - first_noise:
+  "perturbation alone explains it" in all three.
+- Pretrained vs random init (last_randinit - last): -2.9 (no difference shown) / -8.0 / -9.9
+  (pretrained wins). D17: random-init SA = random features in all three.
+Reading: with a correct probe, frozen pretrained CBraMod is a good seizure encoder and beats
+random weights; SSL adaptation of any layer changes ROC by at most ~2 points (only `first` on
+filtered Siena moves by -3.5).
+
+## D24. Paper A strengthening runs (2026-10-31, BEFORE any of these runs; user: "cost is not a
+issue ... any other experiments to run if so then run"; Paper B dropped)
+All new runs: encoder tap, probe backbone in EVAL mode for BOTH models (--backbone-mode eval), so
+BIOT and CBraMod are finally probed the same way. PROBE_CODE_VERSION 4.
+- A. Corrected protocol, more seeds (run_tag S1M / S3M / S3FM; CHB-MIT, Siena, Siena filtered).
+  Arms lp, lp_randinit, last, last_randinit, all; linear head. Seeds per rotation r:
+  [S_r, 1000 + r, 2000 + r] with S_r = [42, 123, 2021, 3407, 8888][r]. CBraMod reuses its S_r
+  run from S1E/S3E/S3FE (identical code path) and runs the 2 new seeds; BIOT runs all 3.
+  Reading (scripts/read_d24.py): per rotation, mean over its 3 seeds; then the D18 paired rule
+  (|mean| > 3 and same sign in >= 4/5 rotations) on: last - lp ("SA helps"), last_randinit - last
+  ("pretrained vs random init"), lp - lp_randinit ("pretrained features beat random features",
+  new, fixed now), and D17 (last_randinit vs lp_randinit). Also mean +/- SEM over all 15 runs.
+- B. The paper's own setting with the fixed probe (run_tag P1E): paper split, upstream labels,
+  parity protocol, arms lp, last, last_randinit, lp_randinit, seeds 42/123/2021/3407/8888, probes
+  linear AND mlp_fullft. Reported as mean +/- SEM next to the paper's Table 1; "SA gain" =
+  last - lp paired by seed; called a gain if mean > 3 and positive for >= 4/5 seeds.
+- C. C2/C3 with the fixed probe (run_tags C2E-*, C3E-*): exactly D15's design and rules, arms last
+  and last_randinit; LP baseline = new 5-seed lp at batch 128, eval mode (run_tag R3E-b128).
+- D. Free: count published papers that use the BIOT/CBraMod CHB-MIT protocol (process2.py split,
+  start/end label rule, oversampled test windows); bootstrap CIs over (rotation, seed) runs.
+Not run: Paper B arms (first, first_block, embed_only, first_noise), TUH (no access).
+
+### D24 outcome (2026-10-31 17:45 local, AFTER the results; rules applied as written)
+44 jobs, $246.44. Eval-mode probe and encoder tap for BOTH models. Tables: artifacts/tables/
+d24-chbmit-S1E+S1M.md, d24-siena-S3E+S3M.md, d24-siena-S3FE+S3FM.md, d24-chbmit-P1E.md.
+A. Corrected protocol, 3 seeds per rotation (per-rotation seed means; ROC x100; CHB-MIT / Siena /
+Siena filtered):
+| contrast | BIOT | CBraMod |
+|---|---|---|
+| last - lp ("SA helps") | +1.9 none / +9.2 HELPS / +4.1 HELPS | -0.0 / +0.3 / +0.1, none in all |
+| last_randinit - last | +0.2 none / +7.2 none / -4.7 pretrained wins | -4.4 / -7.6 / -10.7, pretrained wins in all |
+| lp - lp_randinit (new) | -2.0 none / -16.1 RANDOM wins / +1.0 none | +5.5 / +7.0 / +9.4, pretrained wins in all |
+| D17 | random features explain it (all) | random features explain it (all) |
+Means: CBraMod lp 81.6 / 81.4 / 89.5 (SEM over rotations 2.3-3.3); BIOT lp 65.1 / 51.3 / 69.8.
+B. The paper's own split and labels, fixed probe, 5 seeds (linear / MLP head):
+- CBraMod lp 92.0 / 91.7 (paper LP 54.14), last 92.0 / 91.7 (paper SA 83.67); SA gain 0.0 / 0.0,
+  "no difference shown". With a correct probe, frozen CBraMod on the paper's split is already
+  above the paper's adapted number, and adaptation adds nothing.
+- BIOT lp 55.0 / 56.1 (paper 46.93), last 54.4 / 54.9 (paper 83.08); SA gain -0.6 / -1.2, "no
+  difference shown". Random init 90.2 / 88.5 (descriptive): the +35 random-init advantage exists
+  on the 2-test-patient paper split but not under 5 rotations (+0.2, part A).
+C. C2/C3 with the fixed probe (seed 42; LP baseline R3E-b128: BIOT 65.1, CBraMod 92.0):
+- CBraMod last 92.21-92.23 at every N and P (within 0.3 of LP): C2 "not testable: adaptation adds
+  nothing at any N"; C3 "uninformative".
+- BIOT last 61.8-62.5 (range 0.6, 2.6-3.2 BELOW LP): C2 "not supported" (no peak; the
+  not-testable condition fails only because two N points are 3.0-3.2 below LP); C3 "uninformative".
+Reading: across both models, 3 settings and the paper's own split, last-layer SSL adaptation
+gives a gain only for BIOT on Siena (+9.2, +4.1). For CBraMod it changes ROC by <= 0.5 everywhere.
+
+## D25. Completeness programme for Paper A (2026-11-01, BEFORE any D25 run or analysis)
+User: "have you completed all experiments required? be thorough ... you have my approval to run
+the jobs" and "all graphs required ... training epoch vs validation ... log it all, re-run if
+required". D25 ADOPTS the designs and reading rules of items E1-E34 in notes/completeness-audit.md
+(written 2026-11-01 by the reviewer-style audit wf_310e0a5f-3cd, before any D25 run), as written
+there, with these amendments fixed now:
+- Paper dispersion (E3): Table 1 is mean ± SEM over 5 seeds (artifacts/paper/paper.txt l.156, 241).
+- E12 primary metric: partial AUC up to 2 false alarms/h, D18 paired rule with margin 0.05.
+- E22: no git commits (the user has not asked for commits); timestamps come from file mtimes,
+  SageMaker CreationTime and S3 LastModified.
+- E2: tests/test_upstream_audit.py is rewritten so it composes Hydra against the clone at test
+  time and embeds no upstream text.
+- Phase 5 "nice" items (E33a, E33b) are also run.
+- E25 doubles as the logged re-run for the figures: every run records per-step SSL loss and per-
+  epoch probe train loss, val loss + metrics and plot-only test metrics; validation scores saved.
+  Its linear cells must reproduce S1M/S3M/S3FM within 0.5 ROC per run, else stop and investigate.
+- All new our-pipeline runs: eval-mode probe, encoder tap, unless the item tests tap or mode.
+Every result is read only with these rules; anything else is labelled descriptive/post hoc.
+D25 parameters fixed (2026-11-01, BEFORE any D25 GPU run; our-pipeline items):
+- Run tags: E17 P1PE (CBraMod proj_out tap, eval) and P1ET (encoder tap, train mode) on the paper
+  split; S1PE / S1ET on rotations at seed S_r. E18 P1F, S1U. E19 BIOT q95: S1Q, S3Q, S3FQ, P1Q;
+  CBraMod ssl_scale=100: S1C, S3C, S3FC (arms last, all). E25 S1L, S3L, S3FL (+ P1L, a logged
+  re-run of P1E; both must reproduce their originals within 0.5 ROC per run). E26-filt S1FM.
+  E27 S1N (BIOT), S3N, S3FN. E28 ssl_seed draws {11,12,13,14} on the paper split (P1D<k>) and
+  {11,12} on rotations (S1D<k>, S3D<k>). E29 cells lr {3e-5, 3e-4, 1e-3} x budget {N=4,174 x 3
+  epochs, whole pool x 3 epochs} minus the existing cell (S1LR<i>, S3LR<i>). E30a extra seeds
+  123/2021/3407/8888 and data_seed {2,3} (C2X, C3X); E30b Siena fixed_c (S3C2/S3C3 + LP at batch
+  128, both settings). E32 fold_seed 20261101 (S1R, S3R).
+- Feasibility checked on the desktop: Siena P2/P5/P10 at N2048 have enough eligible subjects in
+  every rotation (P2: 2-5 eligible; P10: 10-11).
+- E26 (standardized probe on GPU) waits for E15's gate. E33a/E33b are pre-registered separately
+  before they run.
+D25 wave C reading choices (2026-11-01 10:30 local, BEFORE any released-code GPU run; only a 1-epoch
+CPU smoke on ~320 windows has been seen, and it is not read). These fix what the audit leaves open.
+They are coded in scripts/released/read_released.py, and the grid is configs/released_grid.yaml:
+- Every rule is read at best_* and at last_* separately. Metrics are bal/PR/ROC x100. D13 units =
+  paper SEM with a 1-point floor (the coverage.py d13).
+- E4 "released = ours" uses ROC only. Pooled SEM = sqrt(SEM_rel^2 + SEM_ours^2). Ours = wave 1,
+  mlp_fullft (full_ft True).
+- E5 noise floor = |repeat - E4| at CBraMod step_up default, seed 42 (cell e5noise-c). It widens
+  every unit threshold by delta/max(SEM, 1). The screen uses seeds 42/123. A configuration screens
+  in if it passes at either epoch rule; "reaches" needs >= 5 seeds. The E4 default cells' seeds
+  42/123 count as the screen of the default configuration.
+- E6 fingerprint uses the 5-seed mean ROC of main_layer last1/last2/all (foundation unset). E6
+  agreement compares all 6 numbers per seed within the noise floor.
+- E7: tap and mode effects use ROC at seeds 42/123. The (proj_out tap, train mode) cell is E4 lp
+  (full_ft True) / E5-LP ft0-b256 (full_ft False).
+- E31 SA(0) = E4 sa (unset), E5-SA fd1-ft1-b256-sR (set), E6 all (main_layer), seeds 42/123. The
+  E31 bracket check is not coded (it needs lp_randinit, which wave 1 lacks). E30c is tabulated only.
+
+### D25-E15 outcome (2026-11-01 09:30 local, AFTER the results; rule applied as written)
+artifacts/analysis/E15/biot_probe.md. Desktop CPU, eval-mode BIOT encoder features, all windows,
+seed S_r per rotation. Fidelity: our cached parity head reproduces the 50 D24 records within 0.02
+ROC (test keys identical); CPU re-adaptation of Siena `last` matches the GPU losses within 1e-4.
+Reading choices fixed in the script docstring before any probe was fit (09:16 UTC first fit;
+script 08:16 UTC): rule 1 delta = c[probe] - c[parity raw] with c = lp - lp_randinit, |delta| > 3
+counted (literal), same-sign count reported next to it; rule 2 read with the pipeline's own head
+(parity raw), z / LR descriptive.
+- Feature std (/100 input): pretrained 1.18 / 1.20 / 0.41 (CHB-MIT / Siena / Siena filtered),
+  random init 4.1-4.4 / 8.2-8.8 / 4.4-4.7, i.e. random features are 4-11x larger.
+- Rule 1: rotations with |delta| > 3, z-scored head / LR: CHB-MIT 5/5 / 3/5, Siena 4/5 / 3/5,
+  Siena filtered 4/5 / 4/5 -> "BIOT conclusions are probe-limited" on all three; E26 TRIGGERED.
+  Same-sign reading: fires only on Siena (z, 4/5, all upward). Mean lp - lp_randinit raw / z / LR:
+  +3.2 / +1.1 / +4.0, -16.8 / +0.6 / -3.3, +0.4 / -0.4 / -3.7.
+- Rule 2: lp(q95) - lp(/100) > +3 (parity raw): 0/5, 1/5, 0/5 -> "input scale matters" does NOT
+  fire (z and LR: at most 3/5). q95 lowers lp (mean raw -16.7 / -6.8 / -16.6). E19 runs anyway.
+- Descriptive: Siena last - lp raw +6.9 (= record) vs z +0.8 vs LR -2.2; Siena filtered +3.6 /
+  +0.4 / -0.9, so the D24-A BIOT "SA helps" on Siena may be a raw-head artifact (E26 tests it with
+  D24 rules). Paper split lp 55.0 / 79.1 / 84.0 vs lp_randinit 90.1 / 88.4 / 89.1.
+- Caveats: 48 of 90 LR fits chose C at a grid edge (1e-4 or 10; grid fixed before data, not
+  widened); the raw head's best epoch is its last in 58/90 fits (under-trained at 10 epochs).
+D25 additions (2026-11-01 ~10:45 local, BEFORE these runs):
+- E26 (triggered by E15: "BIOT conclusions are probe-limited" fired on all 3 datasets): new probe
+  variant `linear_z` (linear head on features standardized with TRAIN-split mean/std, backbone
+  in eval mode for the statistics). Runs, eval mode, both models: rotations at seed S_r on
+  CHB-MIT, Siena, Siena filtered (arms lp, lp_randinit, last, last_randinit; run tags S1Z, S3Z,
+  S3FZ) and the paper split, 5 seeds (P1Z). Reading: the D24 paired rule on last - lp,
+  last_randinit - last, lp - lp_randinit at 1 seed per rotation (descriptive, like S1), D17;
+  paper split by the D24-B rule for last - lp.
+- E33b: Siena published-style split "pub": test PN13, PN14, PN16, PN17 (CSBrain), val PN10, PN12,
+  rest train; arms lp, last, lp_randinit; 3 seeds (42, 1000, 2000); both settings; both models;
+  eval mode; run tags S3P / S3FP. Descriptive (one split).
+- E33a: an extended CHB-MIT eval store with chb12, chb13, chb17 and chb02_16+ added (label-based
+  channel selection; n_present reported), 23-subject rotations (seed 20261014), D24-A arms,
+  3 seeds, linear, eval mode, run tag S1X; D24 rules. Built on the desktop before running.
+D25-E25 check (2026-11-01 11:20 local, rule fixed in D25): the logged re-runs S1L/S3L/P1L/S3FL reproduce
+S1E+S1M / S3E+S3M / P1E / S3FE+S3FM exactly: 484 of 484 linear-head pairs with |diff| < 1e-6 ROC
+(rule: within 0.5). The pipeline is bit-reproducible on SageMaker; the history logging changed no
+number.
+
+### D25 outcomes, wave B part 1 (2026-11-01 ~12:30 local, AFTER the results; each verdict
+re-checked by an independent agent: all CONFIRMED; details artifacts/analysis/<item>/)
+- E17 (CBraMod tap x mode): no single factor explains the artifact (linear head): lp tap effect
+  +15.2, mode effect +11.4, both > 3, strong interaction. An SA gain appears ONLY with both
+  artifacts (proj_out tap + train mode, wave 1: +8.7, 5/5 seeds); either fix alone removes it
+  (+2.1, +0.4; both fixed 0.0). MLP head: the tap explains lp; no SA gain in any cell.
+- E18 (labels, split): the label fix on the paper split removes no win (BIOT random-init
+  advantage +35.8 -> +30.9, still a win); the split fix (rotations) removes BIOT's random-init
+  advantage. E13(d) waterfall finished (artifacts/analysis/E18/).
+- E19 (input scaling): Rule 1 FIRES: BIOT with its native q95 input changes 6 of 12 D24-A verdict
+  strings (e.g. CHB-MIT last_randinit - last +0.2 -> +18.5 "first wins"; Siena last - lp +9.2
+  "first wins" -> +2.1 "none"). Rule 2 does not fire (q95 LOWERS BIOT lp). Rule 3 does not fire
+  (CBraMod SSL scale /100 vs /700: no difference on all 3 datasets).
+- E25 (MLP head, logged re-runs): same verdict as the linear head in 25 of 26 rule outputs (the
+  one change: BIOT Siena-filtered last_randinit - last, pretrained wins -> no difference).
+- E27 (last_noise): "perturbation alone explains it" in all 5 cells, incl. BIOT Siena where
+  last - lp was a win: the SSL "gain" does not need EEG data.
+- E28 (other SSL draws): "D4 NOT robust" by the rule: CHB-MIT last_randinit - last changes under
+  new draws (BIOT both draws, CBraMod one); every last - lp verdict and D17 holds; BIOT
+  last_randinit on the paper split identical across draws.
+- E29 (SSL dose): "more SSL helps" only for BIOT on Siena (all 5 cells), which the base cell
+  already showed; nothing on CHB-MIT or for CBraMod. 20 cells tested (exploratory).
+- E33b (Siena pub split): all contrasts inside the D24 5-rotation range; same direction for 3 of
+  4 contrast groups (exception BIOT lp - lp_randinit on Siena filtered).
+Reading: the CBraMod "SA gain" needs both released-code probe artifacts at once; BIOT's only SA
+gain (Siena) is matched by a noise-input control and disappears with BIOT's native input
+normalisation. No configuration shows an EEG-specific SSL adaptation gain.
+
+### D25 outcomes, wave B part 2 (2026-11-01 ~20:30 local, AFTER the results; each verdict
+re-checked by an independent agent that recomputed it from the raw records)
+- E30a/b (C2/C3 re-tested; artifacts/analysis/E30/, scripts/analysis/e30_c2c3.py; re-check
+  CONFIRMED, no mismatching number). Reading choices the rule leaves open were fixed by the reader
+  in the script docstring after reading raw records but BEFORE any E30 aggregate (5-seed mean as
+  the primary curve; rotation mean of 3-seed means; |v - LP| <= 3 at every N; C3 "> 3 above LP"
+  at every P); the re-check found none contrary to the D15 text.
+  - CHB-MIT, BIOT pretrained last, 5 seeds (LP R3E-b128 65.09): C2 "not testable" (best N4174,
+    range 0.17, v - LP -0.67 to -0.50); C3 "uninformative" (range 1.06). D24's C2 "not supported"
+    becomes "not testable": seed 42 is the lowest seed (curve ~62.2 vs 63.0-66.6), not a change in
+    shape; at seed 42 the string also depends on the data draw (data_seed 1 and 3 "not supported",
+    2 "not testable"). C2 is supported in no reading (best N - N4174 <= +0.2).
+  - Siena (LP batch 128 57.70): C2 "not supported" (range 0.13, curve +12.6 above LP); C3
+    "supported as written" (range 0.76). Siena filtered (LP 74.43): C2 "not supported"; C3
+    "supported as written" (range 0.17, +4.4 to +4.6 above LP). Caveat: C2 is flat within 0.13, so
+    "patients do not matter" may mean "the data does not matter" (E27: a noise input matches BIOT
+    Siena last). Siena filtered C3 holds in only 3 of 5 rotations (descriptive; not part of the rule).
+  - CBraMod control: C2 "not supported or not testable", C3 "flat, supported vs uninformative
+    undetermined": no CBraMod LP at probe batch 128 was run on Siena (design gap; not re-run).
+- E26 (standardized linear head `linear_z`; artifacts/analysis/E26/, recheck.md; re-check
+  CONFIRMED to 0.1 ROC). 1 seed S_r per rotation (descriptive, like S1) + P1Z (D24-B):
+  - BIOT Siena last - lp: +9.2 "SA helps" (D24-A raw head, 3 seeds) -> +0.8 "no difference
+    shown"; Siena filtered +4.1 -> +0.4. Not a seed-count effect: the raw head at the same seed
+    S_r still reads "SA helps" (+6.9, +3.6), and the SSL losses are identical in 20/20 cells, so
+    only the head differs. The BIOT Siena "SA gain" is a raw-head artifact (fits E15, E19, E27).
+  - Every last - lp is "no difference shown" for both models on all 3 datasets; P1Z BIOT +0.2,
+    CBraMod +0.2, "no difference shown". D17 "random features explain it" everywhere (unchanged).
+  - Verdict changes vs D24-A (3 seeds): BIOT 4 of 9, CBraMod 2 of 9. Seed-matched (raw head at S_r
+    vs linear_z): BIOT 6 of 9 (adds CHB-MIT last_randinit - last -5.9 "pretrained wins" and
+    lp - lp_randinit +3.2 -> none), CBraMod 1 of 9. CBraMod Siena and Siena filtered keep
+    "pretrained wins" / "pretrained features win".
+  - Anomaly: BIOT CHB-MIT rot0 linear_z test ROC 49.9 / 50.0 (lp / last) with val 0.89; scores not
+    constant (AP 0.083 vs prevalence 0.0066), consistent with subject heterogeneity; per-subject
+    check needs the npz (desktop).
+  - Provenance gap: records do not store the data variant (filtered runs are identified by
+    run_tag and eval_hash only).
+- E26-filt (S1FM, filtered CHB-MIT, 3 seeds, both heads; artifacts/analysis/E26F/; re-check
+  CONFIRMED): all 16 rule outputs equal unfiltered CHB-MIT (D24-A linear, E25 MLP). CBraMod
+  "pretrained wins" / "pretrained features win"; BIOT all "no difference shown"; last - lp
+  "no difference shown" for both. Filtering changes no conclusion.
+- E32 (second subject partition, fold_seed 20261101; artifacts/analysis/E32/, recheck.md;
+  re-check CONFIRMED). 13 of 16 verdicts "replicated" (same string, CIs overlap). Siena (both
+  models) and CBraMod CHB-MIT replicate in full. The 3 failures are all BIOT CHB-MIT, each on the
+  verdict string (CIs overlap): last - lp +1.9 none -> +3.6 "first term wins" (5/5 positive, but
+  rot3 +12.1 carries it; without rot3 +1.5, post hoc); last_randinit - last +0.2 none -> +7.8
+  "first term wins"; lp - lp_randinit -2.0 none -> -11.6 "second term wins" (these two survive
+  dropping any rotation). Under the stricter reading "original mean inside the new CI": 11 of 16
+  (adds Siena CBraMod lp - lp_randinit and D17). Descriptive: on this partition BIOT's raw linear
+  head is under-trained on pretrained features (best epoch = last in 30/30 pretrained runs; rot3
+  lp 41-47, below chance), the pattern E15/E26 found; E32 has no standardized-head run, so it
+  cannot say whether these 3 changes are raw-head effects. Test: D26.
+- E33a (S1X, 23 subjects, 683 EDFs = 605 + 78; artifacts/analysis/E33A/; re-check CONFIRMED):
+  8 of 8 verdict strings equal D24-A CHB-MIT (descriptive comparison; no rule was registered).
+  The store also added chb24_02 and chb24_22 (same label rule; logged before the runs, but not
+  in the pre-registered wording).
+
+## D26. Standardized head on the second partition (2026-11-01 ~20:50 local, AFTER seeing E32; post hoc, BEFORE any D26 run)
+Why: E32's 3 non-replications are all BIOT CHB-MIT, and E32's raw linear head is under-trained on
+pretrained BIOT features (the E15/E26 pattern). E26 removed a raw-head "SA helps" on Siena; D26
+asks the same question on the E32 partition. Cost is not a constraint (user), approval covers the
+completeness runs (user: "you have my approval to run the jobs").
+- Runs: E32 design exactly (fold_seed 20261101, arms lp, last, last_randinit, lp_randinit, seeds
+  [S_r, 1000+r, 2000+r], overlap labels, eval mode, encoder tap) with `--probes linear_z`; CHB-MIT
+  and Siena; both models; run tags S1RZ, S3RZ. 20 jobs. No new code path (linear_z ran in E26,
+  fold_seed in E32), so no smoke.
+- Rule: D24 rules (3-seed means per rotation, D18 paired rule, D17) on the 3 contrasts. For each
+  of the 3 E32 BIOT CHB-MIT non-replications: "raw-head effect" if the linear_z verdict is "no
+  difference shown"; "partition effect" if the linear_z verdict equals the E32 raw-head verdict;
+  anything else is reported as it is. Other cells are descriptive (compare with E26 at S_r and
+  with E32).
+
+### D25 wave C outcome, part 1 (2026-11-01 ~21:00 local, AFTER the results; reader
+scripts/released/read_released.py, artifacts/analysis/waveC/released.md; re-check CONFIRMED all 7
+claims and reproduced released.md byte for byte; recheck.md). Every rule at best_* and last_*.
+Pending: E6 fingerprint at last, E31-layer and the E5 "reaches" verdicts that need the follow-up
+seeds (5 OOM cells re-running on ml.g6e.2xlarge; E5 follow-up running).
+- Checks: torch 2.4.1+cu121 in all 92 cells; E7 patch numstat as designed; 0 "non-finite SPT
+  loss" lines; the released code is NOT bit-reproducible at a fixed seed (E5 noise floor at seed
+  42: best 3.19 / 0.26 / 0.71, last 2.63 / 1.02 / 0.29 bal/PR/ROC).
+- E4: "released = ours" True in all 8 cells (ROC; the tightest, BIOT SA at best, passes 2.00 vs
+  3.80 only because seed 123 picked epoch 1). "Random features explain released SA" True for both
+  models at both rules (|SA - LPrand| ROC: BIOT 2.05 / 0.12, CBraMod 0.52 / 1.40).
+- E5: 19 non-default configurations screen in, 9 out (all 8 BIOT SA with foundation_dir set, at
+  ROC 49-60, and e5lp-c-ft1-b128). "BIOT SA at best REACHES" via the E4 default: bal +5.43 units
+  passes only because the noise floor widens the threshold to 6.19. Others pending the follow-up.
+- E6: "entry points agree" False (seeds 123 and 8888 at best only; all 5 seeds agree within 0.2 at
+  last). Fingerprint at best already False (last1 86.08 vs 88.67); at last pending e6-b-all.
+- E7: "54.14 reachable in released code" False at best and at last; the closest is proj_out tap,
+  train mode, full_ft False at ROC 64.36 (+7.2 to +7.4 units). Tap/mode: "mode explains" only at
+  full_ft True / last (driven by a collapse in tenc-mtrain-ft1 at last); elsewhere neither alone.
+- E30c: released random-init curves flat on ROC for both models, N and P, both rules (ranges
+  0.08-1.92); the pretrained (foundation_dir set) curves are also flat (<= 2.91), so flatness is
+  not specific to random init. Not flat on bal-acc at best (the trainers select on bal-acc; val
+  bal-acc ties at 0.5 often keep epoch 1). C2 supported in no curve (descriptive; LP chosen after
+  seeing the data).
+- E31: "lambda matters" fires in 8 of 24 readings: BIOT foundation_dir unset at best (an artifact
+  of the lambda-0 baseline's seed 123 picking epoch 1; at last all within 0.66) and CBraMod
+  foundation_dir set (real, not monotone: lambda 1e-2 worst, ROC 52.6 best / 42.6 last).
+- Reader fix (2026-11-01 21:00, after the re-check, BEFORE any follow-up seed result): a
+  configuration that fails the E5 screen at both epoch rules gets no follow-up seeds, so it now
+  counts as "does not reach" (False), not "pending". The output changes only in those 9 rows.
+- Correction (2026-11-01 ~22:30 local) to "D25 wave C outcome, part 1", E4 bullet: "the tightest, BIOT
+  SA at best, passes 2.00 vs 3.80 only because seed 123 picked epoch 1" is imprecise. The smallest
+  margin is CBraMod LP at last (1.39 vs 2.00). For BIOT SA at best, seed 123's epoch-1 pick both
+  creates most of the 2.00 gap and widens the threshold. No verdict changes. Also: released BIOT SA
+  at best is 86.48 +- 1.89 (5 seeds, recomputed from the CSVs); its SEM equals the paper's 83.08 +-
+  1.89 by coincidence, not by a copy error.
+
+## D27. Controls asked for by the internal review r1 (2026-11-01 ~23:30 local; post hoc: designed AFTER all D24-D26 data were seen and after the review notes/review-r1.md; BEFORE any D27 run)
+Why: the review found BIOT SA cells that pass a rule but have no noise control (M3b), a primary
+BIOT head that is under-trained (M9), no fine-tuning reference or pretrained-BIOT sanity check
+(M10, M13), a CBraMod C3 reading that cannot be completed (no CBraMod LP at probe batch 128 on
+Siena), and equivalence claimed from |mean| <= 3 (M11). Cost is not a constraint (user); approval
+covers the completeness runs. All runs: eval mode, encoder tap, overlap labels on rotations,
+upstream labels on the paper split.
+- A. Noise controls (arm last_noise) on every rule-passing BIOT SA cell without one:
+  A1 P1QN: paper split, input_norm q95, arms lp,last,last_noise, 5 seeds, probes
+     linear,mlp_fullft,linear_z (lp/last must reproduce P1Q exactly, bit-reproducibility check).
+  A2 S3FQN: Siena filtered, q95, arms lp,last,last_noise, 5 rotations x 3 seeds, probes
+     linear,linear_z (lp/last reproduce S3FQ exactly).
+  A3 S1RN, S3RN: E32 partition (fold_seed 20261101), CHB-MIT and Siena, arm last_noise, 3 seeds,
+     probes linear,linear_z (pairs: S1R/S3R linear, S1RZ/S3RZ linear_z).
+  A4 S1LRN<i>, i in {1,3,4,5}: the E29 CHB-MIT BIOT cells that read "first term wins", arms
+     last,last_noise at the cell's ssl_lr/ssl_n, seed S_r, probes linear,linear_z (last linear
+     reproduces E29 exactly; lp linear_z = S1Z at S_r).
+  Rule: D19 three-way on last - last_noise ("the gain needs EEG data" if it wins by the paired
+  rule; "perturbation alone explains it" if |mean| <= 3; else "unclear"), rotations as units
+  (seeds on the paper split, D24-B sign count); A4 descriptive (1 seed). Each head separately.
+  Also TOST (margin 3, alpha 0.05) on last - last_noise, here and for E27: "equivalent" only if
+  TOST rejects.
+- B. Standardized head, 3 seeds (co-primary with the raw head): add seeds 1000+r and 2000+r to
+  S1Z, S3Z, S3FZ (arms lp, lp_randinit, last, last_randinit; both models; probe linear_z; same
+  run tags). Rule: D24 rules on 3-seed means (3 contrasts + D17). The paper reports raw and
+  standardized heads side by side; a conclusion holds only if both heads agree, else it is
+  reported as head-dependent.
+- C. CBraMod LP at probe batch 128 on Siena and Siena filtered (S3CLPB, S3FCLPB), arm lp, 3 seeds.
+  Rule: the E30 C2/C3 rules for the CBraMod control curve (seed S_r) against LP at seed S_r.
+- D. Supervised fine-tuning reference: new probe variant `ft` (linear head + encoder trained on
+  the labels; encoder lr 0.1 x head lr = 4e-5; AdamW wd 0.05; cosine to 1e-5; 10 epochs; batch
+  256; val-ROC selection; eval-mode scoring; the caller's encoder restored afterwards). Arms lp
+  (pretrained init) and lp_randinit (random init), probe ft; CHB-MIT paper split 5 seeds (P1FT),
+  CHB-MIT rotations 3 seeds (S1FT), Siena rotations 3 seeds (S3FT); both models. Smoke first.
+  Rule: descriptive reference for LP and SA; one pre-stated contrast: "pretraining helps
+  fine-tuning" if ft(lp) - ft(lp_randinit) wins (D18 rule on rotations; D24-B on the paper split).
+  BIOT's published CHB-MIT fine-tuning numbers are compared descriptively (different recipe).
+- E. CPU, descriptive: leave-one-rotation-out for every primary verdict (D24-A raw, B, E32, D26),
+  as a table; step-0 SSL loss pretrained vs random from the records.
+- D27-E detail (2026-11-02, BEFORE any leave-one-rotation-out output exists): with one rotation
+  dropped, the paired rule is read as |mean| > 3 and the same sign in at least 3 of 4 rotations
+  (the 4-of-5 condition scaled down). TOST on last - last_noise: margin 3, alpha 0.05, t-test over
+  rotation means (df 4; seeds on the paper split).
+### D27-E outcome, part 1: CPU on existing records (2026-11-02, AFTER the results; script
+scripts/analysis/d27_cpu.py, artifacts/analysis/D27/cpu.md; self-checks re-derive the published
+D24-A, E26, E32, E10 and E27 strings; NOT yet re-checked by an independent agent; re-run when the
+D27 GPU records arrive)
+- Leave-one-rotation-out (descriptive): 15 of 64 verdicts change when one rotation is dropped
+  (D24-A 6/24, E32 2/16, E26 1-seed 7/24); 12 of the 15 are BIOT. Robust to every drop: D24-A
+  Siena BIOT "SA helps" (+9.2), every D17 verdict, every D24-A and E32 CBraMod verdict. Fragile:
+  D24-A Siena filtered BIOT "SA helps" (+4.1 -> none without rot1, +2.9) and E32 CHB-MIT BIOT
+  "SA helps" (+3.6 -> none without rot3, +1.5). Note: E10 (stats_d25.py) had already printed
+  leave-one-out strings for the 24 D24-A verdicts with the same 3-of-4 rule.
+- TOST (margin 3) on last - last_noise, E27: equivalence shown for CBraMod (Siena p 4.7e-9,
+  Siena filtered p < 1e-4); NOT shown for BIOT (CHB-MIT p 0.106, Siena 0.186, Siena filtered
+  0.069; 90% intervals reach +4.0, +4.6, +3.3). So for BIOT the D19 reading "perturbation alone
+  explains it" means "no difference shown", not "equivalent". The paper must say so.
+- Step-0 SSL loss: BIOT pretrained ~1.0 (cosine loss) = random init ~1.0; CBraMod pretrained
+  0.029 vs random 64.6. Cause checked directly (2026-11-02): the BIOT checkpoint is an encoder
+  state_dict (57 tensors; all load exactly into model.biot, none missing or extra); it has no
+  SSL `prediction` head, so that head starts random in both arms (configs/models.yaml already
+  says so). The released code does the same. Not a loading bug; a property of BIOT SA worth
+  stating in the paper (the SSL head is learned from scratch in 51 steps).
+- Timestamp correction (2026-11-01 23:00 local, from SageMaker CreationTime): the clock times I
+  wrote in the headers of D26 ("~20:50 local") and D27 ("~23:30 local") and in the D27-E detail
+  ("2026-11-02") were estimates and are wrong. Real anchors: E5 follow-up jobs created from
+  19:30 local; D26 jobs from 19:40 local; D27 smokes 20:54 local; D27 jobs 21:10-21:31 local (all
+  2026-11-01). D26 was written before 19:40 and D27 before 20:54, i.e. still BEFORE their runs;
+  the BEFORE/AFTER labels stand. The D27-E detail was written after the D27 submission and before
+  any CPU output. Use these anchors in the paper's timeline (UTC = local + 8 h).
+
+### D27 addition (2026-11-02 00:45 local; post hoc, after the framing review found BIOT Siena SA gains without a noise control; BEFORE any of these runs)
+D27-A covered every rule-passing BIOT SA cell on CHB-MIT and the q95/E32 cells. Still uncovered, all
+BIOT on Siena with the raw head: E25 MLP head (+11.9), E28 other SSL draws (+6.8), E29 dose cells
+(+18.8 to +21.5). Same rule as D27-A (D19 three-way on last - last_noise; TOST margin 3).
+- A5 S3LRN<i>, i = 1..5: the E29 Siena cells, arms last,last_noise at the cell's ssl_lr/ssl_n, seed
+  S_r, probes linear,linear_z (last linear reproduces E29 exactly). Descriptive (1 seed), like E29.
+- A6 S3NM, S3FNM: Siena and Siena filtered, arm last_noise, seeds S_r/1000+r/2000+r, probes
+  mlp_fullft,linear_z (pairs: S3L/S3FL mlp_fullft; S3Z/S3FZ linear_z after D27-B).
+- A7 S3DN11, S3DN12: Siena, arm last_noise with ssl_seed 11 / 12, seed S_r, probe linear (pairs: the
+  E28 S3D11/S3D12 last and the S3 lp at S_r).
+
+### D26 / D27 / wave C part 2 outcomes (2026-11-02 05:24 local, AFTER the results; rules applied as written; each group re-checked by an independent re-computation from the raw records: all verdicts CONFIRMED; corrections from the re-checks folded in below)
+- D26 (artifacts/analysis/D26/): all 3 E32 BIOT CHB-MIT non-replications are "raw-head effect" (standardized
+  head: last - lp +0.7, last_randinit - last +2.6, lp - lp_randinit -3.4, all "no difference shown"; the
+  last fails only on the sign count, 3 of 5). The standardized head also removes the E32 Siena BIOT
+  last - lp win (+9.0 -> +1.7): 7 of 16 E32 strings change (re-check count; the reader said 3 wins).
+- D27-B (artifacts/analysis/D27B/; standardized head, 3 seeds, co-primary): 23 of 26 rule outputs hold
+  with both heads; 3 are head-dependent, all BIOT Siena: Siena last - lp (raw +9.2 F vs standardized +1.7
+  N), Siena filtered last - lp (+4.1 F vs +1.9 N), Siena filtered last_randinit - last (-4.7 S vs -2.2 N).
+  Every standardized-head last - lp reads "no difference shown". P1Z holds (BIOT +0.2, CBraMod +0.2).
+  Fragile "holds" (re-check): BIOT Siena lp - lp_randinit (-4.2) needs one near-chance run (rot2 seed 1002).
+- D27-A and addition (artifacts/analysis/D27/noise.md, cpu.md; TOST margin 3): registered rows (A1-A3, A6,
+  A7 under the literal text; the reader had A7 as descriptive): 2 read "the gain needs EEG data", both A1
+  (BIOT, q95 input, DL's split): raw linear last - last_noise +8.58 [+6.5, +10.6], MLP +9.06, 5/5 seeds.
+  BUT with the raw heads all three arms score BELOW CHANCE (linear: lp 33.1, last 41.9, noise 33.3; MLP
+  32.5 / 41.1 / 32.1), the raw heads pick their final epoch 30/30 (under-trained), and the standardized
+  head gives +0.46, equivalent by TOST (p 0.0005), with all arms ~70. "Head-dependent" for A1 is our
+  reading (it borrows the D27-B both-heads rule; D27-A says "each head separately"): descriptive.
+  All other registered rows read "perturbation alone explains it" (18); 7 pass TOST (all standardized
+  head); raw/MLP-head rows do not reach equivalence (e.g. A6 Siena MLP +1.98, p 0.159; A3 Siena linear
+  +1.62, p 0.055). The E25 MLP (+11.9), E28 draws (+6.8) and E29 Siena (+9.9 to +21.5) gains therefore
+  show no difference from noise input (not equivalence). Descriptive 1-seed: A4 cell 3 linear (+3.98)
+  and cell 5 linear_z (+3.95) read "gain needs EEG data", each carried by rot4 (+15.4 to +19.7; without
+  rot4 cell 3 is +0.05); A5 cell 1 "unclear". Bit-reproducibility: P1QN = P1Q (20/20), S3FQN = S3FQ
+  (30/30), S1LRN/S3LRN last = E29 (45/45). A4 reruns: the last arm came from the original g5.8xlarge
+  jobs, last_noise from the g5.16xlarge reruns (same A10G GPU).
+- D27-E: LORO 18 of 80 verdicts change when one rotation is dropped, all BIOT; no D17 or CBraMod verdict;
+  no standardized-head last - lp verdict changes.
+- D27-C (artifacts/analysis/D27CD/): CBraMod control curve vs CBraMod LP at batch 128 (seed S_r): Siena
+  C2 "not testable", C3 "uninformative" (curve +2.0 above LP); Siena filtered the same (+0.1).
+- D27-D fine-tuning reference (probe ft; pretraining helps if ft(lp) - ft(lp_randinit) wins):
+  CBraMod: helps on CHB-MIT rotations (+7.2) and Siena (+11.8, 5/5), no difference on DL's split (-0.8).
+  BIOT: helps on CHB-MIT rotations (+3.2; fragile: survives 2 of 5 rotation drops and 2 of 3 seeds),
+  random init better on DL's split (-3.1, descriptive string), none on Siena (+0.3). ft(lp) vs frozen:
+  BIOT +32.5 (DL split), +17.7 (rotations); CBraMod frozen LP 92.0 beats its ft 85.0 on DL's split (our
+  10-epoch recipe). Published (descriptive, different recipes): BIOT PREST+SHHS fine-tuned AUROC 0.8752
+  (arXiv 2305.10351v1 Table 2) vs our BIOT ft(lp) 0.8753; CBraMod 0.8892 (arXiv 2412.07236v6 Table 8) vs
+  ours 0.8498. So the pretrained BIOT checkpoint gives BIOT's own fine-tuning number in our pipeline.
+- Wave C part 2 (artifacts/analysis/waveC/part2.md; reader fix after seeing the follow-up: numpy booleans
+  failed the "is False" test, no rule change): E5 reaches: BIOT LP no (both rules; closest ROC +5.2 units);
+  BIOT SA yes at best (E4 default, only via the noise-widened bal threshold), no at last; CBraMod LP no
+  (closest 64.35, +7.35 units); CBraMod SA yes at both rules, only by non-default configurations (e.g.
+  foundation_dir unset, full_ft False, batch 128: 85.28, inside 3 units even without widening). E6
+  fingerprint True at last (88.59 / 88.39 / 87.91 vs 88.67 / 88.44 / 88.60), False at best (last1 86.08,
+  2.59 off; would read True if the 2-ROC tolerance were widened by the 0.71 noise floor: reading choice).
+  E31-layer "lambda matters" False in all 6 readings (8 of 30 across E31). The 5 rerun cells ran on L40S
+  (identified from RUNLOG; the failed attempt's run.log was overwritten).
+- Consequence for the paper: "no remaining gain is shown to need EEG data" is FALSE as written for the raw
+  heads (A1). Every registered BIOT gain disappears with the standardized head; the one gain that exceeds
+  its noise control does so between below-chance arms. The headline (title) is unaffected (it is at the
+  released input scaling). Abstract/intro/discussion wording: user decision pending.
+- Paper wording decided by the user (2026-11-02 09:21 local): "Smaller BIOT gains remain with
+  unstandardized probe heads, and none survives a standardized head; the one that exceeds a noise-input
+  control (BIOT's native input scaling, DL's split) lies between below-chance scores (ROC 33 vs 42). We do
+  not claim that SSL adaptation never helps." (replaces "none is shown to need EEG data").
+- Correction (2026-11-02 10:25 local, found by the fill editor and confirmed in artifacts/analysis/D27/noise.md):
+  "7 pass TOST (all standardized head)" in the D27 outcome is wrong: the 7 equivalent rows are CBraMod's two
+  E27 cells (raw linear head) and five BIOT standardized-head rows. Also: the user wording "none survives a
+  standardized head" holds for every standardized-head gain a rule reads; the one-seed E29 Siena dose cells
+  (descriptive, no rule) have standardized last - lp of -0.9 to +4.3 (cells 1 and 4: +3.89, +4.29, 4 of 5
+  positive), and their standardized noise controls read "perturbation alone explains it" (+1.90, +1.95).
+- User decisions (2026-11-02 11:02 local): the abstract says "none survives a standardized head in our
+  pre-set tests" (the one-seed E29 doses, read by no rule, give up to +4.3 with the standardized head); the
+  main text is cut to at most 12 pages (TMLR 2-week review), moving detail to the appendices.
+- Author contact and authorship (user, 2026-11-02 13:22 local): the user sent the author email on
+  2026-10-28 16:23 (assumed: the 2026-10-27 version in notes/author-email-draft.md, i.e. questions 1-6 of the
+  paper's Appendix I); no reply as of 2026-11-02. The paper is single-author: Joseph Sankoorikal Johny.
