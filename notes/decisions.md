@@ -804,3 +804,46 @@ BIOT on Siena with the raw head: E25 MLP head (+11.9), E28 other SSL draws (+6.8
 - Author contact and authorship (user, 2026-11-02 13:22 local): the user sent the author email on
   2026-10-28 16:23 (assumed: the 2026-10-27 version in notes/author-email-draft.md, i.e. questions 1-6 of the
   paper's Appendix I); no reply as of 2026-11-02. The paper is single-author: Joseph Sankoorikal Johny.
+
+## D28. Probe convergence: equally tuned, early-stopped linear probes on cached frozen features (2026-11-04; post hoc: designed after all earlier data and after an external review; BEFORE any D28 run; frozen in the local git repository before the runs)
+Why: every conclusion so far uses one fixed probe recipe (10 epochs, lr 4e-4, weight decay 0.05, cosine);
+the raw BIOT head picks its last epoch in most fits (under-trained), and standardizing the features changes
+optimisation and regularisation, not only scale. D28 asks whether the adaptation conclusions survive
+adequately trained probes that get the same tuning budget in every arm.
+- Probe: one linear layer on the encoder output (encoder tap, backbone in eval mode), trained on features
+  computed once per (arm, seed) after the unchanged adaptation step (same seeds; the pipeline is
+  bit-reproducible). Two feature variants: raw ("grid") and train-split standardized ("grid_z").
+- Same search for every arm and variant: AdamW, lr {1e-4, 3e-4, 1e-3, 3e-3} x weight decay {0, 1e-4,
+  1e-2, 1e-1} (16 configurations), batch 256, constant lr, BCE on logits, at most 200 epochs, early stop
+  when validation ROC-AUC has not improved by more than 1e-4 for 20 epochs. Selected epoch = best
+  validation ROC-AUC; selected configuration = best validation ROC-AUC over the 16 (ties: smaller lr,
+  then smaller weight decay). Test metrics are read only at the selected configuration and epoch.
+  A fit "converged" if early stopping fired before epoch 200 (fraction reported).
+- Settings and arms: (a) DL's split, upstream labels, 5 seeds {42, 123, 2021, 3407, 8888}: lp, last,
+  last_randinit, lp_randinit, both models; plus BIOT with q95 input: lp, last, last_noise. (b) Rotations
+  rot0-4, overlap labels, seeds [S_r, 1000+r, 2000+r], CHB-MIT, Siena, Siena filtered: lp, last,
+  last_randinit, lp_randinit, last_noise, both models.
+- Reading (effect sizes primary): for each contrast (last - lp; last_randinit - last; lp - lp_randinit;
+  last - last_noise) and variant: the mean paired difference with a 95% t-interval over the 5 rotation
+  means (df 4; uncertainty across held-out patients) and the Nadeau-Bengio corrected interval; on DL's
+  split the 5 seeds (seed uncertainty on one fixed split, labelled as such). Labels: "gain demonstrated"
+  if the 95% t-interval excludes 0 and |mean| > 3 in that direction; "equivalent within +-3" if TOST
+  (margin 3, alpha 0.05) rejects; else "not resolved". The D18 paired rule is reported as a descriptive
+  consistency criterion. Primary questions: (Q1) does any SA gain (last - lp) read "gain demonstrated"
+  with tuned probes? (Q2) does the BIOT q95 case (last - last_noise on DL's split) read "gain
+  demonstrated" with either variant? (Q3) do the pretrained-vs-random contrasts keep their direction?
+- Learning curves: per-epoch validation ROC-AUC and train loss for all 16 configurations are recorded;
+  figure: the selected configuration's validation curve per arm and setting.
+
+## D29. C2/C3 controls at the fixed-compute budget, and PR-AUC readings (2026-11-04; post hoc, same review; BEFORE any D29 run; frozen in git)
+- Runs (BIOT, Siena and Siena filtered, fixed-compute protocol: 132 steps, batch 128, constant lr 3e-5,
+  lowest-loss pass restored; 5 rotations x 3 seeds): (a) last_noise on the same subsets as E30b (N896,
+  N1664, N2048, N4174; P2, P5, P10 at N2048); (b) the E30b last curve and the batch-128 LP re-run with
+  probes linear and linear_z (the linear values must reproduce E30b exactly).
+- Rules: the E30 C2/C3 rules, applied to each head separately. Noise control: "the plateau needs EEG
+  data" only if at every N (every P) the 95% t-interval of last - last_noise over rotation means
+  excludes 0 with mean > 3; otherwise "no difference demonstrated"; TOST (margin 3) reported.
+- PR-AUC (CPU, descriptive, existing records): C1, C2 and C3 read again with average precision (and the
+  trapezoid PR-AUC the release reports), on DL's split and the rotations.
+- Paper (user decisions 2026-11-04): if D29 shows no EEG-specific plateau, C2/C3 are presented as
+  exploratory, not as a main contribution.
