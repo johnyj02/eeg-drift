@@ -847,3 +847,6 @@ adequately trained probes that get the same tuning budget in every arm.
   trapezoid PR-AUC the release reports), on DL's split and the rotations.
 - Paper (user decisions 2026-11-04): if D29 shows no EEG-specific plateau, C2/C3 are presented as
   exploratory, not as a main contribution.
+- User decisions (2026-11-04 15:19 local) on the external review: abstract without exceptional
+  configurations (suggestion 8; replaces the earlier "state the exception" choice for the abstract only;
+  the q95 case stays in the body); local git freeze of new protocols; run D28 and D29.
