@@ -968,3 +968,4 @@ Project total: about $3,360 (to D25) + $953.89 = about $4,314.
 | anon-DX-v0-1-20261105-f96d8243-arms-cbra-sie-rot2-gf | Completed | 1546 | D28, ml.g5.8xlarge, exit ok; $1.31 |
 | **total (71 jobs)** | | 340801 | **94.67 h = $289.68** (prices: g5.8xl 3.06, g5.16xl 5.12, g6e.2xl 2.80 $/h, AWS Pricing API); by item (h): D29 51.2, D28 43.4 |
 Project total: about $4,314 + $289.68 + smokes = about $4,606.
+Correction (2026-11-05): 4,314 + 289.68 + 1.80 (smokes) = 4,605.48, i.e. about $4,605 (not $4,606).

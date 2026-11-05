@@ -6,7 +6,7 @@
 Inputs: result records (results/*.json and the per-window *.npz next to them; smoke records are
 ignored), artifacts/tables/d24-bootstrap.md (F9), configs/chbmit_seizures.json (F6), for F7
 the CBraMod checkpoint and the local pilot store data/lmdb/chbmit_eval10, and for F10/F11 the
-analyses under artifacts/analysis (E17, D27B, D27, stats). A figure whose inputs do not exist yet
+analyses under artifacts/analysis (E17, D28, D27B, D27, stats). A figure whose inputs do not exist yet
 is skipped with the reason printed and listed in captions.md. --only remakes the named figures and
 keeps the other captions. The exit code is 1 only if a figure fails for another reason (for
 example read_d24 refusing a record, or a cross-check against an analysis file failing).
@@ -26,7 +26,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
-from matplotlib.ticker import FuncFormatter, MaxNLocator, NullFormatter
+from matplotlib.ticker import FuncFormatter, MaxNLocator, MultipleLocator, NullFormatter
+from matplotlib.transforms import blended_transform_factory
 from read_d24 import CONTRASTS, ROTS
 from read_d24 import load as load_d24
 from scipy import stats
@@ -787,129 +788,164 @@ def f10(a):
         "seed by seed (checked); BIOT means as in artifacts/tables/chbmit-paper.md and d24-chbmit-P1E.md.")
 
 
-# ---- F11: adaptation effects under the revised protocol, with the controls ------------------------------
-SETS11 = ("CHB-MIT", "Siena", "Siena filtered")
-CON11 = (("last", "lp"), ("last", "last_noise"), ("last_randinit", "lp_randinit"))
-ARMS11 = ("lp", "last", "last_noise", "lp_randinit", "last_randinit")
-HEADS11 = (   # key in d27b.json, label, marker, face colour, edge colour
-    ("raw", "raw features", "o", INK, INK), ("z", "standardized features", "s", "white", MUTED))
-# D28 slot: the tuned, early-stopped probes (raw and standardized) become two more HEADS11 entries with a
-# loader once artifacts/analysis/D28/ exists, written as fig_effects_d28 so fig_effects stays as is.
+# ---- F11: adaptation effects with the fixed-recipe and the tuned probes, with the noise control ----------
+SETS11 = (   # D28 tag, fixed-recipe set in d27b.json / cpu.json, header
+    ("S1G", "CHB-MIT", "CHB-MIT (5 rotations)"), ("S3G", "Siena", "Siena (5 rotations)"),
+    ("S3FG", "Siena filtered", "Siena filtered (5 rotations)"),
+    ("P1G", "CHB-MIT paper split", "CHB-MIT, DL's split (5 seeds)"),
+    ("P1QG", "CHB-MIT paper split, q95", "CHB-MIT, DL's split, q95 input (5 seeds)"))
+PROBES11 = (   # D28 variant, head, tuned, row label
+    ("grid", "raw", False, "fixed, raw"), ("grid", "raw", True, "tuned, raw"),
+    ("grid_z", "z", False, "fixed, standardized"), ("grid_z", "z", True, "tuned, standardized"))
+CON11 = (("last", "lp"), ("last", "last_noise"))
+ARMS11 = ("lp", "last", "last_noise")
+NOISE11 = {("E27", "linear"): "raw", ("A1", "linear"): "raw", ("A1", "linear_z"): "z", ("A6", "linear_z"): "z"}
+SHADE = "#f1f0eb"
 
 
 def t95(d) -> tuple[float, float, float]:
-    """Mean and 95% t-interval over units (rotation means, df = n - 1)."""
+    """Mean and 95% t-interval over units (df = n - 1)."""
     d = np.asarray(d, dtype=float)
     h = stats.t.ppf(0.975, len(d) - 1) * d.std(ddof=1) / np.sqrt(len(d))
     return float(d.mean()), float(d.mean() - h), float(d.mean() + h)
 
 
 def effects_data(a) -> dict:
-    """Per-rotation arm means (3 seeds each) per (dataset, model, head), cross-checked with the paper's sources."""
+    """Per-unit arm means (rotation means of 3 seeds; on DL's split the 5 seeds) per (D28 tag, model, head,
+    tuned) from d28.json; the fixed-recipe partners are checked against the files the paper cites for them."""
     base = Path(a.analysis)
-    paths = (base / "D27B" / "d27b.json", base / "D27" / "cpu.json", base / "stats" / "stats.json")
+    paths = [base / p for p in ("D28/d28.json", "D27B/d27b.json", "D27/cpu.json", "stats/stats.json")]
     if missing := [str(p) for p in paths if not p.exists()]:
         raise Skip(f"{', '.join(missing)} not found")
-    d27b, cpu, st = (json.loads(p.read_text()) for p in paths)
-    noise = {(t["setting"], t["model"], "raw" if t["probe"] == "linear" else "z"): t for t in cpu["tost"]
-             if (t["item"], t["probe"]) in (("E27", "linear"), ("A6", "linear_z"))}
-    arms = {}
-    for s in SETS11:
+    d28, d27b, cpu, st = (json.loads(p.read_text()) for p in paths)
+    ref = {(s, m, h): {k: np.array(v["per_unit"]) for k, v in cell[h]["arms"].items() if k in ARMS11}
+           for s, sv in d27b["sets"].items() for m, cell in sv["models"].items() for h in ("raw", "z")}
+    for t in cpu["tost"]:   # noise control: E27 (raw), A6 (standardized), A1 (q95 input, both)
+        if h := NOISE11.get((t["item"], t["probe"])):
+            u = ref.setdefault((t["setting"], t["model"], h), {k: np.array(t[k]) for k in ("lp", "last")})
+            if not np.allclose(t["last"], u["last"]):
+                raise ValueError(f"{t['setting']} {t['model']} {h}: noise-control 'last' differs from d27b.json")
+            u["last_noise"] = np.array(t["last_noise"])
+    for r in st["e10"]:   # the raw head on the rotations is Table d24a (stats.json, D24-A)
+        if not r["paper"] and r["probe"] == "linear" and (r["a"], r["b"]) == ("last", "lp"):
+            u = ref[(r["setting"], r["model"], "raw")]
+            if not np.allclose(t95(u["last"] - u["lp"]), (r["mean"], *r["t"]["ci95"])):
+                raise ValueError(f"{r['setting']} {r['model']} last - lp: d27b.json differs from stats.json")
+    out = {}
+    for tag, s, _ in SETS11:
         for m in MODELS:
-            for h, *_ in HEADS11:
-                cell = d27b["sets"][s]["models"][m][h]
-                u = {k: np.array(v["per_unit"]) for k, v in cell["arms"].items()}
-                for name, key in (("last - lp", ("last", "lp")), ("D17", ("last_randinit", "lp_randinit"))):
-                    c = cell["contrasts"][name]
-                    if not np.allclose(t95(u[key[0]] - u[key[1]]), (c["mean"], *c["t95"])):
-                        raise ValueError(f"{s} {m} {h} {name}: arm means do not give d27b.json's interval")
-                if t := noise.get((s, m, h)):
-                    if not (np.allclose(t["last"], u["last"]) and np.isclose(np.mean(t["per_unit"]), t["mean"])):
-                        raise ValueError(f"{s} {m} {h}: noise-control 'last' differs from d27b.json")
-                    u["last_noise"] = np.array(t["last_noise"])
-                arms[(s, m, h)] = u
-    for r in st["e10"]:   # the raw head is Table d24a (stats.json, D24-A)
-        if not r["paper"] and r["probe"] == "linear" and (r["a"], r["b"]) in CON11:
-            u = arms[(r["setting"], r["model"], "raw")]
-            if not np.allclose(t95(u[r["a"]] - u[r["b"]]), (r["mean"], *r["t"]["ci95"])):
-                raise ValueError(f"{r['setting']} {r['model']} {r['a']} - {r['b']}: differs from stats.json")
-    return arms
+            for v, h, *_ in PROBES11[::2]:
+                cell = d28["contrasts"].get(f"{tag}|{m}|{v}")
+                if cell is None:   # q95 input: BIOT only
+                    continue
+                arms = {k: x for k, x in cell["arms"].items() if k in ARMS11}
+                tuned = {k: np.array(x["per_unit"]) for k, x in arms.items()}
+                fixed = {k: np.array(x["fixed"]) for k, x in arms.items() if "fixed" in x}
+                r = ref.get((s, m, h), {})
+                if set(fixed) != set(r) or not all(np.allclose(fixed[k], r[k]) for k in r):
+                    raise ValueError(f"{tag} {m} {v}: fixed-recipe arms in d28.json differ from d27b/cpu.json")
+                for name, c in cell["contrasts"].items():
+                    con = tuple(name.split(" - "))
+                    for u, rec in ((tuned, c), (fixed, c.get("fixed"))):
+                        if con in CON11 and rec and not np.allclose(t95(u[con[0]] - u[con[1]]),
+                                                                    (rec["mean"], *rec["t"]["ci95"])):
+                            raise ValueError(f"{tag} {m} {v} {name}: arm means do not give d28.json's interval")
+                out[(tag, m, h, False)], out[(tag, m, h, True)] = fixed, tuned
+    return out
 
 
 def f11(a):
-    arms = effects_data(a)
-    fig, axes = plt.subplots(2, 2, figsize=(6.5, 4.6), sharex="col", gridspec_kw={"width_ratios": [3, 2]})
-    rows = [4 * i + 1 + j for i in range(len(SETS11)) for j in range(len(CON11))]   # 4 * i: dataset header
-    for (ax, al), m in zip(axes, MODELS, strict=True):
-        for i, s in enumerate(SETS11):
-            for axx in (ax, al):
-                axx.text(0.01, 4 * i, s, transform=axx.get_yaxis_transform(), va="center", fontsize=7,
-                         fontweight="bold")
-            for j, (x, y) in enumerate(CON11):
-                miss = []
-                for k, (h, lab, mk, fc, ec) in enumerate(HEADS11):
-                    u = arms[(s, m, h)]
-                    if x not in u or y not in u:
-                        miss.append(lab)
-                        continue
-                    mu, lo, hi = t95(u[x] - u[y])
-                    ax.errorbar(mu, 4 * i + 1 + j + (k - 0.5) * 0.36, xerr=[[mu - lo], [hi - mu]], fmt=mk, ms=3.5,
-                                mfc=fc, mec=ec, color=ec, elinewidth=1, capsize=1.5)
-                if miss:
-                    ax.text(0.99, 4 * i + 1 + j, "not run" if len(miss) == len(HEADS11) else f"{miss[0]}: not run",
-                            transform=ax.get_yaxis_transform(), ha="right", va="center", fontsize=6, color=MUTED)
-            for k, (h, *_ ) in enumerate(HEADS11):
-                u = arms[(s, m, h)]
+    data = effects_data(a)
+    fig, axes = plt.subplots(1, 4, figsize=(6.5, 3.4), sharey=True, gridspec_kw={"width_ratios": [5, 4, 5, 4]})
+    rows, labels, pitch = [], [], len(PROBES11) + 1.4
+    for g, (tag, _, head) in enumerate(SETS11):
+        y0 = g * pitch
+        axes[0].text(0.004, y0, head, transform=blended_transform_factory(fig.transFigure, axes[0].transData),
+                     va="center", fontsize=6.5, fontweight="bold", zorder=5,
+                     bbox={"fc": "white", "ec": "none", "pad": 0.4})
+        for ax in axes if g else ():
+            ax.axhline(y0 - 0.7, color=GRID, lw=0.8)
+        for k, (_, h, tuned, lab) in enumerate(PROBES11):
+            y = y0 + 1 + k
+            rows.append(y)
+            labels.append(lab)
+            for (ax, al), m in zip((axes[:2], axes[2:]), MODELS, strict=True):
+                if (u := data.get((tag, m, h, tuned))) is None:
+                    continue
+                if tuned:
+                    for axx in (ax, al):
+                        axx.axhspan(y - 0.5, y + 0.5, color=SHADE, lw=0, zorder=0)
+                for j, (x, b) in enumerate(CON11):
+                    if b in u:
+                        mu, lo, hi = t95(u[x] - u[b])
+                        c = INK if b == "lp" else COLOR[b]
+                        ax.errorbar(mu, y + (j - 0.5) * 0.42, xerr=[[mu - lo], [hi - mu]], fmt=MARK[b], ms=3,
+                                    mfc=c if tuned else "white", mec=c, mew=0.8, color=c, elinewidth=0.9,
+                                    capsize=1.2)
                 for q, arm in enumerate(ARMS11):
                     if arm in u:
-                        al.plot(u[arm].mean(), 4 * i + 1.5 + k + (q - 2) * 0.14, MARK[arm], color=COLOR[arm],
-                                ms=3.5, mec="white", mew=0.3)
-        ax.axvline(0, color=MUTED, lw=0.9)
+                        al.plot(u[arm].mean(), y + (q - 1) * 0.28, MARK[arm], ms=3, mfc=COLOR[arm] if tuned else
+                                "white", mec=COLOR[arm], mew=0.8)
+        if not any((tag, "cbramod", h, t) in data for _, h, t, _ in PROBES11):
+            for ax, x in zip(axes[2:], (0.5, 0.7), strict=True):   # arm panel: clear of the chance line
+                ax.text(x, y0 + 2.5, "BIOT only", transform=ax.get_yaxis_transform(), ha="center", va="center",
+                        fontsize=6.5, color=MUTED, zorder=5, bbox={"fc": "white", "ec": "none", "pad": 0.4})
+    for (ax, al), m in zip((axes[:2], axes[2:]), MODELS, strict=True):
+        ax.axvline(0, color=MUTED, lw=0.9, zorder=1)
         for x0 in (-3, 3):
-            ax.axvline(x0, color=MUTED, lw=0.5, ls=":")
-        al.axvline(50, color=MUTED, lw=0.6, ls=":")
-        ax.set_yticks(rows, [f"{x} − {y}" for _ in SETS11 for x, y in CON11], fontsize=6.5)
-        al.set_yticks([4 * i + 1.5 + k for i in range(len(SETS11)) for k in range(len(HEADS11))],
-                      [lab.split()[0] for _ in SETS11 for _, lab, *_ in HEADS11], fontsize=6.5)
-        al.yaxis.tick_right()
-        al.set_xticks(range(50, 100, 10))
-        for axx in (ax, al):
-            axx.set_ylim(4 * len(SETS11) - 0.4, -0.6)
-            axx.grid(axis="y", visible=False)
-        ax.set_title(f"{NAME[m]}: paired differences")
+            ax.axvline(x0, color=MUTED, lw=0.5, ls=":", zorder=1)
+        ax.xaxis.set_major_locator(MultipleLocator(5))
+        ax.set_title(f"{NAME[m]}: differences")
+        ax.set_xlabel("difference, ROC-AUC x100", fontsize=7)
+        al.axvline(50, color=MUTED, lw=0.6, ls=":", zorder=1)
+        al.set_xlim(28, 97)
+        al.set_xticks(range(30, 100, 20))
         al.set_title(f"{NAME[m]}: arm means")
-    axes[1, 0].set_xlabel("paired difference, ROC-AUC x100\n(mean, 95% t-interval over 5 rotations)")
-    axes[1, 1].set_xlabel("arm mean, test ROC-AUC x100")
-    handles = [Line2D([], [], marker=mk, mfc=fc, mec=ec, color=ec, ls="-", lw=1, ms=4, label=f"probe on {lab}")
-               for _, lab, mk, fc, ec in HEADS11]
-    handles += [Line2D([], [], color=COLOR[arm], marker=MARK[arm], ls="none", ms=4, label=arm) for arm in ARMS11]
-    fig.legend(handles=handles, loc="lower center", ncol=4, bbox_to_anchor=(0.5, 1.0), fontsize=6.5)
-    fig.tight_layout()
+        al.set_xlabel("test ROC-AUC x100", fontsize=7)
+    axes[0].set_yticks(rows, labels, fontsize=6.5)
+    axes[0].set_ylim(rows[-1] + 0.7, -0.7)
+    for ax in axes:
+        ax.grid(axis="y", visible=False)
+        ax.tick_params(axis="y", length=0)
+        ax.spines["left"].set_visible(False)
+    handles = [Line2D([], [], color=INK if b == "lp" else COLOR[b], marker=MARK[b], ms=3.5, lw=0.9,
+                      label=f"{x} − {b}") for x, b in CON11]
+    handles += [Line2D([], [], color=COLOR[arm], marker=MARK[arm], ls="none", ms=3.5, label=arm) for arm in ARMS11]
+    handles += [Line2D([], [], color=MUTED, marker="o", mfc=fc, ls="none", ms=3.5, label=lab)
+                for fc, lab in (("white", "open: fixed recipe"), (MUTED, "filled, shaded: tuned"))]
+    fig.legend(handles=handles, loc="lower center", ncol=7, bbox_to_anchor=(0.5, 1.0), fontsize=6.5,
+               handlelength=1.6, columnspacing=1.2)
+    fig.tight_layout(w_pad=0.6)
     save(fig, a, "fig_effects")
+    q = {k: data[("P1QG", "biot", "raw", k)] for k in (False, True)}
     return "fig_effects", (
-        "Adaptation effects under the revised protocol (5 subject rotations, 3 seeds each, overlap labels, "
-        "encoder-level linear probe), with the linear head on raw features (D24-A) and on standardized features "
-        "(D27-B). Left: paired differences of rotation means with 95% t-intervals (df 4): the SA gain last - lp, "
-        "the noise-input control last - last_noise (E27 raw; D27 addition A6 standardized; not run elsewhere) "
-        "and random-init SA against random features last_randinit - lp_randinit (D17); dotted lines at -3 and "
-        "+3 mark the decision margin. Right: the arm means behind them, so a gain between arms near chance (for "
-        f"example BIOT on Siena, raw features, lp {arms[('Siena', 'biot', 'raw')]['lp'].mean():.1f}) is visible. "
-        "Sources: artifacts/analysis/D27B/d27b.json (arm "
-        "means per rotation, both heads; equals artifacts/analysis/stats/stats.json and Table d24a for the raw "
-        "head, checked), artifacts/analysis/D27/cpu.json (last_noise per rotation, E27 and A6). The tuned-probe "
-        "version (D28) will be fig_effects_d28.")
-
-
-def f11_d28(a):
-    raise Skip("D28 (tuned, early-stopped probes) has not run; fig_effects_d28 = F11 with its two tuned probes "
-               "added to HEADS11 once artifacts/analysis/D28/ exists")
+        "SA gain and noise control with the fixed probe recipe and with tuned probes (encoder-level linear probe, "
+        "raw or standardized features; ROC-AUC x100). Rows per setting: fixed recipe, raw; tuned, raw; fixed "
+        "recipe, standardized; tuned, standardized (open markers = fixed recipe, filled markers on shaded rows = "
+        "tuned). Settings: CHB-MIT, Siena and Siena filtered under the revised protocol (5 subject rotations, 3 "
+        "seeds each, overlap labels; unit = rotation mean), and DL's split (upstream labels; unit = seed, 5 seeds "
+        "on one split, seed uncertainty only) with standard input for both models and with BIOT's q95 input "
+        "(BIOT only). Left panel per model: last - lp (black circle) and last - last_noise (pink triangle), mean "
+        "and 95% t-interval over the 5 units (df 4); dotted lines at -3 and +3 mark the decision margin; no "
+        "triangle = no noise arm "
+        "(fixed recipe: BIOT CHB-MIT standardized; CBraMod CHB-MIT both heads, Siena and Siena filtered "
+        "standardized; DL's split with standard input: neither probe). Right panel per model: arm means (mean "
+        "over the 5 units) of lp (blue circle), last (orange square) and last_noise (pink triangle); dotted line "
+        "at 50 = chance. "
+        "Example, BIOT q95 input, raw features, lp / last / last_noise: fixed recipe "
+        + " / ".join(f"{q[False][k].mean():.1f}" for k in ARMS11) + ", tuned "
+        + " / ".join(f"{q[True][k].mean():.1f}" for k in ARMS11) + ". Sources: artifacts/analysis/D28/d28.json "
+        "(tuned probes and their fixed-recipe partners, same seeds); the fixed-recipe values equal "
+        "artifacts/analysis/D27B/d27b.json (arm means, both heads, rotations and DL's split), "
+        "artifacts/analysis/D27/cpu.json (last_noise: E27 raw, A6 standardized, A1 q95 input) and, for the raw "
+        "head on the rotations, artifacts/analysis/stats/stats.json (Table d24a) (checked).")
 
 
 FIGURES = (
     [("F1 per epoch", partial(f1, per_step=False)), ("F1 per step", partial(f1, per_step=True))]
     + [(f"F2 {k}", partial(f2, key=k)) for k in SETTINGS]
     + [("F3", f3), ("F4", f4), ("F5", f5), ("F6", f6), ("F7", f7), ("F8", f8), ("F9", f9),
-       ("F10", f10), ("F11", f11), ("F11 D28", f11_d28)]
+       ("F10", f10), ("F11", f11)]
 )
 
 
