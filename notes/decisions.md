@@ -850,3 +850,36 @@ adequately trained probes that get the same tuning budget in every arm.
 - User decisions (2026-11-04 15:19 local) on the external review: abstract without exceptional
   configurations (suggestion 8; replaces the earlier "state the exception" choice for the abstract only;
   the q95 case stays in the body); local git freeze of new protocols; run D28 and D29.
+
+### D28 / D29 outcomes (2026-11-05 00:19 local, AFTER the results; frozen rules (c0283f4) applied as written; each re-checked by an independent re-computation from the raw records: all rule outputs CONFIRMED; refuted descriptive side claims corrected below)
+- D28 (artifacts/analysis/D28/README.md, d28.json, recheck.md; 505 records, 1,010 probe fits, 16,160 config
+  fits; replaying selection and early stopping gives 0 disagreements; 986 of 1,010 selected fits converged):
+  - Q1 (any SA gain last - lp "gain demonstrated"?): NO in 0 of 18 readings; 16 read "equivalent within
+    +-3" (TOST), 2 "not resolved" (BIOT Siena grid_z -0.2, TOST p 0.076; CBraMod CHB-MIT grid_z -4.4, lp
+    ahead of last, not driven by a single fit).
+  - Q2 (BIOT q95 on DL's split, last - last_noise): NO: grid -0.3 [-1.5, +0.9], TOST p 0.0017; grid_z -0.3
+    [-3.1, +2.5], p 0.027; both equivalent. With tuned probes the arms are no longer below chance (lp / last
+    / last_noise 72.4 / 73.3 / 73.6 vs 33.1 / 41.9 / 33.3 with the fixed raw head): the one gain that beat its
+    noise control (D27-A1) was an artifact of the under-trained fixed raw head.
+  - Q3 (pretrained-vs-random directions): CBraMod 16 of 16 keep the sign (11 "gain demonstrated"; 3 earlier
+    gains become "not resolved"). BIOT 9 of 16 keep the sign (sign-of-mean reading, the reader's choice; the
+    rule text does not define "direction"); 6 of the 7 flips start from fixed-recipe means within +-2.2 (no
+    established direction); the only flip of an established direction is Siena filtered grid last_randinit
+    - last (-4.7 -> +4.6, both "not resolved"). BIOT on DL's split: random init still ahead but smaller
+    (last_randinit - last +14.3 raw / +7.7 standardized vs +35.8 / +9.1 fixed). CHB-MIT rotations, BIOT
+    standardized: pretrained features ahead (lp - lp_randinit +6.8, t-interval excludes 0, Nadeau-Bengio
+    does not). No rotation contrast is "gain demonstrated" with the Nadeau-Bengio interval.
+  - Descriptive: 944 of 1,010 selected configurations sit at a grid edge (lr 3e-3: 498; wd 1e-1: 523);
+    BIOT q95 grid picked lr 3e-3 in 15/15; CBraMod grid_z on DL's split lr 1e-4 in 20/20 (the grid may not
+    bracket every optimum; reported as a limitation). Re-check corrections: test ROC < 50 in 6 fits (not
+    7); validation and test do NOT disagree more with tuning (SD of test - val 11.2 tuned vs 13.3 fixed);
+    the wide BIOT pretrained-vs-random intervals come from rotation spread the fixed recipe already had.
+- D29 (artifacts/analysis/D29/README.md, d29.json; 450 records; last and lp linear reproduce E30b exactly,
+  240/240): no setting or head shows an EEG-specific plateau: the noise rule reads "no difference
+  demonstrated" for C2 and C3 in all 4 setting x head cells (Siena raw head last - last_noise about +3.8 at
+  every N, t-intervals include 0). C3 "supported as written" holds only with the raw head (and the noise
+  curve passes the same C3 rule); with the standardized head C2 is "not testable" and C3 "uninformative"
+  on both Siena paths (Siena v - LP +2.85 to +2.91, just under the 3-point cut). Per the user decision of
+  2026-11-04, C2/C3 are presented as exploratory. Re-check correction: the raw head does reach TOST
+  equivalence in one cell (Siena filtered linear at P2N2048, p 0.037), so "no equivalence with the raw head"
+  holds for all but that cell. PR-AUC readings: artifacts/analysis/D29/README.md (descriptive).
