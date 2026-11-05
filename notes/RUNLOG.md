@@ -884,3 +884,10 @@ The 9 FAILED rows: D27-A4 whole-pool cells, host out of memory on ml.g5.8xlarge;
 | anon-DX-v0-1-20261102-ffa429b4-arms-biot-chb-pnla | Completed | 15279 | D27, ml.g5.8xlarge, exit ok; $12.99 |
 | **total (200 jobs)** | | 1106549 | **307.37 h = $953.89** (prices: g5.8xl 3.06, g5.16xl 5.12, g6e.2xl 2.80 $/h, AWS Pricing API); by item (h): E5 follow-up / OOM reruns 72.0, D27 168.4, D27X 11.9, D27-A4 reruns 8.5, D26 46.6 |
 Project total: about $3,360 (to D25) + $953.89 = about $4,314.
+
+## D28/D29 smokes (2026-11-04)
+| job | status | billable s | outcome |
+|---|---|---|---|
+| anon-DX-v0-1-20261105-30de5d36-arms-cbra-chb-rot0-g1-smoke | Completed | 939 | D28/D29 smoke (grid probes; fixed_c + last_noise + linear_z); records read: GridProbeResult fields, run tags, subsets as intended; $0.8 |
+| anon-DX-v0-1-20261105-c145b724-arms-biot-chb-gqln-smoke | Completed | 940 | D28/D29 smoke (grid probes; fixed_c + last_noise + linear_z); records read: GridProbeResult fields, run tags, subsets as intended; $0.8 |
+| anon-DX-v0-1-20261105-0aaaab50-arms-biot-sie-rot0-y2f-smoke | Completed | 240 | D28/D29 smoke (grid probes; fixed_c + last_noise + linear_z); records read: GridProbeResult fields, run tags, subsets as intended; $0.2 |
