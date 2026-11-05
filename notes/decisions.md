@@ -883,3 +883,9 @@ adequately trained probes that get the same tuning budget in every arm.
   2026-11-04, C2/C3 are presented as exploratory. Re-check correction: the raw head does reach TOST
   equivalence in one cell (Siena filtered linear at P2N2048, p 0.037), so "no equivalence with the raw head"
   holds for all but that cell. PR-AUC readings: artifacts/analysis/D29/README.md (descriptive).
+- User decision (2026-11-05 09:14 local) on the abstract after D28: use exactly "With linear probes
+  tuned to convergence using the same hyperparameter search for every arm, no adaptation gain is
+  demonstrated across 18 tested comparisons; 16 establish equivalence to zero within ±3 ROC-AUC points. We do
+  not claim that SSL adaptation never helps." Keep the headline reproduction results earlier in the abstract;
+  "18 tested comparisons", never "any setting"; the body replaces the q95 exception with the D28 result (arms
+  at about 73 ROC-AUC, gain removed); the methods state D28's timing and exploratory/confirmatory status.
