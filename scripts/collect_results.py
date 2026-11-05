@@ -31,10 +31,13 @@ PAPER = {
 }
 
 
+NOT_RECORDS = ("diag-", "test-index-", "val-index-")   # side files in results/, not (arm, seed) records
+
+
 def records(local: str | None) -> list[dict]:
     if local:
         return [json.loads(p.read_text()) for p in Path(local).rglob("results/*.json")
-                if not p.name.startswith(("diag-", "test-index-"))]
+                if not p.name.startswith(NOT_RECORDS)]
     import boto3  # noqa: PLC0415
 
     s3 = boto3.Session(profile_name="<AWS_PROFILE>").client("s3")
@@ -42,7 +45,7 @@ def records(local: str | None) -> list[dict]:
     for page in s3.get_paginator("list_objects_v2").paginate(Bucket=BUCKET, Prefix=PREFIX):
         for o in page.get("Contents", []):
             name = o["Key"].rsplit("/", 1)[1]
-            skip = name.startswith(("diag-", "test-index-"))
+            skip = name.startswith(NOT_RECORDS)
             if "/results/" in o["Key"] and name.endswith(".json") and not skip:
                 out.append(json.loads(s3.get_object(Bucket=BUCKET, Key=o["Key"])["Body"].read()))
     return out
@@ -73,7 +76,8 @@ def main() -> int:
         row = {"model": model, "arm": arm, "probe": variant, "n_seeds": len(ps)}
         for when in ("test_at_best", "test_last"):
             for m in ("bal_acc", "roc_auc", "pr_auc_trapz", "avg_precision"):
-                v = np.array([p[when][m] for p in ps if m in p[when]]) * 100
+                # GridProbeResult (D28) has no test_last: the test split is read once, at the selection
+                v = np.array([p[when][m] for p in ps if m in p.get(when, {})]) * 100
                 if len(v):
                     sem = v.std(ddof=1) / np.sqrt(len(v)) if len(v) > 1 else float("nan")
                     row[f"{when}.{m}"] = (round(float(v.mean()), 2), round(float(sem), 2))

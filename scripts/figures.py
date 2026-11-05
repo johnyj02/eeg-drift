@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Every Paper A figure (F1-F9) as PNG (300 dpi) and PDF, plus artifacts/figures/captions.md.
+"""Every Paper A figure (F1-F11) as PNG (300 dpi) and PDF, plus artifacts/figures/captions.md.
 
-    .venv/bin/python scripts/figures.py [--results artifacts/s3-results] [--out artifacts/figures]
+    .venv/bin/python scripts/figures.py [--results artifacts/s3-results] [--out artifacts/figures] [--only F10 F11]
 
 Inputs: result records (results/*.json and the per-window *.npz next to them; smoke records are
-ignored), artifacts/tables/d24-bootstrap.md (F9), configs/chbmit_seizures.json (F6), and for F7
-the CBraMod checkpoint and the local pilot store data/lmdb/chbmit_eval10. A figure whose inputs
-do not exist yet is skipped with the reason printed and listed in captions.md. The exit code is 1
-only if a figure fails for another reason (for example read_d24 refusing a record).
+ignored), artifacts/tables/d24-bootstrap.md (F9), configs/chbmit_seizures.json (F6), for F7
+the CBraMod checkpoint and the local pilot store data/lmdb/chbmit_eval10, and for F10/F11 the
+analyses under artifacts/analysis (E17, D27B, D27, stats). A figure whose inputs do not exist yet
+is skipped with the reason printed and listed in captions.md. --only remakes the named figures and
+keeps the other captions. The exit code is 1 only if a figure fails for another reason (for
+example read_d24 refusing a record, or a cross-check against an analysis file failing).
 """
 
 from __future__ import annotations
@@ -27,6 +29,7 @@ from matplotlib.patches import Patch
 from matplotlib.ticker import FuncFormatter, MaxNLocator, NullFormatter
 from read_d24 import CONTRASTS, ROTS
 from read_d24 import load as load_d24
+from scipy import stats
 
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = ("biot", "cbramod")
@@ -34,8 +37,9 @@ NAME = {"biot": "BIOT", "cbramod": "CBraMod"}
 ARMS = ("lp", "last", "last_randinit", "lp_randinit")
 # Categorical slots 1-4 of the validated default palette (adjacent CVD and normal-vision checks
 # pass); every multi-series plot also varies the marker or line style.
-COLOR = {"lp": "#2a78d6", "last": "#eb6834", "last_randinit": "#1baf7a", "lp_randinit": "#eda100"}
-MARK = {"lp": "o", "last": "s", "last_randinit": "^", "lp_randinit": "D"}
+COLOR = {"lp": "#2a78d6", "last": "#eb6834", "last_randinit": "#1baf7a", "lp_randinit": "#eda100",
+         "last_noise": "#e87ba4"}   # slot 5 of the same palette (also ROT_COLORS[4])
+MARK = {"lp": "o", "last": "s", "last_randinit": "^", "lp_randinit": "D", "last_noise": "v"}
 STYLE = {"lp": "-", "last": "--", "last_randinit": "-.", "lp_randinit": ":"}
 ROT_COLORS = ("#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4")
 RELEASED_C, FIXED_C, PAPER_C = "#2a78d6", "#eb6834", "#8a8983"
@@ -705,10 +709,207 @@ def f9(a):
         "verdicts stay those of the D24 rules.")
 
 
+# ---- F10: initialisation x probe setting on DL's split ------------------------------------------
+# Probe settings on DL's split, linear head: (label, run tag, E17 cell); BIOT's released probe reads its encoder.
+SETTINGS10 = {
+    "biot": (("released-code\nprobe\n(train mode)", "", None), ("encoder-level\nprobe\n(eval mode)", "P1E", None)),
+    "cbramod": (("released-code\nprobe (proj_out\ntap, train mode)", "", "proj_out,train"),
+                ("encoder tap only\n(train mode)", "P1ET", "encoder,train"),
+                ("eval mode only\n(proj_out tap)", "P1PE", "proj_out,eval"),
+                ("encoder-level\nprobe (encoder\ntap, eval mode)", "P1E", "encoder,eval")),
+}
+ARMS10 = (("lp", "frozen pretrained encoder (lp)"), ("last", "SA from the pretrained weights (last)"),
+          ("last_randinit", "SA from random init, as shipped (last_randinit)"))
+
+
+def f10(a):
+    path = Path(a.analysis) / "E17" / "e17.json"
+    if not path.exists():
+        raise Skip(f"{path} not found (scripts/analysis/e17_tap_mode.py)")
+    e17 = json.loads(path.read_text())["paper"]["linear"]["cells"]
+    vals = {}
+    for m, sets in SETTINGS10.items():
+        for _, tag, cell in sets:
+            for arm, _ in ARMS10:
+                rs = sorted(select(a.recs, (tag,), model=m, arm=arm, setting="paper"), key=lambda r: r["seed"])
+                v = [metric(r, "linear", "roc_auc") for r in rs if "linear" in r["probes"]]
+                if not v:
+                    raise Skip(f"no {NAME[m]} {arm} records ({tagtxt((tag,))}) on DL's split")
+                if cell and not np.allclose(v, e17[cell][arm], atol=1e-6):   # the paper cites E17 for these
+                    raise ValueError(f"CBraMod {cell} {arm}: records {v} differ from {path}")
+                vals[(m, tag, arm)] = np.array(v)
+    fig, axes = plt.subplots(1, 2, figsize=(6.5, 2.9), sharey=True,
+                             gridspec_kw={"width_ratios": [len(s) + 0.4 for s in SETTINGS10.values()]})
+    dx = (-0.25, 0.0, 0.25)
+    for ax, (m, sets) in zip(axes, SETTINGS10.items(), strict=True):
+        for g, (_, tag, _) in enumerate(sets):
+            mu = {arm: vals[(m, tag, arm)].mean() for arm, _ in ARMS10}
+            ax.plot([g + dx[0], g + dx[1]], [mu["lp"], mu["last"]], color=MUTED, lw=0.8, zorder=2)
+            for (arm, _), d in zip(ARMS10, dx, strict=True):
+                v = vals[(m, tag, arm)]
+                ax.errorbar(g + d, mu[arm], yerr=[[mu[arm] - v.min()], [v.max() - mu[arm]]], fmt=MARK[arm], ms=5,
+                            color=COLOR[arm], mec="white", mew=0.5, elinewidth=1, capsize=2, zorder=3)
+            gain = f"{mu['last'] - mu['lp']:+.1f}".replace("-", "−")
+            ax.text(g, 98.5, f"last − lp: {gain}", ha="center", va="top", fontsize=6.5)
+        for k, ls in (("lp", "--"), ("last", "-.")):
+            y = PAPER_T1[(m, k)]["roc_auc"][0]
+            ax.axhline(y, color=PAPER_C, ls=ls, lw=0.9, zorder=1)
+            ax.text(-0.47, y + (0.5 if k == "last" else -0.5), f"DL {'LP' if k == 'lp' else 'SA'} {y:.1f}",
+                    va="bottom" if k == "last" else "top", fontsize=6, color=PAPER_C)   # LP label below its line
+        ax.set_xticks(range(len(sets)), [s[0] for s in sets], fontsize=6.5)
+        ax.set_xlim(-0.5, len(sets) - 0.5)
+        ax.grid(axis="x", visible=False)
+        ax.set_title(NAME[m])
+    axes[0].set_ylim(40, 100)
+    axes[0].set_ylabel("test ROC-AUC x100")
+    handles = [Line2D([], [], color=COLOR[arm], marker=MARK[arm], ls="none", ms=5, label=lab)
+               for arm, lab in ARMS10]
+    handles += [Line2D([], [], color=PAPER_C, ls=ls, lw=0.9, label=f"DL's reported {k} (their Table 1)")
+                for k, ls in (("LP", "--"), ("SA", "-."))]
+    fig.legend(handles=handles, loc="lower center", ncol=3, bbox_to_anchor=(0.5, 1.0), fontsize=6.5)
+    fig.tight_layout()
+    save(fig, a, "fig_ablation")
+    gain = {t: float(np.mean(vals[("cbramod", t, "last")] - vals[("cbramod", t, "lp")]))
+            for _, t, _ in SETTINGS10["cbramod"]}
+    return "fig_ablation", (
+        "Initialisation and probe setting on DL's split (upstream labels, DL's SSL protocol, linear head): test "
+        "ROC-AUC of the frozen pretrained encoder (lp), of SSL adaptation of the last block from the pretrained "
+        "weights (last) and from random init, the path the release runs as shipped (last_randinit); marker = "
+        "mean over 5 seeds, whisker = range over the seeds; the grey segment and the number above each group "
+        "are the SA gain last - lp. Dashed and dash-dotted lines: DL's reported LP and SA (their Table 1). "
+        "Probe settings: DL's released-code probe (CBraMod: reads proj_out, the reconstruction head, with the "
+        "frozen backbone in train mode, dropout on; BIOT: train mode, it already reads its encoder), each change "
+        "alone, and both changed, the encoder-level probe (for BIOT only the mode changes). "
+        "CBraMod SA gain per setting: "
+        + ", ".join(f"{gain[t]:+.2f}" for _, t, _ in SETTINGS10["cbramod"])
+        + " (released-code probe, encoder tap only, eval mode only, both). Sources: wave-1 replication records "
+        "(released-code probe), P1ET, P1PE, P1E records; the CBraMod cells equal artifacts/analysis/E17/e17.json "
+        "seed by seed (checked); BIOT means as in artifacts/tables/chbmit-paper.md and d24-chbmit-P1E.md.")
+
+
+# ---- F11: adaptation effects under the revised protocol, with the controls ------------------------------
+SETS11 = ("CHB-MIT", "Siena", "Siena filtered")
+CON11 = (("last", "lp"), ("last", "last_noise"), ("last_randinit", "lp_randinit"))
+ARMS11 = ("lp", "last", "last_noise", "lp_randinit", "last_randinit")
+HEADS11 = (   # key in d27b.json, label, marker, face colour, edge colour
+    ("raw", "raw features", "o", INK, INK), ("z", "standardized features", "s", "white", MUTED))
+# D28 slot: the tuned, early-stopped probes (raw and standardized) become two more HEADS11 entries with a
+# loader once artifacts/analysis/D28/ exists, written as fig_effects_d28 so fig_effects stays as is.
+
+
+def t95(d) -> tuple[float, float, float]:
+    """Mean and 95% t-interval over units (rotation means, df = n - 1)."""
+    d = np.asarray(d, dtype=float)
+    h = stats.t.ppf(0.975, len(d) - 1) * d.std(ddof=1) / np.sqrt(len(d))
+    return float(d.mean()), float(d.mean() - h), float(d.mean() + h)
+
+
+def effects_data(a) -> dict:
+    """Per-rotation arm means (3 seeds each) per (dataset, model, head), cross-checked with the paper's sources."""
+    base = Path(a.analysis)
+    paths = (base / "D27B" / "d27b.json", base / "D27" / "cpu.json", base / "stats" / "stats.json")
+    if missing := [str(p) for p in paths if not p.exists()]:
+        raise Skip(f"{', '.join(missing)} not found")
+    d27b, cpu, st = (json.loads(p.read_text()) for p in paths)
+    noise = {(t["setting"], t["model"], "raw" if t["probe"] == "linear" else "z"): t for t in cpu["tost"]
+             if (t["item"], t["probe"]) in (("E27", "linear"), ("A6", "linear_z"))}
+    arms = {}
+    for s in SETS11:
+        for m in MODELS:
+            for h, *_ in HEADS11:
+                cell = d27b["sets"][s]["models"][m][h]
+                u = {k: np.array(v["per_unit"]) for k, v in cell["arms"].items()}
+                for name, key in (("last - lp", ("last", "lp")), ("D17", ("last_randinit", "lp_randinit"))):
+                    c = cell["contrasts"][name]
+                    if not np.allclose(t95(u[key[0]] - u[key[1]]), (c["mean"], *c["t95"])):
+                        raise ValueError(f"{s} {m} {h} {name}: arm means do not give d27b.json's interval")
+                if t := noise.get((s, m, h)):
+                    if not (np.allclose(t["last"], u["last"]) and np.isclose(np.mean(t["per_unit"]), t["mean"])):
+                        raise ValueError(f"{s} {m} {h}: noise-control 'last' differs from d27b.json")
+                    u["last_noise"] = np.array(t["last_noise"])
+                arms[(s, m, h)] = u
+    for r in st["e10"]:   # the raw head is Table d24a (stats.json, D24-A)
+        if not r["paper"] and r["probe"] == "linear" and (r["a"], r["b"]) in CON11:
+            u = arms[(r["setting"], r["model"], "raw")]
+            if not np.allclose(t95(u[r["a"]] - u[r["b"]]), (r["mean"], *r["t"]["ci95"])):
+                raise ValueError(f"{r['setting']} {r['model']} {r['a']} - {r['b']}: differs from stats.json")
+    return arms
+
+
+def f11(a):
+    arms = effects_data(a)
+    fig, axes = plt.subplots(2, 2, figsize=(6.5, 4.6), sharex="col", gridspec_kw={"width_ratios": [3, 2]})
+    rows = [4 * i + 1 + j for i in range(len(SETS11)) for j in range(len(CON11))]   # 4 * i: dataset header
+    for (ax, al), m in zip(axes, MODELS, strict=True):
+        for i, s in enumerate(SETS11):
+            for axx in (ax, al):
+                axx.text(0.01, 4 * i, s, transform=axx.get_yaxis_transform(), va="center", fontsize=7,
+                         fontweight="bold")
+            for j, (x, y) in enumerate(CON11):
+                miss = []
+                for k, (h, lab, mk, fc, ec) in enumerate(HEADS11):
+                    u = arms[(s, m, h)]
+                    if x not in u or y not in u:
+                        miss.append(lab)
+                        continue
+                    mu, lo, hi = t95(u[x] - u[y])
+                    ax.errorbar(mu, 4 * i + 1 + j + (k - 0.5) * 0.36, xerr=[[mu - lo], [hi - mu]], fmt=mk, ms=3.5,
+                                mfc=fc, mec=ec, color=ec, elinewidth=1, capsize=1.5)
+                if miss:
+                    ax.text(0.99, 4 * i + 1 + j, "not run" if len(miss) == len(HEADS11) else f"{miss[0]}: not run",
+                            transform=ax.get_yaxis_transform(), ha="right", va="center", fontsize=6, color=MUTED)
+            for k, (h, *_ ) in enumerate(HEADS11):
+                u = arms[(s, m, h)]
+                for q, arm in enumerate(ARMS11):
+                    if arm in u:
+                        al.plot(u[arm].mean(), 4 * i + 1.5 + k + (q - 2) * 0.14, MARK[arm], color=COLOR[arm],
+                                ms=3.5, mec="white", mew=0.3)
+        ax.axvline(0, color=MUTED, lw=0.9)
+        for x0 in (-3, 3):
+            ax.axvline(x0, color=MUTED, lw=0.5, ls=":")
+        al.axvline(50, color=MUTED, lw=0.6, ls=":")
+        ax.set_yticks(rows, [f"{x} − {y}" for _ in SETS11 for x, y in CON11], fontsize=6.5)
+        al.set_yticks([4 * i + 1.5 + k for i in range(len(SETS11)) for k in range(len(HEADS11))],
+                      [lab.split()[0] for _ in SETS11 for _, lab, *_ in HEADS11], fontsize=6.5)
+        al.yaxis.tick_right()
+        al.set_xticks(range(50, 100, 10))
+        for axx in (ax, al):
+            axx.set_ylim(4 * len(SETS11) - 0.4, -0.6)
+            axx.grid(axis="y", visible=False)
+        ax.set_title(f"{NAME[m]}: paired differences")
+        al.set_title(f"{NAME[m]}: arm means")
+    axes[1, 0].set_xlabel("paired difference, ROC-AUC x100\n(mean, 95% t-interval over 5 rotations)")
+    axes[1, 1].set_xlabel("arm mean, test ROC-AUC x100")
+    handles = [Line2D([], [], marker=mk, mfc=fc, mec=ec, color=ec, ls="-", lw=1, ms=4, label=f"probe on {lab}")
+               for _, lab, mk, fc, ec in HEADS11]
+    handles += [Line2D([], [], color=COLOR[arm], marker=MARK[arm], ls="none", ms=4, label=arm) for arm in ARMS11]
+    fig.legend(handles=handles, loc="lower center", ncol=4, bbox_to_anchor=(0.5, 1.0), fontsize=6.5)
+    fig.tight_layout()
+    save(fig, a, "fig_effects")
+    return "fig_effects", (
+        "Adaptation effects under the revised protocol (5 subject rotations, 3 seeds each, overlap labels, "
+        "encoder-level linear probe), with the linear head on raw features (D24-A) and on standardized features "
+        "(D27-B). Left: paired differences of rotation means with 95% t-intervals (df 4): the SA gain last - lp, "
+        "the noise-input control last - last_noise (E27 raw; D27 addition A6 standardized; not run elsewhere) "
+        "and random-init SA against random features last_randinit - lp_randinit (D17); dotted lines at -3 and "
+        "+3 mark the decision margin. Right: the arm means behind them, so a gain between arms near chance (for "
+        f"example BIOT on Siena, raw features, lp {arms[('Siena', 'biot', 'raw')]['lp'].mean():.1f}) is visible. "
+        "Sources: artifacts/analysis/D27B/d27b.json (arm "
+        "means per rotation, both heads; equals artifacts/analysis/stats/stats.json and Table d24a for the raw "
+        "head, checked), artifacts/analysis/D27/cpu.json (last_noise per rotation, E27 and A6). The tuned-probe "
+        "version (D28) will be fig_effects_d28.")
+
+
+def f11_d28(a):
+    raise Skip("D28 (tuned, early-stopped probes) has not run; fig_effects_d28 = F11 with its two tuned probes "
+               "added to HEADS11 once artifacts/analysis/D28/ exists")
+
+
 FIGURES = (
     [("F1 per epoch", partial(f1, per_step=False)), ("F1 per step", partial(f1, per_step=True))]
     + [(f"F2 {k}", partial(f2, key=k)) for k in SETTINGS]
-    + [("F3", f3), ("F4", f4), ("F5", f5), ("F6", f6), ("F7", f7), ("F8", f8), ("F9", f9)]
+    + [("F3", f3), ("F4", f4), ("F5", f5), ("F6", f6), ("F7", f7), ("F8", f8), ("F9", f9),
+       ("F10", f10), ("F11", f11), ("F11 D28", f11_d28)]
 )
 
 
@@ -719,18 +920,26 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--tables", default=str(ROOT / "artifacts" / "tables"))
     ap.add_argument("--seizures", default=str(ROOT / "configs" / "chbmit_seizures.json"))
     ap.add_argument("--store", default=str(ROOT / "data" / "lmdb" / "chbmit_eval10"))
+    ap.add_argument("--analysis", default=str(ROOT / "artifacts" / "analysis"))
     ap.add_argument("--dpi", type=int, default=300)
+    ap.add_argument("--only", nargs="+", metavar="ID", help="figure ids (e.g. F10 F11); other captions are kept")
     a = ap.parse_args(argv)
     plt.switch_backend("Agg")
     plt.rcParams.update(RCPARAMS)
     a.out = Path(a.out)
     a.out.mkdir(parents=True, exist_ok=True)
     a.recs = load_records(Path(a.results))
-    made, missing, failed = [], [], False
+    cap = a.out / "captions.md"
+    made = ({ln.split("**")[1]: ln for ln in cap.read_text().splitlines() if ln.startswith("- **")}
+            if a.only and cap.exists() else {})
+    missing, failed = [], False
     for fid, fn in FIGURES:
+        if a.only and fid not in a.only:
+            continue
+        made.pop(fid, None)
         try:
             stem, caption = fn(a)
-            made.append(f"- **{fid}** `{stem}`: {caption}")
+            made[fid] = f"- **{fid}** `{stem}`: {caption}"
             print(f"[{fid}] wrote {a.out / stem}.png and .pdf")
         except Skip as e:
             missing.append(f"- {fid}: skipped, {e}")
@@ -744,10 +953,10 @@ def main(argv: list[str] | None = None) -> int:
     src = res.relative_to(ROOT) if res.is_relative_to(ROOT) else res
     lines = ["# Paper A figure captions", "",
              f"Generated by scripts/figures.py from {src}; PNG ({a.dpi} dpi) and PDF next to this file.", "",
-             *made]
+             *(made[fid] for fid, _ in FIGURES if fid in made)]
     if missing:
         lines += ["", "## Not produced in the last run", "", *missing]
-    (a.out / "captions.md").write_text("\n".join(lines) + "\n")
+    cap.write_text("\n".join(lines) + "\n")
     return 1 if failed else 0
 
 

@@ -190,3 +190,23 @@ if want E33A; then  # extended CHB-MIT (chb12/13/17 + chb02_16+ + chb24_02/22), 
     sub --model $M --dataset chbmit_x --arms $A5 --seeds $(s3 $R) --split rot$R $COR --run-tag S1X --tag s1x
   done; done
 fi
+if want D28; then   # probe convergence: tuned, early-stopped linear probes on cached features (notes/decisions.md D28)
+  typeset -A AN=(lp lp last la last_noise ln)
+  for M in biot cbramod; do for A in lp last last_randinit lp_randinit; do   # (a) DL's split, upstream labels
+    sub --model $M --dataset chbmit --arms $A --seeds ${(j:,:)BASE} --split paper --probes grid,grid_z --backbone-mode eval --run-tag P1G --tag g${AS[$A]}
+  done; done
+  for A in lp last last_noise; do   # (a) BIOT with its native q95 input
+    sub --model biot --dataset chbmit --arms $A --seeds ${(j:,:)BASE} --split paper --probes grid,grid_z --backbone-mode eval --set input_norm=q95 --run-tag P1QG --tag gq${AN[$A]}
+  done
+  for D in chbmit siena siena_filt; do for M in biot cbramod; do for R in 0 1 2 3 4; do   # (b) rotations
+    sub --model $M --dataset ${DS[$D]} ${=VAR[$D]} --arms lp,last,last_randinit,lp_randinit,last_noise --seeds $(s3 $R) --split rot$R --labels overlap --probes grid,grid_z --backbone-mode eval --run-tag ${T1[$D]}G --tag g${SH[$D]}
+  done; done; done
+fi
+if want D29; then   # C2/C3 noise and standardized-head controls at the fixed-compute budget (notes/decisions.md D29)
+  ZH=(--labels overlap --probes linear,linear_z --backbone-mode eval)
+  for D in siena siena_filt; do for R in 0 1 2 3 4; do   # E30b flags; last re-run (must reproduce E30b linear) + last_noise
+    sub --model biot --dataset ${DS[$D]} ${=VAR[$D]} --arms last,last_noise --seeds $(s3 $R) --split rot$R $ZH --batch 128 --protocol fixed_c --ssl-subsets N896,N1664,N2048,N4174 --run-tag ${T1[$D]}C2D --tag y2${SH[$D]}
+    sub --model biot --dataset ${DS[$D]} ${=VAR[$D]} --arms last,last_noise --seeds $(s3 $R) --split rot$R $ZH --batch 128 --protocol fixed_c --ssl-subsets P2N2048,P5N2048,P10N2048 --run-tag ${T1[$D]}C3D --tag y3${SH[$D]}
+    sub --model biot --dataset ${DS[$D]} ${=VAR[$D]} --arms lp --seeds $(s3 $R) --split rot$R $ZH --batch 128 --run-tag ${T1[$D]}LPBD --tag yb${SH[$D]}
+  done; done
+fi

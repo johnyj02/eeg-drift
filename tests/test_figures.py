@@ -58,9 +58,9 @@ def test_figures_smoke(tmp_path):
         "| chbmit (P1E) | biot | linear | last - lp | -0.6 | [-2.6, +1.4] |\n"
         "| chbmit (P1E) | cbramod | mlp_fullft | lp - lp_randinit | +2.2 | [+1.2, +3.1] |\n")
     out = tmp_path / "figures"
-    rc = main(["--results", str(res), "--out", str(out), "--tables", str(tables),
-               "--store", str(tmp_path / "no-store"), "--dpi", "30"])
-    assert rc == 0
+    args = ["--results", str(res), "--out", str(out), "--tables", str(tables),
+            "--store", str(tmp_path / "no-store"), "--analysis", str(tmp_path / "no-analysis"), "--dpi", "30"]
+    assert main(args) == 0
     stems = ("f1_ssl_loss_epoch", "f1_ssl_loss_step", "f2_probe_curves_paper", "f2_probe_curves_chbmit_rot",
              "f3_table1_cells", "f4_d24_paired", "f5_roc_pr", "f6_chbmit_protocol_timeline", "f8_c2_c3",
              "f9_d24_forest")
@@ -70,3 +70,6 @@ def test_figures_smoke(tmp_path):
     assert all(f"`{s}`" in captions for s in stems)
     assert "- F7: skipped" in captions and "- F2 siena: skipped" in captions
     assert "\u2014" not in captions
+    assert "- F10: skipped" in captions and "- F11: skipped" in captions
+    assert main([*args, "--only", "F9"]) == 0   # --only keeps the captions of the other figures
+    assert all(f"`{s}`" in (out / "captions.md").read_text() for s in stems)
