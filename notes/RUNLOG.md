@@ -891,3 +891,80 @@ Project total: about $3,360 (to D25) + $953.89 = about $4,314.
 | anon-DX-v0-1-20261105-30de5d36-arms-cbra-chb-rot0-g1-smoke | Completed | 939 | D28/D29 smoke (grid probes; fixed_c + last_noise + linear_z); records read: GridProbeResult fields, run tags, subsets as intended; $0.8 |
 | anon-DX-v0-1-20261105-c145b724-arms-biot-chb-gqln-smoke | Completed | 940 | D28/D29 smoke (grid probes; fixed_c + last_noise + linear_z); records read: GridProbeResult fields, run tags, subsets as intended; $0.8 |
 | anon-DX-v0-1-20261105-0aaaab50-arms-biot-sie-rot0-y2f-smoke | Completed | 240 | D28/D29 smoke (grid probes; fixed_c + last_noise + linear_z); records read: GridProbeResult fields, run tags, subsets as intended; $0.2 |
+
+## D28 + D29 (2026-11-04)
+| job | status | billable s | outcome |
+|---|---|---|---|
+| anon-DX-v0-1-20261105-002a831d-arms-biot-sie-rot1-y3f | Completed | 7923 | D29, ml.g5.8xlarge, exit ok; $6.73 |
+| anon-DX-v0-1-20261105-023efbdb-arms-biot-sie-rot0-y33 | Completed | 7136 | D29, ml.g5.8xlarge, exit ok; $6.07 |
+| anon-DX-v0-1-20261105-039ce7ae-arms-cbra-chb-gpr | Completed | 4315 | D28, ml.g5.8xlarge, exit ok; $3.67 |
+| anon-DX-v0-1-20261105-04ad8856-arms-cbra-chb-rot0-g1 | Completed | 8262 | D28, ml.g5.8xlarge, exit ok; $7.02 |
+| anon-DX-v0-1-20261105-07bd1fb6-arms-biot-chb-rot3-g1 | Completed | 5937 | D28, ml.g5.8xlarge, exit ok; $5.05 |
+| anon-DX-v0-1-20261105-0c4b5041-arms-biot-sie-rot1-y23 | Completed | 10134 | D29, ml.g5.8xlarge, exit ok; $8.61 |
+| anon-DX-v0-1-20261105-1c034af2-arms-biot-sie-rot0-yb3 | Completed | 1280 | D29, ml.g5.8xlarge, exit ok; $1.09 |
+| anon-DX-v0-1-20261105-1f7e11a3-arms-cbra-sie-rot3-gf | Completed | 1335 | D28, ml.g5.8xlarge, exit ok; $1.13 |
+| anon-DX-v0-1-20261105-2025e7d6-arms-cbra-chb-gla | Completed | 4239 | D28, ml.g5.8xlarge, exit ok; $3.60 |
+| anon-DX-v0-1-20261105-25826303-arms-biot-sie-rot1-ybf | Completed | 1395 | D29, ml.g5.8xlarge, exit ok; $1.19 |
+| anon-DX-v0-1-20261105-25fcbcd0-arms-biot-sie-rot2-y2f | Completed | 9245 | D29, ml.g5.8xlarge, exit ok; $7.86 |
+| anon-DX-v0-1-20261105-2b3fd589-arms-biot-sie-rot4-ybf | Completed | 1280 | D29, ml.g5.8xlarge, exit ok; $1.09 |
+| anon-DX-v0-1-20261105-2c46f8d0-arms-biot-sie-rot4-y33 | Completed | 6962 | D29, ml.g5.8xlarge, exit ok; $5.92 |
+| anon-DX-v0-1-20261105-2f3d9618-arms-biot-chb-rot2-g1 | Completed | 7906 | D28, ml.g5.8xlarge, exit ok; $6.72 |
+| anon-DX-v0-1-20261105-329e5b6e-arms-biot-chb-gqla | Completed | 4271 | D28, ml.g5.8xlarge, exit ok; $3.63 |
+| anon-DX-v0-1-20261105-385a07e6-arms-biot-chb-gpr | Completed | 3551 | D28, ml.g5.8xlarge, exit ok; $3.02 |
+| anon-DX-v0-1-20261105-39e5c1fa-arms-biot-sie-rot3-g3 | Completed | 1566 | D28, ml.g5.8xlarge, exit ok; $1.33 |
+| anon-DX-v0-1-20261105-3df9761b-arms-cbra-chb-rot3-g1 | Completed | 10319 | D28, ml.g5.8xlarge, exit ok; $8.77 |
+| anon-DX-v0-1-20261105-45c09586-arms-biot-sie-rot2-g3 | Completed | 1745 | D28, ml.g5.8xlarge, exit ok; $1.48 |
+| anon-DX-v0-1-20261105-53ba9b7b-arms-biot-sie-rot0-gf | Completed | 1073 | D28, ml.g5.8xlarge, exit ok; $0.91 |
+| anon-DX-v0-1-20261105-563fe9d6-arms-cbra-sie-rot0-gf | Completed | 1576 | D28, ml.g5.8xlarge, exit ok; $1.34 |
+| anon-DX-v0-1-20261105-5c40b22f-arms-biot-sie-rot0-g3 | Completed | 1098 | D28, ml.g5.8xlarge, exit ok; $0.93 |
+| anon-DX-v0-1-20261105-5c44b5be-arms-biot-sie-rot3-y23 | Completed | 11286 | D29, ml.g5.8xlarge, exit ok; $9.59 |
+| anon-DX-v0-1-20261105-5e0a5142-arms-biot-chb-rot4-g1 | Completed | 5073 | D28, ml.g5.8xlarge, exit ok; $4.31 |
+| anon-DX-v0-1-20261105-677ac461-arms-biot-sie-rot3-y2f | Completed | 9890 | D29, ml.g5.8xlarge, exit ok; $8.41 |
+| anon-DX-v0-1-20261105-698528c6-arms-cbra-sie-rot1-gf | Completed | 1490 | D28, ml.g5.8xlarge, exit ok; $1.27 |
+| anon-DX-v0-1-20261105-6a89c1b5-arms-biot-chb-gla | Completed | 3466 | D28, ml.g5.8xlarge, exit ok; $2.95 |
+| anon-DX-v0-1-20261105-72228506-arms-biot-sie-rot3-ybf | Completed | 1315 | D29, ml.g5.8xlarge, exit ok; $1.12 |
+| anon-DX-v0-1-20261105-730512e6-arms-cbra-chb-rot2-g1 | Completed | 9550 | D28, ml.g5.8xlarge, exit ok; $8.12 |
+| anon-DX-v0-1-20261105-73d983b7-arms-biot-sie-rot4-yb3 | Completed | 1280 | D29, ml.g5.8xlarge, exit ok; $1.09 |
+| anon-DX-v0-1-20261105-778c9b27-arms-biot-sie-rot1-y33 | Completed | 7659 | D29, ml.g5.8xlarge, exit ok; $6.51 |
+| anon-DX-v0-1-20261105-7aa400ca-arms-biot-sie-rot1-gf | Completed | 1150 | D28, ml.g5.8xlarge, exit ok; $0.98 |
+| anon-DX-v0-1-20261105-80eed862-arms-biot-chb-rot1-g1 | Completed | 4743 | D28, ml.g5.8xlarge, exit ok; $4.03 |
+| anon-DX-v0-1-20261105-81b4df2d-arms-cbra-sie-rot4-gf | Completed | 1843 | D28, ml.g5.8xlarge, exit ok; $1.57 |
+| anon-DX-v0-1-20261105-8280b2d4-arms-biot-sie-rot3-yb3 | Completed | 1455 | D29, ml.g5.8xlarge, exit ok; $1.24 |
+| anon-DX-v0-1-20261105-8289a6c6-arms-biot-sie-rot2-ybf | Completed | 1280 | D29, ml.g5.8xlarge, exit ok; $1.09 |
+| anon-DX-v0-1-20261105-83bb7419-arms-biot-sie-rot0-ybf | Completed | 1280 | D29, ml.g5.8xlarge, exit ok; $1.09 |
+| anon-DX-v0-1-20261105-852d16ce-arms-biot-sie-rot2-y3f | Completed | 7000 | D29, ml.g5.8xlarge, exit ok; $5.95 |
+| anon-DX-v0-1-20261105-89e55619-arms-biot-sie-rot3-y3f | Completed | 7513 | D29, ml.g5.8xlarge, exit ok; $6.39 |
+| anon-DX-v0-1-20261105-89e7122b-arms-biot-sie-rot3-gf | Completed | 1479 | D28, ml.g5.8xlarge, exit ok; $1.26 |
+| anon-DX-v0-1-20261105-8e34c7ee-arms-cbra-chb-glp | Completed | 4214 | D28, ml.g5.8xlarge, exit ok; $3.58 |
+| anon-DX-v0-1-20261105-905f4774-arms-biot-sie-rot2-yb3 | Completed | 1280 | D29, ml.g5.8xlarge, exit ok; $1.09 |
+| anon-DX-v0-1-20261105-910a9621-arms-biot-sie-rot4-g3 | Completed | 2138 | D28, ml.g5.8xlarge, exit ok; $1.82 |
+| anon-DX-v0-1-20261105-91ecfe6f-arms-biot-sie-rot4-y3f | Completed | 6984 | D29, ml.g5.8xlarge, exit ok; $5.94 |
+| anon-DX-v0-1-20261105-92eeba7e-arms-biot-chb-rot0-g1 | Completed | 6905 | D28, ml.g5.8xlarge, exit ok; $5.87 |
+| anon-DX-v0-1-20261105-9988d2a6-arms-cbra-chb-rot1-g1 | Completed | 8663 | D28, ml.g5.8xlarge, exit ok; $7.36 |
+| anon-DX-v0-1-20261105-9f168ede-arms-biot-chb-gqln | Completed | 4295 | D28, ml.g5.8xlarge, exit ok; $3.65 |
+| anon-DX-v0-1-20261105-a02051f8-arms-biot-sie-rot0-y3f | Completed | 7112 | D29, ml.g5.8xlarge, exit ok; $6.05 |
+| anon-DX-v0-1-20261105-a084dd7e-arms-biot-sie-rot0-y23 | Completed | 9491 | D29, ml.g5.8xlarge, exit ok; $8.07 |
+| anon-DX-v0-1-20261105-a17e59fb-arms-cbra-sie-rot0-g3 | Completed | 1415 | D28, ml.g5.8xlarge, exit ok; $1.20 |
+| anon-DX-v0-1-20261105-a1ebdd12-arms-biot-sie-rot2-y23 | Completed | 9242 | D29, ml.g5.8xlarge, exit ok; $7.86 |
+| anon-DX-v0-1-20261105-a28ed6ac-arms-biot-sie-rot0-y2f | Completed | 9405 | D29, ml.g5.8xlarge, exit ok; $7.99 |
+| anon-DX-v0-1-20261105-a46bf7bb-arms-cbra-chb-rot4-g1 | Completed | 12979 | D28, ml.g5.8xlarge, exit ok; $11.03 |
+| anon-DX-v0-1-20261105-ad1a7c4b-arms-cbra-sie-rot1-g3 | Completed | 1535 | D28, ml.g5.8xlarge, exit ok; $1.30 |
+| anon-DX-v0-1-20261105-b32db626-arms-biot-sie-rot4-y2f | Completed | 9147 | D29, ml.g5.8xlarge, exit ok; $7.77 |
+| anon-DX-v0-1-20261105-b421eba7-arms-biot-sie-rot2-gf | Completed | 1831 | D28, ml.g5.8xlarge, exit ok; $1.56 |
+| anon-DX-v0-1-20261105-ca0015ae-arms-biot-sie-rot2-y33 | Completed | 6964 | D29, ml.g5.8xlarge, exit ok; $5.92 |
+| anon-DX-v0-1-20261105-cab103a4-arms-cbra-sie-rot2-g3 | Completed | 1761 | D28, ml.g5.8xlarge, exit ok; $1.50 |
+| anon-DX-v0-1-20261105-cecec647-arms-biot-chb-gqlp | Completed | 4053 | D28, ml.g5.8xlarge, exit ok; $3.45 |
+| anon-DX-v0-1-20261105-d44f81c0-arms-biot-chb-glr | Completed | 3800 | D28, ml.g5.8xlarge, exit ok; $3.23 |
+| anon-DX-v0-1-20261105-d49049be-arms-biot-sie-rot4-gf | Completed | 2048 | D28, ml.g5.8xlarge, exit ok; $1.74 |
+| anon-DX-v0-1-20261105-da1bf4d1-arms-biot-sie-rot3-y33 | Completed | 8444 | D29, ml.g5.8xlarge, exit ok; $7.18 |
+| anon-DX-v0-1-20261105-dc28e456-arms-biot-sie-rot1-y2f | Completed | 10527 | D29, ml.g5.8xlarge, exit ok; $8.95 |
+| anon-DX-v0-1-20261105-ddd54e9c-arms-biot-sie-rot1-g3 | Completed | 1370 | D28, ml.g5.8xlarge, exit ok; $1.16 |
+| anon-DX-v0-1-20261105-e6fc7d0e-arms-cbra-chb-glr | Completed | 4452 | D28, ml.g5.8xlarge, exit ok; $3.78 |
+| anon-DX-v0-1-20261105-e880645f-arms-cbra-sie-rot4-g3 | Completed | 2002 | D28, ml.g5.8xlarge, exit ok; $1.70 |
+| anon-DX-v0-1-20261105-ea36747a-arms-biot-sie-rot4-y23 | Completed | 9237 | D29, ml.g5.8xlarge, exit ok; $7.85 |
+| anon-DX-v0-1-20261105-edccf34e-arms-cbra-sie-rot3-g3 | Completed | 1455 | D28, ml.g5.8xlarge, exit ok; $1.24 |
+| anon-DX-v0-1-20261105-eeb478f4-arms-biot-sie-rot1-yb3 | Completed | 1344 | D29, ml.g5.8xlarge, exit ok; $1.14 |
+| anon-DX-v0-1-20261105-f1a5230e-arms-biot-chb-glp | Completed | 3862 | D28, ml.g5.8xlarge, exit ok; $3.28 |
+| anon-DX-v0-1-20261105-f96d8243-arms-cbra-sie-rot2-gf | Completed | 1546 | D28, ml.g5.8xlarge, exit ok; $1.31 |
+| **total (71 jobs)** | | 340801 | **94.67 h = $289.68** (prices: g5.8xl 3.06, g5.16xl 5.12, g6e.2xl 2.80 $/h, AWS Pricing API); by item (h): D29 51.2, D28 43.4 |
+Project total: about $4,314 + $289.68 + smokes = about $4,606.
