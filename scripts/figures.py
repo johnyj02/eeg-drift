@@ -859,13 +859,17 @@ def effects_data(a) -> dict:
     return out
 
 
-def rows11(fig, axes, step: float = 1.0) -> dict:
-    """Row grid of F11 and F12: one row per feature set under a bold setting header; returns the row centres."""
+def rows11(fig, axes, step: float = 1.0, fs: float = 6.5, hfs: float = 6.5) -> dict:
+    """Row grid of F11 and F12: one row per feature set under a bold setting header; returns the row centres.
+
+    fs sizes the feature-set tick labels and hfs the bold setting headers; the header sits one unit above
+    its first row, so hfs must stay small enough for that gap at the figure's height.
+    """
     y, ticks, labels = {}, [], []
     for g, (tag, _, header) in enumerate(SETS11):
         y0 = g * (step * (len(HEADS11) - 1) + 2.3)
         axes[0].text(0.004, y0, header, transform=blended_transform_factory(fig.transFigure, axes[0].transData),
-                     va="center", fontsize=6.5, fontweight="bold", zorder=5,
+                     va="center", fontsize=hfs, fontweight="bold", zorder=5,
                      bbox={"fc": "white", "ec": "none", "pad": 0.4})
         for ax in axes if g else ():
             ax.axhline(y0 - 0.75, color=GRID, lw=0.8)
@@ -873,7 +877,7 @@ def rows11(fig, axes, step: float = 1.0) -> dict:
             y[(tag, h)] = y0 + 1 + k * step
             ticks.append(y[(tag, h)])
             labels.append(lab)
-    axes[0].set_yticks(ticks, labels, fontsize=6.5)
+    axes[0].set_yticks(ticks, labels, fontsize=fs)
     axes[0].set_ylim(ticks[-1] + 0.8, -0.9)
     for ax in axes:
         ax.grid(axis="y", visible=False)
@@ -882,11 +886,11 @@ def rows11(fig, axes, step: float = 1.0) -> dict:
     return y
 
 
-def biot_only(axes, y, x=0.5) -> None:
+def biot_only(axes, y, x=0.5, fs=6.5) -> None:
     """Label the CBraMod panels of a setting that only BIOT ran (q95 input)."""
     for ax in axes:
         ax.text(x, y, "BIOT only", transform=ax.get_yaxis_transform(), ha="center", va="center",
-                fontsize=6.5, color=MUTED, zorder=5, bbox={"fc": "white", "ec": "none", "pad": 0.4})
+                fontsize=fs, color=MUTED, zorder=5, bbox={"fc": "white", "ec": "none", "pad": 0.4})
 
 
 def interval(ax, iv, y, color, marker, filled, ms=3.2) -> None:
@@ -987,10 +991,14 @@ def f11(a):
 
 def f12(a):
     data = effects_data(a)
-    fig, axes = plt.subplots(1, 5, figsize=(7.0, 4.0), sharey=True, sharex=True,
+    # main.tex draws this one at width=\linewidth, height=0.3\textheight, keepaspectratio (6.5 x 2.7 true in),
+    # and the height is the binding constraint, so the saved aspect sets how much the labels are shrunk.
+    # At 7.0 x 4.0 the saved aspect was 1.60 and every label came out at 0.61 of its size, with 1.8 in of
+    # the line left blank; at 7.0 x 2.95 the scale is 0.81, so 8 pt here reads as 6.5 pt on the page.
+    fig, axes = plt.subplots(1, 5, figsize=(7.0, 2.95), sharey=True, sharex=True,
                              gridspec_kw={"width_ratios": [4, 4, 0.5, 4, 4]})
     axes[2].set_axis_off()   # a gap between the two models
-    y = rows11(fig, axes, step=1.45)
+    y = rows11(fig, axes, step=1.45, fs=8, hfs=7)
     for col, m in zip((axes[:2], axes[3:]), MODELS, strict=True):
         for tag, _, _ in SETS11:
             for _, h, _ in HEADS11:
@@ -998,26 +1006,28 @@ def f12(a):
                     u = data.get((tag, m, h, tuned))
                     for q, arm in enumerate(ARMS11):
                         if u and arm in u:
-                            ax.plot(u[arm].mean(), y[(tag, h)] + (q - 2) * 0.25, MARK[arm], ms=3.4,
+                            # ms stays small: the 5 arms of a row are 0.25 units apart, so a larger marker
+                            # would overlap its neighbour once the page scale is applied.
+                            ax.plot(u[arm].mean(), y[(tag, h)] + (q - 2) * 0.25, MARK[arm], ms=2.5,
                                     mfc=COLOR[arm] if tuned else "white", mec=COLOR[arm], mew=0.8,
                                     zorder=3 + tuned)
         if not any((SETS11[-1][0], m, h, t) in data for _, h, _ in HEADS11 for t, _ in RECIPES11):
-            biot_only(col, y[(SETS11[-1][0], "raw")] + 0.5, x=0.5)
+            biot_only(col, y[(SETS11[-1][0], "raw")] + 0.5, x=0.5, fs=7.5)
     for col, m in zip((axes[:2], axes[3:]), MODELS, strict=True):
         for (_, lab), ax in zip(RECIPES11, col, strict=True):
-            ax.set_title(f"{NAME[m]}\n{lab}", fontsize=7)
+            ax.set_title(f"{NAME[m]}, {lab}", fontsize=8, pad=3)
             ax.axvline(50, color=MUTED, lw=0.8, ls=":", zorder=1)
             ax.set_xlim(28, 97)
             ax.xaxis.set_major_locator(MultipleLocator(20))
-            ax.tick_params(axis="x", labelsize=7)
-    fig.supxlabel("test ROC-AUC x100 (mean over the 5 units; dotted line = chance)", fontsize=7, y=0.01)
-    handles = [Line2D([], [], color=COLOR[arm], marker=MARK[arm], ls="none", ms=3.5, label=arm)
+            ax.tick_params(axis="x", labelsize=8)
+    fig.supxlabel("test ROC-AUC x100 (mean over the 5 units; dotted line = chance)", fontsize=8, y=0.015)
+    handles = [Line2D([], [], color=COLOR[arm], marker=MARK[arm], ls="none", ms=4.0, label=arm)
                for arm in ARMS11]
-    handles += [Line2D([], [], color=MUTED, marker="o", mfc=fc, ls="none", ms=3.5, label=lab)
+    handles += [Line2D([], [], color=MUTED, marker="o", mfc=fc, ls="none", ms=4.0, label=lab)
                 for fc, lab in (("white", "open: fixed recipe"), (MUTED, "filled: tuned probe"))]
-    fig.legend(handles=handles, loc="lower center", ncol=4, bbox_to_anchor=(0.5, 1.0), fontsize=6.5,
-               handlelength=1.2, columnspacing=1.2)
-    fig.tight_layout(w_pad=0.5, rect=(0, 0.02, 1, 1))
+    fig.legend(handles=handles, loc="lower center", ncol=7, bbox_to_anchor=(0.5, 1.0), fontsize=7.5,
+               handlelength=1.0, columnspacing=0.9)
+    fig.tight_layout(w_pad=0.5, rect=(0, 0.03, 1, 1))
     save(fig, a, "fig_absolute")
     q = {k: data[("P1QG", "biot", "raw", k)] for k in (False, True)}
     si = {k: data[("S3G", "biot", "raw", k)]["lp"].mean() for k in (False, True)}
