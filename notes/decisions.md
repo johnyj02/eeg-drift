@@ -889,3 +889,33 @@ adequately trained probes that get the same tuning budget in every arm.
   not claim that SSL adaptation never helps." Keep the headline reproduction results earlier in the abstract;
   "18 tested comparisons", never "any setting"; the body replaces the q95 exception with the D28 result (arms
   at about 73 ROC-AUC, gain removed); the methods state D28's timing and exploratory/confirmatory status.
+
+## D30. PR-AUC read without the ROC threshold, and the EEG-vs-noise PR-AUC finding (2026-11-05 19:54 local; post hoc: in answer to external review r2, AFTER all data; supersedes the PR-AUC part of "## D29" and the "PR-AUC readings ... (descriptive)" line of the D29 outcomes)
+Why: D29 read PR-AUC with the ROC rules, including the 3-point margin. Review r2 showed that this hides
+measured differences: BIOT on Siena, average precision 1.65 (LP) -> 2.20 (SA), difference +0.55
+[+0.14, +0.96], about +33% relative, was labelled "no consistent difference" only because 0.55 < 3.
+I verified that example from the raw records myself: AP 1.6547 -> 2.2039, +0.5492 [+0.1417, +0.9567],
++33.2%; trapezoid PR-AUC +0.5409 [+0.1864, +0.8955]; test prevalence 0.43-0.99% per rotation.
+- New PR-AUC reading (scripts/analysis/d29_read.py; artifacts/analysis/D29/pr_auc.md, pr_auc_table.tex):
+  report both arm means, the absolute difference with its 95% t-interval over the stated units, the
+  relative change in percent, and whether the interval excludes 0 (the only inference claim). NO
+  practical-importance label and no margin-3 TOST: defining a PR-AUC margin now would be a post hoc
+  threshold, and the statement says so and points to the prevalence-scaled measures in the artifacts.
+  Every ROC reading is unchanged (verified byte-identical), and the ROC numbers that lived only in the old
+  PR section are kept verbatim as reference tables.
+- Withdrawn: the old counts "3 string changes" / "6 string changes" / "31 of 34 rows agree with the ROC
+  string" have no referent any more. artifacts/analysis/D29/recheck.md confirmed the VALUES, which still
+  hold; only its two label-count lines are superseded (dated note appended there).
+- NEW FINDING, and the matched test of it (both recomputed by me from the raw records today):
+  At the same parity SSL budget, BIOT on Siena, last - last_noise in average precision x100 over the 5
+  rotation means (95% t-interval, df 4): fixed-recipe linear probe +0.28 [+0.05, +0.52], 5 of 5 rotations
+  positive, interval excludes 0 (+14.7% of the 1.92 noise baseline); tuned probe -0.72 [-1.68, +0.24],
+  1 of 5 positive, interval includes 0. CHB-MIT and Siena filtered show no difference with either probe.
+  At the fixed-compute budget (D29) the fixed-recipe probe gives the same picture more strongly: +0.35 to
+  +0.50 at all 7 subsets, 5 of 5 positive, t AND Nadeau-Bengio intervals exclude 0 (one NB lower bound at
+  +0.00), on a 2.2 AP baseline; with the standardized head and on filtered Siena every interval includes 0.
+  Reading: the one place where EEG adaptation beats noise adaptation on a conservative interval is the
+  fixed-recipe raw probe on Siena, measured in PR-AUC, and tuned probes remove it and reverse its sign.
+  This is the paper's thesis in PR-AUC terms, and it must be reported with the fixed-recipe result shown,
+  not only the tuned one. Absolute levels rise with tuning (Siena last 2.20 -> 5.25 AP), so the fixed-recipe
+  difference sits between two poorly-performing arms.

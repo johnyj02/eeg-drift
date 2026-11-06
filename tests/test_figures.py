@@ -70,6 +70,6 @@ def test_figures_smoke(tmp_path):
     assert all(f"`{s}`" in captions for s in stems)
     assert "- F7: skipped" in captions and "- F2 siena: skipped" in captions
     assert "\u2014" not in captions
-    assert "- F10: skipped" in captions and "- F11: skipped" in captions
+    assert all(f"- {fid}: skipped" in captions for fid in ("F10", "F11", "F12"))
     assert main([*args, "--only", "F9"]) == 0   # --only keeps the captions of the other figures
     assert all(f"`{s}`" in (out / "captions.md").read_text() for s in stems)

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Every Paper A figure (F1-F11) as PNG (300 dpi) and PDF, plus artifacts/figures/captions.md.
+"""Every Paper A figure (F1-F12) as PNG (300 dpi) and PDF, plus artifacts/figures/captions.md.
 
-    .venv/bin/python scripts/figures.py [--results artifacts/s3-results] [--out artifacts/figures] [--only F10 F11]
+    .venv/bin/python scripts/figures.py [--results artifacts/s3-results] [--out artifacts/figures] [--only F11 F12]
 
 Inputs: result records (results/*.json and the per-window *.npz next to them; smoke records are
 ignored), artifacts/tables/d24-bootstrap.md (F9), configs/chbmit_seizures.json (F6), for F7
-the CBraMod checkpoint and the local pilot store data/lmdb/chbmit_eval10, and for F10/F11 the
+the CBraMod checkpoint and the local pilot store data/lmdb/chbmit_eval10, and for F10-F12 the
 analyses under artifacts/analysis (E17, D28, D27B, D27, stats). A figure whose inputs do not exist yet
 is skipped with the reason printed and listed in captions.md. --only remakes the named figures and
 keeps the other captions. The exit code is 1 only if a figure fails for another reason (for
@@ -788,19 +788,19 @@ def f10(a):
         "seed by seed (checked); BIOT means as in artifacts/tables/chbmit-paper.md and d24-chbmit-P1E.md.")
 
 
-# ---- F11: adaptation effects with the fixed-recipe and the tuned probes, with the noise control ----------
+# ---- F11 (effects) and F12 (absolute levels): fixed probe recipe against tuned probes --------------------
 SETS11 = (   # D28 tag, fixed-recipe set in d27b.json / cpu.json, header
     ("S1G", "CHB-MIT", "CHB-MIT (5 rotations)"), ("S3G", "Siena", "Siena (5 rotations)"),
     ("S3FG", "Siena filtered", "Siena filtered (5 rotations)"),
     ("P1G", "CHB-MIT paper split", "CHB-MIT, DL's split (5 seeds)"),
-    ("P1QG", "CHB-MIT paper split, q95", "CHB-MIT, DL's split, q95 input (5 seeds)"))
-PROBES11 = (   # D28 variant, head, tuned, row label
-    ("grid", "raw", False, "fixed, raw"), ("grid", "raw", True, "tuned, raw"),
-    ("grid_z", "z", False, "fixed, standardized"), ("grid_z", "z", True, "tuned, standardized"))
-CON11 = (("last", "lp"), ("last", "last_noise"))
-ARMS11 = ("lp", "last", "last_noise")
+    ("P1QG", "CHB-MIT paper split, q95", "DL's split, q95 input (5 seeds)"))
+HEADS11 = (("grid", "raw", "raw features"), ("grid_z", "z", "standardized"))   # D28 variant, head, row label
+RECIPES11 = ((False, "fixed recipe"), (True, "tuned probe"))
+CON11 = (("last", "lp"), ("last", "last_noise"))   # adaptation effect, noise control
+CONR11 = ("lp", "lp_randinit")                     # pretrained against random features
+ARMS11 = ("lp", "last", "last_noise", "lp_randinit", "last_randinit")
 NOISE11 = {("E27", "linear"): "raw", ("A1", "linear"): "raw", ("A1", "linear_z"): "z", ("A6", "linear_z"): "z"}
-SHADE = "#f1f0eb"
+STATS11 = {"paper split": "CHB-MIT paper split"}   # stats.json set name -> d27b.json set name
 
 
 def t95(d) -> tuple[float, float, float]:
@@ -826,15 +826,20 @@ def effects_data(a) -> dict:
             if not np.allclose(t["last"], u["last"]):
                 raise ValueError(f"{t['setting']} {t['model']} {h}: noise-control 'last' differs from d27b.json")
             u["last_noise"] = np.array(t["last_noise"])
-    for r in st["e10"]:   # the raw head on the rotations is Table d24a (stats.json, D24-A)
-        if not r["paper"] and r["probe"] == "linear" and (r["a"], r["b"]) == ("last", "lp"):
-            u = ref[(r["setting"], r["model"], "raw")]
-            if not np.allclose(t95(u["last"] - u["lp"]), (r["mean"], *r["t"]["ci95"])):
-                raise ValueError(f"{r['setting']} {r['model']} last - lp: d27b.json differs from stats.json")
+    checked = 0
+    for r in st["e10"]:   # the fixed recipe on raw features is the D24 table of each setting (D24-A, D24 paper)
+        u = ref.get((STATS11.get(r["setting"], r["setting"]), r["model"], "raw"), {})
+        if r["probe"] == "linear" and r["a"] in u and r["b"] in u:
+            checked += 1
+            if not np.allclose(t95(u[r["a"]] - u[r["b"]]), (r["mean"], *r["t"]["ci95"])):
+                raise ValueError(f"{r['setting']} {r['model']} {r['a']} - {r['b']}: d27b.json differs "
+                                 f"from stats.json")
+    if checked < 32:   # 4 contrasts x 2 models x (3 rotation settings + DL's split)
+        raise ValueError(f"only {checked} of the stats.json intervals could be checked against d27b.json")
     out = {}
     for tag, s, _ in SETS11:
         for m in MODELS:
-            for v, h, *_ in PROBES11[::2]:
+            for v, h, _ in HEADS11:
                 cell = d28["contrasts"].get(f"{tag}|{m}|{v}")
                 if cell is None:   # q95 input: BIOT only
                     continue
@@ -847,105 +852,202 @@ def effects_data(a) -> dict:
                 for name, c in cell["contrasts"].items():
                     con = tuple(name.split(" - "))
                     for u, rec in ((tuned, c), (fixed, c.get("fixed"))):
-                        if con in CON11 and rec and not np.allclose(t95(u[con[0]] - u[con[1]]),
-                                                                    (rec["mean"], *rec["t"]["ci95"])):
+                        if rec and all(k in u for k in con) and not np.allclose(
+                                t95(u[con[0]] - u[con[1]]), (rec["mean"], *rec["t"]["ci95"])):
                             raise ValueError(f"{tag} {m} {v} {name}: arm means do not give d28.json's interval")
                 out[(tag, m, h, False)], out[(tag, m, h, True)] = fixed, tuned
     return out
 
 
-def f11(a):
-    data = effects_data(a)
-    fig, axes = plt.subplots(1, 4, figsize=(6.5, 3.4), sharey=True, gridspec_kw={"width_ratios": [5, 4, 5, 4]})
-    rows, labels, pitch = [], [], len(PROBES11) + 1.4
-    for g, (tag, _, head) in enumerate(SETS11):
-        y0 = g * pitch
-        axes[0].text(0.004, y0, head, transform=blended_transform_factory(fig.transFigure, axes[0].transData),
+def rows11(fig, axes, step: float = 1.0) -> dict:
+    """Row grid of F11 and F12: one row per feature set under a bold setting header; returns the row centres."""
+    y, ticks, labels = {}, [], []
+    for g, (tag, _, header) in enumerate(SETS11):
+        y0 = g * (step * (len(HEADS11) - 1) + 2.3)
+        axes[0].text(0.004, y0, header, transform=blended_transform_factory(fig.transFigure, axes[0].transData),
                      va="center", fontsize=6.5, fontweight="bold", zorder=5,
                      bbox={"fc": "white", "ec": "none", "pad": 0.4})
         for ax in axes if g else ():
-            ax.axhline(y0 - 0.7, color=GRID, lw=0.8)
-        for k, (_, h, tuned, lab) in enumerate(PROBES11):
-            y = y0 + 1 + k
-            rows.append(y)
+            ax.axhline(y0 - 0.75, color=GRID, lw=0.8)
+        for k, (_, h, lab) in enumerate(HEADS11):
+            y[(tag, h)] = y0 + 1 + k * step
+            ticks.append(y[(tag, h)])
             labels.append(lab)
-            for (ax, al), m in zip((axes[:2], axes[2:]), MODELS, strict=True):
-                if (u := data.get((tag, m, h, tuned))) is None:
-                    continue
-                if tuned:
-                    for axx in (ax, al):
-                        axx.axhspan(y - 0.5, y + 0.5, color=SHADE, lw=0, zorder=0)
-                for j, (x, b) in enumerate(CON11):
-                    if b in u:
-                        mu, lo, hi = t95(u[x] - u[b])
-                        c = INK if b == "lp" else COLOR[b]
-                        ax.errorbar(mu, y + (j - 0.5) * 0.42, xerr=[[mu - lo], [hi - mu]], fmt=MARK[b], ms=3,
-                                    mfc=c if tuned else "white", mec=c, mew=0.8, color=c, elinewidth=0.9,
-                                    capsize=1.2)
-                for q, arm in enumerate(ARMS11):
-                    if arm in u:
-                        al.plot(u[arm].mean(), y + (q - 1) * 0.28, MARK[arm], ms=3, mfc=COLOR[arm] if tuned else
-                                "white", mec=COLOR[arm], mew=0.8)
-        if not any((tag, "cbramod", h, t) in data for _, h, t, _ in PROBES11):
-            for ax, x in zip(axes[2:], (0.5, 0.7), strict=True):   # arm panel: clear of the chance line
-                ax.text(x, y0 + 2.5, "BIOT only", transform=ax.get_yaxis_transform(), ha="center", va="center",
-                        fontsize=6.5, color=MUTED, zorder=5, bbox={"fc": "white", "ec": "none", "pad": 0.4})
-    for (ax, al), m in zip((axes[:2], axes[2:]), MODELS, strict=True):
-        ax.axvline(0, color=MUTED, lw=0.9, zorder=1)
-        for x0 in (-3, 3):
-            ax.axvline(x0, color=MUTED, lw=0.5, ls=":", zorder=1)
-        ax.xaxis.set_major_locator(MultipleLocator(5))
-        ax.set_title(f"{NAME[m]}: differences")
-        ax.set_xlabel("difference, ROC-AUC x100", fontsize=7)
-        al.axvline(50, color=MUTED, lw=0.6, ls=":", zorder=1)
-        al.set_xlim(28, 97)
-        al.set_xticks(range(30, 100, 20))
-        al.set_title(f"{NAME[m]}: arm means")
-        al.set_xlabel("test ROC-AUC x100", fontsize=7)
-    axes[0].set_yticks(rows, labels, fontsize=6.5)
-    axes[0].set_ylim(rows[-1] + 0.7, -0.7)
+    axes[0].set_yticks(ticks, labels, fontsize=6.5)
+    axes[0].set_ylim(ticks[-1] + 0.8, -0.9)
     for ax in axes:
         ax.grid(axis="y", visible=False)
         ax.tick_params(axis="y", length=0)
         ax.spines["left"].set_visible(False)
+    return y
+
+
+def biot_only(axes, y, x=0.5) -> None:
+    """Label the CBraMod panels of a setting that only BIOT ran (q95 input)."""
+    for ax in axes:
+        ax.text(x, y, "BIOT only", transform=ax.get_yaxis_transform(), ha="center", va="center",
+                fontsize=6.5, color=MUTED, zorder=5, bbox={"fc": "white", "ec": "none", "pad": 0.4})
+
+
+def interval(ax, iv, y, color, marker, filled, ms=3.2) -> None:
+    mu, lo, hi = iv
+    ax.errorbar(mu, y, xerr=[[mu - lo], [hi - mu]], fmt=marker, ms=ms, mfc=color if filled else "white",
+                mec=color, mew=0.8, color=color, elinewidth=0.9, capsize=1.2, zorder=3 + filled)
+
+
+def f11(a):
+    data = effects_data(a)
+    fig, axes = plt.subplots(1, 7, figsize=(7.0, 3.0), sharey=True,
+                             gridspec_kw={"width_ratios": [4.4, 4.4, 3.9, 0.5, 4.4, 4.4, 3.9]})
+    axes[3].set_axis_off()   # a gap between the two models
+    y, eff, rnd = rows11(fig, axes), [], []
+    for col, m in zip((axes[:3], axes[4:]), MODELS, strict=True):
+        for tag, _, _ in SETS11:
+            for _, h, _ in HEADS11:
+                for (tuned, _), ax in zip(RECIPES11, col[:2], strict=True):
+                    u = data.get((tag, m, h, tuned))
+                    for j, (x, b) in enumerate(CON11):
+                        if u and x in u and b in u:
+                            iv = t95(u[x] - u[b])
+                            eff += iv[1:]
+                            interval(ax, iv, y[(tag, h)] + (j - 0.5) * 0.5,
+                                     INK if b == "lp" else COLOR[b], MARK[b], tuned)
+                ivs = {tuned: t95(u[CONR11[0]] - u[CONR11[1]])
+                       for tuned, _ in RECIPES11 if (u := data.get((tag, m, h, tuned)))
+                       and all(k in u for k in CONR11)}
+                if len(ivs) == 2:   # the same rows, so join the two recipes
+                    col[2].plot([ivs[False][0], ivs[True][0]], [y[(tag, h)] - 0.22, y[(tag, h)] + 0.22],
+                                color=MUTED, lw=0.6, zorder=2)
+                for tuned, iv in ivs.items():
+                    rnd += iv[1:]
+                    interval(col[2], iv, y[(tag, h)] + (tuned - 0.5) * 0.44, COLOR["lp_randinit"],
+                             MARK["lp_randinit"], tuned)
+        if not any((SETS11[-1][0], m, h, t) in data for _, h, _ in HEADS11 for t, _ in RECIPES11):
+            biot_only(col, y[(SETS11[-1][0], "raw")] + 0.5)
+    wide = max(abs(x) for x in rnd)
+    for col, m in zip((axes[:3], axes[4:]), MODELS, strict=True):
+        for (_, lab), ax in zip(RECIPES11, col[:2], strict=True):
+            ax.set_title(f"{NAME[m]}\n{lab}", fontsize=7)
+            for x0 in (-3, 3):
+                ax.axvline(x0, color=MUTED, lw=0.5, ls=":", zorder=1)
+            ax.set_xlim(min(eff) - 1, max(eff) + 1)
+            ax.xaxis.set_major_locator(MultipleLocator(10))
+        col[2].set_title(f"{NAME[m]}\npretrained features", fontsize=7)
+        col[2].set_xlim(-wide - 3, wide + 3)
+        col[2].set_xticks([-40, 0, 40])
+        for ax in col:
+            ax.axvline(0, color=INK, lw=1.0, zorder=1)
+            ax.tick_params(axis="x", labelsize=7)
+    fig.supxlabel("paired difference in test ROC-AUC x100 (mean and 95% t-interval over the 5 units)",
+                  fontsize=7, y=0.01)
     handles = [Line2D([], [], color=INK if b == "lp" else COLOR[b], marker=MARK[b], ms=3.5, lw=0.9,
                       label=f"{x} − {b}") for x, b in CON11]
-    handles += [Line2D([], [], color=COLOR[arm], marker=MARK[arm], ls="none", ms=3.5, label=arm) for arm in ARMS11]
-    handles += [Line2D([], [], color=MUTED, marker="o", mfc=fc, ls="none", ms=3.5, label=lab)
-                for fc, lab in (("white", "open: fixed recipe"), (MUTED, "filled, shaded: tuned"))]
-    fig.legend(handles=handles, loc="lower center", ncol=7, bbox_to_anchor=(0.5, 1.0), fontsize=6.5,
+    handles += [Line2D([], [], color=COLOR["lp_randinit"], marker=MARK["lp_randinit"], ms=3.5, lw=0.9,
+                       label="lp − lp_randinit"),
+                Line2D([], [], color=MUTED, marker="o", mfc="white", ls="none", ms=3.5,
+                       label="open: fixed recipe"),
+                Line2D([], [], color=MUTED, marker="o", mfc=MUTED, ls="none", ms=3.5,
+                       label="filled: tuned probe")]
+    fig.legend(handles=handles, loc="lower center", ncol=5, bbox_to_anchor=(0.5, 1.0), fontsize=6.5,
                handlelength=1.6, columnspacing=1.2)
-    fig.tight_layout(w_pad=0.6)
+    fig.tight_layout(w_pad=0.5, rect=(0, 0.03, 1, 1))
     save(fig, a, "fig_effects")
-    q = {k: data[("P1QG", "biot", "raw", k)] for k in (False, True)}
+    shrink = []   # every fixed-recipe SA gain past the margin, against the tuned reading of the same cell
+    for tag, s, _ in SETS11:
+        for _, h, hlab in HEADS11:
+            for m in MODELS:
+                f, u = data.get((tag, m, h, False)), data.get((tag, m, h, True))
+                if f and u and t95(f["last"] - f["lp"])[0] > 3:
+                    slab = s.replace("CHB-MIT paper split", "DL's split")
+                    shrink.append(f"{NAME[m]} {slab}, {hlab} {t95(f['last'] - f['lp'])[0]:+.1f} against "
+                                  f"{t95(u['last'] - u['lp'])[0]:+.1f}")
     return "fig_effects", (
-        "SA gain and noise control with the fixed probe recipe and with tuned probes (encoder-level linear probe, "
-        "raw or standardized features; ROC-AUC x100). Rows per setting: fixed recipe, raw; tuned, raw; fixed "
-        "recipe, standardized; tuned, standardized (open markers = fixed recipe, filled markers on shaded rows = "
-        "tuned). Settings: CHB-MIT, Siena and Siena filtered under the revised protocol (5 subject rotations, 3 "
-        "seeds each, overlap labels; unit = rotation mean), and DL's split (upstream labels; unit = seed, 5 seeds "
-        "on one split, seed uncertainty only) with standard input for both models and with BIOT's q95 input "
-        "(BIOT only). Left panel per model: last - lp (black circle) and last - last_noise (pink triangle), mean "
-        "and 95% t-interval over the 5 units (df 4); dotted lines at -3 and +3 mark the decision margin; no "
-        "triangle = no noise arm "
-        "(fixed recipe: BIOT CHB-MIT standardized; CBraMod CHB-MIT both heads, Siena and Siena filtered "
-        "standardized; DL's split with standard input: neither probe). Right panel per model: arm means (mean "
-        "over the 5 units) of lp (blue circle), last (orange square) and last_noise (pink triangle); dotted line "
-        "at 50 = chance. "
-        "Example, BIOT q95 input, raw features, lp / last / last_noise: fixed recipe "
-        + " / ".join(f"{q[False][k].mean():.1f}" for k in ARMS11) + ", tuned "
-        + " / ".join(f"{q[True][k].mean():.1f}" for k in ARMS11) + ". Sources: artifacts/analysis/D28/d28.json "
-        "(tuned probes and their fixed-recipe partners, same seeds); the fixed-recipe values equal "
-        "artifacts/analysis/D27B/d27b.json (arm means, both heads, rotations and DL's split), "
-        "artifacts/analysis/D27/cpu.json (last_noise: E27 raw, A6 standardized, A1 q95 input) and, for the raw "
-        "head on the rotations, artifacts/analysis/stats/stats.json (Table d24a) (checked).")
+        "Paired adaptation effects with the fixed probe recipe and with tuned probes (encoder-level linear "
+        "probe; ROC-AUC x100, positive = the first arm scores higher). Three panels per model: the two left "
+        "panels hold the same two differences, last - lp (black circle, the SA gain, upper half of each row) "
+        "and last - last_noise (pink triangle, the noise control, lower half), under the fixed recipe (open "
+        "markers) and under the tuned probe "
+        "(filled markers), on one shared scale; the right panel holds lp - lp_randinit, the frozen pretrained "
+        "features against random features, on its own wider scale, with the fixed-recipe and tuned readings of "
+        "a row joined by a grey line (open above, filled below). Marker and whisker: mean and 95% t-interval "
+        "over the 5 units (df 4). Rows per setting: raw features and standardized features. Settings: CHB-MIT, "
+        "Siena and Siena filtered under the revised protocol (5 subject rotations, 3 seeds each, overlap "
+        "labels; unit = rotation mean), and DL's split (upstream labels; unit = seed, 5 seeds on one split, "
+        "seed uncertainty only) with standard input for both models and with BIOT's q95 input (BIOT only). "
+        "The thick line is zero; the dotted lines at -3 and +3 in the difference panels mark the decision "
+        "margin. No triangle = no noise arm (fixed recipe: BIOT CHB-MIT standardized; CBraMod CHB-MIT both "
+        "heads, Siena and Siena filtered standardized; DL's split with standard input: neither probe); no "
+        "diamond = no random-init arm (q95 input). Every fixed-recipe SA gain past the margin, against the "
+        "tuned reading of the same cell: " + "; ".join(shrink) + ". Sources: "
+        "artifacts/analysis/D28/d28.json (tuned probes and their fixed-recipe partners, same seeds); the "
+        "fixed-recipe values equal artifacts/analysis/D27B/d27b.json (arm means, both heads, rotations and "
+        "DL's split), artifacts/analysis/D27/cpu.json (last_noise: E27 raw, A6 standardized, A1 q95 input) "
+        "and, on raw features, artifacts/analysis/stats/stats.json (the D24 tables, every contrast) (checked).")
+
+
+def f12(a):
+    data = effects_data(a)
+    fig, axes = plt.subplots(1, 5, figsize=(7.0, 4.0), sharey=True, sharex=True,
+                             gridspec_kw={"width_ratios": [4, 4, 0.5, 4, 4]})
+    axes[2].set_axis_off()   # a gap between the two models
+    y = rows11(fig, axes, step=1.45)
+    for col, m in zip((axes[:2], axes[3:]), MODELS, strict=True):
+        for tag, _, _ in SETS11:
+            for _, h, _ in HEADS11:
+                for (tuned, _), ax in zip(RECIPES11, col, strict=True):
+                    u = data.get((tag, m, h, tuned))
+                    for q, arm in enumerate(ARMS11):
+                        if u and arm in u:
+                            ax.plot(u[arm].mean(), y[(tag, h)] + (q - 2) * 0.25, MARK[arm], ms=3.4,
+                                    mfc=COLOR[arm] if tuned else "white", mec=COLOR[arm], mew=0.8,
+                                    zorder=3 + tuned)
+        if not any((SETS11[-1][0], m, h, t) in data for _, h, _ in HEADS11 for t, _ in RECIPES11):
+            biot_only(col, y[(SETS11[-1][0], "raw")] + 0.5, x=0.5)
+    for col, m in zip((axes[:2], axes[3:]), MODELS, strict=True):
+        for (_, lab), ax in zip(RECIPES11, col, strict=True):
+            ax.set_title(f"{NAME[m]}\n{lab}", fontsize=7)
+            ax.axvline(50, color=MUTED, lw=0.8, ls=":", zorder=1)
+            ax.set_xlim(28, 97)
+            ax.xaxis.set_major_locator(MultipleLocator(20))
+            ax.tick_params(axis="x", labelsize=7)
+    fig.supxlabel("test ROC-AUC x100 (mean over the 5 units; dotted line = chance)", fontsize=7, y=0.01)
+    handles = [Line2D([], [], color=COLOR[arm], marker=MARK[arm], ls="none", ms=3.5, label=arm)
+               for arm in ARMS11]
+    handles += [Line2D([], [], color=MUTED, marker="o", mfc=fc, ls="none", ms=3.5, label=lab)
+                for fc, lab in (("white", "open: fixed recipe"), (MUTED, "filled: tuned probe"))]
+    fig.legend(handles=handles, loc="lower center", ncol=4, bbox_to_anchor=(0.5, 1.0), fontsize=6.5,
+               handlelength=1.2, columnspacing=1.2)
+    fig.tight_layout(w_pad=0.5, rect=(0, 0.02, 1, 1))
+    save(fig, a, "fig_absolute")
+    q = {k: data[("P1QG", "biot", "raw", k)] for k in (False, True)}
+    si = {k: data[("S3G", "biot", "raw", k)]["lp"].mean() for k in (False, True)}
+    return "fig_absolute", (
+        "Absolute test ROC-AUC of every arm with the fixed probe recipe and with tuned probes (encoder-level "
+        "linear probe; ROC-AUC x100), so that a difference between two poor arms is visible. Two panels per "
+        "model, the fixed recipe (open markers) and the tuned probe (filled markers), on one shared scale; "
+        "within a row, top to bottom, lp (blue circle), last (orange square), last_noise (pink triangle "
+        "down), lp_randinit (amber diamond) and last_randinit (green triangle up). Each marker is the mean "
+        "over the 5 units (rotation means of 3 seeds, or 5 seeds on DL's split); the dotted line at 50 is "
+        "chance. Rows per setting: raw features and standardized features. Settings: CHB-MIT, Siena and Siena "
+        "filtered under the revised protocol (5 subject rotations, 3 seeds each, overlap labels), and DL's "
+        "split (upstream labels, 5 seeds on one split) with standard input for both models and with BIOT's q95 "
+        "input (BIOT only). A missing marker means that arm was not run in that cell (no noise arm for most "
+        "fixed-recipe cells, no random-init arm with q95 input). The arms the fixed recipe misreads: BIOT with "
+        "q95 input on raw features, lp / last / last_noise "
+        + " / ".join(f"{q[False][k].mean():.1f}" for k in ARMS11[:3]) + " with the fixed recipe against "
+        + " / ".join(f"{q[True][k].mean():.1f}" for k in ARMS11[:3]) + " with the tuned probe, and frozen BIOT "
+        f"on Siena (raw features) {si[False]:.1f} against {si[True]:.1f}. "
+        "Sources: artifacts/analysis/D28/d28.json (tuned probes "
+        "and their fixed-recipe partners, same seeds); the fixed-recipe arm means equal "
+        "artifacts/analysis/D27B/d27b.json and artifacts/analysis/D27/cpu.json (last_noise: E27 raw, A6 "
+        "standardized, A1 q95 input), which are the arm means of artifacts/tables/d24-*.md (checked).")
 
 
 FIGURES = (
     [("F1 per epoch", partial(f1, per_step=False)), ("F1 per step", partial(f1, per_step=True))]
     + [(f"F2 {k}", partial(f2, key=k)) for k in SETTINGS]
     + [("F3", f3), ("F4", f4), ("F5", f5), ("F6", f6), ("F7", f7), ("F8", f8), ("F9", f9),
-       ("F10", f10), ("F11", f11)]
+       ("F10", f10), ("F11", f11), ("F12", f12)]
 )
 
 
