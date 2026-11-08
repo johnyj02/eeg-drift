@@ -561,6 +561,20 @@ def objects() -> list[tuple[str, str | None, datetime, bool]]:
     return out
 
 
+def chronology_regenerable() -> bool:
+    """False in an unpacked copy of the supplement archive.
+
+    Section 4 compares decision timestamps with the mtimes of the result objects, which only means
+    something on the machine that synced them from S3. A zip stores one normalized timestamp per entry,
+    and unpacking (or re-running a reader) overwrites others with the current time, so an unpacked copy
+    cannot reproduce the chronology. SHA256SUMS is written by the packaging script and exists only in the
+    archive, so its presence identifies such a copy. Counting distinct mtimes does NOT work: in a copy
+    whose readers have been re-run, most files keep the normalized time while the rewritten ones carry
+    the current time, which looks like genuine spread.
+    """
+    return not (ROOT / "SHA256SUMS").exists()
+
+
 def job_logs() -> dict:
     out = {}
     for f in (ROOT / "notes").glob("jobs-*.txt"):
@@ -973,13 +987,29 @@ def e22_md(sr: list, ts: list, existing: list, newest: datetime, disagree: str) 
         "|---|---|---|",
     ]
     L += [f"| {a} | {b.format(disagree=disagree)} | {c} |" for a, b, c in DEVIATIONS]
+    if not chronology_regenerable():
+        L += [
+            "",
+            "## 4. Decision timestamps against result-object times",
+            "",
+            "NOT REGENERATED. The result objects here all carry the same normalized timestamp, which means "
+            "this is an unpacked copy of the supplement archive rather than the machine that synced the "
+            "objects from S3. File times in such a copy are the archive's normalized times or the time of "
+            "extraction, so they are not evidence of when anything ran. The saved report of this section is "
+            "a historical snapshot taken on the original machine; read it there. Its object times were the "
+            "local mtimes of the synced result objects and its submission times the '~HH:MM local' headers "
+            "logged by hand in notes/jobs-*.txt. SageMaker CreationTime was never queried, so no "
+            "independently obtained cloud timestamp exists for any run.",
+        ]
+        return "\n".join(L) + "\n"
     L += [
         "",
         "## 4. Decision timestamps against result-object times",
         "",
         "Object times are the local mtimes under artifacts/s3-results. aws s3 sync sets a downloaded file's "
         "mtime to the object's S3 LastModified; the cache was re-synced from S3 on 2026-10-26 (WORKLOG) yet "
-        "wave-1 files still carry 2026-10-15, so the mtimes are upload times, not download times. Within a "
+        "wave-1 files still carry 2026-10-15, so on this machine the mtimes track the object's S3 "
+        "LastModified rather than the download. Within a "
         "job they increase by about one arm's run time. Submission times are the '~HH:MM local' headers of "
         "notes/jobs-*.txt (logged by hand; they stand in for SageMaker CreationTime, which was not queried). "
         "All times US Pacific (local). 'first object' includes the test-index file a job writes at its "

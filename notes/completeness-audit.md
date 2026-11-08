@@ -1,5 +1,10 @@
 # Paper A completeness audit (2026-11-01, workflow wf_310e0a5f-3cd)
 
+> **Historical experiment plan, recorded 2026-11-01.** Statements below about incomplete experiments
+> describe the project on that date. They are kept as recorded and were not updated. The released code has
+> since been run (92 released-code cells are in `artifacts/released-root/`), and the completed runs and
+> their outcomes are in `notes/RUNLOG.md`, `notes/decisions.md` and `artifacts/analysis/`. Added 2026-11-07.
+
 **Experiment plan: Paper A reproducibility audit (deduplicated, ordered)**
 
 Not all required experiments are complete. The biggest gap is that no upstream code has ever run: every "released path" number in the draft comes from our reimplementation. Below, 47 reviewer items are merged into 33. The 8 "dropped or already done" entries at the end are separate from these 33.

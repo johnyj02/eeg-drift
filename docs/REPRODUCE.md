@@ -2,9 +2,14 @@
 
 Three levels, from cheapest to most expensive:
 
-1. **CPU, from the saved records (seconds).** Every number in the main tables is recomputed from the result
-   records (`artifacts/s3-results/<unit>/results/*.json`, one per run) and the released-code run outputs
-   (`artifacts/released-root/`), and compared with the LaTeX.
+1. **CPU, from the saved records (seconds).** The CPU scripts regenerate the record-derived analyses from
+   the result records (`artifacts/s3-results/<unit>/results/*.json`, one per run) and the released-code run
+   outputs (`artifacts/released-root/`). `scripts/make_main_tables.py` recomputes the supported cells of
+   five tables; comparing them with the LaTeX needs a separate directory of manuscript sources, which this
+   archive does not contain, so from the archive alone it prints `151 UNCHECKED, 1 SKIP` (with the sources
+   present: `151 PASS, 1 SKIP`). The dedicated scripts `scripts/analysis/d28_read.py` and
+   `scripts/analysis/d29_read.py` regenerate the tuned-probe and PR-AUC analyses. Cells that need the
+   omitted per-window scores are reported separately as `SKIP`.
 2. **CPU, from per-window scores, window indices or window stores.** A few readings re-score test windows;
    they need files that are not in the records (listed below).
 3. **GPU, retraining.** Every run itself: SSL adaptation, then the probe. Needed to re-derive any number
@@ -64,8 +69,11 @@ deterministic.
 
 Every number in the paper comes from a run; re-deriving it from the EEG means re-running that run.
 The job specifications are in `scripts/submit_*.sh` (our pipeline) and `scripts/released/` (the released
-code at `d056cdf`, cloned inside each job). Each job used one NVIDIA A10G (24 GB) with 128 GB host RAM
-(`ml.g5.8xlarge`); billable seconds per job are in `notes/RUNLOG.md`.
+code at `d056cdf`, cloned inside each job). Almost every job used one NVIDIA A10G (24 GB) with 128 GB host
+RAM (`ml.g5.8xlarge`). Two sets of jobs did not: five released-code cells that ran out of GPU memory were
+re-run on one NVIDIA L40S (48 GB, `ml.g6e.2xlarge`), and nine D27 jobs that ran out of host memory were
+re-run on the same A10G with 256 GB host RAM (`ml.g5.16xlarge`). Billable seconds per job are in
+`notes/RUNLOG.md`.
 
 | finding | paper (labels) | runs to repeat | specs |
 |---|---|---|---|
@@ -73,21 +81,34 @@ code at `d056cdf`, cloned inside each job). Each job used one NVIDIA A10G (24 GB
 | Revised protocol (D24-A): five rotations, three settings, 3 seeds | `sec:d24a`, `tab:d24a`, `fig:forest` | S1E/S3E/S3FE (D23) and S1M/S3M/S3FM | `submit_s1.sh`, `submit_d24.sh` part A |
 | Issue 1 (SSL adapts a random encoder): released-code cells and the fingerprint | `sec:a1`, `tab:original` released-code column, `tab:artifacts` row 1, `app-b-released.tex` E4-E6 | released-code E4, E5, E6 | `scripts/released/` (README there) |
 | Issue 2 (CBraMod probe reads `proj_out` with dropout on) | `sec:a2`, `tab:original` released-code-probe columns, `tab:artifacts` row 2 | released-code E7; our E17 cells (P1PE, P1ET) and the wave-1 runs (released-code probe) | `scripts/released/`; `submit_d25.sh` ONLY=E17; wave 1 = the arms jobs of 2026-10-15 in `notes/RUNLOG.md`, run with probe code version 2 |
-| Issue 3 (two-patient split, start/end labels) | `sec:a3`, `tab:artifacts` row 3 | P1E, D24-A, P1F | as above; `submit_d25.sh` ONLY=E18 |
+| The inherited CHB-MIT protocol (two-patient test split, start/end labels, duplicate test windows) | `sec:a3`, `tab:artifacts` row 3 | P1E, D24-A, P1F | as above; `submit_d25.sh` ONLY=E18 |
 | Controls (noise inputs, standardized head, input scaling, SSL draws, second partition, dose) | `sec:controls`, `tab:robust`, `app-c-robust.tex` | E19, E25-E29, E32, D26, D27 tags | `submit_d25.sh` ONLY=E19 / E25 / E26 / E27 / E28 / E29 / E32 / D26 / D27 / D27X |
 | C2/C3 (SSL data size and diversity) | `sec:c2c3`, `tab:c2c3` | C2E/C3E and E30 re-tests | `submit_d24.sh` part C; `submit_d25.sh` ONLY=E30 |
 
 Code evidence for the issues (file and line references in `sec:a1`, `sec:a2`) needs no run: read the release at
 `d056cdf`; `tests/test_upstream_audit.py` and `tests/test_released_differential.py` check it against a clone.
 
-Not yet run (protocols fixed in `notes/decisions.md`, results pending in the paper):
+D28 and D29 are complete. D28 holds 505 result records and 1,010 probe fits; D29 holds 450 result records.
+Their protocols and outcomes are in `notes/decisions.md` (entries D28, D29, D30 and the outcome sections).
+After restoring the window indices as described in the archive README, regenerate both analyses on CPU:
+
+```bash
+python scripts/analysis/d28_read.py
+python scripts/analysis/d29_read.py
+```
+
+Repeating them from EEG data needs GPU:
 - **D28** (probe convergence): GPU for the adaptation step and one feature pass per (arm, seed); the
   16-configuration probe search then runs on the cached features.
 - **D29** (C2/C3 noise and standardized-probe controls on Siena at the fixed-compute budget): GPU runs.
-  Its PR-AUC readings are CPU-only from the existing records (`avg_precision` and `pr_auc_trapz` are stored
-  in every record); that reading script is not written yet.
+  Its PR-AUC readings need no GPU (`avg_precision` and `pr_auc_trapz` are stored in every record).
 
 ### The headline comparison, one command
+
+The SageMaker plan-only command works with this archive. Actual cloud submission does not: it needs the
+private job wrapper that is excluded from the archive (see "Not included" in the README), plus your own
+credential setup. Replace that wrapper with your own SageMaker integration, or use the local GPU command,
+which is the supplied route for retraining. The job specifications below are complete either way.
 
 ```bash
 zsh scripts/reproduce_headline.sh sagemaker                        # prints the 4 job specs, submits nothing
@@ -115,9 +136,10 @@ D24-B rule) and prints, per cell, the largest difference from the saved P1E reco
   (it resumes from there). Needs a CUDA GPU with 24 GB, at least 64 GB of host RAM (the CHB-MIT evaluation
   store is about 40 GB as float32 and is held in memory), the two checkpoints in `weights/` and the stores
   in `$DATA` (default `data/lmdb/chbmit`). Expect about the same 11.7 hours on one A10G.
-- The pipeline was bit-reproducible on the same hardware and container (D27 re-ran lp/last under new
-  tags with identical ROC); on other GPUs or library versions expect small differences, so compare the
-  rule outputs and the means at the paper's precision.
+- On the tested hardware and container, the pipeline reproduced the recorded values within an absolute
+  tolerance of `1e-6`, which is what the paper reports; this is not bitwise identity. (D27 re-ran lp/last
+  under new tags and matched within that tolerance.) On other GPUs or library versions, compare both the
+  numerical results and the reported decision-rule outputs at the paper's precision.
 
 ## Rebuilding the data
 

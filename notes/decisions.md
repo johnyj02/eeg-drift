@@ -919,3 +919,13 @@ I verified that example from the raw records myself: AP 1.6547 -> 2.2039, +0.549
   This is the paper's thesis in PR-AUC terms, and it must be reported with the fixed-recipe result shown,
   not only the tuned one. Absolute levels rise with tuning (Siena last 2.20 -> 5.25 AP), so the fixed-recipe
   difference sits between two poorly-performing arms.
+
+## Clarification 2026-11-07: "bit-reproducible"
+
+Two earlier entries of this log call the pipeline "bit-reproducible" (the D20-era entry on the history
+logging, and the D28 entry on the feature pass). That wording is too strong and the earlier entries are
+left exactly as written. What was measured, and what the paper reports, is agreement within an absolute
+tolerance of 1e-6: 484 of 484 re-run pairs, the 95 of 95 D27 repeat values, and the 240 of 240 D29
+records matching the recorded E30b values. Read every earlier "bit-reproducible" in this log as
+"reproducible within 1e-6 on the same hardware and container". Raised by the supplement review of
+2026-11-08; no number changes.
