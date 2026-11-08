@@ -286,7 +286,7 @@ def subject_rocs(dataset: str, tags: str) -> dict:
     win = 10 * {"chbmit": 256, "siena": 512}[dataset]
     out, idx_cache = {}, {}
     for p in LOCAL.rglob("results/*.json"):
-        if p.name.startswith(("diag-", "test-index-", "report-")):
+        if p.name.startswith(("diag-", "test-index-", "val-index-", "report-")):
             continue
         r = json.loads(p.read_text())
         if (
@@ -313,7 +313,18 @@ def subject_rocs(dataset: str, tags: str) -> dict:
             ]
             idx_cache[ti] = np.array([x["subject"] for x in idx]), np.array(lab)
         subj, lab = idx_cache[ti]
-        z = np.load(p.with_name(p.stem + ".linear.npz"))
+        npz = p.with_name(p.stem + ".linear.npz")
+        if not npz.exists():
+            raise SystemExit(
+                f"missing per-window scores: {npz.name}\n"
+                "This script (E10/E11) re-scores test windows, so it needs the per-window score archives. "
+                "Most of them are left out of the supplement archive for size; see \"Not included\" in the "
+                "README, which lists this script under \"included with their outputs only\". The saved "
+                "outputs are artifacts/analysis/stats/e10-stats.md, e22-hygiene.md and stats.json. To run "
+                "it yourself, regenerate the missing archive by re-running the command recorded in "
+                f"{p.name} (the pipeline reproduces its own runs within 1e-6)."
+            )
+        z = np.load(npz)
         y, s = z["y_test"], z["scores_best"]
         if not np.array_equal(y, lab):
             raise SystemExit(f"{p.name}: y_test differs from the overlap labels of its test index")
@@ -553,7 +564,7 @@ def objects() -> list[tuple[str, str | None, datetime, bool]]:
     out = []
     for p in LOCAL.rglob("results/*"):
         arm = None
-        if p.suffix == ".json" and not p.name.startswith(("diag-", "test-index-", "report-")):
+        if p.suffix == ".json" and not p.name.startswith(("diag-", "test-index-", "val-index-", "report-")):
             arm = json.loads(p.read_text())["arm"]
         elif p.name.endswith(".npz"):
             arm = "?"
@@ -711,7 +722,16 @@ def without_sr(rocs: dict) -> list[dict]:
 
 
 def draft_rows() -> list[tuple[int, str]]:
-    lines = (ROOT / "paper" / "reproducibility-note-draft.md").read_text().splitlines()
+    draft = ROOT / "paper" / "reproducibility-note-draft.md"
+    if not draft.exists():
+        raise SystemExit(
+            "missing paper/reproducibility-note-draft.md\n"
+            "Section 2 of the E22 report tags the claims of that working draft, which is not part of the "
+            "supplement archive. Together with the per-window score archives, this is why stats_d25.py "
+            "cannot be re-run from the archive; its saved outputs are "
+            "artifacts/analysis/stats/{e10-stats.md,e22-hygiene.md,stats.json}."
+        )
+    lines = draft.read_text().splitlines()
     cur, out = None, []
     for i, ln in enumerate(lines):
         m = re.match(r"\*Table (\d+)\.", ln)
@@ -929,7 +949,7 @@ def e10_md(rows: list[dict], ratios: dict, cov: tuple, vc1: list, vc2: list, pow
     return "\n".join(L) + "\n"
 
 
-def e22_md(sr: list, ts: list, existing: list, newest: datetime, disagree: str) -> str:
+def e22_md(sr: list, ts: list, existing: list, newest: datetime | None, disagree: str) -> str:
     keys = ("3 seeds (D24 as logged)", "2 new seeds (no S_r)", "S_r only (D23 re-run)")
     L = [
         "# E22: pre-registered vs post-hoc hygiene (D25)",
@@ -992,14 +1012,17 @@ def e22_md(sr: list, ts: list, existing: list, newest: datetime, disagree: str) 
             "",
             "## 4. Decision timestamps against result-object times",
             "",
-            "NOT REGENERATED. The result objects here all carry the same normalized timestamp, which means "
-            "this is an unpacked copy of the supplement archive rather than the machine that synced the "
-            "objects from S3. File times in such a copy are the archive's normalized times or the time of "
-            "extraction, so they are not evidence of when anything ran. The saved report of this section is "
-            "a historical snapshot taken on the original machine; read it there. Its object times were the "
-            "local mtimes of the synced result objects and its submission times the '~HH:MM local' headers "
-            "logged by hand in notes/jobs-*.txt. SageMaker CreationTime was never queried, so no "
-            "independently obtained cloud timestamp exists for any run.",
+            "NOT AVAILABLE, and not computed. SHA256SUMS is present, so this is an unpacked copy of the "
+            "supplement archive rather than the machine that synced the result objects from S3. File times "
+            "in such a copy are the archive's normalized times for entries as unpacked, or the current time "
+            "for anything an unpacking tool or a re-run reader has rewritten; a mixture of the two is "
+            "normal. Either way they are not evidence of when anything ran, so no chronology rows and no "
+            "verdicts are produced from them. The saved report of this section, in the archive's own "
+            "artifacts/analysis/stats/e22-hygiene.md, is a historical snapshot taken on the original "
+            "machine and is not overwritten by this run. Its object times were the local mtimes of the "
+            "synced result objects and its submission times the '~HH:MM local' headers logged by hand in "
+            "notes/jobs-*.txt. SageMaker CreationTime was never queried, so no independently obtained cloud "
+            "timestamp exists for any run.",
         ]
         return "\n".join(L) + "\n"
     L += [
@@ -1282,26 +1305,38 @@ def main() -> int:
         and ((r["verdict"] in win) != (r["boot"][0] > 0 or r["boot"][1] < 0))
     ]
     sr = without_sr(rocs)
-    ts, existing, newest = timestamps()
-    (OUT / "e22-hygiene.md").write_text(e22_md(sr, ts, existing, newest, "; ".join(dis)))
-    (OUT / "stats.json").write_text(
-        json.dumps(
-            dict(
-                e10=[{k: v for k, v in r.items()} for r in rows],
-                nb_ratio=ratios,
-                boot_coverage=cov,
-                vc_rot_seed=vc1,
-                vc_subject=vc2,
-                e22_without_sr=sr,
-                e22_timestamps=ts,
-                e22_d22_existing=existing,
-                e22_ci_verdict_disagreements=dis,
-            ),
-            indent=1,
-            default=float,
-        )
+    # The chronology of section 4 is only meaningful on the machine that synced the result objects from
+    # S3. In an unpacked copy of the supplement archive the mtimes are the archive's normalized times or
+    # the time of extraction, so the comparison is not computed at all: computing it would produce rows
+    # (and "INCONSISTENT" verdicts) from times that carry no information. The saved snapshot of
+    # e22-hygiene.md is left in place, and the regenerated outputs are written under a separate name so
+    # that snapshot is never overwritten.
+    live = chronology_regenerable()
+    ts, existing, newest = timestamps() if live else ([], [], None)
+    suffix = "" if live else "-regenerated"
+    (OUT / f"e22-hygiene{suffix}.md").write_text(e22_md(sr, ts, existing, newest, "; ".join(dis)))
+    payload = dict(
+        e10=[{k: v for k, v in r.items()} for r in rows],
+        nb_ratio=ratios,
+        boot_coverage=cov,
+        vc_rot_seed=vc1,
+        vc_subject=vc2,
+        e22_without_sr=sr,
+        e22_ci_verdict_disagreements=dis,
     )
-    print(f"wrote {OUT}: e10-stats.md, e22-hygiene.md, stats.json, forest-d24.png, power-rule.png")
+    if live:
+        payload["e22_timestamps"] = ts
+        payload["e22_d22_existing"] = existing
+    else:
+        payload["e22_timestamps"] = "not available: unpacked archive copy, see e22-hygiene.md section 4"
+        payload["e22_d22_existing"] = payload["e22_timestamps"]
+    (OUT / f"stats{suffix}.json").write_text(json.dumps(payload, indent=1, default=float))
+    print(
+        f"wrote {OUT}: e10-stats.md, e22-hygiene{suffix}.md, stats{suffix}.json, "
+        "forest-d24.png, power-rule.png"
+        + ("" if live else "\n  chronology (section 4) NOT computed: unpacked archive copy; "
+                           "the saved e22-hygiene.md and stats.json are left unchanged")
+    )
     return 0
 
 

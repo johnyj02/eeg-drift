@@ -274,7 +274,7 @@ def score_run(job: dict) -> dict:
 def list_jobs() -> list[dict]:
     jobs, seen = [], set()
     for p in sorted(RES.rglob("results/*.json")):
-        if p.name.startswith(("diag-", "test-index-", "report-")):
+        if p.name.startswith(("diag-", "test-index-", "val-index-", "report-")):
             continue
         r = json.loads(p.read_text())
         if r.get("smoke") or r["arm"] not in ARMS:

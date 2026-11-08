@@ -65,7 +65,7 @@ def load(local: Path) -> dict:
     runs: dict = defaultdict(dict)
     seen: dict = defaultdict(set)
     for p in local.rglob("results/*.json"):
-        if p.name.startswith(("diag-", "test-index-", "report-")):
+        if p.name.startswith(("diag-", "test-index-", "val-index-", "report-")):
             continue
         r = json.loads(p.read_text())
         if r.get("smoke") or r["dataset"] != "chbmit":

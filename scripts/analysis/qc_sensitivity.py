@@ -153,7 +153,7 @@ def exclusion_sets() -> tuple[dict, dict]:
 def load_runs(dataset: str, tags: tuple[str, ...]) -> list[dict]:
     runs, seen = [], set()
     for p in sorted((ROOT / "artifacts" / "s3-results").rglob("results/*.json")):
-        if p.name.startswith(("diag-", "test-index-", "report-")):
+        if p.name.startswith(("diag-", "test-index-", "val-index-", "report-")):
             continue
         r = json.loads(p.read_text())
         if r.get("smoke") or r["dataset"] != dataset or r.get("run_tag") not in tags or r["arm"] not in ARMS \

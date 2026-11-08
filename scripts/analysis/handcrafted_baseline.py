@@ -326,7 +326,7 @@ def model_runs(dataset: str, tags: set[str], split_kind: str = "rot") -> dict:
     out: dict = {}
     index_cache: dict = {}
     for p in sorted(RESULTS.rglob("results/*.json")):
-        if p.name.startswith(("diag-", "test-index-", "report-")):
+        if p.name.startswith(("diag-", "test-index-", "val-index-", "report-")):
             continue
         r = json.loads(p.read_text())
         if (

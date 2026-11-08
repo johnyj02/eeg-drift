@@ -85,7 +85,7 @@ def load_runs(dataset: str, tags: set[str], split_prefix: str, arms: tuple, prob
     """One dict per (record, probe head). Refuses duplicates, wrong versions and a pooled ROC != record."""
     runs, seen = [], set()
     for p in sorted(RES.rglob("results/*.json")):
-        if p.name.startswith(("diag-", "test-index-", "report-")):
+        if p.name.startswith(("diag-", "test-index-", "val-index-", "report-")):
             continue
         r = json.loads(p.read_text())
         if (r.get("smoke") or r["dataset"] != dataset or r.get("run_tag", "") not in tags

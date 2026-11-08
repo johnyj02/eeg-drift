@@ -56,7 +56,7 @@ def main() -> int:
     cells: dict = defaultdict(list)
     for k in keys:
         name = k.rsplit("/", 1)[1]
-        if not name.endswith(".json") or name.startswith(("diag-", "test-index-", "report-")):
+        if not name.endswith(".json") or name.startswith(("diag-", "test-index-", "val-index-", "report-")):
             continue
         rec = json.loads(get(k))
         if (rec.get("smoke") or rec["dataset"] != args.dataset or rec["split"] != "paper"
