@@ -1059,3 +1059,51 @@ seconds, about $16.70.
 
 **Reporting.** D32 is an additional analysis motivated by E29 (per its freeze). It does not change the
 18-comparison family; D31 does that.
+
+## D31 outcome (2026-11-15, AFTER the results; frozen protocol of "## D31" applied as written)
+
+**Integrity (all pass).** 505 records = P1W 40, P1QW 15, S1W 150, S3W 150, S3FW 150; 0 smoke, 0 missing.
+0 of the 1,010 selected fits violates the frozen spec (30 configurations, version 2, 500 epochs, batch 256,
+patience 20, min_delta 1e-4, constant schedule, float16 features). 3 raw records were read individually
+before any aggregate was trusted. 41 of 41 jobs Completed, 0 Failed, 265,474 billable seconds, about $225.65.
+
+**The expanded search does NOT simply confirm D28. It moves the numbers, and the paper must say so.**
+
+| quantity | D28 (16 configs, 200 epochs) | D31 (30 configs, 500 epochs) |
+|---|---|---|
+| \lastarm$-$\lparm{} range over the 18 | $-4.4$ to $+0.9$ | $-1.1$ to $+5.7$ |
+| equivalent within $\pm3$, ordinary $t$ | 16 of 18 | 14 of 18 |
+| equivalent within $\pm3$, dependence-adjusted | 13 of 18 | 12 of 18 |
+| margin sweep, ordinary (1 / 2 / 3 points) | 5 / 11 / 16 | 4 / 10 / 14 |
+| margin sweep, adjusted (1 / 2 / 3 points) | 3 / 8 / 13 | 2 / 6 / 12 |
+| comparisons labelled "gain demonstrated" | 0 | 0 |
+
+**What survives.** No comparison meets the registered gain criterion, which needs a 95% t-interval excluding
+0 AND a mean above 3 points. No positive effect has a dependence-adjusted 95% interval excluding 0. The
+headline conclusion therefore stands: the expanded equal-budget search recovers no demonstrated adaptation
+gain in any of the 18 comparisons.
+
+**What weakens, stated plainly.** The bound is looser than D28's. The largest effect rises from +0.9 to
++5.7 (BIOT q95 standardized, 95% t [-1.0, +12.3], unresolved), so "differences range from -4.4 to +0.9"
+must become "-1.1 to +5.7". Two comparisons that D28 read as equivalent are now unresolved, and the
+dependence-adjusted count falls 13 to 12. Six of the 18 are unresolved under dependence-adjusted inference.
+
+**Two comparisons need a careful sentence (raised by the review).** S3W BIOT raw and standardized both read
++1.7 with ordinary t95 [+0.1, +3.3] and [+0.3, +3.1], which EXCLUDE zero. Their Nadeau-Bengio intervals
+[-1.0, +4.4] and [-0.7, +4.1] include zero, and both fail the registered criterion because the mean is below
+3. So "no adaptation gain is demonstrated" is too blunt: the supportable claim is that no positive effect has
+a 95% interval excluding zero under dependence-adjusted inference.
+
+**The search-boundary concern is REDUCED, NOT RESOLVED.** 864 of 1,010 selected fits still sit on a grid
+edge (85.5%, against D28's 944 of 1,010 = 93.5%), and 428 of 1,010 chose the new largest learning rate 1e-2
+(against 498 choosing D28's largest, 3e-3). 109 of 1,010 selected fits reached the 500-epoch cap (10.8%,
+against D28's 24 of 1,010 = 2.4%). Widening the grid and quadrupling the budget did not stop selection
+pressing to the boundary, so the paper still must not claim optimization convergence, and under D31's own
+stopping rule the search is NOT enlarged again.
+
+**Noise controls under D31.** 14 \lastarm$-$\lastnoise{} comparisons: 13 equivalent within +-3 under
+ordinary t (D28: 12), 8 under dependence-adjusted inference (D28: 9).
+
+**Reporting (the author's pre-run decision, "## D31").** D31 REPLACES D28 as the primary tuned-probe
+analysis; the equivalence counts, the margin sweep and the abstract are recomputed from it, and D28 stays in
+the paper as the narrower pre-registered search with the change between the two reported.
