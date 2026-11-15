@@ -89,6 +89,11 @@ FROZEN = {
     "features": "float16",
     "version": 1,
 }
+# frozen D31 search (decisions.md "## D31"): the same coverage with a wider grid, a longer cap and
+# GRID_CODE_VERSION 2. The 30 configurations contain all 16 of D28's, so the earlier optimum stays reachable.
+LRS31, WDS31 = (3e-5, 1e-4, 3e-4, 1e-3, 3e-3, 1e-2), (0.0, 1e-4, 1e-2, 1e-1, 1.0)
+FROZEN31 = {**FROZEN, "lr": list(LRS31), "weight_decay": list(WDS31), "max_epochs": 500, "version": 2}
+D31_TAG = {"P1G": "P1W", "P1QG": "P1QW", "S1G": "S1W", "S3G": "S3W", "S3FG": "S3FW"}
 HEAD_PARAMS = {"biot": 257, "cbramod": 32001}
 # tag, setting, dataset, labels, input_norm, models, arms, stats_d25.nb_ratio key, (linear tags, linear_z tags)
 SETS = (
@@ -872,7 +877,24 @@ def outliers(res: dict, mine_by: dict, thr: float = 25.0) -> list[str]:
     return out
 
 
+def use_d31() -> None:
+    """Read the D31 tags (W) at FROZEN31 instead of the D28 tags (G), and write to artifacts/analysis/D31.
+
+    Everything else is identical: the same settings, models, arms, partner tags and nb_ratio keys, so the
+    two searches are read by one code path and stay comparable.
+    """
+    global OUT, SETS, FROZEN, LRS, WDS, D27B_SET, NOISE_PUB
+    OUT = ROOT / "artifacts" / "analysis" / "D31"
+    SETS = tuple((D31_TAG[s[0]], *s[1:]) for s in SETS)
+    D27B_SET = {D31_TAG[k]: v for k, v in D27B_SET.items()}
+    NOISE_PUB = {(D31_TAG[tg], m, v): x for (tg, m, v), x in NOISE_PUB.items()}
+    FROZEN, LRS, WDS = FROZEN31, LRS31, WDS31
+    OUT.mkdir(parents=True, exist_ok=True)
+
+
 def main() -> int:
+    if "--d31" in sys.argv[1:]:
+        use_d31()
     selfcheck()
     recs_all = scan()
     refs = {}
