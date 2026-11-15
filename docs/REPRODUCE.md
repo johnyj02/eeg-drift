@@ -67,7 +67,9 @@ deterministic.
 
 ## 3. What needs retraining (GPU)
 
-Every number in the paper comes from a run; re-deriving it from the EEG means re-running that run.
+Re-deriving the model-performance results from the EEG requires repeating the relevant adaptation and
+probe runs. The paper also reports dataset counts, configuration audits and census findings, which are not
+model-training outputs.
 The job specifications are in `scripts/submit_*.sh` (our pipeline) and `scripts/released/` (the released
 code at `d056cdf`, cloned inside each job). Almost every job used one NVIDIA A10G (24 GB) with 128 GB host
 RAM (`ml.g5.8xlarge`). Two sets of jobs did not: five released-code cells that ran out of GPU memory were
@@ -98,7 +100,7 @@ python scripts/analysis/d29_read.py
 ```
 
 Repeating them from EEG data needs GPU:
-- **D28** (probe convergence): GPU for the adaptation step and one feature pass per (arm, seed); the
+- **D28** (equal-budget probe tuning with early stopping): GPU for the adaptation step and one feature pass per (arm, seed); the
   16-configuration probe search then runs on the cached features.
 - **D29** (C2/C3 noise and standardized-probe controls on Siena at the fixed-compute budget): GPU runs.
   Its PR-AUC readings need no GPU (`avg_precision` and `pr_auc_trapz` are stored in every record).

@@ -1,7 +1,7 @@
 [project]
 name = "eegdrift"
 version = "0.1.0"
-description = "Where does SSL adaptation pressure live in EEG foundation models? (BIOT, CBraMod)"
+description = "Reproduction and controlled evaluation of self-supervised adaptation for EEG encoders"
 requires-python = ">=3.11,<3.13"
 license = { text = "MIT" }
 # Pinned to match the SageMaker PyTorch 2.6 DLC (py312) so the Mac pilot and the jobs
