@@ -94,6 +94,25 @@ FROZEN = {
 LRS31, WDS31 = (3e-5, 1e-4, 3e-4, 1e-3, 3e-3, 1e-2), (0.0, 1e-4, 1e-2, 1e-1, 1.0)
 FROZEN31 = {**FROZEN, "lr": list(LRS31), "weight_decay": list(WDS31), "max_epochs": 500, "version": 2}
 D31_TAG = {"P1G": "P1W", "P1QG": "P1QW", "S1G": "S1W", "S3G": "S3W", "S3FG": "S3FW"}
+# TAG resolves a D28 tag literal to the active search's tag. use_d31() swaps it for D31_TAG, so code
+# that names a setting by its D28 tag keeps working under --d31 instead of raising a KeyError.
+TAG = {k: k for k in D31_TAG}
+# Output names, so a --d31 run cannot overwrite the D28 outputs the paper and the supplement ship.
+JSON_NAME, CURVES_FIG, EFFECTS_FIG = "d28.json", "f_d28_curves.pdf", "fig_effects_d28.pdf"
+PROTOCOL = "D28"   # the decision-log entry whose search this run reads; use_d31() swaps it
+
+
+def sci(x: float) -> str:
+    """1e-4, 3e-3, 0, 1: the notation the frozen protocols are written in.
+
+    Not "%g", which renders 1e-4 as 0.0001 and would silently rewrite the published D28 report.
+    """
+    if x == 0:
+        return "0"
+    if x == int(x):
+        return str(int(x))
+    m, e = f"{x:.0e}".split("e")
+    return f"{m}e{int(e)}"
 HEAD_PARAMS = {"biot": 257, "cbramod": 32001}
 # tag, setting, dataset, labels, input_norm, models, arms, stats_d25.nb_ratio key, (linear tags, linear_z tags)
 SETS = (
@@ -348,9 +367,10 @@ def verify(s, recs: list[dict], refs: dict) -> tuple[list[dict], list[str], dict
         + f"; 1 per cell, 0 missing, 0 duplicates, 0 smoke; versions adapt 3 / probe 4 / grid 1; probes "
         f'grid + grid_z; backbone eval, tap encoder, input_norm "{norm}", labels {labels}; '
         f"one eval set per split (both models)",
-        f"  {acc['configs']} configuration fits checked: grid fields = the frozen D28 search; selected "
+        f"  {acc['configs']} configuration fits checked: grid fields = the frozen {PROTOCOL} search; selected "
         f"configuration = first argmax of best val (ties among configurations: {acc['ties']} fits); "
-        f"best_val = max of the logged curve; converged = stopped before epoch 200; early-stop replay on the "
+        f"best_val = max of the logged curve; converged = stopped before epoch {FROZEN['max_epochs']}; "
+        f"early-stop replay on the "
         f"logged (6-decimal) curves disagrees in {acc['replay_mismatch']} fits; non-finite train loss in "
         f"{acc['nonfinite_loss']}; val ROC re-scored at the selection = best_val within "
         f"{acc['val_rescore_max_gap_e9']}e-9",
@@ -457,7 +477,7 @@ def fit_stats(mine: list[dict], v: str) -> dict:
         if p["selected"]["lr"] in (LRS[0], LRS[-1])
     )
     wd_e = Counter(
-        "wd 0" if p["selected"]["weight_decay"] == 0 else "wd 1e-1"
+        "wd 0" if p["selected"]["weight_decay"] == WDS[0] else f"wd {sci(WDS[-1])}"
         for p in ps
         if p["selected"]["weight_decay"] in (WDS[0], WDS[-1])
     )
@@ -468,7 +488,7 @@ def fit_stats(mine: list[dict], v: str) -> dict:
         "n": len(ps),
         "converged_selected": int(sum(p["converged"] for p in ps)),
         "converged_all_configs": int(sum(c["converged"] for p in ps for c in p["configs"])),
-        "n_configs": 16 * len(ps),
+        "n_configs": len(LRS) * len(WDS) * len(ps),
         "selected": Counter(f"{p['selected']['lr']:g}/{p['selected']['weight_decay']:g}" for p in ps),
         "epoch_median": float(np.median(ep)),
         "epoch_q": [float(np.quantile(ep, 0.25)), float(np.quantile(ep, 0.75))],
@@ -639,10 +659,13 @@ def report(res: dict, checks: list[str], fits: dict, ratios: dict, q: dict, outl
     L = [
         "# D28: probe convergence (tuned, early-stopped linear probes on cached frozen features)",
         "",
-        'Protocol: notes/decisions.md "## D28", frozen in git (commit c0283f4) before any D28 run; applied as '
-        "written. Probes: grid (raw features), grid_z (train-standardized); AdamW lr {1e-4, 3e-4, 1e-3, 3e-3} x "
-        "wd {0, 1e-4, 1e-2, 1e-1}, batch 256, constant lr, BCE, <= 200 epochs, early stop after 20 epochs "
-        "without a val ROC gain > 1e-4; configuration and epoch selected on val ROC-AUC; test read once there.",
+        f'Protocol: notes/decisions.md "## {PROTOCOL}", frozen in git (commit c0283f4) before any '
+        f"{PROTOCOL} run; applied as written. Probes: grid (raw features), grid_z (train-standardized); "
+        f"AdamW lr {{{', '.join(sci(x) for x in LRS)}}} x wd {{{', '.join(sci(x) for x in WDS)}}} "
+        f"({len(LRS) * len(WDS)} configurations), batch {FROZEN['batch']}, constant lr, BCE, "
+        f"<= {FROZEN['max_epochs']} epochs, early stop after {FROZEN['patience']} epochs without a val ROC "
+        f"gain > {sci(FROZEN['min_delta'])}; configuration and epoch selected on val ROC-AUC; "
+        "test read once there.",
         "Units: rotation means over seeds [S_r, 1000+r, 2000+r] (95% t-interval df 4; Nadeau-Bengio corrected "
         "interval with n_test/n_train " + ", ".join(f"{t} {r:.3f}" for t, r in ratios.items()) + "). DL's split: "
         "the 5 seeds 42/123/2021/3407/8888 on one fixed split (**seed uncertainty on one split**, no NB). "
@@ -721,8 +744,10 @@ def report(res: dict, checks: list[str], fits: dict, ratios: dict, q: dict, outl
         "",
         "## Fits: convergence, selected configurations, epochs, grid edges (descriptive)",
         "",
-        "Converged = early stopping fired before epoch 200. Epochs 1-based. Edge: lr 1e-4 or 3e-3, or wd 0 or "
-        "1e-1 (12 of 16 configurations touch an edge).",
+        f"Converged = early stopping fired before epoch {FROZEN['max_epochs']}. Epochs 1-based. Edge: "
+        f"lr {sci(LRS[0])} or {sci(LRS[-1])}, or wd {sci(WDS[0])} or {sci(WDS[-1])} "
+        f"({len(LRS) * len(WDS) - (len(LRS) - 2) * (len(WDS) - 2)} of {len(LRS) * len(WDS)} configurations "
+        f"touch an edge).",
         "",
         "| setting | model | variant | fits | converged (selected) | converged (all 16) | selected epoch median "
         "[IQR] (min-max; at epoch <= 2) | epochs run, selected (median, max) | at an edge | lr edge | wd edge | "
@@ -774,7 +799,7 @@ def answers(res: dict) -> dict:
         + ", ".join(f"{lab} {n}" for lab, n in Counter(c["label"] for *_, c in sa).most_common())
         + "."
     )
-    q2 = {v: res[("P1QG", "biot", v)]["contrasts"]["last - last_noise"] for v in VARIANTS}
+    q2 = {v: res[(TAG["P1QG"], "biot", v)]["contrasts"]["last - last_noise"] for v in VARIANTS}
     q2a = "yes" if any(c["label"] == GAIN and c["mean"] > 0 for c in q2.values()) else "no"
     q2t = "; ".join(
         f"{v}: {f1(c['mean'])} {iv(c['t'])}, TOST p {pv(c['t']['tost_p'])}, {c['label']}, per seed "
@@ -883,7 +908,11 @@ def use_d31() -> None:
     Everything else is identical: the same settings, models, arms, partner tags and nb_ratio keys, so the
     two searches are read by one code path and stay comparable.
     """
-    global OUT, SETS, FROZEN, LRS, WDS, D27B_SET, NOISE_PUB
+    global OUT, SETS, FROZEN, LRS, WDS, D27B_SET, NOISE_PUB, TAG
+    global JSON_NAME, CURVES_FIG, EFFECTS_FIG, PROTOCOL
+    TAG = dict(D31_TAG)
+    JSON_NAME, CURVES_FIG, EFFECTS_FIG = "d31.json", "f_d31_curves.pdf", "fig_effects_d31.pdf"
+    PROTOCOL = "D31"
     OUT = ROOT / "artifacts" / "analysis" / "D31"
     SETS = tuple((D31_TAG[s[0]], *s[1:]) for s in SETS)
     D27B_SET = {D31_TAG[k]: v for k, v in D27B_SET.items()}
@@ -944,11 +973,11 @@ def main() -> int:
         "contrasts": {f"{t}|{m}|{v}": x for (t, m, v), x in res.items()},
         "fits": {f"{t}|{m}|{v}": f for (t, m, v), f in fits.items()},
     }
-    (OUT / "d28.json").write_text(
+    (OUT / JSON_NAME).write_text(
         json.dumps(js, indent=1, default=lambda o: dict(o) if isinstance(o, Counter) else str(o))
     )
-    curves_fig(mine_by, FIG / "f_d28_curves.pdf")
-    effects_fig(res, FIG / "fig_effects_d28.pdf")
+    curves_fig(mine_by, FIG / CURVES_FIG)
+    effects_fig(res, FIG / EFFECTS_FIG)
     print((OUT / "README.md").read_text())
     return 0
 

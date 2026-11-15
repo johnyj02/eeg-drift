@@ -1031,8 +1031,17 @@ identically to all three arms, the same comparisons read (5 rotation means over 
 | 5 | std | last - last_noise | +1.5 | [-0.7, +3.7] | [-2.1, +5.1] | not resolved | not resolved |
 
 **What this establishes.** None of the 8 contrasts demonstrates a gain: the +21 effects fall to +2.4 and
-+3.1 on raw features and to -1.0 and +0.8 on standardized features, and every interval contains 0. The
-largest surviving gains in the project were therefore a probe-training artifact, like the smaller ones.
++3.1 on raw features and to -1.0 and +0.8 on standardized features, and every interval contains 0. The large
+fixed-probe gains were substantially reduced under equal-budget tuned probes, indicating substantial
+sensitivity to probe evaluation.
+
+**Why the causal wording was softened (2026-11-15, after the review).** An earlier draft of this entry said
+the gains "were therefore a probe-training artifact". That attributes the change to probe training alone,
+which this design cannot support: E29 used ONE seed per rotation and D32 uses three, so seed count and probe
+training moved together. A matched-seed comparison would be needed to attribute the reduction specifically to
+probe training. The dependence-adjusted raw-feature intervals also still allow benefits up to +10.0 (cell 2)
+and +11.2 (cell 5), so "the large gains were not recovered" is the supportable claim and smaller benefits
+stay unresolved.
 
 **What it does NOT establish, stated plainly.** Only 2 of the 8 contrasts establish equivalence within +-3
 under t, and only 1 of those survives the Nadeau-Bengio correction. The other 6 are unresolved: with 5
