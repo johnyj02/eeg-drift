@@ -929,3 +929,85 @@ tolerance of 1e-6: 484 of 484 re-run pairs, the 95 of 95 D27 repeat values, and 
 records matching the recorded E30b values. Read every earlier "bit-reproducible" in this log as
 "reproducible within 1e-6 on the same hardware and container". Raised by the supplement review of
 2026-11-08; no number changes.
+
+## D31 (2026-11-14, BEFORE the runs): expanded probe search
+
+**Status: additional analysis, motivated by the existing D28 results.** Freezing this protocol does not make
+any earlier decision prospective. The D28 family stays exactly as published until this protocol's runs are
+read; see "Reporting" below for what replaces what.
+
+**Why.** D28 selected 498 of 1,010 fits at the largest learning rate (3e-3) and 944 at a grid edge, and 24
+selected fits reached the 200-epoch cap. The search may therefore not bracket the optimum, which the paper
+already states. This expansion tests that boundary once.
+
+**Grid (frozen).** lr in {3e-5, 1e-4, 3e-4, 1e-3, 3e-3, 1e-2} x wd in {0, 1e-4, 1e-2, 1e-1, 1} = 30
+configurations, which contains D28's 16 as a subset. Both feature variants (raw "grid", standardized
+"grid_z"). Identical search and selection for EVERY compared arm.
+
+**Budget (frozen).** Common maximum of 500 epochs, batch 256, constant lr, BCE on logits, the existing
+early-stopping rule unchanged (val ROC-AUC, min_delta 1e-4, patience 20). Selection on VALIDATION only:
+best_val = max(curve), best_epoch = first argmax, selected configuration = first argmax over (lr, then wd).
+Test is scored once, after selection.
+
+**Coverage (frozen).** The existing 18-comparison family in full: P1G and P1QG on DL's split (5 seeds) and
+S1G, S3G, S3FG rotations (5 rotations x 3 seeds), both models except the q95 setting, which is BIOT only.
+If any part cannot run, that part is reported separately and the original family's counts are retained.
+
+**Records (frozen).** Stopping epoch, selected lr and wd, whether the selection sits at a grid edge, the
+per-epoch training loss and validation ROC-AUC curve of every configuration, and absolute test ROC-AUC and
+average precision per arm.
+
+**Analysis (frozen).** The same statistics as D28: paired last - lp and last - last_noise differences, 95%
+t-intervals over the 5 units (df 4), Nadeau-Bengio intervals for the rotation comparisons only, TOST at
+margin 3 and alpha 0.05, and the post hoc margin sweep at 1, 2 and 3 points. Reporting absolute performance
+alongside every paired difference.
+
+**What this can and cannot establish (frozen).** Fewer boundary selections and earlier stopping do NOT
+establish optimization convergence, and the paper must not claim they do. The claim is bounded: a wider
+equal-budget search than D28's either changes the paired adaptation effects or does not.
+
+**Stopping rule (frozen).** This expansion runs ONCE. If an effect is still sensitive to the search, that
+sensitivity is disclosed. The search is not enlarged again to reach a preferred result.
+
+**Reporting (decided 2026-11-14, by the author, BEFORE the runs).** The expanded search REPLACES D28 as the
+primary tuned-probe analysis, and the equivalence counts, the margin sweep and the abstract numbers are
+recomputed from it. D28's counts remain in the paper as the narrower pre-registered search, and the change
+between the two is reported. The prespecified-analysis label stays attached to the ordinary t-based inference,
+not to the grid.
+
+## D32 (2026-11-14, BEFORE the runs): tuned probes and matched noise controls for the large E29 gains
+
+**Status: additional analysis, motivated by the existing E29 results.** Not prospective for E29 itself.
+
+**Why.** The largest surviving gains in the project are E29 Siena BIOT at ssl_lr 1e-3: cell 2 (4,174 SSL
+windows) last - lp +21.1 and cell 5 (full eligible pool) +21.5, each firing the exploratory rule in 4 of 5
+rotations (artifacts/analysis/E29/e29.md). Their only noise controls are the one-seed descriptive A5 rows of
+D27X. They have never had tuned probes. The paper discloses this (Appendix C, E29 paragraph), and D32 turns
+the disclosure into measurement.
+
+**Configurations (frozen).** Exactly the two E29 recipes, unchanged: BIOT, Siena, labels overlap, backbone
+mode eval, --set ssl_lr=1e-3, cell 2 without --ssl-n all and cell 5 with it. No other parameter moves. The
+recorded update count of each recipe is reported, because learning rate, data exposure and duration must not
+change together.
+
+**Arms (frozen).** lp (pretrained, no adaptation), last (EEG-adapted) and last_noise (noise-adapted),
+matched to last on learning rate, update count, initialization and every other training setting; the noise
+arm differs only in arm and data_hash.
+
+**Units (frozen).** 5 rotations x 3 seeds [S_r, 1000+r, 2000+r].
+
+**Probes (frozen).** The D31 expanded search and selection, identically for all three arms.
+
+**Outcomes (frozen).** Absolute ROC-AUC and average precision; paired EEG-minus-LP and EEG-minus-noise
+differences; per-rotation values; 95% t-intervals, Nadeau-Bengio intervals and TOST at margin 3. Average
+precision is read WITHOUT the ROC margin (D30).
+
+**Decision (frozen).** If a substantial gain survives matched tuning, it is given prominence in the main text
+and the interpretation is revised: that would change the empirical adaptation finding, and it would NOT
+reverse the two verified code findings, which are static facts about the release.
+
+**CHB-MIT extension.** Cell 5 for BIOT on CHB-MIT is conditional on the Siena result and on cost; it is not
+part of this freeze.
+
+**Stopping rule (frozen).** Runs once per configuration. No search for a larger step budget or a different
+recipe if the result is unwelcome.
