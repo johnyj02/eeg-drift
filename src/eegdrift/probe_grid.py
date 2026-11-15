@@ -1,5 +1,7 @@
-"""D28 probe convergence (notes/decisions.md "## D28"): equally tuned, early-stopped linear probes on
-cached frozen features. Opt-in probe variants "grid" (raw features) and "grid_z" (features
+"""Equal-budget, early-stopped linear probes on cached frozen features. D28 (notes/decisions.md "## D28")
+froze the 16-configuration, 200-epoch search; D31 ("## D31") expands it to 30 configurations and 500 epochs
+and is the primary tuned analysis. GRID_CODE_VERSION distinguishes the two in the result key.
+Opt-in probe variants "grid" (raw features) and "grid_z" (features
 standardized with TRAIN-split mean/std). New variants only: no existing probe number changes.
 
 * Features are computed ONCE per (arm, seed): backbone in eval mode, exactly the parity probe's path
@@ -7,13 +9,14 @@ standardized with TRAIN-split mean/std). New variants only: no existing probe nu
   stored float16 in CPU memory. Mini-batches reach the GPU through one pinned staging buffer (the
   cache itself stays pageable: torch's pinned allocator rounds blocks up to a power of two, which
   would turn CBraMod's ~18 GB CHB-MIT train cache into 32 GB of locked host memory).
-* Same search for every arm and variant: AdamW, lr in LRS x weight decay in WDS (16 configurations),
-  batch 256, constant lr, BCE on logits, at most 200 epochs, early stop when val ROC-AUC has not
+* Same search for every arm and variant: AdamW, lr in LRS x weight decay in WDS (30 configurations,
+  which contain D28's 16 as a subset), batch 256, constant lr, BCE on logits, at most 500 epochs,
+  early stop when val ROC-AUC has not
   improved by more than 1e-4 for 20 epochs (the reference moves only on such an improvement).
   All heads of all requested variants train in parallel in one data pass per epoch: same seeded
   shuffle, same initial weights (the "linear" probe's nn.Linear init at this seed), one AdamW
   parameter group (own state) per head. A stopped head gets no further step and no weight decay.
-* Per variant: selected configuration = best val ROC-AUC over the 16 (ties: smaller lr, then
+* Per variant: selected configuration = best val ROC-AUC over the 30 (ties: smaller lr, then
   smaller wd), selected epoch = its best val epoch (snapshot of that head's weights). Val and test
   metrics are computed only there. The test split is read once, after every choice is made.
 """
@@ -33,11 +36,11 @@ from eegdrift.models.protocols import EEGModel, scale_input
 from eegdrift.probe import LOGIT_T, ProbeSpec, metrics
 
 GRID_VARIANTS = ("grid", "grid_z")
-GRID_CODE_VERSION = 1   # in the result key of grid runs only (existing keys unchanged)
-LRS = (1e-4, 3e-4, 1e-3, 3e-3)
-WDS = (0.0, 1e-4, 1e-2, 1e-1)
+GRID_CODE_VERSION = 2   # 1 = D28 (16 configs, 200 epochs); 2 = D31. In the result key of grid runs only.
+LRS = (3e-5, 1e-4, 3e-4, 1e-3, 3e-3, 1e-2)
+WDS = (0.0, 1e-4, 1e-2, 1e-1, 1.0)
 CONFIGS = tuple((lr, wd) for lr in LRS for wd in WDS)   # lr-major, ascending: index order IS the tie rule
-BATCH, MAX_EPOCHS, PATIENCE, MIN_DELTA = 256, 200, 20, 1e-4
+BATCH, MAX_EPOCHS, PATIENCE, MIN_DELTA = 256, 500, 20, 1e-4
 BETAS = (0.9, 0.999)
 EVAL_BATCH = 1024   # scoring and statistics only; never changes a training step
 

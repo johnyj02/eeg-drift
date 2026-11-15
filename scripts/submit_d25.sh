@@ -202,6 +202,28 @@ if want D28; then   # probe convergence: tuned, early-stopped linear probes on c
     sub --model $M --dataset ${DS[$D]} ${=VAR[$D]} --arms lp,last,last_randinit,lp_randinit,last_noise --seeds $(s3 $R) --split rot$R --labels overlap --probes grid,grid_z --backbone-mode eval --run-tag ${T1[$D]}G --tag g${SH[$D]}
   done; done; done
 fi
+if want D31; then   # expanded probe search: 30 configurations, 500 epochs (notes/decisions.md D31)
+  # Same coverage as D28, new run tags so both searches stay readable side by side. The result key also
+  # carries GRID_CODE_VERSION = 2, so these records cannot collide with D28's.
+  typeset -A AN31=(lp lp last la last_noise ln)
+  for M in biot cbramod; do for A in lp last last_randinit lp_randinit; do   # (a) DL's split, upstream labels
+    sub --model $M --dataset chbmit --arms $A --seeds ${(j:,:)BASE} --split paper --probes grid,grid_z --backbone-mode eval --run-tag P1W --tag w${AS[$A]}
+  done; done
+  for A in lp last last_noise; do   # (a) BIOT with its native q95 input
+    sub --model biot --dataset chbmit --arms $A --seeds ${(j:,:)BASE} --split paper --probes grid,grid_z --backbone-mode eval --set input_norm=q95 --run-tag P1QW --tag wq${AN31[$A]}
+  done
+  for D in chbmit siena siena_filt; do for M in biot cbramod; do for R in 0 1 2 3 4; do   # (b) rotations
+    sub --model $M --dataset ${DS[$D]} ${=VAR[$D]} --arms lp,last,last_randinit,lp_randinit,last_noise --seeds $(s3 $R) --split rot$R --labels overlap --probes grid,grid_z --backbone-mode eval --run-tag ${T1[$D]}W --tag w${SH[$D]}
+  done; done; done
+fi
+if want D32; then   # tuned probes + matched noise for the large E29 Siena BIOT gains (notes/decisions.md D32)
+  # Exactly the E29 cell 2 and cell 5 recipes (ssl_lr 1e-3; cell 5 adds the full eligible pool), with the
+  # D31 search on all three arms. last_noise differs from last only in arm and data_hash.
+  for I in 2 5; do for R in 0 1 2 3 4; do
+    NARG=(); (( I == 5 )) && NARG=(--ssl-n all)
+    sub --model biot --dataset siena --arms lp,last,last_noise --seeds $(s3 $R) --split rot$R --labels overlap --probes grid,grid_z --backbone-mode eval $NARG --set ssl_lr=1e-3 --run-tag S3LRW$I --tag wl$I
+  done; done
+fi
 if want D29; then   # C2/C3 noise and standardized-head controls at the fixed-compute budget (notes/decisions.md D29)
   ZH=(--labels overlap --probes linear,linear_z --backbone-mode eval)
   for D in siena siena_filt; do for R in 0 1 2 3 4; do   # E30b flags; last re-run (must reproduce E30b linear) + last_noise

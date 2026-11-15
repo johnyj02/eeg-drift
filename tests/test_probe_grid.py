@@ -59,7 +59,9 @@ def test_selection_uses_validation_only():
 
 
 def test_tie_rule_prefers_smaller_lr_then_wd():
-    assert CONFIGS == tuple(sorted(CONFIGS)) and len(CONFIGS) == 16   # np.argmax takes the first max
+    assert CONFIGS == tuple(sorted(CONFIGS)) and len(CONFIGS) == 30   # np.argmax takes the first max
+    # D31 must contain D28's 16 configurations, so the wider search cannot lose the earlier optimum.
+    assert all((lr, wd) in CONFIGS for lr in (1e-4, 3e-4, 1e-3, 3e-3) for wd in (0.0, 1e-4, 1e-2, 1e-1))
 
 
 def test_early_stopping_fires():
@@ -190,7 +192,7 @@ def test_existing_probes_unchanged_and_grid_runs_on_models(registry, root, tmp_p
     assert _strip(before.to_record()) == _strip(after.to_record())
     assert all(np.array_equal(arr_before[k], arr_after[k]) for k in arr_before)
     rec = out["grid_z"][0]
-    assert rec["spec"]["variant"] == "grid_z" and rec["head_params"] == 257 and len(rec["configs"]) == 16
+    assert rec["spec"]["variant"] == "grid_z" and rec["head_params"] == 257 and len(rec["configs"]) == 30
     assert set(out["grid"][1]) == {"y_test", "scores_best", "y_val", "scores_val_best"}
     with pytest.raises(ValueError):
         grid_probe(m, replace(pspec, backbone_mode="train"), data, CPU, log=_quiet)
