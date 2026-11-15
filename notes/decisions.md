@@ -1011,3 +1011,42 @@ part of this freeze.
 
 **Stopping rule (frozen).** Runs once per configuration. No search for a larger step budget or a different
 recipe if the result is unwelcome.
+
+## D32 outcome (2026-11-15, AFTER the results; frozen protocol of "## D32" applied as written)
+
+**The large E29 gains do not survive equal-budget tuned probes.** E29's fixed-recipe \lastarm$-$\lparm{} was
++21.1 (cell 2, 4,174 SSL windows) and +21.5 (cell 5, full eligible pool), each firing the exploratory rule in
+4 of 5 rotations. With the D31 search (30 configurations, 500 epochs, validation-only selection) applied
+identically to all three arms, the same comparisons read (5 rotation means over 3 seeds, df 4):
+
+| cell | features | contrast | mean | 95% t | NB 95% | t verdict | NB verdict |
+|---|---|---|---|---|---|---|---|
+| 2 | raw | last - lp | +2.4 | [-2.2, +7.0] | [-5.3, +10.0] | not resolved | not resolved |
+| 2 | raw | last - last_noise | +0.8 | [-3.6, +5.3] | [-6.5, +8.2] | not resolved | not resolved |
+| 2 | std | last - lp | -1.0 | [-4.5, +2.6] | [-6.8, +4.9] | not resolved | not resolved |
+| 2 | std | last - last_noise | +0.4 | [-2.3, +3.0] | [-4.0, +4.8] | equivalent within +-3 | not resolved |
+| 5 | raw | last - lp | +3.1 | [-1.8, +8.0] | [-5.1, +11.2] | not resolved | not resolved |
+| 5 | raw | last - last_noise | +1.1 | [-1.8, +4.0] | [-3.7, +5.9] | not resolved | not resolved |
+| 5 | std | last - lp | +0.8 | [-0.4, +2.0] | [-1.2, +2.8] | equivalent within +-3 | equivalent within +-3 |
+| 5 | std | last - last_noise | +1.5 | [-0.7, +3.7] | [-2.1, +5.1] | not resolved | not resolved |
+
+**What this establishes.** None of the 8 contrasts demonstrates a gain: the +21 effects fall to +2.4 and
++3.1 on raw features and to -1.0 and +0.8 on standardized features, and every interval contains 0. The
+largest surviving gains in the project were therefore a probe-training artifact, like the smaller ones.
+
+**What it does NOT establish, stated plainly.** Only 2 of the 8 contrasts establish equivalence within +-3
+under t, and only 1 of those survives the Nadeau-Bengio correction. The other 6 are unresolved: with 5
+rotation units at df 4 the intervals are wide (up to +-8 points on raw features). So the evidence bounds
+these effects well below +21 but does not show them to be zero.
+
+**Honest caveat on the budget.** 54 of the 180 selected fits reached the 500-epoch cap, which is 30%,
+against 24 of 1,010 (2.4%) under D28's 200-epoch cap. The longer budget is being used, so early stopping
+still does NOT establish optimization convergence, and the paper must not claim it does.
+
+**Integrity checks (all pass).** 90 records = 2 cells x 5 rotations x 3 arms x 3 seeds, 0 smoke, 0 missing.
+Every record carries 30 configurations, grid version 2 and max_epochs 500. Every adapted arm has
+adapt_spec lr 0.001, matching the real E29 S3LR2 record. 10 of 10 jobs Completed, 0 Failed, 19,642 billable
+seconds, about $16.70.
+
+**Reporting.** D32 is an additional analysis motivated by E29 (per its freeze). It does not change the
+18-comparison family; D31 does that.
