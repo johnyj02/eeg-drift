@@ -1048,9 +1048,10 @@ under t, and only 1 of those survives the Nadeau-Bengio correction. The other 6 
 rotation units at df 4 the intervals are wide (up to +-8 points on raw features). So the evidence bounds
 these effects well below +21 but does not show them to be zero.
 
-**Honest caveat on the budget.** 54 of the 180 selected fits reached the 500-epoch cap, which is 30%,
-against 24 of 1,010 (2.4%) under D28's 200-epoch cap. The longer budget is being used, so early stopping
-still does NOT establish optimization convergence, and the paper must not claim it does.
+**Stopping diagnostics (corrected 2026-11-15).** All 180 selected configurations stopped before 500 epochs.
+In 54 searches, at least one candidate reached the cap; 263 of 5,400 candidates were capped. The longest
+selected configuration ran 283 epochs. The earlier wording incorrectly treated a search with a capped
+candidate as a capped selected fit. Early stopping still does not establish optimization convergence.
 
 **Integrity checks (all pass).** 90 records = 2 cells x 5 rotations x 3 arms x 3 seeds, 0 smoke, 0 missing.
 Every record carries 30 configurations, grid version 2 and max_epochs 500. Every adapted arm has
@@ -1085,8 +1086,8 @@ gain in any of the 18 comparisons.
 
 **What weakens, stated plainly.** The bound is looser than D28's. The largest effect rises from +0.9 to
 +5.7 (BIOT q95 standardized, 95% t [-1.0, +12.3], unresolved), so "differences range from -4.4 to +0.9"
-must become "-1.1 to +5.7". Two comparisons that D28 read as equivalent are now unresolved, and the
-dependence-adjusted count falls 13 to 12. Six of the 18 are unresolved under dependence-adjusted inference.
+must become "-1.1 to +5.7". Under ordinary inference two previously equivalent comparisons become unresolved. Under corrected
+inference, five lose equivalence and four gain it, giving a net change from 13 to 12. Six of the 18 are unresolved under dependence-adjusted inference.
 
 **Two comparisons need a careful sentence (raised by the review).** S3W BIOT raw and standardized both read
 +1.7 with ordinary t95 [+0.1, +3.3] and [+0.3, +3.1], which EXCLUDE zero. Their Nadeau-Bengio intervals
@@ -1096,9 +1097,11 @@ a 95% interval excluding zero under dependence-adjusted inference.
 
 **The search-boundary concern is REDUCED, NOT RESOLVED.** 864 of 1,010 selected fits still sit on a grid
 edge (85.5%, against D28's 944 of 1,010 = 93.5%), and 428 of 1,010 chose the new largest learning rate 1e-2
-(against 498 choosing D28's largest, 3e-3). 109 of 1,010 selected fits reached the 500-epoch cap (10.8%,
-against D28's 24 of 1,010 = 2.4%). Widening the grid and quadrupling the budget did not stop selection
-pressing to the boundary, so the paper still must not claim optimization convergence, and under D31's own
+(against 498 choosing D28's largest, 3e-3). All 1,010 selected configurations stopped before the 500-epoch cap; 491 of 30,300 candidate
+configurations reached it, in 109 searches. The previous count of 109 capped selected fits was a counting
+error (corrected 2026-11-15). The epoch allowance increased 2.5-fold and the maximum configuration-by-epoch
+allowance 4.69-fold. The boundary selections remain a limitation; the paper must not claim optimization
+convergence, and under D31's own
 stopping rule the search is NOT enlarged again.
 
 **Noise controls under D31.** 14 \lastarm$-$\lastnoise{} comparisons: 13 equivalent within +-3 under
@@ -1107,3 +1110,101 @@ ordinary t (D28: 12), 8 under dependence-adjusted inference (D28: 9).
 **Reporting (the author's pre-run decision, "## D31").** D31 REPLACES D28 as the primary tuned-probe
 analysis; the equivalence counts, the margin sweep and the abstract are recomputed from it, and D28 stays in
 the paper as the narrower pre-registered search with the change between the two reported.
+
+
+## Reporting and stopping-count correction (2026-11-15, AFTER the D31/D32 results)
+
+The manuscript now uses D31 as primary, as decided before its runs, and reports D32 separately.
+A re-computation from selected configurations corrects the capped-fit wording above: the probe-level
+`epochs_run` is the maximum over all candidates, not the run length of the selected candidate.
+No selected D31 or D32 configuration reached 500 epochs. The paired effects, intervals, equivalence
+counts and margin sweep are unchanged. The original narrower search and its complete results remain
+in the supplement; repeated prose and identifier catalogues were moved there to shorten the manuscript.
+
+
+## Reporting revision (2026-11-16, AFTER D31/D32 results)
+
+The title now describes non-recovery of the large reported gains. The main-text random-feature advantage
+on DL's split is corrected from the older-search value of 14 to the primary D31 value of 12.2 points
+(frozen LP minus frozen random features; this is distinct from the 11.4-point adapted random-initialization
+contrast). Original runtime overrides or a different code version remain possibilities, not established
+facts. The prose refers to the study's gain criterion rather than using its three-point mean threshold
+as the definition of any statistical improvement.
+
+Figure 2 now displays Nadeau–Bengio corrected intervals for subject rotations and ordinary seed intervals
+on DL's fixed split. Its four panels focus on EEG adaptation against LP and noise. The full random-feature
+contrasts and uncertainty remain in the existing result tables, and absolute levels remain in Figure 3.
+All 59 displayed interval readings agree with the saved D31 results; no effect estimate, equivalence count,
+margin sweep or raw record is changed by this reporting pass.
+
+A targeted separately implemented logistic-probe solver check is proposed for BIOT on DL's q95 split
+and the primary Siena rotations, using matched LP, EEG and noise arms with raw and standardized features.
+It is not yet frozen, implemented or run. No new experiment is claimed by this revision, and no GPU run
+was launched. The verified author-contact cutoff remains 2026-11-02 until the author supplies an updated
+status.
+
+
+## Title wording confirmed (2026-11-16, AFTER the reporting revision)
+
+The author requested the title “Large Reported CHB-MIT Adaptation Gains Disappear with Pretrained
+Encoders and Matched Probes.” This replaces the “Are Not Recovered” wording selected earlier in the
+reporting pass. The qualifier “Large Reported” refers to the published headline gains. The abstract and
+body continue to report 12 of 18 equivalences and six unresolved comparisons, and do not exclude smaller
+benefits. This title-only change does not change any result, statistical analysis or experimental protocol.
+The manuscript metadata, supplementary source title, release README and current revision checklist use
+the confirmed wording. Previously built PDFs and archives still need regeneration.
+
+
+## Author-correspondence update (2026-11-16, author-confirmed)
+
+The author reports first contacting the original authors around 2026-09-10 and following up on
+2026-10-28, with still no response as of 2026-11-16. The September date is approximate, as reported;
+its message contents have not been specified. The October follow-up retains the previously documented
+questions 1–6. The manuscript now reports both contacts and the verified 2026-11-16 cutoff in ordinary
+text. The correspondence checklist item is complete. Earlier 2026-11-02 status entries remain historical
+records rather than being rewritten or back-dated.
+
+## D33 (2026-11-16, BEFORE the runs): convex-probe optimization check
+
+**Status: additional analysis, motivated by D31's own diagnostic.** Freezing this protocol does not make any
+earlier decision prospective. It does NOT change the 18-comparison family of D31, which stays the primary
+tuned-probe analysis; D33 is reported separately.
+
+**Why.** D31 widened the search to 30 configurations and 500 epochs and still left 864 of 1,010 selected
+fits at a grid edge, 428 at the largest learning rate, and 109 at the epoch cap. Early stopping is a
+stopping rule, so neither D28 nor D31 can claim the probe reached its optimum. A logistic-regression probe
+makes that claim checkable: the objective is convex, so a converged solver is at the global optimum of the
+probe, and convergence can be VERIFIED rather than assumed.
+
+**Scope (frozen).** BIOT only, the two settings where the probe mattered most: DL's split with the q95 input
+(5 seeds) and Siena rotations (5 rotations x 3 seeds). Arms lp (pretrained, no adaptation), last
+(EEG-adapted) and last_noise (noise-adapted, matched to last on learning rate, update count, initialization
+and every other training setting). Both feature variants: raw and train-standardized.
+
+**Probe (frozen).** scikit-learn LogisticRegression, solver lbfgs, L2 penalty, on the SAME cached frozen
+encoder features that the tuned probes use (backbone in eval mode, encoder tap, the parity probe's path).
+Regularization C in {1e-4, 1e-3, 1e-2, 1e-1, 1, 10, 100}, selected on VALIDATION ROC-AUC only; ties take the
+smaller C. max_iter 20000, tol 1e-6. Test is scored once, after selection.
+
+**Convergence must be verified, not assumed (frozen).** Every fit records n_iter, max_iter, tol and a
+boolean converged = the solver stopped before max_iter without a ConvergenceWarning. A setting is reported
+as optimization-converged only if EVERY arm's selected fit in it converged. Any non-converged fit is
+reported as such and not silently dropped.
+
+**Outcomes (frozen).** Absolute test ROC-AUC and average precision per arm; paired last - lp and
+last - last_noise differences; per-rotation values; 95% t-intervals over the 5 units (df 4), Nadeau-Bengio
+intervals for the rotation setting, and TOST at margin 3 with alpha 0.05. Average precision is read WITHOUT
+the ROC margin (D30).
+
+**What this can and cannot establish (frozen).** It can establish that a convex probe on these frozen
+features reached its optimum, so a remaining difference cannot be blamed on probe under-training. It CANNOT
+establish anything about the non-convex probes of D28 and D31, and it does not make their searches
+convergent in retrospect. A logistic probe is also a different hypothesis class from the SGD-trained linear
+head, so its absolute numbers are not interchangeable with theirs.
+
+**Stopping rule (frozen).** Runs once per setting. If a difference is still sensitive to the probe, that
+sensitivity is disclosed. The C grid is not widened afterwards to reach a preferred result.
+
+**Reporting (frozen).** A compact sensitivity table plus the convergence diagnostics, kept separate from
+D31's 18 comparisons. The conclusion or the title changes only if a benefit is demonstrated under this
+probe, by the same criterion used elsewhere: a 95% interval excluding zero AND a mean above 3 points.
