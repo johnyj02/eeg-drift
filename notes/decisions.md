@@ -1372,3 +1372,60 @@ decide these; validation preferred the strongest regularization offered by a wid
 as a boundary selection, and it still does not establish that the optimal regularization lies outside the
 grid, nor does it bear on numerical convergence at the selected C. Ties, if any appear in the remaining
 jobs, will be reported as ties resolved by the frozen rule.
+
+## D33 outcome (2026-11-16, AFTER the results; frozen protocol, amendment and clarifications applied as written)
+
+**Integrity.** 60 records = Siena 45 (5 rotations x 3 arms x 3 seeds, tag S3L) + DL's q95 split 15 (3 arms x
+5 seeds, tag P1QL); 60 distinct result keys, 0 smoke. 6 of 6 jobs Completed, 0 Failed, 8,292 billable
+seconds, about $7.05. Manifest of every key and source directory: artifacts/analysis/D33/manifest.json.
+
+**Convergence, the deliverable.** All 840 candidate fits satisfied the numerical convergence criterion
+(n_iter < 20000, no ConvergenceWarning, gradient infinity-norm below 1e-5 on the mean-normalised objective),
+and all 120 selected models passed the validation-AUC stability check (a tol 1e-9 refit moved validation
+ROC-AUC by less than 0.1 percentage points). 0 failures of either kind.
+
+**Result (primary inference: ordinary t for DL's fixed split, dependence-adjusted for Siena rotations).**
+
+| setting | features | contrast | mean | 95% interval | TOST p | verdict |
+|---|---|---|---|---|---|---|
+| DL q95 | raw | last - lp | +0.19 | [-1.33, +1.71] | 0.003 | equivalent within +-3 |
+| DL q95 | raw | last - last_noise | -0.90 | [-2.41, +0.61] | 0.009 | equivalent within +-3 |
+| DL q95 | std | last - lp | +0.61 | [-0.70, +1.92] | 0.004 | equivalent within +-3 |
+| DL q95 | std | last - last_noise | +0.49 | [-2.64, +3.63] | 0.045 | equivalent within +-3 |
+| Siena | std | last - last_noise | +0.46 | [-0.57, +1.49] | 0.001 | equivalent within +-3 |
+| Siena | std | last - lp | +0.38 | [-4.82, +5.59] | 0.118 | NOT RESOLVED |
+| Siena | raw | last - last_noise | +1.82 | [-6.25, +9.88] | 0.352 | NOT RESOLVED |
+| Siena | raw | last - lp | +2.87 | [-5.10, +10.83] | 0.483 | NOT RESOLVED |
+
+All D33 candidate fits satisfied the numerical convergence criterion, and all selected models passed the
+validation-AUC stability check. None of the eight adaptation contrasts demonstrated an improvement. Five
+supported equivalence within +-3 ROC-AUC points under the applicable primary inference procedure; three
+Siena comparisons remained unresolved.
+
+**CORRECTION to my own first summary (2026-11-16).** I first reported 6 of 8 equivalent and named only the
+two raw Siena comparisons as unresolved. That was wrong twice over: equivalence is the TOST decision, not
+whether the displayed 95% interval sits inside the margin, and the primary procedure is dependence-adjusted
+for Siena. Siena standardized last - lp is equivalent under ordinary TOST but has adjusted TOST p = 0.118,
+so it is UNRESOLVED under the primary reading. Ordinary t throughout would give 6 of 8; the primary
+procedure gives **5 of 8 equivalent and 3 unresolved**, and that is the count to report.
+
+**Conclusion wording (frozen).** "In the targeted BIOT settings, numerically converged regularized linear
+probes did not reveal a statistically demonstrated adaptation gain. This reduces concern that the findings
+arise from insufficient probe optimization, but does not establish convergence of the earlier SGD-trained
+probes." The earlier phrasing, "the earlier results cannot be blamed on probe under-training", is withdrawn
+as too strong. The raw Siena interval still permits a substantial positive effect, up to +10.8 points, and
+that uncertainty stays prominent.
+
+**Regularization selected (descriptive).** 45 of 120 selected fits sit at a grid boundary. The selected C
+spreads across the grid: 39 at 1e-4, 35 at 1, 16 at 1e-3, 13 at 0.1, 9 at 0.01, 6 at 100, 2 at 10. The
+pilot's uniform 1e-4 was not representative of the full set. Per the stopping rule the grid is not widened.
+
+**MY NAMING ERROR, recorded.** I ran the Siena cells under --run-tag S3L, which E25 already used (the
+shipped-MLP-head wave, decisions.md:454, RUNLOG 2026-11-01 rows). No data was harmed: 195 records carry that
+tag, 150 from E25 and 45 from D33, with 195 distinct result keys, 0 clashes, and separate unit directories
+(E25 in *-l3, D33 in *-ld0..ld4). The tag alone is nonetheless ambiguous, so D33 is selected by
+artifacts/analysis/D33/manifest.json or by the presence of the 'logreg' probe, never by run_tag alone. Both
+waves keep their recorded tags; nothing is rewritten.
+
+**Reporting.** One compact table plus a short main-text paragraph. D31's primary 18-comparison statistics
+are unchanged.

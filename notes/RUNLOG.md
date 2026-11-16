@@ -982,3 +982,11 @@ Correction (2026-11-05): 4,314 + 289.68 + 1.80 (smokes) = 4,605.48, i.e. about $
 | anon-DX-v0-1-20261115-ba14c762-arms-biot-sie-rot4-wl5 | Completed | 3234 | D32 BIOT Siena cell 5 (full eligible pool), ssl_lr=1e-3, arms lp+last+last_noise, grid+grid_z (30 configs, 500 epochs), ml.g5.8xlarge, exit ok; $2.75 |
 | anon-DX-v0-1-20261115-d868f236-arms-biot-sie-rot2-wl5 | Completed | 1836 | D32 BIOT Siena cell 5 (full eligible pool), ssl_lr=1e-3, arms lp+last+last_noise, grid+grid_z (30 configs, 500 epochs), ml.g5.8xlarge, exit ok; $1.56 |
 | D32 total (10 jobs) | - | 19642 | 5.46 GPU-hours, about $16.70 at list price; 10 of 10 Completed, 0 Failed |
+| anon-DX-v0-1-20261116-18281034-arms-biot-sie-rot0-l0-smoke | Completed | 229 | D33 smoke (logreg+logreg_z, BIOT Siena rot0, 3 arms); correctness only: 3 '[features] cached once' lines for 3 arms, both variants with all 7 C values, both flags populated, all converged. Reduced budget, so it does NOT assess adaptation effects; $0.19 |
+| anon-DX-v0-1-20261116-aa468360-arms-biot-sie-rot0-ld0 | Completed | 913 | D33 convex probe (Siena rot0, 3 arms x 3 seeds), logreg+logreg_z, 7-point C grid, ml.g5.8xlarge, exit ok; $0.78 |
+| anon-DX-v0-1-20261116-53624494-arms-biot-sie-rot1-ld1 | Completed | 742 | D33 convex probe (Siena rot1, 3 arms x 3 seeds), logreg+logreg_z, 7-point C grid, ml.g5.8xlarge, exit ok; $0.63 |
+| anon-DX-v0-1-20261116-0cf17ab3-arms-biot-sie-rot2-ld2 | Completed | 777 | D33 convex probe (Siena rot2, 3 arms x 3 seeds), logreg+logreg_z, 7-point C grid, ml.g5.8xlarge, exit ok; $0.66 |
+| anon-DX-v0-1-20261116-5358b0a5-arms-biot-sie-rot3-ld3 | Completed | 1102 | D33 convex probe (Siena rot3, 3 arms x 3 seeds), logreg+logreg_z, 7-point C grid, ml.g5.8xlarge, exit ok; $0.94 |
+| anon-DX-v0-1-20261116-01c7f170-arms-biot-sie-rot4-ld4 | Completed | 1277 | D33 convex probe (Siena rot4, 3 arms x 3 seeds), logreg+logreg_z, 7-point C grid, ml.g5.8xlarge, exit ok; $1.09 |
+| anon-DX-v0-1-20261116-0549f742-arms-biot-chb-lq | Completed | 3481 | D33 convex probe (DL's q95 split, 3 arms x 5 seeds), logreg+logreg_z, 7-point C grid, ml.g5.8xlarge, exit ok; $2.96 |
+| D33 total (6 jobs + 1 smoke) | - | 8521 | 2.37 GPU-hours, about $7.24; 7 of 7 Completed, 0 Failed; measured cost replaced the provisional $40-70 estimate |
