@@ -1240,9 +1240,9 @@ of 5,400 candidates, over 54 searches. The paper already states both correctly
 (paper/tmlr/sections/s7-main.tex:218, app-c-robust.tex:559). The boundary concern stands on the edge counts,
 864 of 1,010 selected fits and 428 at the largest learning rate, not on the cap.
 
-**A4. Comparison and diagnostics made precise (frozen).** All arms within a setting use the identical cached
-features, split definitions and input preprocessing, and standardization statistics come from the TRAIN
-split only. Validation ROC-AUC is recorded for EVERY C in the grid, not just the winner, together with a
+**A4. Comparison and diagnostics made precise (frozen).** [CORRECTED by C2 below: arms necessarily have
+different features; the requirement is identical split definitions and extraction procedures, with each
+arm's raw and standardized probes sharing that arm's one feature matrix and its train-only statistics.] Validation ROC-AUC is recorded for EVERY C in the grid, not just the winner, together with a
 flag for whether the selected C sits at either boundary of {1e-4, ..., 100}. Binary ROC-AUC and average
 precision are computed from decision_function scores, not predict_proba, so the linear confidence scores are
 what is scored. For Siena the three seeds are averaged WITHIN each rotation first, giving five units, and
@@ -1267,3 +1267,42 @@ convergence of the earlier D28 and D31 procedures.
 
 **Reporting (unchanged).** A compact targeted sensitivity analysis with its convergence diagnostics, kept
 separate from D31's primary 18-comparison family.
+
+## D33 clarifications (2026-11-16, BEFORE the runs; refine A2, A4 and A6 of the amendment)
+
+**C1. Numerical convergence and prediction stability are two separate flags.** Each fit records BOTH, and
+neither is reported as the other:
+- `numerically_converged`: n_iter < max_iter AND no ConvergenceWarning AND the final gradient
+  infinity-norm is below 1e-5. The gradient is computed against the EXACT regularized objective the solver
+  minimises, which for scikit-learn's lbfgs is the sum of binary cross-entropy plus (1/(2C)) times the
+  squared L2 norm of the coefficients, with the intercept unpenalised. L-BFGS-B stops on either its
+  objective tolerance (ftol) or its projected-gradient tolerance (gtol), so both are recorded with the
+  gradient norm.
+- `prediction_stable`: the tol 1e-9 refit of the selected model moves **validation** ROC-AUC by less than
+  0.001 in absolute terms, which is **0.1 ROC-AUC percentage points** on the x100 scale the paper uses.
+  Validation, not test, is the acceptance criterion.
+
+The same refit comparison on the TEST score is recorded as a reported diagnostic only. It never controls
+model selection, exclusion, or any further tuning. A fit that fails `prediction_stable` while passing
+`numerically_converged` is described as numerically converged with unstable predictions, not as a
+convergence failure.
+
+**C2. A4's "identical cached features" is corrected; it was wrong.** LP, EEG-adapted and noise-adapted
+encoders are different encoders and must produce different features; identical features across arms would
+mean the adaptation did nothing. The frozen requirement is:
+
+> All arms use identical split definitions and feature-extraction procedures. Within each arm, raw and
+> standardized logistic probes share one extracted feature matrix; standardization statistics are fitted on
+> that arm's training features only.
+
+**C3. The smoke cannot price the production runs, and will not be used to.** Verified in
+src/eegdrift/study.py:216 and 175: a smoke caps the train split at 1,500 windows and val and test at 500,
+caps the SSL pool at 256 windows, and runs 1 adaptation epoch. Its runtime says nothing about production
+cost. The sequence is therefore: smoke for CORRECTNESS only, then ONE production-sized job timed end to end,
+including the full 7-point C grid and the selected-model refits, and that timed job COUNTS as one of the
+eight planned jobs rather than being extra. The provisional $40 to $70 estimate is replaced by a measured
+per-job cost from that pilot before the remaining jobs are submitted.
+
+**Unchanged:** the scope (BIOT, DL's q95 split and Siena rotations, arms lp / last / last_noise, raw and
+standardized features), the stopping rule, and the separation from D31's primary 18-comparison statistics.
+Every convergence failure, every boundary selection of C, and every scientific outcome is reported.
