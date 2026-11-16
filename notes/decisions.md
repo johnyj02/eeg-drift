@@ -1318,3 +1318,24 @@ per-job cost from that pilot before the remaining jobs are submitted.
 **Unchanged:** the scope (BIOT, DL's q95 split and Siena rotations, arms lp / last / last_noise, raw and
 standardized features), the stopping rule, and the separation from D31's primary 18-comparison statistics.
 Every convergence failure, every boundary selection of C, and every scientific outcome is reported.
+
+## D33 reporting wording (2026-11-16, fixed before any result is written up)
+
+Three statements about the D33 diagnostics, to be used verbatim in the paper and in every status report.
+
+**W1. Similar ROC-AUC does not establish similar features.** ROC-AUC scores the ranking of predictions, not
+the similarity of representations. Nothing in the smoke measured feature or parameter change, so the
+correct sentence about the reduced-budget smoke is: "The reduced-budget smoke produced similar test ROC-AUC
+across arms; it does not assess adaptation effects." The earlier phrasing, "the encoder barely moves", is
+withdrawn: it was an inference about the representation from a ranking metric, which the measurement does
+not support.
+
+**W2. `prediction_stable` is the frozen validation-AUC stability check, and nothing wider.** A zero refit
+delta establishes that validation ROC-AUC is unchanged by the tol 1e-9 refit. It does NOT establish
+unchanged coefficients, unchanged decision scores or unchanged individual predictions, because ROC-AUC
+depends only on the ordering of the scores. The flag is always named as the validation-AUC stability check.
+
+**W3. A boundary C is reported as what it is.** A selected C at either end of {1e-4, ..., 100} means
+validation chose the strongest (or weakest) regularization the grid offered. It does not undermine numerical
+convergence at that selected C, and it does not establish that the optimal regularization lies outside the
+grid. Per the stopping rule the grid is not widened afterwards; the boundary selection is disclosed.
