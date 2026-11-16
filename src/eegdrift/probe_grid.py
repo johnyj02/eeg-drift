@@ -216,18 +216,125 @@ def _converged(h: dict, max_epochs: int) -> bool:
 
 
 def grid_probe(model: EEGModel, spec: ProbeSpec, data: dict[str, tuple[Tensor, Tensor]], device: torch.device,
-               variants=GRID_VARIANTS, log=print, max_epochs: int = MAX_EPOCHS) -> dict[str, tuple[dict, dict]]:
+               variants=GRID_VARIANTS, log=print, max_epochs: int = MAX_EPOCHS,
+               feats: Feats | None = None) -> dict[str, tuple[dict, dict]]:
     """One feature cache, every requested grid variant. spec: the probe template (its epochs/lr/wd/
     eta_min/label_smoothing are not used; the record's "grid" holds what ran; spec.batch sets only
     the feature pass)."""
     if spec.backbone_mode != "eval" or spec.n_classes != 2:
         raise ValueError("grid probes cache eval-mode features of a binary task: use --backbone-mode eval")
     t0 = time.time()
-    feats = cache_features(model, spec, data, device)
+    feats = feats if feats is not None else cache_features(model, spec, data, device)
     cache_s = time.time() - t0
     log(f"[grid] {spec.model}/{spec.dataset} s{spec.seed}: features {tuple(feats['train'][0].shape)} "
         f"cached in {cache_s:.0f}s")
     out = fit_grid(feats, variants, spec.seed, device, log, max_epochs)
     for v, (rec, _) in out.items():
         rec.update(spec=asdict(replace(spec, variant=v)), cache_seconds=cache_s)
+    return out
+
+
+# ---------- D33: convex probe (notes/decisions.md "## D33" + its amendment and clarifications) ----------
+LOGREG_VARIANTS = ("logreg", "logreg_z")
+LOGREG_CS = (1e-4, 1e-3, 1e-2, 1e-1, 1.0, 10.0, 100.0)
+LOGREG_MAX_ITER, LOGREG_TOL, LOGREG_REFIT_TOL = 20000, 1e-6, 1e-9
+LOGREG_GRAD_TOL = 1e-5     # on the MEAN-normalised objective sklearn minimises, not the summed one
+LOGREG_STABLE_TOL = 1e-3   # 0.001 absolute ROC-AUC = 0.1 percentage points, on VALIDATION
+LOGREG_CODE_VERSION = 1
+
+
+def _sk_objective(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float, c: float) -> tuple[float, float]:
+    """scikit-learn 1.6.1's lbfgs objective and its gradient infinity-norm, unweighted samples.
+
+        F(w, b) = (1/n) sum_i BCE(y_i, w.x_i + b) + ||w||^2 / (2 C n),   intercept unpenalised.
+
+    Verified against the installed source: l2_reg_strength = 1/(C * sw_sum) with sw_sum = n_samples
+    (_logistic.py:447), loss.sum()/sw_sum + 0.5*l2_reg_strength*||w||^2 (_linear_loss.py:323, :207),
+    grad_pointwise /= sw_sum (_linear_loss.py:326). The SUMMED form has the same minimiser but a gradient
+    n times larger, which would fail LOGREG_GRAD_TOL on converged fits.
+    """
+    n = len(y)
+    raw = X @ w + b
+    # log(1 + exp(-|raw|)) + max(-raw, 0) is log(1+exp(-raw)) without overflow
+    bce = np.mean(np.log1p(np.exp(-np.abs(raw))) + np.maximum(-raw, 0.0) + (1.0 - y) * raw)
+    strength = 1.0 / (c * n)
+    f = float(bce + 0.5 * strength * (w @ w))
+    resid = (1.0 / (1.0 + np.exp(-raw)) - y) / n
+    g = np.concatenate([X.T @ resid + strength * w, [resid.sum()]])
+    return f, float(np.max(np.abs(g)))
+
+
+def logreg_probe(feats: Feats, spec: ProbeSpec, variants=LOGREG_VARIANTS,
+                 log=print) -> dict[str, tuple[dict, dict]]:
+    """Validation-selected L2 logistic regression on ONE arm's cached features (D33).
+
+    Per variant: fit every C in LOGREG_CS, select on validation ROC-AUC (ties take the smaller C), then
+    score test ONCE. Records every C's validation score, whether the winner sits at a grid boundary,
+    `numerically_converged` (n_iter < max_iter, no ConvergenceWarning, gradient inf-norm < LOGREG_GRAD_TOL)
+    and `prediction_stable` (a LOGREG_REFIT_TOL refit moves VALIDATION ROC-AUC by < LOGREG_STABLE_TOL).
+    The same refit comparison on test is recorded as a diagnostic only and never selects or excludes.
+    """
+    import warnings  # noqa: PLC0415
+
+    from sklearn.exceptions import ConvergenceWarning  # noqa: PLC0415
+    from sklearn.linear_model import LogisticRegression  # noqa: PLC0415
+
+    if set(variants) - set(LOGREG_VARIANTS):
+        raise ValueError(f"logreg variants must be a subset of {LOGREG_VARIANTS}, got {tuple(variants)}")
+    X = {k: v[0].numpy().astype(np.float64) for k, v in feats.items()}
+    y = {k: v[1].numpy().astype(np.float64).ravel() for k, v in feats.items()}
+    out: dict[str, tuple[dict, dict]] = {}
+    for variant in variants:
+        t0 = time.time()
+        if variant == "logreg_z":            # train-only statistics, this arm's own features
+            mu, sd = X["train"].mean(0), X["train"].std(0)
+            sd = np.where(sd > 0, sd, 1.0)
+            Z = {k: (v - mu) / sd for k, v in X.items()}
+        else:
+            Z = X
+        per_c, best = [], None
+        for c in LOGREG_CS:
+            with warnings.catch_warnings(record=True) as caught:
+                warnings.simplefilter("always", ConvergenceWarning)
+                clf = LogisticRegression(C=c, solver="lbfgs", penalty="l2", max_iter=LOGREG_MAX_ITER,
+                                         tol=LOGREG_TOL).fit(Z["train"], y["train"])
+            warned = any(issubclass(w.category, ConvergenceWarning) for w in caught)
+            n_iter = int(np.ravel(clf.n_iter_)[0])
+            f, gnorm = _sk_objective(Z["train"], y["train"], clf.coef_.ravel(), float(clf.intercept_[0]), c)
+            val = metrics(y["val"], clf.decision_function(Z["val"]), 2)   # linear scores, not probabilities
+            per_c.append({"C": c, "val_roc_auc": val["roc_auc"], "n_iter": n_iter, "warned": warned,
+                          "objective": f, "grad_inf_norm": gnorm,
+                          "numerically_converged": bool(n_iter < LOGREG_MAX_ITER and not warned
+                                                        and gnorm < LOGREG_GRAD_TOL)})
+            if best is None or val["roc_auc"] > best[0] + 1e-12:   # ties keep the smaller C (grid ascends)
+                best = (val["roc_auc"], c, clf, val)
+        _, c_sel, clf, val_sel = best
+        refit = LogisticRegression(C=c_sel, solver="lbfgs", penalty="l2", max_iter=LOGREG_MAX_ITER,
+                                   tol=LOGREG_REFIT_TOL).fit(Z["train"], y["train"])
+        val_refit = metrics(y["val"], refit.decision_function(Z["val"]), 2)
+        test = metrics(y["test"], clf.decision_function(Z["test"]), 2)
+        test_refit = metrics(y["test"], refit.decision_function(Z["test"]), 2)
+        sel = next(r for r in per_c if r["C"] == c_sel)
+        rec = {
+            "type": "logreg", "spec": {**asdict(replace(spec, variant=variant))},
+            "version": LOGREG_CODE_VERSION, "solver": "lbfgs", "penalty": "l2",
+            "max_iter": LOGREG_MAX_ITER, "tol": LOGREG_TOL, "refit_tol": LOGREG_REFIT_TOL,
+            "grad_tol": LOGREG_GRAD_TOL, "stable_tol": LOGREG_STABLE_TOL,
+            "standardized": variant == "logreg_z", "Cs": list(LOGREG_CS), "configs": per_c,
+            "selected": {"C": c_sel, "index": LOGREG_CS.index(c_sel),
+                         "at_grid_boundary": c_sel in (LOGREG_CS[0], LOGREG_CS[-1])},
+            "n_iter": sel["n_iter"], "objective": sel["objective"], "grad_inf_norm": sel["grad_inf_norm"],
+            "numerically_converged": sel["numerically_converged"],
+            "prediction_stable": bool(abs(val_refit["roc_auc"] - val_sel["roc_auc"]) < LOGREG_STABLE_TOL),
+            "val_refit_delta": float(val_refit["roc_auc"] - val_sel["roc_auc"]),
+            "test_refit_delta": float(test_refit["roc_auc"] - test["roc_auc"]),   # diagnostic only
+            "head_params": int(clf.coef_.size + 1), "val_at_best": val_sel, "test_at_best": test,
+            "n_train": int(len(y["train"])), "seconds": round(time.time() - t0, 1),
+        }
+        log(f"[logreg] {variant}: C={c_sel:g}"
+            f"{' (grid edge)' if rec['selected']['at_grid_boundary'] else ''} "
+            f"n_iter={sel['n_iter']} |g|={sel['grad_inf_norm']:.2e} "
+            f"conv={rec['numerically_converged']} stable={rec['prediction_stable']} "
+            f"test_auroc={test['roc_auc']:.4f}")
+        out[variant] = (rec, {"test_scores": clf.decision_function(Z["test"]).astype(np.float32)})
     return out

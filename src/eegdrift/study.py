@@ -32,7 +32,16 @@ from eegdrift.models.protocols import state_copy
 from eegdrift.models.registry import Registry
 from eegdrift.objectives import objective_for
 from eegdrift.probe import DEFAULT_VARIANTS, PROBE_CODE_VERSION, VARIANTS, ProbeSpec, parity_probe
-from eegdrift.probe_grid import GRID_CODE_VERSION, GRID_VARIANTS, MAX_EPOCHS, grid_probe
+from eegdrift.probe_grid import (
+    GRID_CODE_VERSION,
+    GRID_VARIANTS,
+    LOGREG_CODE_VERSION,
+    LOGREG_VARIANTS,
+    MAX_EPOCHS,
+    cache_features,
+    grid_probe,
+    logreg_probe,
+)
 
 
 @dataclass
@@ -278,7 +287,8 @@ def result_key(spec: AdaptSpec, arm: Arm, template: ProbeSpec, variants, ev: Eva
                run_tag: str = "") -> str:
     h = _hash(spec.key(), asdict(arm), asdict(template), sorted(variants), PROBE_CODE_VERSION,
               ADAPT_CODE_VERSION, ev.hash, run_tag,
-              *([("grid", GRID_CODE_VERSION)] if set(variants) & set(GRID_VARIANTS) else []))   # D28 only
+              *([("grid", GRID_CODE_VERSION)] if set(variants) & set(GRID_VARIANTS) else []),   # D28/D31
+              *([("logreg", LOGREG_CODE_VERSION)] if set(variants) & set(LOGREG_VARIANTS) else []))  # D33
     return f"{spec.model}-{spec.dataset}-{arm.name}-s{spec.seed}-{ev.split}-{h}"
 
 
@@ -288,9 +298,10 @@ def run_arm_seed(ctx: Context, model_name: str, dataset: str, arm_name: str, see
         raise ValueError(f"SSL split {ssl.split} != eval split {ev.split}")
     if ctx.overrides.get("probes"):   # e.g. "linear": run only the listed probe variants
         variants = tuple(ctx.overrides["probes"].split(","))
-        unknown = set(variants) - set(VARIANTS) - set(GRID_VARIANTS)
+        unknown = set(variants) - set(VARIANTS) - set(GRID_VARIANTS) - set(LOGREG_VARIANTS)
         if unknown:
-            raise ValueError(f"unknown probe variants {sorted(unknown)}; expected {VARIANTS + GRID_VARIANTS}")
+            known = VARIANTS + GRID_VARIANTS + LOGREG_VARIANTS
+            raise ValueError(f"unknown probe variants {sorted(unknown)}; expected {known}")
     arm = resolve(arm_name, ctx.adapt_cfg, ctx.registry, model_name)
     spec = adapt_spec(ctx, model_name, dataset, arm, seed, ssl)
     template = probe_template(ctx, model_name, dataset, seed, ev.split)
@@ -336,13 +347,23 @@ def run_arm_seed(ctx: Context, model_name: str, dataset: str, arm_name: str, see
         val_index_path.write_text(json.dumps(ev.val_index))
     record["val_index"] = val_index_path.name
     record["probes"] = {}
-    grid = None   # D28: one feature cache serves every requested grid variant
+    grid = logreg = feats = None   # ONE feature extraction per arm serves grid and logreg variants
+    want_grid = [v for v in variants if v in GRID_VARIANTS]
+    want_logreg = [v for v in variants if v in LOGREG_VARIANTS]
+    if want_grid or want_logreg:
+        if template.backbone_mode != "eval" or template.n_classes != 2:
+            raise ValueError("grid and logreg probes need eval-mode features of a binary task")
+        feats = cache_features(model, template, ev.splits, ctx.device)
+        ctx.log(f"[features] cached once for {key}: " + ", ".join(
+            f"{s}={tuple(v[0].shape)}" for s, v in feats.items()))
     for variant in variants:
         if variant in GRID_VARIANTS:
-            grid = grid or grid_probe(model, template, ev.splits, ctx.device,
-                                      [v for v in variants if v in GRID_VARIANTS], ctx.log,
-                                      max_epochs=2 if ctx.smoke else MAX_EPOCHS)
+            grid = grid or grid_probe(model, template, ev.splits, ctx.device, want_grid, ctx.log,
+                                      max_epochs=2 if ctx.smoke else MAX_EPOCHS, feats=feats)
             rec, arrays = grid[variant]
+        elif variant in LOGREG_VARIANTS:
+            logreg = logreg or logreg_probe(feats, template, want_logreg, ctx.log)
+            rec, arrays = logreg[variant]
         else:
             result, arrays = parity_probe(model, replace(template, variant=variant), ev.splits,
                                           ctx.device, ctx.log)
