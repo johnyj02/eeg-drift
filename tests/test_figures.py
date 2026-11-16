@@ -1,9 +1,12 @@
 """Smoke test: scripts/figures.py on a tiny synthetic record set writes every figure it can."""
 
 import json
+from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
-from figures import main
+import pytest
+from figures import effects_intervals, main
 
 MODELS, ARMS = ("biot", "cbramod"), ("lp", "last", "last_randinit", "lp_randinit")
 
@@ -73,3 +76,32 @@ def test_figures_smoke(tmp_path):
     assert all(f"- {fid}: skipped" in captions for fid in ("F10", "F11", "F12"))
     assert main([*args, "--only", "F9"]) == 0   # --only keeps the captions of the other figures
     assert all(f"`{s}`" in (out / "captions.md").read_text() for s in stems)
+
+
+def test_primary_effect_intervals_preserve_rotation_correction(tmp_path):
+    """The ordinary Siena interval excludes zero; the primary corrected interval does not."""
+    source = Path(__file__).parent / "fixtures" / "figure_intervals_d31.json"
+    target = tmp_path / "D31" / "d31.json"
+    target.parent.mkdir()
+    target.write_bytes(source.read_bytes())
+    data = effects_intervals(SimpleNamespace(analysis=tmp_path))
+    corrected = data[("S3G", "biot", "raw", True)][("last", "lp")]
+    fixed_recipe = data[("S3G", "biot", "raw", False)][("last", "lp")]
+    seed_interval = data[("P1G", "biot", "raw", True)][("last", "lp")]
+    assert corrected == pytest.approx((1.698963173062663, -0.9754950861593537, 4.373421432284679))
+    assert fixed_recipe == pytest.approx((9.232413872446674, -2.2726999719686862, 20.737527716862033))
+    assert seed_interval == pytest.approx((0.8615351956962798, -1.6817215748885619, 3.4047919662811212))
+    saved = json.loads(source.read_text())
+    assert saved["contrasts"]["S3W|biot|grid"]["contrasts"]["last - lp"]["t"]["ci95"][0] > 0
+    assert corrected[1] < 0 < corrected[2]
+
+
+def test_effect_figure_refuses_inconsistent_saved_interval(tmp_path):
+    source = Path(__file__).parent / "fixtures" / "figure_intervals_d31.json"
+    data = json.loads(source.read_text())
+    data["contrasts"]["S3W|biot|grid"]["contrasts"]["last - lp"]["nb"]["ci95"][0] = 0.1
+    target = tmp_path / "D31" / "d31.json"
+    target.parent.mkdir()
+    target.write_text(json.dumps(data))
+    with pytest.raises(ValueError, match="plotted interval differs"):
+        effects_intervals(SimpleNamespace(analysis=tmp_path))

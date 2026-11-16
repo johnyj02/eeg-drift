@@ -1171,7 +1171,8 @@ earlier decision prospective. It does NOT change the 18-comparison family of D31
 tuned-probe analysis; D33 is reported separately.
 
 **Why.** D31 widened the search to 30 configurations and 500 epochs and still left 864 of 1,010 selected
-fits at a grid edge, 428 at the largest learning rate, and 109 at the epoch cap. Early stopping is a
+fits at a grid edge and 428 at the largest learning rate [AMENDED A3: the cap clause of this sentence
+was wrong and is corrected in the D33 amendment below]. Early stopping is a
 stopping rule, so neither D28 nor D31 can claim the probe reached its optimum. A logistic-regression probe
 makes that claim checkable: the objective is convex, so a converged solver is at the global optimum of the
 probe, and convergence can be VERIFIED rather than assumed.
@@ -1208,3 +1209,61 @@ sensitivity is disclosed. The C grid is not widened afterwards to reach a prefer
 **Reporting (frozen).** A compact sensitivity table plus the convergence diagnostics, kept separate from
 D31's 18 comparisons. The conclusion or the title changes only if a benefit is demonstrated under this
 probe, by the same criterion used elsewhere: a 95% interval excluding zero AND a mean above 3 points.
+
+## D33 amendment (2026-11-16, BEFORE the runs; cb531a6 preserved, superseded only where stated)
+
+Six corrections to the D33 freeze. The scope is unchanged: BIOT, DL's q95 split and Siena rotations, arms
+lp / last / last_noise, raw and standardized features. No model and no dataset is added.
+
+**A1. The "non-convex" and "different hypothesis class" wording is withdrawn.** It was wrong. The D28 and
+D31 probes already fit an AFFINE head with binary cross-entropy on frozen features
+(src/eegdrift/probe_grid.py:119; head_params 257 = 256 weights + bias), so logistic regression is the SAME
+linear hypothesis class, differing in the optimizer and the regularizer. That makes D33 a MORE direct check
+of the optimization objection, not a parallel one. The superseded sentence claimed the opposite.
+
+**A2. Convergence is solver-reported, and the claim is narrowed to match.** No warning plus n_iter <
+max_iter establishes that L-BFGS-B's own stopping test fired, not an exact optimum: it can stop on a small
+objective change (ftol) OR a small projected gradient (gtol). Each fit therefore records n_iter, max_iter,
+ftol, gtol, the final regularized objective and the final gradient infinity-norm. **Acceptance criterion,
+fixed now, before any run:** a fit counts as numerically converged if n_iter < max_iter AND no
+ConvergenceWarning AND the final gradient infinity-norm is below 1e-5. Every selected model is then refit at
+tol 1e-9 as a stability check, and the refit must move test ROC-AUC by less than 0.001 in absolute terms;
+any fit that fails either test is reported as non-converged and is NOT dropped. The result is described as
+numerical convergence of the fixed-C training objective, never as globally optimal probe performance.
+
+**A3. The epoch-cap sentence in cb531a6 is corrected.** The freeze said "109 at the epoch cap". That is
+wrong, and the error was mine: it read the top-level epochs_run, which is not the selected configuration's
+(the D28 recheck already recorded that the two differ in 848 of 1,010 fits). Re-counted from the records
+2026-11-16: **0 of the 1,010 selected D31 fits reached the 500-epoch cap**; 491 of 30,300 candidate
+configuration fits reached it, spread over 109 searches. D32 has the same shape: 0 of 180 selected fits, 263
+of 5,400 candidates, over 54 searches. The paper already states both correctly
+(paper/tmlr/sections/s7-main.tex:218, app-c-robust.tex:559). The boundary concern stands on the edge counts,
+864 of 1,010 selected fits and 428 at the largest learning rate, not on the cap.
+
+**A4. Comparison and diagnostics made precise (frozen).** All arms within a setting use the identical cached
+features, split definitions and input preprocessing, and standardization statistics come from the TRAIN
+split only. Validation ROC-AUC is recorded for EVERY C in the grid, not just the winner, together with a
+flag for whether the selected C sits at either boundary of {1e-4, ..., 100}. Binary ROC-AUC and average
+precision are computed from decision_function scores, not predict_proba, so the linear confidence scores are
+what is scored. For Siena the three seeds are averaged WITHIN each rotation first, giving five units, and
+dependence-adjusted inference is the primary reading for that setting.
+
+**A5. The ">3 points" rule for changing conclusions is removed.** Any credible positive effect informs the
+discussion, including one below 3 points. Equivalence within +-3 and evidence of a positive difference can
+coexist and will both be reported. The title stays defensible while the large reported gains remain
+unrecovered, but the interpretation follows all of the results, not a threshold.
+
+**A6. The cache and cost claims are marked provisional.** src/eegdrift/study.py:339 shares one feature
+extraction among the existing grid variants but does not yet expose that cache to the logistic helper;
+sharing one extraction between the raw and standardized logistic fits is feasible and is what will be
+implemented. The historical D31 caches were NOT persisted, and CPU fitting inside a GPU job still bills GPU
+time. The frozen scope implies 60 cells x 2 variants x 7 C values = **840 candidate logistic fits** before
+any stability refits. The $40 to $70 estimate is provisional until a representative timing run.
+
+**Replacement for the strongest claim of cb531a6.** D33 tests whether the targeted BIOT findings persist
+with numerically converged, validation-selected regularized linear probes on the same frozen encoder
+features. It assesses sensitivity to probe fitting but does not establish optimal test performance or
+convergence of the earlier D28 and D31 procedures.
+
+**Reporting (unchanged).** A compact targeted sensitivity analysis with its convergence diagnostics, kept
+separate from D31's primary 18-comparison family.

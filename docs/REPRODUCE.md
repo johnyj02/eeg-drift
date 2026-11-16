@@ -90,13 +90,15 @@ re-run on the same A10G with 256 GB host RAM (`ml.g5.16xlarge`). Billable second
 Code evidence for the issues (file and line references in `sec:a1`, `sec:a2`) needs no run: read the release at
 `d056cdf`; `tests/test_upstream_audit.py` and `tests/test_released_differential.py` check it against a clone.
 
-D28 and D29 are complete. D28 holds 505 result records and 1,010 probe fits; D29 holds 450 result records.
-Their protocols and outcomes are in `notes/decisions.md` (entries D28, D29, D30 and the outcome sections).
+D28-D32 are complete. D31 is the primary expanded-search probe analysis; D28 is historical sensitivity. D28 holds 505 result records and 1,010 probe fits; D29 holds 450 result records.
+Their protocols and outcomes are in `notes/decisions.md` (entries D28-D32 and the outcome sections).
 After restoring the window indices as described in the archive README, regenerate both analyses on CPU:
 
 ```bash
 python scripts/analysis/d28_read.py
 python scripts/analysis/d29_read.py
+python scripts/analysis/d28_read.py --d31
+python scripts/analysis/tuned_metrics.py
 ```
 
 Repeating them from EEG data needs GPU:
@@ -104,6 +106,12 @@ Repeating them from EEG data needs GPU:
   16-configuration probe search then runs on the cached features.
 - **D29** (C2/C3 noise and standardized-probe controls on Siena at the fixed-compute budget): GPU runs.
   Its PR-AUC readings need no GPU (`avg_precision` and `pr_auc_trapz` are stored in every record).
+
+D31/D32 repeat the adaptation step and cache frozen features once per arm and seed; the matched
+30-configuration, 500-epoch-maximum probe search then runs on that in-memory cache. Their complete
+run specifications are in the result records and the frozen entries in `notes/decisions.md`. The CPU
+reader above requires no retraining, and `tuned_metrics.py --paper` synchronizes the generated LaTeX
+tables when manuscript sources are present.
 
 ### The headline comparison, one command
 

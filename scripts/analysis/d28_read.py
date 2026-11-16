@@ -99,6 +99,7 @@ D31_TAG = {"P1G": "P1W", "P1QG": "P1QW", "S1G": "S1W", "S3G": "S3W", "S3FG": "S3
 TAG = {k: k for k in D31_TAG}
 # Output names, so a --d31 run cannot overwrite the D28 outputs the paper and the supplement ship.
 JSON_NAME, CURVES_FIG, EFFECTS_FIG = "d28.json", "f_d28_curves.pdf", "fig_effects_d28.pdf"
+FREEZE_COMMIT = "c0283f4"
 PROTOCOL = "D28"   # the decision-log entry whose search this run reads; use_d31() swaps it
 
 
@@ -364,12 +365,13 @@ def verify(s, recs: list[dict], refs: dict) -> tuple[list[dict], list[str], dict
     lines = [
         f"- {tag} ({setting}): {len(mine)} records = {len(models)} model(s) x {len(arms)} arms x "
         + ("5 seeds" if tag.startswith("P1") else "5 rotations x 3 seeds")
-        + f"; 1 per cell, 0 missing, 0 duplicates, 0 smoke; versions adapt 3 / probe 4 / grid 1; probes "
+        + "; 1 per cell, 0 missing, 0 duplicates, 0 smoke; versions "
+        f"adapt 3 / probe 4 / grid {FROZEN['version']}; probes "
         f'grid + grid_z; backbone eval, tap encoder, input_norm "{norm}", labels {labels}; '
         f"one eval set per split (both models)",
         f"  {acc['configs']} configuration fits checked: grid fields = the frozen {PROTOCOL} search; selected "
         f"configuration = first argmax of best val (ties among configurations: {acc['ties']} fits); "
-        f"best_val = max of the logged curve; converged = stopped before epoch {FROZEN['max_epochs']}; "
+        f"best_val = max of the logged curve; stopped early = stopped before epoch {FROZEN['max_epochs']}; "
         f"early-stop replay on the "
         f"logged (6-decimal) curves disagrees in {acc['replay_mismatch']} fits; non-finite train loss in "
         f"{acc['nonfinite_loss']}; val ROC re-scored at the selection = best_val within "
@@ -472,7 +474,7 @@ def fit_stats(mine: list[dict], v: str) -> dict:
     ep = np.array([p["best_epoch"] + 1 for p in ps])
     run = np.array([c["epochs_run"] for c in sel])
     lr_e = Counter(
-        "lr 1e-4" if p["selected"]["lr"] == LRS[0] else "lr 3e-3"
+        f"lr {sci(LRS[0])}" if p["selected"]["lr"] == LRS[0] else f"lr {sci(LRS[-1])}"
         for p in ps
         if p["selected"]["lr"] in (LRS[0], LRS[-1])
     )
@@ -564,7 +566,7 @@ def curves_fig(recs: dict, path: Path) -> None:
         handles=handles, loc="upper center", ncol=6, frameon=False, fontsize=10, bbox_to_anchor=(0.5, 0.995)
     )
     fig.suptitle(
-        "D28: validation ROC-AUC per epoch of the selected configuration (one line per run; early stop "
+        f"{PROTOCOL}: validation ROC-AUC per epoch of the selected configuration (one line per run; early stop "
         "after 20 epochs without a 1e-4 gain, at most 200)",
         y=0.012,
         fontsize=10,
@@ -623,7 +625,7 @@ def effects_fig(res: dict, path: Path) -> None:
     ]
     fig.legend(handles=handles, loc="upper center", ncol=4, frameon=False, fontsize=9, bbox_to_anchor=(0.5, 0.995))
     fig.suptitle(
-        "D28 contrasts with tuned, early-stopped probes. Dashed: +-3. Labels: gain = gain demonstrated, "
+        f"{PROTOCOL} contrasts with tuned, early-stopped probes. Dashed: +-3. Labels: gain = gain demonstrated, "
         "equiv. = equivalent within +-3 (TOST), n.r. = not resolved. DL's split: 5 seeds on one split "
         "(seed uncertainty only).",
         y=0.03,
@@ -657,9 +659,9 @@ def pv(p: float) -> str:
 
 def report(res: dict, checks: list[str], fits: dict, ratios: dict, q: dict, outl: list[str]) -> str:
     L = [
-        "# D28: probe convergence (tuned, early-stopped linear probes on cached frozen features)",
+        f"# {PROTOCOL}: equal-budget, early-stopped linear probes on frozen features",
         "",
-        f'Protocol: notes/decisions.md "## {PROTOCOL}", frozen in git (commit c0283f4) before any '
+        f'Protocol: notes/decisions.md "## {PROTOCOL}", frozen in git (commit {FREEZE_COMMIT}) before any '
         f"{PROTOCOL} run; applied as written. Probes: grid (raw features), grid_z (train-standardized); "
         f"AdamW lr {{{', '.join(sci(x) for x in LRS)}}} x wd {{{', '.join(sci(x) for x in WDS)}}} "
         f"({len(LRS) * len(WDS)} configurations), batch {FROZEN['batch']}, constant lr, BCE, "
@@ -672,11 +674,12 @@ def report(res: dict, checks: list[str], fits: dict, ratios: dict, q: dict, outl
         f"Labels: **{GAIN}** (95% t-interval excludes 0 and |mean| > 3 that way), **{EQUIV}** (TOST margin 3, "
         f"alpha 0.05 rejects), **{UNRES}**. D18 = the paired rule (|mean| > 3, same sign in >= 4/5), descriptive "
         "consistency criterion. Everything outside the labels and Q1-Q3 is descriptive. ROC-AUC x100.",
-        "Reading choices (NB label as sensitivity, Q3 = sign of the mean against D24-A/D24-B and D27-B, edges, "
-        "1-based epochs) were fixed before any aggregate; the outlier list, the epoch <= 2 count and the "
+        ("D31 inherits the following reading choices from D28. " if PROTOCOL == "D31" else "")
+        + "Reading choices (NB label as sensitivity, Q3 = sign of the mean against D24-A/D24-B and D27-B, edges, "
+        "1-based epochs) were fixed before any D28 aggregate; the outlier list, the epoch <= 2 count and the "
         "per-model Q3 grouping were added after the first output (descriptive). See the script docstring.",
         "",
-        "Command: `.venv/bin/python scripts/analysis/d28_read.py`",
+        f"Command: `.venv/bin/python scripts/analysis/d28_read.py{' --d31' if PROTOCOL == 'D31' else ''}`",
         "",
         "## Checks",
         "",
@@ -742,14 +745,16 @@ def report(res: dict, checks: list[str], fits: dict, ratios: dict, q: dict, outl
                 )
     L += [
         "",
-        "## Fits: convergence, selected configurations, epochs, grid edges (descriptive)",
+        "## Fits: early stopping, selected configurations, epochs, grid edges (descriptive)",
         "",
-        f"Converged = early stopping fired before epoch {FROZEN['max_epochs']}. Epochs 1-based. Edge: "
+        f"Stopped early = the stopping rule fired before epoch {FROZEN['max_epochs']}; this does "
+        f"not establish optimization convergence. Epochs 1-based. Edge: "
         f"lr {sci(LRS[0])} or {sci(LRS[-1])}, or wd {sci(WDS[0])} or {sci(WDS[-1])} "
         f"({len(LRS) * len(WDS) - (len(LRS) - 2) * (len(WDS) - 2)} of {len(LRS) * len(WDS)} configurations "
         f"touch an edge).",
         "",
-        "| setting | model | variant | fits | converged (selected) | converged (all 16) | selected epoch median "
+        f"| setting | model | variant | fits | stopped early (selected) | stopped early (all "
+        f"{len(LRS) * len(WDS)}) | selected epoch median "
         "[IQR] (min-max; at epoch <= 2) | epochs run, selected (median, max) | at an edge | lr edge | wd edge | "
         "selected lr/wd (count) | test ROC < 50 |",
         "|---|---|---|---|---|---|---|---|---|---|---|---|---|",
@@ -777,9 +782,11 @@ def report(res: dict, checks: list[str], fits: dict, ratios: dict, q: dict, outl
         "",
         "## Figures",
         "",
-        "- artifacts/figures/f_d28_curves.pdf/png: selected configuration's val ROC-AUC per epoch, per arm, "
-        "setting, model and variant (the D28 learning-curve figure).",
-        "- artifacts/figures/fig_effects_d28.pdf/png: the D28 contrasts with 95% t and Nadeau-Bengio intervals.",
+        f"- artifacts/figures/{CURVES_FIG.removesuffix('.pdf')}.pdf/png: selected "
+        f"configuration's val ROC-AUC per epoch, per arm, "
+        f"setting, model and variant (the {PROTOCOL} learning-curve figure).",
+        f"- artifacts/figures/{EFFECTS_FIG.removesuffix('.pdf')}.pdf/png: the {PROTOCOL} "
+        f"contrasts with 95% t and Nadeau-Bengio intervals.",
     ]
     return "\n".join(L) + "\n"
 
@@ -909,10 +916,11 @@ def use_d31() -> None:
     two searches are read by one code path and stay comparable.
     """
     global OUT, SETS, FROZEN, LRS, WDS, D27B_SET, NOISE_PUB, TAG
-    global JSON_NAME, CURVES_FIG, EFFECTS_FIG, PROTOCOL
+    global JSON_NAME, CURVES_FIG, EFFECTS_FIG, PROTOCOL, FREEZE_COMMIT
     TAG = dict(D31_TAG)
     JSON_NAME, CURVES_FIG, EFFECTS_FIG = "d31.json", "f_d31_curves.pdf", "fig_effects_d31.pdf"
     PROTOCOL = "D31"
+    FREEZE_COMMIT = "222d090"
     OUT = ROOT / "artifacts" / "analysis" / "D31"
     SETS = tuple((D31_TAG[s[0]], *s[1:]) for s in SETS)
     D27B_SET = {D31_TAG[k]: v for k, v in D27B_SET.items()}
@@ -957,15 +965,16 @@ def main() -> int:
     n_rec = sum(len(v) for v in mine_by.values())
     checks.insert(
         0,
-        f"- {n_rec} D28 records ({', '.join(f'{t} {len(v)}' for t, v in mine_by.items())}), "
-        f"{2 * n_rec} probe fits, {32 * n_rec} configuration fits; 0 smoke records among them.",
+        f"- {n_rec} {PROTOCOL} records ({', '.join(f'{t} {len(v)}' for t, v in mine_by.items())}), "
+        f"{2 * n_rec} probe fits, {2 * len(LRS) * len(WDS) * n_rec} configuration fits; 0 smoke "
+        f"records among them.",
     )
     q = answers(res)
     outl = outliers(res, mine_by)
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "README.md").write_text(report(res, checks, fits, ratios, q, outl))
     js = {
-        "protocol": "notes/decisions.md ## D28 (commit c0283f4)",
+        "protocol": f"notes/decisions.md ## {PROTOCOL} (commit {FREEZE_COMMIT})",
         "checks": checks,
         "nb_ratio": ratios,
         "answers": q,
