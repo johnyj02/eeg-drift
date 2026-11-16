@@ -1339,3 +1339,36 @@ depends only on the ordering of the scores. The flag is always named as the vali
 validation chose the strongest (or weakest) regularization the grid offered. It does not undermine numerical
 convergence at that selected C, and it does not establish that the optimal regularization lies outside the
 grid. Per the stopping rule the grid is not widened afterwards; the boundary selection is disclosed.
+
+## D33 reporting wording, part 2 (2026-11-16, after the pilot, before the full read)
+
+**W4. The Siena effect is a rotation-level paired difference, and the frozen inference is unchanged.** For
+each rotation r,
+
+    d_r = mean_s[ AUC(last, r, s) ] - AUC(lp, r),
+
+and the frozen procedure (95% t-interval over the 5 units at df 4, Nadeau-Bengio for the rotation setting,
+TOST at margin 3) is applied to those five d_r. The repeated LP values are a SHARED BASELINE, not three
+independent LP replicates. Paired inference uses the variability of the differences, so a constant baseline
+does not invalidate it. The same form applies to last - last_noise, where both arms do vary with seed.
+
+**W5. Why LP is identical across seed-labelled runs.** Attribute it to fixed inputs and a fixed fitting
+procedure: the LP arm performs no adaptation, so its features, data and splits are identical across the
+three seed labels, and scikit-learn's lbfgs solver does not consume random_state. Do NOT attribute it to
+convexity alone, which is a property of the objective, not an explanation of why nothing varied.
+Frozen sentence: "Within each split, LP produced identical results across seed-labelled runs because its
+inputs and fitting procedure were fixed. Adaptation effects were averaged across seeds within each Siena
+rotation, and inference used five rotation-level differences."
+
+**W6. What the DL-split intervals describe.** Five-seed intervals on DL's fixed split describe adaptation
+randomness CONDITIONAL on those patients and that data. They do not measure uncertainty across new
+patients. LP's zero observed seed variation on that split must never be presented as certainty about LP's
+population performance; it is the absence of one variance component, not evidence of precision.
+
+**W7. The boundary selections in the pilot were NOT ties (checked).** All 18 pilot fits selected C = 1e-4
+with a UNIQUE validation maximum, and validation ROC-AUC fell monotonically as C grew in every fit: for
+example last, seed 42, raw features gave 85.42 at 1e-4 against 52.42 at 100. So the frozen tie rule did not
+decide these; validation preferred the strongest regularization offered by a wide margin. This is reported
+as a boundary selection, and it still does not establish that the optimal regularization lies outside the
+grid, nor does it bear on numerical convergence at the selected C. Ties, if any appear in the remaining
+jobs, will be reported as ties resolved by the frozen rule.
