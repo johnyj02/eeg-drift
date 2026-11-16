@@ -1273,11 +1273,23 @@ separate from D31's primary 18-comparison family.
 **C1. Numerical convergence and prediction stability are two separate flags.** Each fit records BOTH, and
 neither is reported as the other:
 - `numerically_converged`: n_iter < max_iter AND no ConvergenceWarning AND the final gradient
-  infinity-norm is below 1e-5. The gradient is computed against the EXACT regularized objective the solver
-  minimises, which for scikit-learn's lbfgs is the sum of binary cross-entropy plus (1/(2C)) times the
-  squared L2 norm of the coefficients, with the intercept unpenalised. L-BFGS-B stops on either its
-  objective tolerance (ftol) or its projected-gradient tolerance (gtol), so both are recorded with the
-  gradient norm.
+  infinity-norm is below 1e-5. The objective and gradient are computed against the EXACT objective the
+  solver minimises, which for scikit-learn 1.6.1 with unweighted samples is the MEAN-NORMALISED form
+
+      F(w, b) = (1/n) * sum_i BCE(y_i, w.x_i + b) + ||w||^2 / (2 C n),
+
+  with the intercept unpenalised. Verified in the installed source: `l2_reg_strength = 1.0 / (C * sw_sum)`
+  with `sw_sum = n_samples` (_logistic.py:447), `loss = loss.sum() / sw_sum` plus
+  `l2_penalty = 0.5 * l2_reg_strength * ||w||^2` (_linear_loss.py:323 and :207), and
+  `grad_pointwise /= sw_sum` (_linear_loss.py:326).
+
+  [CORRECTED 2026-11-16, before any run: C1 first wrote this as the SUMMED cross-entropy plus
+  ||w||^2 / (2C). That has the same minimiser but a gradient n times larger, so against the fixed 1e-5
+  threshold it would have marked converged fits as non-converged, with n in the thousands here. The
+  threshold stays 1e-5 and the normalisation is corrected.]
+
+  L-BFGS-B stops on either its objective tolerance (ftol) or its projected-gradient tolerance (gtol), so
+  both are recorded with the gradient norm.
 - `prediction_stable`: the tol 1e-9 refit of the selected model moves **validation** ROC-AUC by less than
   0.001 in absolute terms, which is **0.1 ROC-AUC percentage points** on the x100 scale the paper uses.
   Validation, not test, is the acceptance criterion.
