@@ -250,8 +250,8 @@ def _sk_objective(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float, c: floa
 
     Verified against the installed source: l2_reg_strength = 1/(C * sw_sum) with sw_sum = n_samples
     (_logistic.py:447), loss.sum()/sw_sum + 0.5*l2_reg_strength*||w||^2 (_linear_loss.py:323, :207),
-    grad_pointwise /= sw_sum (_linear_loss.py:326). The SUMMED form has the same minimiser but a gradient
-    n times larger, which would fail LOGREG_GRAD_TOL on converged fits.
+    grad_pointwise /= sw_sum (_linear_loss.py:326). The summed form has the same minimiser but scales
+    the gradient by n; normalization must match the convergence threshold.
     """
     n = len(y)
     raw = X @ w + b
@@ -266,12 +266,12 @@ def _sk_objective(X: np.ndarray, y: np.ndarray, w: np.ndarray, b: float, c: floa
 
 def logreg_probe(feats: Feats, spec: ProbeSpec, variants=LOGREG_VARIANTS,
                  log=print) -> dict[str, tuple[dict, dict]]:
-    """Validation-selected L2 logistic regression on ONE arm's cached features (D33).
+    """Validation-selected L2 logistic regression on one arm's cached features (D33).
 
     Per variant: fit every C in LOGREG_CS, select on validation ROC-AUC (ties take the smaller C), then
-    score test ONCE. Records every C's validation score, whether the winner sits at a grid boundary,
+    score test after selection. Records every C's validation score, whether the winner sits at a grid boundary,
     `numerically_converged` (n_iter < max_iter, no ConvergenceWarning, gradient inf-norm < LOGREG_GRAD_TOL)
-    and `prediction_stable` (a LOGREG_REFIT_TOL refit moves VALIDATION ROC-AUC by < LOGREG_STABLE_TOL).
+    and `prediction_stable` (a LOGREG_REFIT_TOL refit moves validation ROC-AUC by < LOGREG_STABLE_TOL).
     The same refit comparison on test is recorded as a diagnostic only and never selects or excludes.
     """
     import warnings  # noqa: PLC0415

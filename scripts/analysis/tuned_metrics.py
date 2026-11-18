@@ -247,7 +247,7 @@ def render31(d31, metrics, name):
             ]
         )
     return table(
-        "D31 expanded-search "
+        "Expanded-search "
         + (r"\lastarm$-$\lparm" if name == "last - lp" else r"\lastarm$-$\lastnoise")
         + r" contrasts in ROC-AUC points. Units are five seeds on DL\textquotesingle s fixed split "
         r"or five rotation means of three seeds. "
@@ -299,7 +299,7 @@ def render32(data, metric, compact=False):
         "pr_auc_trapz": "trapezoidal PR-AUC",
     }[metric]
     caption = (
-        "D32: BIOT on Siena with the two E29 recipes (learning rate $10^{-3}$, "
+        "BIOT on Siena with two larger-dose SSL recipes (learning rate $10^{-3}$, "
         "4,174 windows in cell 2; full SSL pool in cell 5), "
     )
     caption += (
@@ -331,7 +331,7 @@ def render32(data, metric, compact=False):
 
 def report32(data, diag, records):
     lines = [
-        "# D32: matched probe tuning for the two large E29 Siena BIOT gains",
+        "# Matched probe tuning for two larger-dose Siena BIOT recipes",
         "",
         "Protocol: notes/decisions.md D32, frozen at 222d090 before its runs. Additional "
         "analysis motivated by E29; not an external replication.",

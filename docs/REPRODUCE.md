@@ -36,7 +36,7 @@ between files), printing PASS / FAIL / SKIP per cell:
 | `tab:robust` | 53 | the SSL adaptation gain under every control; rows matched by the id in their label, e.g. `(E25)` (the `--` cells are not run and not counted) |
 | `tab:artifacts` | 15 | the record-derived values of the release-issue table (our runs and the released-code runs) |
 
-Current result (2026-11-04 paper sources): 151 PASS, 0 FAIL, 1 SKIP. The SKIP is the PR-AUC 37.4 ± 1.2 in
+Record-derived table check (2026-11-16 manuscript sources): 151 PASS, 0 FAIL, 1 SKIP. The SKIP is the PR-AUC 37.4 ± 1.2 in
 `tab:artifacts` (row 3b), a re-scoring of per-window test scores with the revised labels (level 2, below),
 not a value stored in a record. DL's own values (DL column, DL LP / SA) are quoted from DL's paper and not
 checked.
@@ -90,8 +90,8 @@ re-run on the same A10G with 256 GB host RAM (`ml.g5.16xlarge`). Billable second
 Code evidence for the issues (file and line references in `sec:a1`, `sec:a2`) needs no run: read the release at
 `d056cdf`; `tests/test_upstream_audit.py` and `tests/test_released_differential.py` check it against a clone.
 
-D28-D32 are complete. D31 is the primary expanded-search probe analysis; D28 is historical sensitivity. D28 holds 505 result records and 1,010 probe fits; D29 holds 450 result records.
-Their protocols and outcomes are in `notes/decisions.md` (entries D28-D32 and the outcome sections).
+The probe searches, larger-dose controls and converged-probe check are complete. D31 is the primary expanded-search probe analysis; D28 is historical sensitivity. D28 holds 505 result records and 1,010 probe fits; D29 holds 450 result records.
+Their protocols and outcomes are in `notes/decisions.md` (entries D28-D33 and the outcome sections).
 After restoring the window indices as described in the archive README, regenerate both analyses on CPU:
 
 ```bash
@@ -99,6 +99,7 @@ python scripts/analysis/d28_read.py
 python scripts/analysis/d29_read.py
 python scripts/analysis/d28_read.py --d31
 python scripts/analysis/tuned_metrics.py
+python scripts/analysis/d33_read.py
 ```
 
 Repeating them from EEG data needs GPU:
@@ -112,6 +113,15 @@ D31/D32 repeat the adaptation step and cache frozen features once per arm and se
 run specifications are in the result records and the frozen entries in `notes/decisions.md`. The CPU
 reader above requires no retraining, and `tuned_metrics.py --paper` synchronizes the generated LaTeX
 tables when manuscript sources are present.
+
+The converged linear-probe analysis is selected by `artifacts/analysis/D33/manifest.json`,
+which lists all 60 result keys and source directories. Its Siena tag is shared with the
+earlier MLP-head analysis; do not select it by tag alone. The CPU reader `d33_read.py`
+checks the saved diagnostics and reconstructs the eight ROC-AUC contrasts, with
+dependence-adjusted inference primary on Siena and seed inference on DL's fixed split.
+It writes `D33/d33.json` and `D33/README.md`; add `--check-paper` to verify the
+manuscript table. This reader needs only the shipped manifest, records and saved
+train/test ratio. Retraining still requires the EEG stores and pretrained checkpoint.
 
 ### The headline comparison, one command
 

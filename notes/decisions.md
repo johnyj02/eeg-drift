@@ -1429,3 +1429,12 @@ waves keep their recorded tags; nothing is rewritten.
 
 **Reporting.** One compact table plus a short main-text paragraph. D31's primary 18-comparison statistics
 are unchanged.
+
+## D33 artifact metadata clarification (2026-11-16, AFTER the results)
+
+The raw D33 result records store tol, max_iter, final objective, gradient infinity-norm and the
+two separate flags, but do not separately store ftol or gtol despite the pre-run wording. For
+the pinned scikit-learn 1.6.1 lbfgs implementation, gtol is the passed tol and ftol is
+64 * eps(float64). These are implementation-derived values, not independently captured runtime
+fields. The original records are unchanged. The record reader documents this metadata limitation;
+the convergence criterion and all eight contrast results are unchanged.
