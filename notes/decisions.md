@@ -1438,3 +1438,30 @@ the pinned scikit-learn 1.6.1 lbfgs implementation, gtol is the passed tol and f
 64 * eps(float64). These are implementation-derived values, not independently captured runtime
 fields. The original records are unchanged. The record reader documents this metadata limitation;
 the convergence criterion and all eight contrast results are unchanged.
+
+## Rule 3 exception 1 (2026-11-18, user-approved): the "confirmed (code)" definition in Paper A
+
+Paper A is frozen (CLAUDE.md Rule 3). The user approved ONE exception, limited to one clause of one
+sentence in paper/tmlr/sections/app-a-census.tex.
+
+**What was wrong.** The definition read: confirmed (code) if the code copies process2.py, "or its
+repository points to CBraMod's preprocessing or reads its output, which determines the split, the
+start/end label rule and the duplicate windows". The word "determines" does not hold for the
+reads-its-output branch: a loader or config that reads processed_seg shows that a paper adopted someone
+else's files, and says nothing about how those files were labelled or segmented. The next sentence already
+hedged the text class correctly, so the code class was the inconsistent one.
+
+**What it now says** (the user's wording): "A copied script specifies the split, label rule and duplicate
+windows; references to upstream preprocessing or compatible loaders support adoption without establishing
+how the evaluated files were produced."
+
+**Scope.** No number, count, table or verdict changes. The 14-plus-5 tally in s6-artifact3.tex:41 was
+already correct and is untouched. This is a precision fix to an evidence definition, not a retraction.
+
+**Two further points raised in the same review, NOT applied to Paper A and carried to Paper C instead,
+because they would change claims rather than tighten a definition:**
+- Copied baselines: BIOT averages two assignments after swapping its validation and test patients, so
+  reusing BIOT's published numbers beside a single fixed-split experiment is a comparability question
+  separate from preprocessing.
+- Target-dataset pretraining is not contamination: BIOT states it trains on CHB-MIT's TRAINING splits, so
+  test-subject exposure needs its own evidence and must not be inferred from pretraining on the dataset.
