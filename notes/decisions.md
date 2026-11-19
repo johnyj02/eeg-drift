@@ -1465,3 +1465,26 @@ because they would change claims rather than tighten a definition:**
   separate from preprocessing.
 - Target-dataset pretraining is not contamination: BIOT states it trains on CHB-MIT's TRAINING splits, so
   test-subject exposure needs its own evidence and must not be inferred from pretraining on the dataset.
+
+## Rule 3 exception 2 (2026-11-18, user-approved): a second author on Paper A
+
+Paper A is frozen (CLAUDE.md Rule 3). The user approved a second exception: adding a co-author.
+
+**Change.** paper/tmlr/main.tex gains `\AuthorB{Antony J Sankoorikal}` and a second `\author` block,
+"Independent Researcher, Gurugram, India". Order as listed, Joseph Sankoorikal Johny first.
+The author block sits inside `\ifdefined\PREPRINT`, so the ANONYMOUS TMLR build is unchanged by this edit;
+only the named preprint shows authors.
+
+**Why now rather than later.** On arXiv a co-author needs no account: the author list is metadata and only
+the submitter needs one, and he can claim the paper afterwards by ORCID or the paper password. But arXiv
+keeps every version public ("Previous versions of your article will remain publicly available",
+info.arxiv.org/help/replace.html, checked 2026-11-18), so a single-author v1 would stay on the record
+permanently. Adding him before the first posting avoids that.
+
+**Not verified.** Whether TMLR's OpenReview submission requires an OpenReview profile for every author. It
+very likely does, for conflict-of-interest and reviewer assignment, but I did not confirm it in this
+session. The co-author should create an OpenReview account before the TMLR submission.
+
+**Still needed from the user.** An e-mail and an ORCID for the second author, and a decision on whether an
+author-contributions statement is wanted. Nothing else about Paper A changes: no number, no table, no
+claim, and no section text.
