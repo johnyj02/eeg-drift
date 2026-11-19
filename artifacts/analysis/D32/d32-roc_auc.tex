@@ -1,0 +1,20 @@
+\begin{table}[!htbp]
+\caption{BIOT on Siena with two larger-dose SSL recipes (learning rate $10^{-3}$, 4,174 windows in cell 2; full SSL pool in cell 5), the same 30-configuration probe search for LP, EEG and matched noise adaptation, and five rotation means of three seeds. ROC-AUC $\times100$; NB = dependence-adjusted interval. Only cell 5 with standardized features, EEG-minus-LP, supports corrected equivalence within $\pm3$; the other seven contrasts are unresolved.}
+\label{tab:d32-roc_auc}
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lllrrrl}
+\toprule
+Cell & Features & Contrast & Mean & 95\% $t$ & 95\% NB & Class\\
+\midrule
+Cell 2 & raw & EEG$-$LP & +2.4 & [-2.2, +7.0] & [-5.3, +10.0] & n.r.\\
+Cell 2 & raw & EEG$-$noise & +0.8 & [-3.6, +5.3] & [-6.5, +8.2] & n.r.\\
+Cell 2 & std & EEG$-$LP & -1.0 & [-4.5, +2.6] & [-6.8, +4.9] & n.r.\\
+Cell 2 & std & EEG$-$noise & +0.4 & [-2.3, +3.0] & [-4.0, +4.8] & n.r.\\
+Cell 5 & raw & EEG$-$LP & +3.1 & [-1.8, +8.0] & [-5.1, +11.2] & n.r.\\
+Cell 5 & raw & EEG$-$noise & +1.1 & [-1.8, +4.0] & [-3.7, +5.9] & n.r.\\
+Cell 5 & std & EEG$-$LP & +0.8 & [-0.4, +2.0] & [-1.2, +2.8] & eq.\\
+Cell 5 & std & EEG$-$noise & +1.5 & [-0.7, +3.7] & [-2.1, +5.1] & n.r.\\
+\bottomrule
+\end{tabular}
+\end{table}

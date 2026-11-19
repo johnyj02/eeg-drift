@@ -1,0 +1,201 @@
+anon-DX-rel-1101-829c-e4-b-lp-smoke  [39]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit model=biot method=fm_freeze
+anon-DX-rel-1101-4bc3-e4-b-sa-smoke  [39]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit model=biot method=step_up +method.spt_anchor_l2sp_lambda=0
+anon-DX-rel-1101-6420-e4-b-lprand-smoke  [43]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit model=biot method=fm_freeze model.use_pretrained_weights=false
+anon-DX-rel-1101-b23a-e4-c-lp-smoke  [39]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit model=cbramod method=fm_freeze
+anon-DX-rel-1101-fbfa-e4-c-sa-smoke  [39]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit model=cbramod method=step_up +method.spt_anchor_l2sp_lambda=0
+anon-DX-rel-1101-56c8-e4-c-lprand-smoke  [43]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit model=cbramod method=fm_freeze model.use_pretrained_weights=false
+anon-DX-rel-1101-0614-e5lp-b-ft1-b128-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=biot training.batch_size=128
+anon-DX-rel-1101-a55c-e5lp-b-ft0-b256-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=biot training.full_ft=False
+anon-DX-rel-1101-642b-e5lp-b-ft0-b128-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=biot training.full_ft=False training.batch_size=128
+anon-DX-rel-1101-ee95-e5lp-c-ft1-b128-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=cbramod training.batch_size=128
+anon-DX-rel-1101-00a5-e5lp-c-ft0-b256-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=cbramod training.full_ft=False
+anon-DX-rel-1101-acb7-e5lp-c-ft0-b128-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=cbramod training.full_ft=False training.batch_size=128
+anon-DX-rel-1101-4014-e5sa-b-fd0-ft1-b128-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot training.batch_size=128
+anon-DX-rel-1101-b9e7-e5sa-b-fd0-ft0-b256-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot training.full_ft=False
+anon-DX-rel-1101-034f-e5sa-b-fd0-ft0-b128-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot training.full_ft=False training.batch_size=128
+anon-DX-rel-1101-3683-e5sa-b-fd1-ft1-b256-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot +model.foundation_dir={foundation}
+anon-DX-rel-1101-d192-e5sa-b-fd1-ft1-b256-s4174-smoke  [57]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot +model.foundation_dir={foundation} dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb
+anon-DX-rel-1101-bc3d-e5sa-b-fd1-ft1-b128-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot +model.foundation_dir={foundation} training.batch_size=128
+anon-DX-rel-1101-3c08-e5sa-b-fd1-ft1-b128-s4174-smoke  [57]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot +model.foundation_dir={foundation} training.batch_size=128 dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb
+anon-DX-rel-1101-6684-e5sa-b-fd1-ft0-b256-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot +model.foundation_dir={foundation} training.full_ft=False
+anon-DX-rel-1101-9a7c-e5sa-b-fd1-ft0-b256-s4174-smoke  [57]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot +model.foundation_dir={foundation} training.full_ft=False dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb
+anon-DX-rel-1101-791d-e5sa-b-fd1-ft0-b128-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot +model.foundation_dir={foundation} training.full_ft=False training.batch_size=128
+anon-DX-rel-1101-e041-e5sa-b-fd1-ft0-b128-s4174-smoke  [57]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot +model.foundation_dir={foundation} training.full_ft=False training.batch_size=128 dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb
+anon-DX-rel-1101-685e-e5sa-c-fd0-ft1-b128-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod training.batch_size=128
+anon-DX-rel-1101-7c5d-e5sa-c-fd0-ft0-b256-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod training.full_ft=False
+anon-DX-rel-1101-2c91-e5sa-c-fd0-ft0-b128-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod training.full_ft=False training.batch_size=128
+anon-DX-rel-1101-c6cd-e5sa-c-fd1-ft1-b256-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod +model.foundation_dir={foundation}
+anon-DX-rel-1101-dd75-e5sa-c-fd1-ft1-b256-s4174-smoke  [57]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod +model.foundation_dir={foundation} dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb
+anon-DX-rel-1101-9bdf-e5sa-c-fd1-ft1-b128-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod +model.foundation_dir={foundation} training.batch_size=128
+anon-DX-rel-1101-31ca-e5sa-c-fd1-ft1-b128-s4174-smoke  [57]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod +model.foundation_dir={foundation} training.batch_size=128 dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb
+anon-DX-rel-1101-0245-e5sa-c-fd1-ft0-b256-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod +model.foundation_dir={foundation} training.full_ft=False
+anon-DX-rel-1101-283b-e5sa-c-fd1-ft0-b256-s4174-smoke  [57]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod +model.foundation_dir={foundation} training.full_ft=False dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb
+anon-DX-rel-1101-1526-e5sa-c-fd1-ft0-b128-sR-smoke  [54]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod +model.foundation_dir={foundation} training.full_ft=False training.batch_size=128
+anon-DX-rel-1101-e7da-e5sa-c-fd1-ft0-b128-s4174-smoke  [57]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod +model.foundation_dir={foundation} training.full_ft=False training.batch_size=128 dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb
+anon-DX-rel-1101-bf21-e5noise-c-smoke  [41]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod
+anon-DX-rel-1101-ab93-e6-b-last1-smoke  [42]  layer  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot method.spt_unfreeze_layers=last1
+anon-DX-rel-1101-e306-e6-b-last2-smoke  [42]  layer  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot method.spt_unfreeze_layers=last2
+anon-DX-rel-1101-1605-e6-b-all-smoke  [40]  layer  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot method.spt_unfreeze_layers=all
+anon-DX-rel-1101-19b5-e6fd-b-last1-smoke  [44]  layer  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 +model.foundation_dir={foundation} model=biot method.spt_unfreeze_layers=last1
+anon-DX-rel-1101-8eff-e6fd-b-last2-smoke  [44]  layer  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 +model.foundation_dir={foundation} model=biot method.spt_unfreeze_layers=last2
+anon-DX-rel-1101-9c7e-e6fd-b-all-smoke  [42]  layer  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 +model.foundation_dir={foundation} model=biot method.spt_unfreeze_layers=all
+anon-DX-rel-1101-8eeb-e7cbramod-c-tproj-meval-ft1-smoke  [59]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=cbramod   patches: ['backbone_eval']
+anon-DX-rel-1101-1bcf-e7cbramod-c-tproj-meval-ft0-smoke  [59]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=cbramod training.full_ft=False   patches: ['backbone_eval']
+anon-DX-rel-1101-a198-e7cbramod-c-tenc-mtrain-ft1-smoke  [59]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=cbramod   patches: ['encoder_tap']
+anon-DX-rel-1101-c239-e7cbramod-c-tenc-mtrain-ft0-smoke  [59]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=cbramod training.full_ft=False   patches: ['encoder_tap']
+anon-DX-rel-1101-9cea-e7cbramod-c-tenc-meval-ft1-smoke  [58]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=cbramod   patches: ['encoder_tap', 'backbone_eval']
+anon-DX-rel-1101-6c87-e7cbramod-c-tenc-meval-ft0-smoke  [58]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=cbramod training.full_ft=False   patches: ['encoder_tap', 'backbone_eval']
+anon-DX-rel-1101-ec49-e7biot-b-meval-ft1-smoke  [50]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=biot   patches: ['backbone_eval']
+anon-DX-rel-1101-fc2a-e7biot-b-meval-ft0-smoke  [50]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=fm_freeze model=biot training.full_ft=False   patches: ['backbone_eval']
+anon-DX-rel-1101-e318-e30cn-b-N896-fd0-smoke  [48]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot dataset.compute_N=896
+anon-DX-rel-1101-3d2e-e30cn-b-N896-fd1-smoke  [48]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot dataset.compute_N=896 +model.foundation_dir={foundation}
+anon-DX-rel-1101-e307-e30cn-b-N1664-fd0-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot dataset.compute_N=1664
+anon-DX-rel-1101-eaa0-e30cn-b-N1664-fd1-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot dataset.compute_N=1664 +model.foundation_dir={foundation}
+anon-DX-rel-1101-4d49-e30cn-b-N2048-fd0-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot dataset.compute_N=2048
+anon-DX-rel-1101-d0de-e30cn-b-N2048-fd1-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot dataset.compute_N=2048 +model.foundation_dir={foundation}
+anon-DX-rel-1101-f42c-e30cn-b-N4174-fd0-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot dataset.compute_N=4174
+anon-DX-rel-1101-1622-e30cn-b-N4174-fd1-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=biot dataset.compute_N=4174 +model.foundation_dir={foundation}
+anon-DX-rel-1101-78ba-e30cn-c-N896-fd0-smoke  [48]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod dataset.compute_N=896
+anon-DX-rel-1101-112a-e30cn-c-N896-fd1-smoke  [48]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod dataset.compute_N=896 +model.foundation_dir={foundation}
+anon-DX-rel-1101-f8a6-e30cn-c-N1664-fd0-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod dataset.compute_N=1664
+anon-DX-rel-1101-2872-e30cn-c-N1664-fd1-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod dataset.compute_N=1664 +model.foundation_dir={foundation}
+anon-DX-rel-1101-8034-e30cn-c-N2048-fd0-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod dataset.compute_N=2048
+anon-DX-rel-1101-c8e6-e30cn-c-N2048-fd1-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod dataset.compute_N=2048 +model.foundation_dir={foundation}
+anon-DX-rel-1101-45db-e30cn-c-N4174-fd0-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod dataset.compute_N=4174
+anon-DX-rel-1101-52f3-e30cn-c-N4174-fd1-smoke  [49]  divN  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 model=cbramod dataset.compute_N=4174 +model.foundation_dir={foundation}
+anon-DX-rel-1101-58ef-e30cp-b-P3-fd0-smoke  [46]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=biot dataset.compute_P=3
+anon-DX-rel-1101-b44c-e30cp-b-P3-fd1-smoke  [46]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=biot dataset.compute_P=3 +model.foundation_dir={foundation}
+anon-DX-rel-1101-b20d-e30cp-b-P11-fd0-smoke  [47]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=biot dataset.compute_P=11
+anon-DX-rel-1101-c8fc-e30cp-b-P11-fd1-smoke  [47]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=biot dataset.compute_P=11 +model.foundation_dir={foundation}
+anon-DX-rel-1101-58e2-e30cp-b-P21-fd0-smoke  [47]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=biot dataset.compute_P=21
+anon-DX-rel-1101-3846-e30cp-b-P21-fd1-smoke  [47]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=biot dataset.compute_P=21 +model.foundation_dir={foundation}
+anon-DX-rel-1101-3e6e-e30cp-c-P3-fd0-smoke  [46]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=cbramod dataset.compute_P=3
+anon-DX-rel-1101-6de3-e30cp-c-P3-fd1-smoke  [46]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=cbramod dataset.compute_P=3 +model.foundation_dir={foundation}
+anon-DX-rel-1101-2cac-e30cp-c-P11-fd0-smoke  [47]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=cbramod dataset.compute_P=11
+anon-DX-rel-1101-5daa-e30cp-c-P11-fd1-smoke  [47]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=cbramod dataset.compute_P=11 +model.foundation_dir={foundation}
+anon-DX-rel-1101-e309-e30cp-c-P21-fd0-smoke  [47]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=cbramod dataset.compute_P=21
+anon-DX-rel-1101-73e1-e30cp-c-P21-fd1-smoke  [47]  divP  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up +method.spt_anchor_l2sp_lambda=0 dataset.compute_N=2048 model=cbramod dataset.compute_P=21 +model.foundation_dir={foundation}
+anon-DX-rel-1101-32ac-e31-b-l1e-4-fd0-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=biot +method.spt_anchor_l2sp_lambda=0.0001
+anon-DX-rel-1101-708e-e31-b-l1e-4-fd1-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=biot +method.spt_anchor_l2sp_lambda=0.0001 +model.foundation_dir={foundation}
+anon-DX-rel-1101-7997-e31-b-l1e-2-fd0-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=biot +method.spt_anchor_l2sp_lambda=0.01
+anon-DX-rel-1101-9259-e31-b-l1e-2-fd1-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=biot +method.spt_anchor_l2sp_lambda=0.01 +model.foundation_dir={foundation}
+anon-DX-rel-1101-b846-e31-b-l1-fd0-smoke  [44]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=biot +method.spt_anchor_l2sp_lambda=1
+anon-DX-rel-1101-ec06-e31-b-l1-fd1-smoke  [44]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=biot +method.spt_anchor_l2sp_lambda=1 +model.foundation_dir={foundation}
+anon-DX-rel-1101-edeb-e31-c-l1e-4-fd0-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=cbramod +method.spt_anchor_l2sp_lambda=0.0001
+anon-DX-rel-1101-5126-e31-c-l1e-4-fd1-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=cbramod +method.spt_anchor_l2sp_lambda=0.0001 +model.foundation_dir={foundation}
+anon-DX-rel-1101-f8fd-e31-c-l1e-2-fd0-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=cbramod +method.spt_anchor_l2sp_lambda=0.01
+anon-DX-rel-1101-6c0a-e31-c-l1e-2-fd1-smoke  [47]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=cbramod +method.spt_anchor_l2sp_lambda=0.01 +model.foundation_dir={foundation}
+anon-DX-rel-1101-5a11-e31-c-l1-fd0-smoke  [44]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=cbramod +method.spt_anchor_l2sp_lambda=1
+anon-DX-rel-1101-4017-e31-c-l1-fd1-smoke  [44]  main  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up model=cbramod +method.spt_anchor_l2sp_lambda=1 +model.foundation_dir={foundation}
+anon-DX-rel-1101-16e2-e31layer-b-l1e-4-smoke  [48]  layer  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up method.spt_unfreeze_layers=all model=biot +method.spt_anchor_l2sp_lambda=0.0001
+anon-DX-rel-1101-c35a-e31layer-b-l1e-2-smoke  [48]  layer  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up method.spt_unfreeze_layers=all model=biot +method.spt_anchor_l2sp_lambda=0.01
+anon-DX-rel-1101-6087-e31layer-b-l1-smoke  [45]  layer  seeds [42]  est 0.9 h  max_run 10800 s
+    overrides: dataset=chbmit method=step_up method.spt_unfreeze_layers=all model=biot +method.spt_anchor_l2sp_lambda=1
+
+item         jobs  runs  est instance-h (ml.g5.8xlarge)
+E4               6     6       5.4
+E5-LP            6     6       5.4
+E5-SA           22    22      19.8
+E5-noise         1     1       0.9
+E6               3     3       2.7
+E6-fd            3     3       2.7
+E7-cbramod       6     6       5.4
+E7-biot          2     2       1.8
+E30c-N          16    16      14.4
+E30c-P          12    12      10.8
+E31             12    12      10.8
+E31-layer        3     3       2.7
+TOTAL           92    92      82.8   (input s3://<BUCKET>/<PREFIX>/released/chbmit-d056cdf/; smoke=True; seeds sequential unless parallel > 1)
+
+--plan-only: nothing submitted.

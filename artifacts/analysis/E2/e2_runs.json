@@ -1,0 +1,302 @@
+{
+  "a_main_biot_stepup": {
+    "exit": 1,
+    "seconds": 9,
+    "error": "omegaconf.errors.ConfigAttributeError: Key 'spt_anchor_l2sp_lambda' is not in struct",
+    "where": "trainer.py:154 in train_step_up_pretraining",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "a_main_cbramod_stepup": {
+    "exit": 1,
+    "seconds": 9,
+    "error": "omegaconf.errors.ConfigAttributeError: Key 'spt_anchor_l2sp_lambda' is not in struct",
+    "where": "trainer.py:154 in train_step_up_pretraining",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "b_main_biot_fmfreeze": {
+    "exit": 0,
+    "seconds": 676,
+    "error": null,
+    "where": null,
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": "{'acc': 0.45599999999999996, 'roc_auc': 0.36879999999999996, 'pr_auc': 0.12676946237935108}"
+  },
+  "b_main_biot_stepup_key": {
+    "exit": 0,
+    "seconds": 3377,
+    "error": null,
+    "where": null,
+    "spt_trainable": 920576,
+    "paper": 920576,
+    "match": true,
+    "final_test": "{'acc': 0.5, 'roc_auc': 0.14456000000000002, 'pr_auc': 0.09573782527408489}"
+  },
+  "b_main_cbramod_fmfreeze": {
+    "exit": 0,
+    "seconds": 818,
+    "error": null,
+    "where": null,
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": "{'acc': 0.56, 'roc_auc': 0.72112, 'pr_auc': 0.45354164860418156}"
+  },
+  "b_main_cbramod_stepup_key": {
+    "exit": 0,
+    "seconds": 2976,
+    "error": null,
+    "where": null,
+    "spt_trainable": 442800,
+    "paper": 442800,
+    "match": true,
+    "final_test": "{'acc': 0.536, 'roc_auc': 0.8446399999999998, 'pr_auc': 0.5767941283593081}"
+  },
+  "c_divN_biot_N": {
+    "exit": 1,
+    "seconds": 12,
+    "error": "omegaconf.errors.ConfigAttributeError: Missing key spt_anchor_l2sp_lambda",
+    "where": "ablation_diversityN/trainer_diversityN.py:158 in train_step_up_pretraining",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divN_biot_N_key": {
+    "exit": 0,
+    "seconds": 3334,
+    "error": null,
+    "where": null,
+    "spt_trainable": 920576,
+    "paper": 920576,
+    "match": true,
+    "final_test": "{'acc': 0.5, 'roc_auc': 0.15896, 'pr_auc': 0.0970068539189792}"
+  },
+  "c_divN_biot_plusN": {
+    "exit": 1,
+    "seconds": 20,
+    "error": "Could not append to config. An item is already at 'dataset.compute_N'.",
+    "where": null,
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divN_biot_plusN_key": {
+    "exit": 1,
+    "seconds": 10,
+    "error": "Could not append to config. An item is already at 'dataset.compute_N'.",
+    "where": null,
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divN_cbramod_N": {
+    "exit": 1,
+    "seconds": 14,
+    "error": "omegaconf.errors.ConfigAttributeError: Missing key spt_anchor_l2sp_lambda",
+    "where": "ablation_diversityN/trainer_diversityN.py:158 in train_step_up_pretraining",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divN_cbramod_N_key": {
+    "exit": 0,
+    "seconds": 2440,
+    "error": null,
+    "where": null,
+    "spt_trainable": 442800,
+    "paper": 442800,
+    "match": true,
+    "final_test": "{'acc': 0.6, 'roc_auc': 0.8095199999999999, 'pr_auc': 0.517381440021584}"
+  },
+  "c_divN_cbramod_plusN": {
+    "exit": 1,
+    "seconds": 9,
+    "error": "Could not append to config. An item is already at 'dataset.compute_N'.",
+    "where": null,
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divN_cbramod_plusN_key": {
+    "exit": 1,
+    "seconds": 9,
+    "error": "Could not append to config. An item is already at 'dataset.compute_N'.",
+    "where": null,
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divP_biot": {
+    "exit": 1,
+    "seconds": 12,
+    "error": "TypeError: unsupported operand type(s) for //: 'str' and 'str'",
+    "where": "ablation_diversityP/compute_P.py:24 in get_experiment_subset",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divP_biot_NP": {
+    "exit": 1,
+    "seconds": 12,
+    "error": "omegaconf.errors.ConfigAttributeError: Missing key spt_anchor_l2sp_lambda",
+    "where": "ablation_diversityP/trainer_diversityP.py:159 in train_step_up_pretraining",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divP_biot_NP_key": {
+    "exit": 0,
+    "seconds": 3077,
+    "error": null,
+    "where": null,
+    "spt_trainable": 920576,
+    "paper": 920576,
+    "match": true,
+    "final_test": "{'acc': 0.5, 'roc_auc': 0.16016, 'pr_auc': 0.09699589254960625}"
+  },
+  "c_divP_biot_key": {
+    "exit": 1,
+    "seconds": 12,
+    "error": "TypeError: unsupported operand type(s) for //: 'str' and 'str'",
+    "where": "ablation_diversityP/compute_P.py:24 in get_experiment_subset",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divP_cbramod": {
+    "exit": 1,
+    "seconds": 11,
+    "error": "TypeError: unsupported operand type(s) for //: 'str' and 'str'",
+    "where": "ablation_diversityP/compute_P.py:24 in get_experiment_subset",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divP_cbramod_NP": {
+    "exit": 1,
+    "seconds": 13,
+    "error": "omegaconf.errors.ConfigAttributeError: Missing key spt_anchor_l2sp_lambda",
+    "where": "ablation_diversityP/trainer_diversityP.py:159 in train_step_up_pretraining",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_divP_cbramod_NP_key": {
+    "exit": 0,
+    "seconds": 2376,
+    "error": null,
+    "where": null,
+    "spt_trainable": 442800,
+    "paper": 442800,
+    "match": true,
+    "final_test": "{'acc': 0.638, 'roc_auc': 0.8077599999999999, 'pr_auc': 0.49840854113001254}"
+  },
+  "c_divP_cbramod_key": {
+    "exit": 1,
+    "seconds": 12,
+    "error": "TypeError: unsupported operand type(s) for //: 'str' and 'str'",
+    "where": "ablation_diversityP/compute_P.py:24 in get_experiment_subset",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_layer_biot": {
+    "exit": 1,
+    "seconds": 12,
+    "error": "omegaconf.errors.ConfigAttributeError: Key 'spt_anchor_l2sp_lambda' is not in struct",
+    "where": "trainer.py:154 in train_step_up_pretraining",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_layer_biot_key": {
+    "exit": 0,
+    "seconds": 3374,
+    "error": null,
+    "where": null,
+    "spt_trainable": 920576,
+    "paper": 920576,
+    "match": true,
+    "final_test": "{'acc': 0.5, 'roc_auc': 0.14456000000000002, 'pr_auc': 0.09573782527408489}"
+  },
+  "c_layer_biot_key_last2": {
+    "exit": 0,
+    "seconds": 3978,
+    "error": null,
+    "where": null,
+    "spt_trainable": 1709568,
+    "paper": 1709568,
+    "match": true,
+    "final_test": "{'acc': 0.5, 'roc_auc': 0.14432, 'pr_auc': 0.09576834476857829}"
+  },
+  "c_layer_cbramod": {
+    "exit": 1,
+    "seconds": 13,
+    "error": "omegaconf.errors.ConfigAttributeError: Key 'spt_anchor_l2sp_lambda' is not in struct",
+    "where": "trainer.py:154 in train_step_up_pretraining",
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": null
+  },
+  "c_layer_cbramod_key": {
+    "exit": 0,
+    "seconds": 3106,
+    "error": null,
+    "where": null,
+    "spt_trainable": 442800,
+    "paper": 442800,
+    "match": true,
+    "final_test": "{'acc': 0.536, 'roc_auc': 0.8446399999999998, 'pr_auc': 0.5767941283593081}"
+  },
+  "c_layer_cbramod_key_last2": {
+    "exit": 0,
+    "seconds": 3033,
+    "error": null,
+    "where": null,
+    "spt_trainable": 845400,
+    "paper": 845400,
+    "match": true,
+    "final_test": "{'acc': 0.516, 'roc_auc': 0.8407199999999999, 'pr_auc': 0.5527700157968041}"
+  },
+  "d_l29_cbramod_fmfreeze": {
+    "exit": 0,
+    "seconds": 765,
+    "error": null,
+    "where": null,
+    "spt_trainable": null,
+    "paper": null,
+    "match": null,
+    "final_test": "{'acc': 0.5700000000000001, 'roc_auc': 0.87144, 'pr_auc': 0.7488889568605113}"
+  },
+  "d_l29_cbramod_stepup_key": {
+    "exit": 1,
+    "seconds": 1976,
+    "error": "RuntimeError: Error(s) in loading state_dict for CBraMod: Unexpected key(s) in state_dict: \"proj_out.0.weight\", \"proj_out.0.bias\".",
+    "where": "trainer.py:309 in train_step_up_pretraining",
+    "spt_trainable": 442800,
+    "paper": 442800,
+    "match": true,
+    "final_test": null
+  }
+}

@@ -1,0 +1,50 @@
+# D24-D: cluster-bootstrap 95% CIs (ROC-AUC x100, 10,000 resamples)
+
+| dataset (tags) | model | head | contrast | mean | 95% CI |
+|---|---|---|---|---|---|
+| chbmit (S1E,S1M) | biot | linear | last - lp | +1.9 | [+0.1, +3.9] |
+| chbmit (S1E,S1M) | biot | linear | last_randinit - last | +0.2 | [-8.9, +12.4] |
+| chbmit (S1E,S1M) | biot | linear | lp - lp_randinit | -2.0 | [-12.9, +6.1] |
+| chbmit (S1E,S1M) | biot | linear | last_randinit - lp_randinit | +0.1 | [-0.1, +0.4] |
+| chbmit (S1E,S1M) | biot | linear | all - last | +9.8 | [+4.6, +14.8] |
+| chbmit (S1E,S1M) | cbramod | linear | last - lp | -0.0 | [-0.3, +0.3] |
+| chbmit (S1E,S1M) | cbramod | linear | last_randinit - last | -4.4 | [-6.9, -2.2] |
+| chbmit (S1E,S1M) | cbramod | linear | lp - lp_randinit | +5.5 | [+3.5, +7.7] |
+| chbmit (S1E,S1M) | cbramod | linear | last_randinit - lp_randinit | +1.0 | [-0.5, +2.6] |
+| chbmit (S1E,S1M) | cbramod | linear | all - last | +1.6 | [+0.6, +3.0] |
+| siena (S3E,S3M) | biot | linear | last - lp | +9.2 | [+4.6, +15.7] |
+| siena (S3E,S3M) | biot | linear | last_randinit - last | +7.2 | [-4.4, +19.6] |
+| siena (S3E,S3M) | biot | linear | lp - lp_randinit | -16.1 | [-33.2, -1.7] |
+| siena (S3E,S3M) | biot | linear | last_randinit - lp_randinit | +0.3 | [-0.4, +1.0] |
+| siena (S3E,S3M) | biot | linear | all - last | +10.6 | [+3.1, +17.7] |
+| siena (S3E,S3M) | cbramod | linear | last - lp | +0.3 | [-0.6, +0.8] |
+| siena (S3E,S3M) | cbramod | linear | last_randinit - last | -7.6 | [-12.8, -3.0] |
+| siena (S3E,S3M) | cbramod | linear | lp - lp_randinit | +7.0 | [+0.9, +13.7] |
+| siena (S3E,S3M) | cbramod | linear | last_randinit - lp_randinit | -0.4 | [-2.3, +1.7] |
+| siena (S3E,S3M) | cbramod | linear | all - last | +2.0 | [-2.9, +6.3] |
+| siena (S3FE,S3FM) | biot | linear | last - lp | +4.1 | [+1.4, +6.9] |
+| siena (S3FE,S3FM) | biot | linear | last_randinit - last | -4.7 | [-19.2, +17.0] |
+| siena (S3FE,S3FM) | biot | linear | lp - lp_randinit | +1.0 | [-23.8, +17.4] |
+| siena (S3FE,S3FM) | biot | linear | last_randinit - lp_randinit | +0.4 | [-0.1, +0.9] |
+| siena (S3FE,S3FM) | biot | linear | all - last | +0.4 | [-9.4, +10.8] |
+| siena (S3FE,S3FM) | cbramod | linear | last - lp | +0.1 | [+0.0, +0.3] |
+| siena (S3FE,S3FM) | cbramod | linear | last_randinit - last | -10.7 | [-15.7, -6.2] |
+| siena (S3FE,S3FM) | cbramod | linear | lp - lp_randinit | +9.4 | [+5.4, +13.7] |
+| siena (S3FE,S3FM) | cbramod | linear | last_randinit - lp_randinit | -1.1 | [-3.9, +0.7] |
+| siena (S3FE,S3FM) | cbramod | linear | all - last | -0.8 | [-2.3, +0.7] |
+| chbmit (P1E) | biot | linear | last - lp | -0.6 | [-2.6, +1.4] |
+| chbmit (P1E) | biot | linear | last_randinit - last | +35.8 | [+34.0, +37.5] |
+| chbmit (P1E) | biot | linear | lp - lp_randinit | -35.1 | [-35.6, -34.6] |
+| chbmit (P1E) | biot | linear | last_randinit - lp_randinit | +0.0 | [-0.0, +0.1] |
+| chbmit (P1E) | biot | mlp_fullft | last - lp | -1.2 | [-3.4, +0.8] |
+| chbmit (P1E) | biot | mlp_fullft | last_randinit - last | +33.6 | [+31.5, +35.7] |
+| chbmit (P1E) | biot | mlp_fullft | lp - lp_randinit | -32.4 | [-32.8, -32.0] |
+| chbmit (P1E) | biot | mlp_fullft | last_randinit - lp_randinit | -0.0 | [-0.2, +0.2] |
+| chbmit (P1E) | cbramod | linear | last - lp | +0.0 | [-0.0, +0.0] |
+| chbmit (P1E) | cbramod | linear | last_randinit - last | -8.5 | [-9.0, -8.0] |
+| chbmit (P1E) | cbramod | linear | lp - lp_randinit | +6.4 | [+5.2, +7.8] |
+| chbmit (P1E) | cbramod | linear | last_randinit - lp_randinit | -2.1 | [-3.4, -0.9] |
+| chbmit (P1E) | cbramod | mlp_fullft | last - lp | +0.0 | [-0.3, +0.2] |
+| chbmit (P1E) | cbramod | mlp_fullft | last_randinit - last | -2.0 | [-3.7, -0.2] |
+| chbmit (P1E) | cbramod | mlp_fullft | lp - lp_randinit | +2.2 | [+1.2, +3.1] |
+| chbmit (P1E) | cbramod | mlp_fullft | last_randinit - lp_randinit | +0.2 | [-0.8, +1.2] |

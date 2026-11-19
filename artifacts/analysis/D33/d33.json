@@ -1,0 +1,224 @@
+{
+ "analysis": "D33",
+ "nb_ratio": 0.34708500489366034,
+ "diagnostics": {
+  "records": 60,
+  "candidate_fits": 840,
+  "selected_fits": 120,
+  "nonconverged_candidates": 0,
+  "nonconverged_selected": 0,
+  "validation_auc_unstable_selected": 0,
+  "boundary_selected": 45,
+  "selected_C_counts": {
+   "0.0001": 39,
+   "0.001": 16,
+   "0.01": 9,
+   "0.1": 13,
+   "1.0": 35,
+   "10.0": 2,
+   "100.0": 6
+  }
+ },
+ "contrasts": {
+  "chbmit|logreg|last - lp": {
+   "per_unit": [
+    0.010471517472495862,
+    -0.4223749496607354,
+    0.08215748402440681,
+    -0.9634033524052512,
+    2.2522310743349436
+   ],
+   "mean": 0.19181635475317194,
+   "t": {
+    "ci95": [
+     -1.329156583751322,
+     1.7127892932576658
+    ],
+    "tost_p": 0.0034283470333547786,
+    "equivalent": true,
+    "improvement_demonstrated": false
+   },
+   "nb": null,
+   "primary": "t"
+  },
+  "chbmit|logreg|last - last_noise": {
+   "per_unit": [
+    -1.3525828793301145,
+    -1.2834376210991962,
+    -0.5394374919267477,
+    -2.290507913712787,
+    0.9673925019185674
+   ],
+   "mean": -0.8997146808300556,
+   "t": {
+    "ci95": [
+     -2.408033350396285,
+     0.608603988736174
+    ],
+    "tost_p": 0.009026551772406249,
+    "equivalent": true,
+    "improvement_demonstrated": false
+   },
+   "nb": null,
+   "primary": "t"
+  },
+  "chbmit|logreg_z|last - lp": {
+   "per_unit": [
+    0.24207963862106396,
+    0.3027242091986011,
+    0.06684199928575651,
+    -0.03158076698046841,
+    2.482272029603294
+   ],
+   "mean": 0.6124674219456494,
+   "t": {
+    "ci95": [
+     -0.6959722728678464,
+     1.9209071167591452
+    ],
+    "tost_p": 0.003574638202405355,
+    "equivalent": true,
+    "improvement_demonstrated": false
+   },
+   "nb": null,
+   "primary": "t"
+  },
+  "chbmit|logreg_z|last - last_noise": {
+   "per_unit": [
+    -0.9705030887414807,
+    4.440825715957345,
+    -0.5312217435242985,
+    -1.922105207169821,
+    1.4462091682053426
+   ],
+   "mean": 0.49264096894541753,
+   "t": {
+    "ci95": [
+     -2.6434849515094885,
+     3.6287668894003233
+    ],
+    "tost_p": 0.04531664648716961,
+    "equivalent": true,
+    "improvement_demonstrated": false
+   },
+   "nb": null,
+   "primary": "t"
+  },
+  "siena|logreg|last - lp": {
+   "per_unit": [
+    0.7813087337240224,
+    6.381349192170608,
+    -1.6282491667495407,
+    7.441586280814586,
+    1.3548279887000898
+   ],
+   "mean": 2.8661646057319525,
+   "t": {
+    "ci95": [
+     -1.9476469236968925,
+     7.679976135160798
+    ],
+    "tost_p": 0.471088964474795,
+    "equivalent": false,
+    "improvement_demonstrated": false
+   },
+   "nb": {
+    "ci95": [
+     -5.0954562242164805,
+     10.827785435680385
+    ],
+    "tost_p": 0.4825058506066275,
+    "equivalent": false,
+    "improvement_demonstrated": false
+   },
+   "primary": "nb"
+  },
+  "siena|logreg|last - last_noise": {
+   "per_unit": [
+    0.031057622982643807,
+    8.825514413094664,
+    -0.23295311101421134,
+    0.5301287990262864,
+    -0.0716755460255077
+   ],
+   "mean": 1.816414435612775,
+   "t": {
+    "ci95": [
+     -3.0615358409145443,
+     6.694364712140095
+    ],
+    "tost_p": 0.2687202207687109,
+    "equivalent": false,
+    "improvement_demonstrated": false
+   },
+   "nb": {
+    "ci95": [
+     -6.251286240167636,
+     9.884115111393186
+    ],
+    "tost_p": 0.35231337769863114,
+    "equivalent": false,
+    "improvement_demonstrated": false
+   },
+   "primary": "nb"
+  },
+  "siena|logreg_z|last - lp": {
+   "per_unit": [
+    0.8547624769686782,
+    -3.936886221047106,
+    2.74813267744346,
+    0.8561411157737808,
+    1.393869138071537
+   ],
+   "mean": 0.38320383744207004,
+   "t": {
+    "ci95": [
+     -2.765555940318698,
+     3.5319636152028377
+    ],
+    "tost_p": 0.04113430637479237,
+    "equivalent": true,
+    "improvement_demonstrated": false
+   },
+   "nb": {
+    "ci95": [
+     -4.824567859032796,
+     5.590975533916937
+    ],
+    "tost_p": 0.11772955325495119,
+    "equivalent": false,
+    "improvement_demonstrated": false
+   },
+   "primary": "nb"
+  },
+  "siena|logreg_z|last - last_noise": {
+   "per_unit": [
+    0.20267563886885873,
+    0.5954673156297664,
+    1.2601398993724189,
+    0.2786346213235949,
+    -0.037439461192093404
+   ],
+   "mean": 0.4598956028005092,
+   "t": {
+    "ci95": [
+     -0.16252693035643256,
+     1.082318135957451
+    ],
+    "tost_p": 0.00017293303625478214,
+    "equivalent": true,
+    "improvement_demonstrated": false
+   },
+   "nb": {
+    "ci95": [
+     -0.5695365165744555,
+     1.489327722175474
+    ],
+    "tost_p": 0.0011880854385774298,
+    "equivalent": true,
+    "improvement_demonstrated": false
+   },
+   "primary": "nb"
+  }
+ }
+}

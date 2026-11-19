@@ -1,30 +1,14 @@
-# Inputs that are not ours to redistribute. Rebuild the window stores with
-# scripts/preprocess_chbmit.py and scripts/preprocess_siena.py; the checkpoint URLs and their
-# SHA-256 are in README.md.
+# Inputs rebuilt from source, never committed
 data/
 weights/
-
-# Manuscript sources and release tooling are kept private.
-paper/
-
-# Private working notes. The three shipped notes files are tracked.
-notes/WORKLOG.md
-notes/author-email-draft.md
-notes/review-r*.md
-notes/jobs-*.txt
-notes/results-*.md
-notes/siena-spec.md
-notes/cbramod-check.md
-
-# Project-internal
-CLAUDE.md
-NEXT-STEPS.md
-EXECUTOR-PLAN.md
-OVERVIEW.md
-CHECKLIST.md
-.claude/
-
-# Python
-__pycache__/
-*.py[cod]
+# The large record stores ship in the supplement archive, not here (see README)
+artifacts/*
+!artifacts/analysis/
+!artifacts/tables/
+!artifacts/figures/
+# Local and derived
 .venv/
+__pycache__/
+*.pyc
+build/
+*.log

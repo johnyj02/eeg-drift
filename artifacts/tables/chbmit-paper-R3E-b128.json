@@ -1,0 +1,80 @@
+[
+  {
+    "model": "biot",
+    "arm": "lp",
+    "probe": "linear",
+    "n_seeds": 5,
+    "test_at_best.bal_acc": [
+      50.19,
+      0.0
+    ],
+    "test_at_best.roc_auc": [
+      65.09,
+      0.14
+    ],
+    "test_at_best.pr_auc_trapz": [
+      5.4,
+      0.23
+    ],
+    "test_at_best.avg_precision": [
+      5.56,
+      0.22
+    ],
+    "test_last.bal_acc": [
+      50.19,
+      0.0
+    ],
+    "test_last.roc_auc": [
+      65.09,
+      0.14
+    ],
+    "test_last.pr_auc_trapz": [
+      5.4,
+      0.23
+    ],
+    "test_last.avg_precision": [
+      5.56,
+      0.22
+    ],
+    "paper": null
+  },
+  {
+    "model": "cbramod",
+    "arm": "lp",
+    "probe": "linear",
+    "n_seeds": 5,
+    "test_at_best.bal_acc": [
+      58.78,
+      0.93
+    ],
+    "test_at_best.roc_auc": [
+      92.01,
+      0.05
+    ],
+    "test_at_best.pr_auc_trapz": [
+      41.5,
+      0.64
+    ],
+    "test_at_best.avg_precision": [
+      41.68,
+      0.64
+    ],
+    "test_last.bal_acc": [
+      56.49,
+      0.19
+    ],
+    "test_last.roc_auc": [
+      91.66,
+      0.01
+    ],
+    "test_last.pr_auc_trapz": [
+      39.04,
+      0.02
+    ],
+    "test_last.avg_precision": [
+      39.19,
+      0.02
+    ],
+    "paper": null
+  }
+]

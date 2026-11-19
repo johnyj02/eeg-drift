@@ -1,0 +1,7565 @@
+{
+ "verdicts": {
+  "E4 biot lp best: released = ours": 1.0,
+  "E4 biot lp last: released = ours": 1.0,
+  "E4 biot sa best: released = ours": 1.0,
+  "E4 biot sa last: released = ours": 1.0,
+  "E4 biot best: random features explain released SA (|SA-LPrand| ROC 2.05 <= 3)": 1.0,
+  "E4 biot last: random features explain released SA (|SA-LPrand| ROC 0.12 <= 3)": 1.0,
+  "E4 cbramod lp best: released = ours": 1.0,
+  "E4 cbramod lp last: released = ours": 1.0,
+  "E4 cbramod sa best: released = ours": 1.0,
+  "E4 cbramod sa last: released = ours": 1.0,
+  "E4 cbramod best: random features explain released SA (|SA-LPrand| ROC 0.52 <= 3)": 1.0,
+  "E4 cbramod last: random features explain released SA (|SA-LPrand| ROC 1.40 <= 3)": 1.0,
+  "E5 biot LP at best": "pending (configurations without 5 seeds)",
+  "E5 biot LP at last": "pending (configurations without 5 seeds)",
+  "E5 cbramod LP at best": "pending (configurations without 5 seeds)",
+  "E5 cbramod LP at last": "pending (configurations without 5 seeds)",
+  "E5 biot SA at best": "reaches",
+  "E5 biot SA at last": "pending (configurations without 5 seeds)",
+  "E5 cbramod SA at best": "pending (configurations without 5 seeds)",
+  "E5 cbramod SA at last": "pending (configurations without 5 seeds)",
+  "E6 entry points agree (main_layer last1 vs main.py step_up, seeds [42, 123, 2021, 3407, 8888])": false,
+  "E6 fingerprint reproduced in released code at best (all 3 rows within 2 ROC)": "PENDING (2 of 3 rows have finished seeds)",
+  "E6 fingerprint reproduced in released code at last (all 3 rows within 2 ROC)": "PENDING (2 of 3 rows have finished seeds)",
+  "E7 cbramod ft1 best: tap effect +3.56, mode effect +3.18 ROC -> tap explains": false,
+  "E7 cbramod ft1 best: mode explains": false,
+  "E7 cbramod ft0 best: tap effect +15.61, mode effect +12.04 ROC -> tap explains": false,
+  "E7 cbramod ft0 best: mode explains": false,
+  "E7 cbramod ft1 last: tap effect +0.60, mode effect +7.94 ROC -> tap explains": false,
+  "E7 cbramod ft1 last: mode explains": true,
+  "E7 cbramod ft0 last: tap effect +15.05, mode effect +12.72 ROC -> tap explains": false,
+  "E7 cbramod ft0 last: mode explains": false,
+  "E7 54.14 reachable in released code at best (any CBraMod LP config D13-consistent)": false,
+  "E7 54.14 reachable in released code at last (any CBraMod LP config D13-consistent)": false,
+  "E31 e31-b-l1-fd0 best: lambda matters (dROC +5.84)": true,
+  "E31 e31-b-l1-fd0 last: lambda matters (dROC +0.66)": false,
+  "E31 e31-b-l1-fd1 best: lambda matters (dROC -0.14)": false,
+  "E31 e31-b-l1-fd1 last: lambda matters (dROC -0.14)": false,
+  "E31 e31-b-l1e-2-fd0 best: lambda matters (dROC +5.56)": true,
+  "E31 e31-b-l1e-2-fd0 last: lambda matters (dROC +0.40)": false,
+  "E31 e31-b-l1e-2-fd1 best: lambda matters (dROC +2.82)": false,
+  "E31 e31-b-l1e-2-fd1 last: lambda matters (dROC +2.82)": false,
+  "E31 e31-b-l1e-4-fd0 best: lambda matters (dROC +5.19)": true,
+  "E31 e31-b-l1e-4-fd0 last: lambda matters (dROC -0.01)": false,
+  "E31 e31-b-l1e-4-fd1 best: lambda matters (dROC -0.01)": false,
+  "E31 e31-b-l1e-4-fd1 last: lambda matters (dROC -0.01)": false,
+  "E31 e31-c-l1-fd0 best: lambda matters (dROC -0.42)": false,
+  "E31 e31-c-l1-fd0 last: lambda matters (dROC +1.25)": false,
+  "E31 e31-c-l1-fd1 best: lambda matters (dROC -1.36)": false,
+  "E31 e31-c-l1-fd1 last: lambda matters (dROC +8.93)": true,
+  "E31 e31-c-l1e-2-fd0 best: lambda matters (dROC +0.09)": false,
+  "E31 e31-c-l1e-2-fd0 last: lambda matters (dROC +0.01)": false,
+  "E31 e31-c-l1e-2-fd1 best: lambda matters (dROC -30.98)": true,
+  "E31 e31-c-l1e-2-fd1 last: lambda matters (dROC -29.33)": true,
+  "E31 e31-c-l1e-4-fd0 best: lambda matters (dROC +0.59)": false,
+  "E31 e31-c-l1e-4-fd0 last: lambda matters (dROC +0.37)": false,
+  "E31 e31-c-l1e-4-fd1 best: lambda matters (dROC -7.21)": true,
+  "E31 e31-c-l1e-4-fd1 last: lambda matters (dROC -15.54)": true,
+  "E31 e31layer-b-l1 best: lambda matters": "PENDING (cell or lambda-0 base: no finished seed)",
+  "E31 e31layer-b-l1 last: lambda matters": "PENDING (cell or lambda-0 base: no finished seed)",
+  "E31 e31layer-b-l1e-2 best: lambda matters": "PENDING (cell or lambda-0 base: no finished seed)",
+  "E31 e31layer-b-l1e-2 last: lambda matters": "PENDING (cell or lambda-0 base: no finished seed)",
+  "E31 e31layer-b-l1e-4 best: lambda matters": "PENDING (cell or lambda-0 base: no finished seed)",
+  "E31 e31layer-b-l1e-4 last: lambda matters": "PENDING (cell or lambda-0 base: no finished seed)"
+ },
+ "noise_floor": {
+  "best": [
+   3.190512282781313,
+   0.2615818127226568,
+   0.7145564065741041
+  ],
+  "last": [
+   2.631176533163142,
+   1.0205204030224415,
+   0.28954576884210326
+  ]
+ },
+ "runs": {
+  "e30cn-b-N1664-fd0": {
+   "cell": {
+    "id": "e30cn-b-N1664-fd0",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "b",
+     "N": "N1664",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "dataset.compute_N=1664"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-8b7c-e30cn-b-N1664-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3097,
+     "smoke": false,
+     "best": [
+      50.9860797677935,
+      31.137989428493835,
+      87.62077862499714
+     ],
+     "last": [
+      57.48283715911767,
+      37.545546236380964,
+      88.85925520678992
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2548,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3260,
+     "smoke": false,
+     "best": [
+      50.0,
+      31.919936709872594,
+      86.75090658171678
+     ],
+     "last": [
+      59.63845008244243,
+      37.68570699183626,
+      87.7613961453418
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e30cn-b-N1664-fd1": {
+   "cell": {
+    "id": "e30cn-b-N1664-fd1",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "b",
+     "N": "N1664",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "dataset.compute_N=1664",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-3b15-e30cn-b-N1664-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3120,
+     "smoke": false,
+     "best": [
+      50.18943711200772,
+      3.236346984902837,
+      57.11356776235307
+     ],
+     "last": [
+      50.39682539682539,
+      4.3205517873409445,
+      59.469908515504486
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3284,
+     "smoke": false,
+     "best": [
+      52.48960921531529,
+      5.550524651119659,
+      60.71579351782199
+     ],
+     "last": [
+      52.75384288069783,
+      7.951140969072315,
+      63.44445489221698
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 4
+    }
+   },
+   "failed": []
+  },
+  "e30cn-b-N2048-fd0": {
+   "cell": {
+    "id": "e30cn-b-N2048-fd0",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "b",
+     "N": "N2048",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "dataset.compute_N=2048"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-9c59-e30cn-b-N2048-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3063,
+     "smoke": false,
+     "best": [
+      50.0,
+      31.46770177794118,
+      87.7969779343044
+     ],
+     "last": [
+      57.48582902125266,
+      37.659404507152026,
+      88.92859042452149
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3256,
+     "smoke": false,
+     "best": [
+      58.25554491782352,
+      32.53236417808074,
+      88.51828977561983
+     ],
+     "last": [
+      59.82788719445015,
+      37.70924163725563,
+      87.84910994475977
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e30cn-b-N2048-fd1": {
+   "cell": {
+    "id": "e30cn-b-N2048-fd1",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "b",
+     "N": "N2048",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "dataset.compute_N=2048",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-c285-e30cn-b-N2048-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3122,
+     "smoke": false,
+     "best": [
+      49.98504068932503,
+      2.7522393936448486,
+      55.86445344852476
+     ],
+     "last": [
+      50.3938335346904,
+      4.454645308640631,
+      59.25257110184109
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3342,
+     "smoke": false,
+     "best": [
+      51.873428085132254,
+      4.5686421866906874,
+      59.166721280023104
+     ],
+     "last": [
+      52.93729626843556,
+      7.647415810772429,
+      62.83126562416892
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 3
+    }
+   },
+   "failed": []
+  },
+  "e30cn-b-N4174-fd0": {
+   "cell": {
+    "id": "e30cn-b-N4174-fd0",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "b",
+     "N": "N4174",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "dataset.compute_N=4174"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-36b7-e30cn-b-N4174-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3101,
+     "smoke": false,
+     "best": [
+      50.0,
+      32.40454398668145,
+      87.759128503803
+     ],
+     "last": [
+      57.68424171966537,
+      37.721524003165015,
+      88.9059733714772
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3307,
+     "smoke": false,
+     "best": [
+      54.71403496774487,
+      33.07987615257241,
+      87.82392843845692
+     ],
+     "last": [
+      59.63845008244243,
+      37.72146635201586,
+      87.80476627383042
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e30cn-b-N4174-fd1": {
+   "cell": {
+    "id": "e30cn-b-N4174-fd1",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "b",
+     "N": "N4174",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "dataset.compute_N=4174",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-86ff-e30cn-b-N4174-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3118,
+     "smoke": false,
+     "best": [
+      49.98803255146002,
+      2.69470206650907,
+      56.33322600621546
+     ],
+     "last": [
+      50.3938335346904,
+      3.992555640564693,
+      59.47170125829173
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3291,
+     "smoke": false,
+     "best": [
+      52.22836741206775,
+      4.222019922573342,
+      57.07727362526309
+     ],
+     "last": [
+      52.94926371697554,
+      8.164380107893667,
+      62.96513958224107
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 3
+    }
+   },
+   "failed": []
+  },
+  "e30cn-b-N896-fd0": {
+   "cell": {
+    "id": "e30cn-b-N896-fd0",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "b",
+     "N": "N896",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "dataset.compute_N=896"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-4c57-e30cn-b-N896-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3078,
+     "smoke": false,
+     "best": [
+      50.0,
+      30.908312766703855,
+      87.58258489290084
+     ],
+     "last": [
+      57.47984529698268,
+      37.54114552186422,
+      88.90346828056258
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2534,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3348,
+     "smoke": false,
+     "best": [
+      56.2863772443715,
+      33.411810934168926,
+      88.09898979537563
+     ],
+     "last": [
+      59.63845008244243,
+      37.64080071882383,
+      87.81656750780733
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e30cn-b-N896-fd1": {
+   "cell": {
+    "id": "e30cn-b-N896-fd1",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "b",
+     "N": "N896",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "dataset.compute_N=896",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-6452-e30cn-b-N896-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3158,
+     "smoke": false,
+     "best": [
+      49.98204882719005,
+      2.820452899759198,
+      57.125784532737626
+     ],
+     "last": [
+      50.192428974142715,
+      3.393218613877254,
+      59.301414438441725
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 6
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3356,
+     "smoke": false,
+     "best": [
+      52.31812327611753,
+      5.908335048555961,
+      61.52775165834644
+     ],
+     "last": [
+      52.54645459588016,
+      7.796979883215108,
+      63.302816339556415
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2534,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e30cn-c-N1664-fd0": {
+   "cell": {
+    "id": "e30cn-c-N1664-fd0",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "c",
+     "N": "N1664",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "dataset.compute_N=1664"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-0139-e30cn-c-N1664-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3601,
+     "smoke": false,
+     "best": [
+      61.38227829826681,
+      39.31697102352597,
+      89.7877535009536
+     ],
+     "last": [
+      60.23069631554553,
+      37.20012530501596,
+      87.84608246521842
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 6
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3847,
+     "smoke": false,
+     "best": [
+      60.182826521385635,
+      30.698408166386294,
+      88.36270107213142
+     ],
+     "last": [
+      57.56755909640066,
+      23.497493260971407,
+      89.08222017065964
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e30cn-c-N1664-fd1": {
+   "cell": {
+    "id": "e30cn-c-N1664-fd1",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "c",
+     "N": "N1664",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "dataset.compute_N=1664",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-a1ff-e30cn-c-N1664-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3608,
+     "smoke": false,
+     "best": [
+      56.11189944303874,
+      36.03778726603055,
+      87.20741487914778
+     ],
+     "last": [
+      56.11189944303874,
+      36.03778726603055,
+      87.20741487914778
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 8
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3902,
+     "smoke": false,
+     "best": [
+      57.678257995395384,
+      37.27546357201152,
+      87.36349035385655
+     ],
+     "last": [
+      57.68424171966537,
+      36.81687626433992,
+      87.11965358985465
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2548,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e30cn-c-N2048-fd0": {
+   "cell": {
+    "id": "e30cn-c-N2048-fd0",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "c",
+     "N": "N2048",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "dataset.compute_N=2048"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-c0e2-e30cn-c-N2048-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3623,
+     "smoke": false,
+     "best": [
+      59.6085314610925,
+      36.99130205193101,
+      89.51744113155075
+     ],
+     "last": [
+      59.6085314610925,
+      36.99130205193101,
+      89.51744113155075
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3870,
+     "smoke": false,
+     "best": [
+      61.37330271186183,
+      33.90266264244625,
+      88.75641588213392
+     ],
+     "last": [
+      61.989483842044876,
+      33.230561390582466,
+      88.7213446093293
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e30cn-c-N2048-fd1": {
+   "cell": {
+    "id": "e30cn-c-N2048-fd1",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "c",
+     "N": "N2048",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "dataset.compute_N=2048",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-e3cf-e30cn-c-N2048-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3641,
+     "smoke": false,
+     "best": [
+      57.08900362442727,
+      35.56895996737735,
+      86.81308270076819
+     ],
+     "last": [
+      57.47685343484768,
+      35.92419398471585,
+      87.03072879862013
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 8
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3832,
+     "smoke": false,
+     "best": [
+      58.25853677995851,
+      40.074594528513344,
+      89.23276307491244
+     ],
+     "last": [
+      58.25853677995851,
+      39.96277097309766,
+      89.15186407257973
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e30cn-c-N4174-fd0": {
+   "cell": {
+    "id": "e30cn-c-N4174-fd0",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "c",
+     "N": "N4174",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "dataset.compute_N=4174"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-49c8-e30cn-c-N4174-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3608,
+     "smoke": false,
+     "best": [
+      59.44302924616471,
+      36.29723051030161,
+      89.39572458151923
+     ],
+     "last": [
+      59.04321198720432,
+      36.26836200021003,
+      89.31848229957374
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 9
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3746,
+     "smoke": false,
+     "best": [
+      65.32360550730584,
+      32.955691601874385,
+      88.44680564103733
+     ],
+     "last": [
+      58.21365884793362,
+      28.998926451246255,
+      88.70028284969645
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 6
+    }
+   },
+   "failed": []
+  },
+  "e30cn-c-N4174-fd1": {
+   "cell": {
+    "id": "e30cn-c-N4174-fd1",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "c",
+     "N": "N4174",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "dataset.compute_N=4174",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-8968-e30cn-c-N4174-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3670,
+     "smoke": false,
+     "best": [
+      58.8567667373316,
+      41.26510379090095,
+      89.76607437294369
+     ],
+     "last": [
+      58.8567667373316,
+      41.37365211826189,
+      89.76764153882392
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 9
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3804,
+     "smoke": false,
+     "best": [
+      56.30432841718145,
+      40.72336002139677,
+      88.83266087670108
+     ],
+     "last": [
+      56.30432841718145,
+      40.570293950507555,
+      88.74243011389973
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e30cn-c-N896-fd0": {
+   "cell": {
+    "id": "e30cn-c-N896-fd0",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "c",
+     "N": "N896",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "dataset.compute_N=896"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-6413-e30cn-c-N896-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3596,
+     "smoke": false,
+     "best": [
+      61.38227829826681,
+      35.930252590203786,
+      88.52668361105412
+     ],
+     "last": [
+      60.01433244432287,
+      35.55604301086921,
+      88.29735500391315
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2562,
+     "best_epoch": 9
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3818,
+     "smoke": false,
+     "best": [
+      64.4641337466852,
+      33.19807036263317,
+      89.29091442704417
+     ],
+     "last": [
+      58.41805527061631,
+      26.631544484734317,
+      88.26465822486647
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 7
+    }
+   },
+   "failed": []
+  },
+  "e30cn-c-N896-fd1": {
+   "cell": {
+    "id": "e30cn-c-N896-fd1",
+    "item": "E30c-N",
+    "entry": "divN",
+    "levels": {
+     "model": "c",
+     "N": "N896",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "dataset.compute_N=896",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-f59c-e30cn-c-N896-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3577,
+     "smoke": false,
+     "best": [
+      58.6613459010539,
+      37.912798618927376,
+      87.82034295288244
+     ],
+     "last": [
+      58.2645205042285,
+      37.557140133527604,
+      87.56629586572143
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2541,
+     "best_epoch": 9
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3811,
+     "smoke": false,
+     "best": [
+      60.41414970328326,
+      29.002685411593284,
+      86.33401671263687
+     ],
+     "last": [
+      58.459941340506205,
+      39.689134728411744,
+      88.92650087001452
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e30cp-b-P11-fd0": {
+   "cell": {
+    "id": "e30cp-b-P11-fd0",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "b",
+     "P": "P11",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=biot",
+     "dataset.compute_P=11"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-5a26-e30cp-b-P11-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3089,
+     "smoke": false,
+     "best": [
+      60.420133427553246,
+      37.37882269380519,
+      89.01137714939173
+     ],
+     "last": [
+      57.28143259856998,
+      38.07920728750783,
+      88.94124647625125
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 5
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3284,
+     "smoke": false,
+     "best": [
+      58.65237031464892,
+      33.56090463926385,
+      88.43125270692289
+     ],
+     "last": [
+      60.029291754997836,
+      37.323413958669214,
+      87.87839932526387
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2550,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e30cp-b-P11-fd1": {
+   "cell": {
+    "id": "e30cp-b-P11-fd1",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "b",
+     "P": "P11",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=biot",
+     "dataset.compute_P=11",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-8995-e30cp-b-P11-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3174,
+     "smoke": false,
+     "best": [
+      50.38485794828542,
+      3.5742984633377466,
+      56.416119583304834
+     ],
+     "last": [
+      50.38485794828542,
+      3.944795459231909,
+      56.92198173349442
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3342,
+     "smoke": false,
+     "best": [
+      52.119710577704836,
+      5.966808640358436,
+      58.70273332725463
+     ],
+     "last": [
+      52.33009072465751,
+      6.835836047804301,
+      59.827673490011925
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 6
+    }
+   },
+   "failed": []
+  },
+  "e30cp-b-P21-fd0": {
+   "cell": {
+    "id": "e30cp-b-P21-fd0",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "b",
+     "P": "P21",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=biot",
+     "dataset.compute_P=21"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-1d5e-e30cp-b-P21-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3089,
+     "smoke": false,
+     "best": [
+      61.60462589375945,
+      35.931355712797036,
+      88.79736402698947
+     ],
+     "last": [
+      57.48582902125266,
+      37.78618645422607,
+      88.8829051646189
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2550,
+     "best_epoch": 3
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3293,
+     "smoke": false,
+     "best": [
+      54.51562226933218,
+      33.456597619581665,
+      87.97434074555305
+     ],
+     "last": [
+      59.63845008244243,
+      37.862827174850715,
+      87.73727128876122
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2550,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e30cp-b-P21-fd1": {
+   "cell": {
+    "id": "e30cp-b-P21-fd1",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "b",
+     "P": "P21",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=biot",
+     "dataset.compute_P=21",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-61f1-e30cp-b-P21-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3103,
+     "smoke": false,
+     "best": [
+      49.98204882719005,
+      2.194531418227791,
+      53.15366013965822
+     ],
+     "last": [
+      49.99401627573001,
+      3.2735303556657116,
+      57.25206011078438
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3305,
+     "smoke": false,
+     "best": [
+      52.702981224402954,
+      6.187190515549782,
+      60.38112049511044
+     ],
+     "last": [
+      52.72392425934791,
+      6.6847349343715905,
+      61.38123352101332
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2550,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e30cp-b-P3-fd0": {
+   "cell": {
+    "id": "e30cp-b-P3-fd0",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "b",
+     "P": "P3",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=biot",
+     "dataset.compute_P=3"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-1df4-e30cp-b-P3-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3085,
+     "smoke": false,
+     "best": [
+      50.0,
+      29.277762766213876,
+      87.38141778172893
+     ],
+     "last": [
+      55.91348674462604,
+      38.46668347434094,
+      89.08962859118436
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3291,
+     "smoke": false,
+     "best": [
+      50.98308790565851,
+      31.306619958452124,
+      87.13268956058569
+     ],
+     "last": [
+      60.23368817768052,
+      36.415985416989706,
+      87.66020709384759
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2544,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e30cp-b-P3-fd1": {
+   "cell": {
+    "id": "e30cp-b-P3-fd1",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "b",
+     "P": "P3",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=biot",
+     "dataset.compute_P=3",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-587d-e30cp-b-P3-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3120,
+     "smoke": false,
+     "best": [
+      50.18943711200772,
+      2.7400308048184066,
+      57.17237210026822
+     ],
+     "last": [
+      50.195420836277705,
+      3.395566257964729,
+      59.26980992652366
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2544,
+     "best_epoch": 5
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3335,
+     "smoke": false,
+     "best": [
+      52.85950785292576,
+      5.414017840341421,
+      59.448585561558275
+     ],
+     "last": [
+      52.07782450781493,
+      5.596665040629448,
+      60.09269073833459
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2560,
+     "best_epoch": 4
+    }
+   },
+   "failed": []
+  },
+  "e30cp-c-P11-fd0": {
+   "cell": {
+    "id": "e30cp-c-P11-fd0",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "c",
+     "P": "P11",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=cbramod",
+     "dataset.compute_P=11"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-87f4-e30cp-c-P11-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3591,
+     "smoke": false,
+     "best": [
+      61.56273982386955,
+      35.45169084859284,
+      89.2029631782504
+     ],
+     "last": [
+      60.801999513703684,
+      33.47035242963109,
+      87.39936895453889
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 6
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3822,
+     "smoke": false,
+     "best": [
+      59.19076302932215,
+      27.486335612189066,
+      88.21329792488241
+     ],
+     "last": [
+      60.95947593972964,
+      18.485543500116155,
+      87.21698408899223
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e30cp-c-P11-fd1": {
+   "cell": {
+    "id": "e30cp-c-P11-fd1",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "c",
+     "P": "P11",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=cbramod",
+     "dataset.compute_P=11",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-79a8-e30cp-c-P11-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3606,
+     "smoke": false,
+     "best": [
+      61.59864216948947,
+      30.284372280600834,
+      86.62252957669425
+     ],
+     "last": [
+      57.47685343484768,
+      34.464618329628934,
+      86.06150793650794
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3782,
+     "smoke": false,
+     "best": [
+      58.8567667373316,
+      39.90171129241683,
+      89.96160206144049
+     ],
+     "last": [
+      56.30732027931644,
+      36.44416783949552,
+      87.44986256430128
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e30cp-c-P21-fd0": {
+   "cell": {
+    "id": "e30cp-c-P21-fd0",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "c",
+     "P": "P21",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=cbramod",
+     "dataset.compute_P=21"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-3894-e30cp-c-P21-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3572,
+     "smoke": false,
+     "best": [
+      61.21677608333903,
+      38.2081180374311,
+      90.30555935474555
+     ],
+     "last": [
+      61.403221333211754,
+      38.05370341049276,
+      89.75531791622029
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 7
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3806,
+     "smoke": false,
+     "best": [
+      63.14405768690116,
+      29.915499131608176,
+      88.83532030970997
+     ],
+     "last": [
+      58.74008411406688,
+      23.708412115585855,
+      88.71035070323006
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 6
+    }
+   },
+   "failed": []
+  },
+  "e30cp-c-P21-fd1": {
+   "cell": {
+    "id": "e30cp-c-P21-fd1",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "c",
+     "P": "P21",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=cbramod",
+     "dataset.compute_P=21",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-606c-e30cp-c-P21-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3581,
+     "smoke": false,
+     "best": [
+      57.28143259856998,
+      36.86727022634228,
+      87.99421525830692
+     ],
+     "last": [
+      57.28143259856998,
+      36.86727022634228,
+      87.99421525830692
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2520,
+     "best_epoch": 9
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3842,
+     "smoke": false,
+     "best": [
+      57.09797921083225,
+      37.66876803705097,
+      88.24794178881062
+     ],
+     "last": [
+      55.71208218407835,
+      36.71132877809774,
+      87.5040128944509
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 7
+    }
+   },
+   "failed": []
+  },
+  "e30cp-c-P3-fd0": {
+   "cell": {
+    "id": "e30cp-c-P3-fd0",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "c",
+     "P": "P3",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=cbramod",
+     "dataset.compute_P=3"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-00c8-e30cp-c-P3-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3572,
+     "smoke": false,
+     "best": [
+      53.54150995007865,
+      38.23659036175331,
+      90.38391764875729
+     ],
+     "last": [
+      56.2833853822365,
+      33.749833548590544,
+      88.47354244075161
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 5
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3807,
+     "smoke": false,
+     "best": [
+      60.85381096750173,
+      22.216493899793196,
+      87.74495277606815
+     ],
+     "last": [
+      57.55259978572569,
+      20.11043009943563,
+      87.11326620164581
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 2564,
+     "best_epoch": 8
+    }
+   },
+   "failed": []
+  },
+  "e30cp-c-P3-fd1": {
+   "cell": {
+    "id": "e30cp-c-P3-fd1",
+    "item": "E30c-P",
+    "entry": "divP",
+    "levels": {
+     "model": "c",
+     "P": "P3",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "dataset.compute_N=2048",
+     "model=cbramod",
+     "dataset.compute_P=3",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-4b53-e30cp-c-P3-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3539,
+     "smoke": false,
+     "best": [
+      60.020316168592856,
+      28.857605739571056,
+      87.6947441055567
+     ],
+     "last": [
+      58.6613459010539,
+      38.46130526455568,
+      85.50400054708336
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2564,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3787,
+     "smoke": false,
+     "best": [
+      58.989358468774455,
+      26.90401781586722,
+      88.80730128336639
+     ],
+     "last": [
+      54.521605993602165,
+      34.73735483858811,
+      84.17456898189305
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2560,
+     "best_epoch": 2
+    }
+   },
+   "failed": []
+  },
+  "e31-b-l1-fd0": {
+   "cell": {
+    "id": "e31-b-l1-fd0",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "lam": "l1",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=biot",
+     "+method.spt_anchor_l2sp_lambda=1"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-5eba-e31-b-l1-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3167,
+     "smoke": false,
+     "best": [
+      58.26152864209351,
+      38.691009602912835,
+      90.32481649912239
+     ],
+     "last": [
+      58.066107805815804,
+      38.95575156744622,
+      90.30293553914306
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3174,
+     "smoke": false,
+     "best": [
+      61.21378422120404,
+      37.0862346859926,
+      88.95037640475051
+     ],
+     "last": [
+      60.62752171237092,
+      37.33538201992587,
+      88.91659923104393
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 7
+    }
+   },
+   "failed": []
+  },
+  "e31-b-l1-fd1": {
+   "cell": {
+    "id": "e31-b-l1-fd1",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "lam": "l1",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=biot",
+     "+method.spt_anchor_l2sp_lambda=1",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-ea87-e31-b-l1-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3163,
+     "smoke": false,
+     "best": [
+      50.71681217564416,
+      2.1972415201069215,
+      53.39806678216205
+     ],
+     "last": [
+      50.71681217564416,
+      2.1972415201069215,
+      53.39806678216205
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3220,
+     "smoke": false,
+     "best": [
+      50.099538778332466,
+      1.6069016431212995,
+      51.38508969887621
+     ],
+     "last": [
+      50.099538778332466,
+      1.6069016431212995,
+      51.38508969887621
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e31-b-l1e-2-fd0": {
+   "cell": {
+    "id": "e31-b-l1e-2-fd0",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "lam": "l1e-2",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=biot",
+     "+method.spt_anchor_l2sp_lambda=0.01"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-d973-e31-b-l1e-2-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3166,
+     "smoke": false,
+     "best": [
+      58.850783013061616,
+      37.95524852644654,
+      89.89041473857775
+     ],
+     "last": [
+      58.069099667950795,
+      38.292236759655744,
+      89.89005856451404
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3264,
+     "smoke": false,
+     "best": [
+      60.62452985023593,
+      37.18774297208567,
+      88.81240644494595
+     ],
+     "last": [
+      60.62452985023593,
+      37.18774297208567,
+      88.81240644494595
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e31-b-l1e-2-fd1": {
+   "cell": {
+    "id": "e31-b-l1e-2-fd1",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "lam": "l1e-2",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=biot",
+     "+method.spt_anchor_l2sp_lambda=0.01",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-a444-e31-b-l1e-2-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3259,
+     "smoke": false,
+     "best": [
+      49.997957935368184,
+      2.3533893318226835,
+      56.47370105693466
+     ],
+     "last": [
+      49.997957935368184,
+      2.3533893318226835,
+      56.47370105693466
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3176,
+     "smoke": false,
+     "best": [
+      50.03371781136262,
+      1.8413938368203038,
+      54.22513857545571
+     ],
+     "last": [
+      50.03371781136262,
+      1.8413938368203038,
+      54.22513857545571
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e31-b-l1e-4-fd0": {
+   "cell": {
+    "id": "e31-b-l1e-4-fd0",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "lam": "l1e-4",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=biot",
+     "+method.spt_anchor_l2sp_lambda=0.0001"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-db6f-e31-b-l1e-4-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3065,
+     "smoke": false,
+     "best": [
+      53.34608911380094,
+      37.19832145894097,
+      89.17000520489032
+     ],
+     "last": [
+      56.499749253459164,
+      37.872960873144976,
+      89.22128239759284
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 5
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3121,
+     "smoke": false,
+     "best": [
+      61.21378422120404,
+      36.8979171259985,
+      88.80174496797282
+     ],
+     "last": [
+      60.23069631554553,
+      37.27098875107999,
+      88.65016915893531
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e31-b-l1e-4-fd1": {
+   "cell": {
+    "id": "e31-b-l1e-4-fd1",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "lam": "l1e-4",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=biot",
+     "+method.spt_anchor_l2sp_lambda=0.0001",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-8346-e31-b-l1e-4-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3199,
+     "smoke": false,
+     "best": [
+      49.84442316898037,
+      1.9501334234085665,
+      50.289450789091774
+     ],
+     "last": [
+      49.84442316898037,
+      1.9501334234085665,
+      50.289450789091774
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3147,
+     "smoke": false,
+     "best": [
+      51.08466874862279,
+      2.200619872367715,
+      54.75124328493165
+     ],
+     "last": [
+      51.08466874862279,
+      2.200619872367715,
+      54.75124328493165
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e31-c-l1-fd0": {
+   "cell": {
+    "id": "e31-c-l1-fd0",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "lam": "l1",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=cbramod",
+     "+method.spt_anchor_l2sp_lambda=1"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-6c71-e31-c-l1-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3639,
+     "smoke": false,
+     "best": [
+      52.95225557911053,
+      36.8622490231406,
+      88.58381393086994
+     ],
+     "last": [
+      58.03319732233088,
+      31.073025167909297,
+      90.35253871374623
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 3
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3650,
+     "smoke": false,
+     "best": [
+      50.0,
+      35.763419643401875,
+      88.65678212405115
+     ],
+     "last": [
+      68.06343887483189,
+      29.203495564912206,
+      87.65374847082603
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 4
+    }
+   },
+   "failed": []
+  },
+  "e31-c-l1-fd1": {
+   "cell": {
+    "id": "e31-c-l1-fd1",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "lam": "l1",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=cbramod",
+     "+method.spt_anchor_l2sp_lambda=1",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-72b6-e31-c-l1-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3723,
+     "smoke": false,
+     "best": [
+      57.87667069380809,
+      33.21741251058533,
+      83.43655257699058
+     ],
+     "last": [
+      56.30133655504647,
+      29.83792063490404,
+      80.84151583882317
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 2
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3677,
+     "smoke": false,
+     "best": [
+      56.69517008973687,
+      30.023837046247298,
+      80.92393451716093
+     ],
+     "last": [
+      56.69517008973687,
+      30.023837046247298,
+      80.92393451716093
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 2,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e31-c-l1e-2-fd0": {
+   "cell": {
+    "id": "e31-c-l1e-2-fd0",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "lam": "l1e-2",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=cbramod",
+     "+method.spt_anchor_l2sp_lambda=0.01"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-fcc5-e31-c-l1e-2-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3702,
+     "smoke": false,
+     "best": [
+      50.0,
+      34.622858135468434,
+      89.28445580402257
+     ],
+     "last": [
+      61.183865599854116,
+      32.579325535326866,
+      88.0699734816537
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 2
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3689,
+     "smoke": false,
+     "best": [
+      77.19123032969371,
+      34.14113720757527,
+      88.99445888136648
+     ],
+     "last": [
+      69.56492625772186,
+      31.557920416230438,
+      87.46036969918013
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 7
+    }
+   },
+   "failed": []
+  },
+  "e31-c-l1e-2-fd1": {
+   "cell": {
+    "id": "e31-c-l1e-2-fd1",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "lam": "l1e-2",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=cbramod",
+     "+method.spt_anchor_l2sp_lambda=0.01",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-b4d5-e31-c-l1e-2-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3652,
+     "smoke": false,
+     "best": [
+      54.65813938468319,
+      4.879301310799368,
+      52.10297039671141
+     ],
+     "last": [
+      51.136622672046315,
+      4.629453313803804,
+      43.35970446100891
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3772,
+     "smoke": false,
+     "best": [
+      52.084758029588095,
+      4.012968664888975,
+      53.01753041251606
+     ],
+     "last": [
+      51.16354943126126,
+      4.679930523024333,
+      41.88496575030204
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 2
+    }
+   },
+   "failed": []
+  },
+  "e31-c-l1e-4-fd0": {
+   "cell": {
+    "id": "e31-c-l1e-4-fd0",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "lam": "l1e-4",
+     "fd": "fd0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=cbramod",
+     "+method.spt_anchor_l2sp_lambda=0.0001"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-bfa1-e31-c-l1e-4-fd0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3655,
+     "smoke": false,
+     "best": [
+      60.026299892862845,
+      41.86582222326729,
+      91.14228346516524
+     ],
+     "last": [
+      58.61646796902901,
+      33.61534420819547,
+      88.50832877430533
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 5
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3614,
+     "smoke": false,
+     "best": [
+      63.3215273503689,
+      31.04166326137372,
+      88.13054681741852
+     ],
+     "last": [
+      66.33756183181745,
+      28.82502523476857,
+      87.74314816081213
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    }
+   },
+   "failed": []
+  },
+  "e31-c-l1e-4-fd1": {
+   "cell": {
+    "id": "e31-c-l1e-4-fd1",
+    "item": "E31",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "lam": "l1e-4",
+     "fd": "fd1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "model=cbramod",
+     "+method.spt_anchor_l2sp_lambda=0.0001",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-a5d5-e31-c-l1e-4-fd1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3663,
+     "smoke": false,
+     "best": [
+      55.09889291603031,
+      16.661131203638668,
+      72.79714652336122
+     ],
+     "last": [
+      52.561413906555124,
+      17.525282244224595,
+      55.3344901866922
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3634,
+     "smoke": false,
+     "best": [
+      57.6722742711254,
+      25.068529949121416,
+      79.86365181943209
+     ],
+     "last": [
+      55.324232373657935,
+      18.328158821241217,
+      57.486303920004254
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e31layer-b-l1": {
+   "cell": {
+    "id": "e31layer-b-l1",
+    "item": "E31-layer",
+    "entry": "layer",
+    "levels": {
+     "model": "b",
+     "lam": "l1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "method.spt_unfreeze_layers=all",
+     "model=biot",
+     "+method.spt_anchor_l2sp_lambda=1"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-5f7f-e31layer-b-l1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {},
+   "failed": [
+    "s42",
+    "s123"
+   ]
+  },
+  "e31layer-b-l1e-2": {
+   "cell": {
+    "id": "e31layer-b-l1e-2",
+    "item": "E31-layer",
+    "entry": "layer",
+    "levels": {
+     "model": "b",
+     "lam": "l1e-2"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "method.spt_unfreeze_layers=all",
+     "model=biot",
+     "+method.spt_anchor_l2sp_lambda=0.01"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-42d1-e31layer-b-l1e-2",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {},
+   "failed": [
+    "s42",
+    "s123"
+   ]
+  },
+  "e31layer-b-l1e-4": {
+   "cell": {
+    "id": "e31layer-b-l1e-4",
+    "item": "E31-layer",
+    "entry": "layer",
+    "levels": {
+     "model": "b",
+     "lam": "l1e-4"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "method.spt_unfreeze_layers=all",
+     "model=biot",
+     "+method.spt_anchor_l2sp_lambda=0.0001"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-d252-e31layer-b-l1e-4",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {},
+   "failed": [
+    "s42",
+    "s123"
+   ]
+  },
+  "e4-b-lp": {
+   "cell": {
+    "id": "e4-b-lp",
+    "item": "E4",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "arm": "lp"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "model=biot",
+     "method=fm_freeze"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123,
+     2021,
+     3407,
+     8888
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-f31f-e4-b-lp",
+    "max_run": 96659,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2410,
+     "smoke": false,
+     "best": [
+      52.40379501090368,
+      2.541208304767944,
+      52.36449713920992
+     ],
+     "last": [
+      52.40379501090368,
+      2.541208304767944,
+      52.36449713920992
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "2021": {
+     "rc": 0,
+     "seconds": 2392,
+     "smoke": false,
+     "best": [
+      52.0368882354282,
+      2.3609077727955774,
+      52.123224828466576
+     ],
+     "last": [
+      52.0368882354282,
+      2.3609077727955774,
+      52.123224828466576
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "3407": {
+     "rc": 0,
+     "seconds": 2387,
+     "smoke": false,
+     "best": [
+      52.340965906068824,
+      2.4385555061058226,
+      52.03045335734422
+     ],
+     "last": [
+      52.340965906068824,
+      2.4385555061058226,
+      52.03045335734422
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2638,
+     "smoke": false,
+     "best": [
+      52.449622740431735,
+      2.2849067406002845,
+      52.56412082943916
+     ],
+     "last": [
+      52.449622740431735,
+      2.2849067406002845,
+      52.56412082943916
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "8888": {
+     "rc": 0,
+     "seconds": 2398,
+     "smoke": false,
+     "best": [
+      51.73675222442575,
+      2.3384387610668385,
+      52.49884599603365
+     ],
+     "last": [
+      51.73675222442575,
+      2.3384387610668385,
+      52.49884599603365
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e4-b-lprand": {
+   "cell": {
+    "id": "e4-b-lprand",
+    "item": "E4",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "arm": "lprand"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "model=biot",
+     "method=fm_freeze",
+     "model.use_pretrained_weights=false"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123,
+     2021,
+     3407,
+     8888
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-3579-e4-b-lprand",
+    "max_run": 96659,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2369,
+     "smoke": false,
+     "best": [
+      61.80004673003715,
+      36.80583337764235,
+      88.78208415965716
+     ],
+     "last": [
+      61.210792359069046,
+      37.42490989670376,
+      88.7227218157089
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 7
+    },
+    "2021": {
+     "rc": 0,
+     "seconds": 2284,
+     "smoke": false,
+     "best": [
+      60.62153798810094,
+      37.14511725577893,
+      87.78311089075808
+     ],
+     "last": [
+      58.84779115092662,
+      38.52604980577078,
+      87.73044461920719
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 5
+    },
+    "3407": {
+     "rc": 0,
+     "seconds": 2356,
+     "smoke": false,
+     "best": [
+      58.65237031464892,
+      37.607129001881624,
+      88.3264662973854
+     ],
+     "last": [
+      58.25853677995851,
+      37.75708470858055,
+      88.3135015614671
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 8
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2475,
+     "smoke": false,
+     "best": [
+      60.62452985023593,
+      39.61139665914567,
+      88.36905284293388
+     ],
+     "last": [
+      60.62452985023593,
+      39.63551890152562,
+      88.36308099113268
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 9
+    },
+    "8888": {
+     "rc": 0,
+     "seconds": 2344,
+     "smoke": false,
+     "best": [
+      61.403221333211754,
+      35.464625634437716,
+      89.36257664865849
+     ],
+     "last": [
+      61.01836338492633,
+      36.14486804034767,
+      89.16506625787382
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e4-b-sa": {
+   "cell": {
+    "id": "e4-b-sa",
+    "item": "E4",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "arm": "sa"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "model=biot",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123,
+     2021,
+     3407,
+     8888
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-441e-e4-b-sa",
+    "max_run": 96659,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3102,
+     "smoke": false,
+     "best": [
+      50.0,
+      17.37824320039017,
+      78.919315651903
+     ],
+     "last": [
+      57.28143259856998,
+      37.75381045515311,
+      89.24425562470081
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 1
+    },
+    "2021": {
+     "rc": 0,
+     "seconds": 3178,
+     "smoke": false,
+     "best": [
+      59.64144194457742,
+      35.35502043388996,
+      88.0695223278397
+     ],
+     "last": [
+      59.44302924616471,
+      35.3542903571987,
+      88.0617221158449
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 9
+    },
+    "3407": {
+     "rc": 0,
+     "seconds": 3240,
+     "smoke": false,
+     "best": [
+      59.43405365975973,
+      37.599661158204434,
+      88.20718360345575
+     ],
+     "last": [
+      59.43405365975973,
+      37.599661158204434,
+      88.20718360345575
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3216,
+     "smoke": false,
+     "best": [
+      61.21378422120404,
+      36.84445102651887,
+      88.66997243687646
+     ],
+     "last": [
+      60.822942548648626,
+      37.01204650807252,
+      88.64965864277737
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 7
+    },
+    "8888": {
+     "rc": 0,
+     "seconds": 3201,
+     "smoke": false,
+     "best": [
+      60.426117151823235,
+      34.51979994315049,
+      88.51464492770143
+     ],
+     "last": [
+      60.62452985023593,
+      35.81886017431843,
+      88.71466040940071
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e4-c-lp": {
+   "cell": {
+    "id": "e4-c-lp",
+    "item": "E4",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "arm": "lp"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "model=cbramod",
+     "method=fm_freeze"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123,
+     2021,
+     3407,
+     8888
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-4ac4-e4-c-lp",
+    "max_run": 96659,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2920,
+     "smoke": false,
+     "best": [
+      58.27050422849849,
+      38.544851924625185,
+      87.40789338712986
+     ],
+     "last": [
+      56.69517008973687,
+      31.858475895699108,
+      82.36183295721352
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 3
+    },
+    "2021": {
+     "rc": 0,
+     "seconds": 2980,
+     "smoke": false,
+     "best": [
+      58.465925064776194,
+      33.139110955829025,
+      82.77296467893045
+     ],
+     "last": [
+      57.28741632283997,
+      31.721960293033746,
+      82.07435299794084
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 8
+    },
+    "3407": {
+     "rc": 0,
+     "seconds": 3055,
+     "smoke": false,
+     "best": [
+      59.4490129704347,
+      37.152488008684145,
+      85.40878334739033
+     ],
+     "last": [
+      55.90750302035605,
+      31.841457709889028,
+      82.48392942624632
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 5
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3283,
+     "smoke": false,
+     "best": [
+      56.69517008973687,
+      32.157214304543594,
+      82.59443836574042
+     ],
+     "last": [
+      56.69517008973687,
+      32.70883515652474,
+      82.60022025804099
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 9
+    },
+    "8888": {
+     "rc": 0,
+     "seconds": 3084,
+     "smoke": false,
+     "best": [
+      56.10591571876875,
+      32.71303572835411,
+      82.72153314413367
+     ],
+     "last": [
+      55.11983595097525,
+      31.974397217324015,
+      82.51426358400388
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e4-c-lprand": {
+   "cell": {
+    "id": "e4-c-lprand",
+    "item": "E4",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "arm": "lprand"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "model=cbramod",
+     "method=fm_freeze",
+     "model.use_pretrained_weights=false"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123,
+     2021,
+     3407,
+     8888
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-5bfe-e4-c-lprand",
+    "max_run": 96659,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2991,
+     "smoke": false,
+     "best": [
+      55.88655998541111,
+      36.233168903213624,
+      88.34907147796088
+     ],
+     "last": [
+      53.72496333781638,
+      34.23346691484032,
+      87.86051938726665
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 8
+    },
+    "2021": {
+     "rc": 0,
+     "seconds": 2921,
+     "smoke": false,
+     "best": [
+      50.0,
+      38.73124943434934,
+      88.9425880652245
+     ],
+     "last": [
+      55.700114735538385,
+      37.497924085672665,
+      89.69722592643248
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 5
+    },
+    "3407": {
+     "rc": 0,
+     "seconds": 3022,
+     "smoke": false,
+     "best": [
+      50.0,
+      41.09010063895947,
+      89.8720836467665
+     ],
+     "last": [
+      60.22471259127554,
+      40.70478932909605,
+      91.52731950048252
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 7
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3305,
+     "smoke": false,
+     "best": [
+      61.219767945474025,
+      42.18330480945292,
+      92.34282750917504
+     ],
+     "last": [
+      61.219767945474025,
+      42.18330480945292,
+      92.34282750917504
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "8888": {
+     "rc": 0,
+     "seconds": 2939,
+     "smoke": false,
+     "best": [
+      50.0,
+      32.528020465467826,
+      87.7515301237776
+     ],
+     "last": [
+      50.0,
+      28.09388915089598,
+      87.34495743007591
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e4-c-sa": {
+   "cell": {
+    "id": "e4-c-sa",
+    "item": "E4",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "arm": "sa"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "model=cbramod",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123,
+     2021,
+     3407,
+     8888
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-4adf-e4-c-sa",
+    "max_run": 96659,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3647,
+     "smoke": false,
+     "best": [
+      54.906463941887594,
+      39.14263899030847,
+      90.98202888144246
+     ],
+     "last": [
+      59.22367351280706,
+      32.97721858693865,
+      88.39592023980487
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 4
+    },
+    "2021": {
+     "rc": 0,
+     "seconds": 3652,
+     "smoke": false,
+     "best": [
+      58.25255305568853,
+      46.38986702796311,
+      91.72056767497169
+     ],
+     "last": [
+      67.37749511804083,
+      37.20626501252164,
+      90.22936185005356
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 4
+    },
+    "3407": {
+     "rc": 0,
+     "seconds": 3754,
+     "smoke": false,
+     "best": [
+      63.519940048781606,
+      33.84980386061687,
+      89.61745480863479
+     ],
+     "last": [
+      57.825809037513196,
+      26.57371684044304,
+      87.74705420304392
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 6
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3682,
+     "smoke": false,
+     "best": [
+      66.89091385716566,
+      28.988776733483558,
+      87.10806606031596
+     ],
+     "last": [
+      66.89091385716566,
+      28.988776733483558,
+      87.10806606031596
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "8888": {
+     "rc": 0,
+     "seconds": 3649,
+     "smoke": false,
+     "best": [
+      50.0,
+      33.616919648447904,
+      90.43374640026745
+     ],
+     "last": [
+      61.52683747824964,
+      29.472352686907467,
+      88.29944455842015
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 3
+    }
+   },
+   "failed": []
+  },
+  "e5lp-b-ft0-b128": {
+   "cell": {
+    "id": "e5lp-b-ft0-b128",
+    "item": "E5-LP",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "ft": "ft0",
+     "bs": "b128"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=biot",
+     "training.full_ft=False",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-1f38-e5lp-b-ft0-b128",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2441,
+     "smoke": false,
+     "best": [
+      50.568311336023164,
+      3.940994787740658,
+      58.64534181312544
+     ],
+     "last": [
+      50.568311336023164,
+      3.940994787740658,
+      58.64534181312544
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2647,
+     "smoke": false,
+     "best": [
+      50.568311336023164,
+      3.9998675931424725,
+      59.06857158053902
+     ],
+     "last": [
+      50.568311336023164,
+      3.9152027369977054,
+      58.88987905278594
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e5lp-b-ft0-b256": {
+   "cell": {
+    "id": "e5lp-b-ft0-b256",
+    "item": "E5-LP",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "ft": "ft0",
+     "bs": "b256"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=biot",
+     "training.full_ft=False"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-84d0-e5lp-b-ft0-b256",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2389,
+     "smoke": false,
+     "best": [
+      50.278100708928854,
+      1.8042899925707216,
+      52.48028932731541
+     ],
+     "last": [
+      50.278100708928854,
+      1.8042899925707216,
+      52.48028932731541
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2635,
+     "smoke": false,
+     "best": [
+      50.314952852051945,
+      1.758682976281596,
+      52.61564734398626
+     ],
+     "last": [
+      50.314952852051945,
+      1.758682976281596,
+      52.61564734398626
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5lp-b-ft1-b128": {
+   "cell": {
+    "id": "e5lp-b-ft1-b128",
+    "item": "E5-LP",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "ft": "ft1",
+     "bs": "b128"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=biot",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-cbf6-e5lp-b-ft1-b128",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2441,
+     "smoke": false,
+     "best": [
+      51.16654129339625,
+      6.995508590749404,
+      58.91508430402639
+     ],
+     "last": [
+      51.16654129339625,
+      6.995508590749404,
+      58.91508430402639
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2667,
+     "smoke": false,
+     "best": [
+      51.364953991808946,
+      6.44988130231839,
+      58.96271664881048
+     ],
+     "last": [
+      51.364953991808946,
+      6.44988130231839,
+      58.96271664881048
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5lp-c-ft0-b128": {
+   "cell": {
+    "id": "e5lp-c-ft0-b128",
+    "item": "E5-LP",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "ft": "ft0",
+     "bs": "b128"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=cbramod",
+     "training.full_ft=False",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-4ee3-e5lp-c-ft0-b128",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2861,
+     "smoke": false,
+     "best": [
+      57.08900362442727,
+      19.791393236133516,
+      68.10412582537403
+     ],
+     "last": [
+      56.890590926014575,
+      19.25554174963688,
+      67.30503744101756
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 8
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3051,
+     "smoke": false,
+     "best": [
+      57.68124985753038,
+      20.13656377740324,
+      68.48761843974864
+     ],
+     "last": [
+      57.28741632283997,
+      19.785917137084628,
+      67.90544006017917
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 8
+    }
+   },
+   "failed": []
+  },
+  "e5lp-c-ft0-b256": {
+   "cell": {
+    "id": "e5lp-c-ft0-b256",
+    "item": "E5-LP",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "ft": "ft0",
+     "bs": "b256"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=cbramod",
+     "training.full_ft=False"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-cf94-e5lp-c-ft0-b256",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2858,
+     "smoke": false,
+     "best": [
+      56.69217822760187,
+      17.994263861734147,
+      64.28027669500862
+     ],
+     "last": [
+      56.69217822760187,
+      17.838044924070186,
+      63.858447878912216
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 9
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3141,
+     "smoke": false,
+     "best": [
+      56.890590926014575,
+      18.10624118457386,
+      64.44676432484594
+     ],
+     "last": [
+      56.890590926014575,
+      18.10624118457386,
+      64.44676432484594
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5lp-c-ft1-b128": {
+   "cell": {
+    "id": "e5lp-c-ft1-b128",
+    "item": "E5-LP",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "ft": "ft1",
+     "bs": "b128"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=cbramod",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-5a9d-e5lp-c-ft1-b128",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3083,
+     "smoke": false,
+     "best": [
+      58.06311594368081,
+      36.95203921451583,
+      85.31543012529727
+     ],
+     "last": [
+      57.48283715911767,
+      32.15754486178508,
+      83.99268276003555
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 3
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3360,
+     "smoke": false,
+     "best": [
+      58.08106711649077,
+      34.34091017244333,
+      83.74701763584002
+     ],
+     "last": [
+      58.08106711649077,
+      34.34091017244333,
+      83.74701763584002
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5noise-c": {
+   "cell": {
+    "id": "e5noise-c",
+    "item": "E5-noise",
+    "entry": "main",
+    "levels": {
+     "model": "c"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod"
+    ],
+    "patches": [],
+    "seeds": [
+     42
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-052b-e5noise-c",
+    "max_run": 21060,
+    "smoke": false
+   },
+   "seeds": {
+    "42": {
+     "rc": 0,
+     "seconds": 3659,
+     "smoke": false,
+     "best": [
+      63.700401574384344,
+      28.7271949207609,
+      87.82262246689007
+     ],
+     "last": [
+      64.25973732400251,
+      27.968256330461116,
+      86.81852029147386
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd0-ft0-b128-sR": {
+   "cell": {
+    "id": "e5sa-b-fd0-ft0-b128-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd0",
+     "ft": "ft0",
+     "bs": "b128",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "training.full_ft=False",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-e16e-e5sa-b-fd0-ft0-b128-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3239,
+     "smoke": false,
+     "best": [
+      57.86769510740311,
+      37.02692719353627,
+      88.90315959637405
+     ],
+     "last": [
+      55.50170203712569,
+      37.55826368820954,
+      88.7236241233369
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3159,
+     "smoke": false,
+     "best": [
+      58.06311594368081,
+      37.187128525484496,
+      89.37114857112464
+     ],
+     "last": [
+      55.89553557181609,
+      38.69682554604569,
+      89.05852272295547
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 5
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd0-ft0-b256-sR": {
+   "cell": {
+    "id": "e5sa-b-fd0-ft0-b256-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd0",
+     "ft": "ft0",
+     "bs": "b256",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "training.full_ft=False"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-99d5-e5sa-b-fd0-ft0-b256-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3138,
+     "smoke": false,
+     "best": [
+      60.03228361713283,
+      34.06518372366495,
+      88.7744620346942
+     ],
+     "last": [
+      55.89852743395108,
+      36.701909925716095,
+      89.06432836019361
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3234,
+     "smoke": false,
+     "best": [
+      56.4847899427842,
+      38.55932664831034,
+      89.39127240572311
+     ],
+     "last": [
+      56.28936910650649,
+      38.53470693729424,
+      89.28851618834864
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd0-ft1-b128-sR": {
+   "cell": {
+    "id": "e5sa-b-fd0-ft1-b128-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd0",
+     "ft": "ft1",
+     "bs": "b128",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-6046-e5sa-b-fd0-ft1-b128-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3253,
+     "smoke": false,
+     "best": [
+      57.08601176229228,
+      38.30652034179628,
+      89.23423526104234
+     ],
+     "last": [
+      57.08601176229228,
+      38.30652034179628,
+      89.23423526104234
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3109,
+     "smoke": false,
+     "best": [
+      56.87263975320461,
+      33.95086837588811,
+      89.16248993214647
+     ],
+     "last": [
+      60.62452985023593,
+      37.47382025445067,
+      88.25739227396718
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd1-ft0-b128-s4174": {
+   "cell": {
+    "id": "e5sa-b-fd1-ft0-b128-s4174",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd1",
+     "ft": "ft0",
+     "bs": "b128",
+     "ssl": "s4174"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "+model.foundation_dir={foundation}",
+     "training.full_ft=False",
+     "training.batch_size=128",
+     "dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-444f-e5sa-b-fd1-ft0-b128-s4174",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2446,
+     "smoke": false,
+     "best": [
+      49.98204882719005,
+      3.73413435749718,
+      54.96385545601677
+     ],
+     "last": [
+      49.98504068932503,
+      3.6939092559790665,
+      54.93854335255723
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 9
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2750,
+     "smoke": false,
+     "best": [
+      50.38186608615043,
+      2.7173535990589657,
+      58.132997294976704
+     ],
+     "last": [
+      50.38186608615043,
+      2.694325414249063,
+      58.04002399188492
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd1-ft0-b128-sR": {
+   "cell": {
+    "id": "e5sa-b-fd1-ft0-b128-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd1",
+     "ft": "ft0",
+     "bs": "b128",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "+model.foundation_dir={foundation}",
+     "training.full_ft=False",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-2456-e5sa-b-fd1-ft0-b128-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3288,
+     "smoke": false,
+     "best": [
+      49.99401627573001,
+      2.8729553982104035,
+      55.232648149414544
+     ],
+     "last": [
+      49.99401627573001,
+      2.874700611413672,
+      55.117295242654265
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 8
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3215,
+     "smoke": false,
+     "best": [
+      50.7876670693808,
+      5.266217153609806,
+      60.089627641386855
+     ],
+     "last": [
+      50.7876670693808,
+      5.376142048004056,
+      60.03389827288822
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 8
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd1-ft0-b256-s4174": {
+   "cell": {
+    "id": "e5sa-b-fd1-ft0-b256-s4174",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd1",
+     "ft": "ft0",
+     "bs": "b256",
+     "ssl": "s4174"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "+model.foundation_dir={foundation}",
+     "training.full_ft=False",
+     "dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-ebd1-e5sa-b-fd1-ft0-b256-s4174",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2427,
+     "smoke": false,
+     "best": [
+      50.412734505003534,
+      1.6797941470463624,
+      48.236226036609
+     ],
+     "last": [
+      50.412734505003534,
+      1.6797941470463624,
+      48.236226036609
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2673,
+     "smoke": false,
+     "best": [
+      50.34786333553687,
+      1.5201804282787887,
+      50.39295497199997
+     ],
+     "last": [
+      50.34786333553687,
+      1.5201804282787887,
+      50.39295497199997
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd1-ft0-b256-sR": {
+   "cell": {
+    "id": "e5sa-b-fd1-ft0-b256-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd1",
+     "ft": "ft0",
+     "bs": "b256",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "+model.foundation_dir={foundation}",
+     "training.full_ft=False"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-404e-e5sa-b-fd1-ft0-b256-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3205,
+     "smoke": false,
+     "best": [
+      49.919219722355194,
+      1.4699991681606368,
+      47.200685563837794
+     ],
+     "last": [
+      49.919219722355194,
+      1.4699991681606368,
+      47.200685563837794
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3175,
+     "smoke": false,
+     "best": [
+      49.87229972569848,
+      1.7250469191618962,
+      54.1387426200734
+     ],
+     "last": [
+      49.881275312103455,
+      1.7291247093386835,
+      54.12280976695768
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd1-ft1-b128-s4174": {
+   "cell": {
+    "id": "e5sa-b-fd1-ft1-b128-s4174",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd1",
+     "ft": "ft1",
+     "bs": "b128",
+     "ssl": "s4174"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "+model.foundation_dir={foundation}",
+     "training.batch_size=128",
+     "dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-29e5-e5sa-b-fd1-ft1-b128-s4174",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2471,
+     "smoke": false,
+     "best": [
+      50.577286922428144,
+      4.92755199885505,
+      56.902570247023334
+     ],
+     "last": [
+      50.577286922428144,
+      4.92755199885505,
+      56.902570247023334
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2649,
+     "smoke": false,
+     "best": [
+      50.76971589657086,
+      3.757958523552592,
+      58.53188850137151
+     ],
+     "last": [
+      50.76971589657086,
+      3.757958523552592,
+      58.53188850137151
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd1-ft1-b128-sR": {
+   "cell": {
+    "id": "e5sa-b-fd1-ft1-b128-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd1",
+     "ft": "ft1",
+     "bs": "b128",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "+model.foundation_dir={foundation}",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-45e2-e5sa-b-fd1-ft1-b128-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3303,
+     "smoke": false,
+     "best": [
+      49.99401627573001,
+      3.8246947842102452,
+      58.257112083703745
+     ],
+     "last": [
+      49.99401627573001,
+      3.8246947842102452,
+      58.257112083703745
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3261,
+     "smoke": false,
+     "best": [
+      52.555430182285136,
+      7.308562718902683,
+      61.56165942920969
+     ],
+     "last": [
+      52.555430182285136,
+      7.308562718902683,
+      61.56165942920969
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd1-ft1-b256-s4174": {
+   "cell": {
+    "id": "e5sa-b-fd1-ft1-b256-s4174",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd1",
+     "ft": "ft1",
+     "bs": "b256",
+     "ssl": "s4174"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "+model.foundation_dir={foundation}",
+     "dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-a208-e5sa-b-fd1-ft1-b256-s4174",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2422,
+     "smoke": false,
+     "best": [
+      50.788616866883984,
+      2.436761971463317,
+      49.87256092001185
+     ],
+     "last": [
+      50.788616866883984,
+      2.436761971463317,
+      49.87256092001185
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2655,
+     "smoke": false,
+     "best": [
+      50.61005493628758,
+      1.8136463924054098,
+      51.45040014968809
+     ],
+     "last": [
+      50.61005493628758,
+      1.8136463924054098,
+      51.45040014968809
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5sa-b-fd1-ft1-b256-sR": {
+   "cell": {
+    "id": "e5sa-b-fd1-ft1-b256-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "fd": "fd1",
+     "ft": "ft1",
+     "bs": "b256",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-ed3e-e5sa-b-fd1-ft1-b256-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3181,
+     "smoke": false,
+     "best": [
+      49.853398755385356,
+      1.9491184280091243,
+      50.165336000364725
+     ],
+     "last": [
+      49.853398755385356,
+      1.9491184280091243,
+      50.165336000364725
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3190,
+     "smoke": false,
+     "best": [
+      51.28308144703549,
+      2.1996036278627478,
+      54.895944934539955
+     ],
+     "last": [
+      51.28308144703549,
+      2.1996036278627478,
+      54.895944934539955
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd0-ft0-b128-sR": {
+   "cell": {
+    "id": "e5sa-c-fd0-ft0-b128-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd0",
+     "ft": "ft0",
+     "bs": "b128",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "training.full_ft=False",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-e9b6-e5sa-c-fd0-ft0-b128-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3545,
+     "smoke": false,
+     "best": [
+      65.37840882323889,
+      27.25526160539133,
+      86.61970392912231
+     ],
+     "last": [
+      66.70147674515793,
+      28.61222072930612,
+      87.55698785019034
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3554,
+     "smoke": false,
+     "best": [
+      59.765058089615295,
+      25.764537526635365,
+      85.25199552455418
+     ],
+     "last": [
+      56.84870485612468,
+      23.61788752333687,
+      84.01898027840463
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd0-ft0-b256-sR": {
+   "cell": {
+    "id": "e5sa-c-fd0-ft0-b256-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd0",
+     "ft": "ft0",
+     "bs": "b256",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "training.full_ft=False"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-ffe0-e5sa-c-fd0-ft0-b256-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3531,
+     "smoke": false,
+     "best": [
+      68.9268522950907,
+      29.395350880289005,
+      86.94979417888106
+     ],
+     "last": [
+      68.92984415722569,
+      28.23213911329955,
+      86.5680705623561
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 6
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3495,
+     "smoke": false,
+     "best": [
+      60.31242639069351,
+      26.22367140581624,
+      85.94195217579612
+     ],
+     "last": [
+      58.189723950853676,
+      25.53020066207501,
+      84.89698496280594
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 7
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd0-ft1-b128-sR": {
+   "cell": {
+    "id": "e5sa-c-fd0-ft1-b128-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd0",
+     "ft": "ft1",
+     "bs": "b128",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-d89a-e5sa-c-fd0-ft1-b128-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3839,
+     "smoke": false,
+     "best": [
+      55.700114735538385,
+      41.490475441237216,
+      90.55191308213088
+     ],
+     "last": [
+      58.2226344343386,
+      33.8065702435333,
+      86.9122296876306
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 3
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3719,
+     "smoke": false,
+     "best": [
+      52.35402562173744,
+      34.77316223053658,
+      87.49532224729688
+     ],
+     "last": [
+      62.378283449968464,
+      22.579921413009373,
+      87.23785588912443
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 2
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd1-ft0-b128-s4174": {
+   "cell": {
+    "id": "e5sa-c-fd1-ft0-b128-s4174",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd1",
+     "ft": "ft0",
+     "bs": "b128",
+     "ssl": "s4174"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "+model.foundation_dir={foundation}",
+     "training.full_ft=False",
+     "training.batch_size=128",
+     "dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-f2cd-e5sa-c-fd1-ft0-b128-s4174",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2904,
+     "smoke": false,
+     "best": [
+      58.65536217678391,
+      24.756022312075633,
+      76.61064286094205
+     ],
+     "last": [
+      58.65536217678391,
+      24.756022312075633,
+      76.61064286094205
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3132,
+     "smoke": false,
+     "best": [
+      58.850783013061616,
+      24.022470508800136,
+      77.16939685958954
+     ],
+     "last": [
+      58.850783013061616,
+      23.97161315349139,
+      77.06626072321382
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd1-ft0-b128-sR": {
+   "cell": {
+    "id": "e5sa-c-fd1-ft0-b128-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd1",
+     "ft": "ft0",
+     "bs": "b128",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "+model.foundation_dir={foundation}",
+     "training.full_ft=False",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-e7e9-e5sa-c-fd1-ft0-b128-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3646,
+     "smoke": false,
+     "best": [
+      63.54088308372655,
+      30.53356653530981,
+      86.35758356318432
+     ],
+     "last": [
+      63.54088308372655,
+      30.53356653530981,
+      86.35758356318432
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3602,
+     "smoke": false,
+     "best": [
+      62.74723229007576,
+      30.507902851415626,
+      86.67533831787063
+     ],
+     "last": [
+      62.74723229007576,
+      30.507902851415626,
+      86.67533831787063
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd1-ft0-b256-s4174": {
+   "cell": {
+    "id": "e5sa-c-fd1-ft0-b256-s4174",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd1",
+     "ft": "ft0",
+     "bs": "b256",
+     "ssl": "s4174"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "+model.foundation_dir={foundation}",
+     "training.full_ft=False",
+     "dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-9863-e5sa-c-fd1-ft0-b256-s4174",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2901,
+     "smoke": false,
+     "best": [
+      57.87667069380809,
+      23.07269112936404,
+      73.41897894868814
+     ],
+     "last": [
+      57.87667069380809,
+      23.07269112936404,
+      73.41897894868814
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3091,
+     "smoke": false,
+     "best": [
+      58.465925064776194,
+      23.442190013581804,
+      72.49811465195621
+     ],
+     "last": [
+      58.465925064776194,
+      23.261755588689667,
+      72.32306697212154
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd1-ft0-b256-sR": {
+   "cell": {
+    "id": "e5sa-c-fd1-ft0-b256-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd1",
+     "ft": "ft0",
+     "bs": "b256",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "+model.foundation_dir={foundation}",
+     "training.full_ft=False"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-c07e-e5sa-c-fd1-ft0-b256-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3548,
+     "smoke": false,
+     "best": [
+      67.25088711086796,
+      35.646959327526794,
+      86.52676624343691
+     ],
+     "last": [
+      67.62676947274842,
+      35.770739191300365,
+      86.73322847568899
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 6
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3565,
+     "smoke": false,
+     "best": [
+      67.44929980928066,
+      35.61116453710203,
+      86.53948165751062
+     ],
+     "last": [
+      67.44929980928066,
+      35.61116453710203,
+      86.53948165751062
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd1-ft1-b128-s4174": {
+   "cell": {
+    "id": "e5sa-c-fd1-ft1-b128-s4174",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd1",
+     "ft": "ft1",
+     "bs": "b128",
+     "ssl": "s4174"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "+model.foundation_dir={foundation}",
+     "training.batch_size=128",
+     "dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-5ad0-e5sa-c-fd1-ft1-b128-s4174",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3195,
+     "smoke": false,
+     "best": [
+      55.51965320993564,
+      32.636729340047836,
+      85.03315030735448
+     ],
+     "last": [
+      55.70909032194336,
+      31.7159333245486,
+      83.82167171958938
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 6
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3356,
+     "smoke": false,
+     "best": [
+      56.69517008973687,
+      32.96558793087051,
+      85.130765745743
+     ],
+     "last": [
+      56.69517008973687,
+      32.461786796026445,
+      84.66975778264073
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 9
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd1-ft1-b128-sR": {
+   "cell": {
+    "id": "e5sa-c-fd1-ft1-b128-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd1",
+     "ft": "ft1",
+     "bs": "b128",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "+model.foundation_dir={foundation}",
+     "training.batch_size=128"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-9629-e5sa-c-fd1-ft1-b128-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3861,
+     "smoke": false,
+     "best": [
+      57.293400047109955,
+      29.099172200945556,
+      82.91281048880379
+     ],
+     "last": [
+      55.715074046213346,
+      27.923194278341086,
+      82.39070680130996
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 9
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3740,
+     "smoke": false,
+     "best": [
+      53.94132720903904,
+      28.320817944014404,
+      85.52943137523081
+     ],
+     "last": [
+      52.558422044420126,
+      24.909398380636897,
+      80.30813330597915
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 4
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd1-ft1-b256-s4174": {
+   "cell": {
+    "id": "e5sa-c-fd1-ft1-b256-s4174",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd1",
+     "ft": "ft1",
+     "bs": "b256",
+     "ssl": "s4174"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "+model.foundation_dir={foundation}",
+     "dataset.pretrain_datasets_dir={data}/chbmit_ssl_4174.lmdb"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-4cb9-e5sa-c-fd1-ft1-b256-s4174",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2982,
+     "smoke": false,
+     "best": [
+      58.462933202641196,
+      37.22565227620349,
+      86.47908640877766
+     ],
+     "last": [
+      54.521605993602165,
+      33.78329946096505,
+      82.76950979051266
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3248,
+     "smoke": false,
+     "best": [
+      55.12881153738023,
+      35.421908214542725,
+      86.96362560502102
+     ],
+     "last": [
+      55.910494882491044,
+      32.49805587207662,
+      83.13375713297924
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e5sa-c-fd1-ft1-b256-sR": {
+   "cell": {
+    "id": "e5sa-c-fd1-ft1-b256-sR",
+    "item": "E5-SA",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "fd": "fd1",
+     "ft": "ft1",
+     "bs": "b256",
+     "ssl": "sR"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=cbramod",
+     "+model.foundation_dir={foundation}"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-f43f-e5sa-c-fd1-ft1-b256-sR",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3664,
+     "smoke": false,
+     "best": [
+      57.68424171966537,
+      28.516872450493235,
+      80.23780080086927
+     ],
+     "last": [
+      52.958239303380516,
+      20.85964586168696,
+      70.48332108094554
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3620,
+     "smoke": false,
+     "best": [
+      60.62452985023593,
+      35.61965707566166,
+      86.85192941864794
+     ],
+     "last": [
+      57.290408184974964,
+      23.312017229963004,
+      73.41506103398756
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e6-b-all": {
+   "cell": {
+    "id": "e6-b-all",
+    "item": "E6",
+    "entry": "layer",
+    "levels": {
+     "model": "b",
+     "layers": "all"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "method.spt_unfreeze_layers=all"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123,
+     2021,
+     3407,
+     8888
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-7619-e6-b-all",
+    "max_run": 96659,
+    "smoke": false
+   },
+   "seeds": {},
+   "failed": [
+    "s2021",
+    "s42",
+    "s123",
+    "s3407",
+    "s8888"
+   ]
+  },
+  "e6-b-last1": {
+   "cell": {
+    "id": "e6-b-last1",
+    "item": "E6",
+    "entry": "layer",
+    "levels": {
+     "model": "b",
+     "layers": "last1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "method.spt_unfreeze_layers=last1"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123,
+     2021,
+     3407,
+     8888
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-d6b3-e6-b-last1",
+    "max_run": 96659,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3125,
+     "smoke": false,
+     "best": [
+      50.0,
+      16.896597668980036,
+      76.66890106529289
+     ],
+     "last": [
+      57.47984529698268,
+      37.78659736460306,
+      89.25914370056304
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 1
+    },
+    "2021": {
+     "rc": 0,
+     "seconds": 3250,
+     "smoke": false,
+     "best": [
+      59.04620384933932,
+      35.45985247101736,
+      88.10103186000744
+     ],
+     "last": [
+      59.64144194457742,
+      35.164207948766176,
+      88.10825032103156
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    },
+    "3407": {
+     "rc": 0,
+     "seconds": 3225,
+     "smoke": false,
+     "best": [
+      59.43405365975973,
+      37.572677000693865,
+      88.23679354061714
+     ],
+     "last": [
+      59.43405365975973,
+      37.69658356063952,
+      88.22460051517015
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 9
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3248,
+     "smoke": false,
+     "best": [
+      61.21378422120404,
+      36.793407221046415,
+      88.68584592764823
+     ],
+     "last": [
+      60.822942548648626,
+      37.19572716799878,
+      88.65205688147286
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 7
+    },
+    "8888": {
+     "rc": 0,
+     "seconds": 3204,
+     "smoke": false,
+     "best": [
+      61.01537152279134,
+      35.74375481694047,
+      88.69285068423412
+     ],
+     "last": [
+      60.62452985023593,
+      35.80076959326533,
+      88.7004490642595
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    }
+   },
+   "failed": []
+  },
+  "e6-b-last2": {
+   "cell": {
+    "id": "e6-b-last2",
+    "item": "E6",
+    "entry": "layer",
+    "levels": {
+     "model": "b",
+     "layers": "last2"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "model=biot",
+     "method.spt_unfreeze_layers=last2"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123,
+     2021,
+     3407,
+     8888
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-341c-e6-b-last2",
+    "max_run": 96659,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3238,
+     "smoke": false,
+     "best": [
+      58.6613459010539,
+      37.47391852973519,
+      89.02399758371516
+     ],
+     "last": [
+      56.88759906387958,
+      37.75950580332133,
+      88.98500839620993
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    },
+    "2021": {
+     "rc": 0,
+     "seconds": 3406,
+     "smoke": false,
+     "best": [
+      60.029291754997836,
+      34.458962013313936,
+      87.77537004110724
+     ],
+     "last": [
+      60.029291754997836,
+      34.458962013313936,
+      87.77537004110724
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "3407": {
+     "rc": 0,
+     "seconds": 3382,
+     "smoke": false,
+     "best": [
+      60.029291754997836,
+      36.97485311311359,
+      87.90387764328646
+     ],
+     "last": [
+      60.029291754997836,
+      36.97485311311359,
+      87.90387764328646
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3367,
+     "smoke": false,
+     "best": [
+      58.456949478371214,
+      35.52526676542578,
+      88.82316290166938
+     ],
+     "last": [
+      60.23368817768052,
+      36.878002997255756,
+      88.56040142241673
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 3
+    },
+    "8888": {
+     "rc": 0,
+     "seconds": 3297,
+     "smoke": false,
+     "best": [
+      61.41219691961673,
+      35.17376125947315,
+      88.7300590014209
+     ],
+     "last": [
+      60.62153798810094,
+      35.41917768681062,
+      88.71920756494715
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": 3,
+     "best_epoch": 8
+    }
+   },
+   "failed": []
+  },
+  "e6fd-b-all": {
+   "cell": {
+    "id": "e6fd-b-all",
+    "item": "E6-fd",
+    "entry": "layer",
+    "levels": {
+     "model": "b",
+     "layers": "all"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "+model.foundation_dir={foundation}",
+     "model=biot",
+     "method.spt_unfreeze_layers=all"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-eef9-e6fd-b-all",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {},
+   "failed": [
+    "s42",
+    "s123"
+   ]
+  },
+  "e6fd-b-last1": {
+   "cell": {
+    "id": "e6fd-b-last1",
+    "item": "E6-fd",
+    "entry": "layer",
+    "levels": {
+     "model": "b",
+     "layers": "last1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "+model.foundation_dir={foundation}",
+     "model=biot",
+     "method.spt_unfreeze_layers=last1"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-89cc-e6fd-b-last1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3234,
+     "smoke": false,
+     "best": [
+      49.853398755385356,
+      1.943462403612663,
+      50.12126539621753
+     ],
+     "last": [
+      49.853398755385356,
+      1.943462403612663,
+      50.12126539621753
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3273,
+     "smoke": false,
+     "best": [
+      51.28308144703549,
+      2.1969834849363465,
+      54.86797339807153
+     ],
+     "last": [
+      51.28308144703549,
+      2.1969834849363465,
+      54.86797339807153
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e6fd-b-last2": {
+   "cell": {
+    "id": "e6fd-b-last2",
+    "item": "E6-fd",
+    "entry": "layer",
+    "levels": {
+     "model": "b",
+     "layers": "last2"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=step_up",
+     "+method.spt_anchor_l2sp_lambda=0",
+     "+model.foundation_dir={foundation}",
+     "model=biot",
+     "method.spt_unfreeze_layers=last2"
+    ],
+    "patches": [],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-b814-e6fd-b-last2",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 3358,
+     "smoke": false,
+     "best": [
+      49.99401627573001,
+      3.6550279831266423,
+      64.0601017613045
+     ],
+     "last": [
+      50.195420836277705,
+      6.549428930863123,
+      62.19243182353522
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 4
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3380,
+     "smoke": false,
+     "best": [
+      50.0,
+      5.23521708870778,
+      62.849288031791616
+     ],
+     "last": [
+      50.0,
+      5.23521708870778,
+      62.849288031791616
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": true,
+     "spt_kept": 3,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e7biot-b-meval-ft0": {
+   "cell": {
+    "id": "e7biot-b-meval-ft0",
+    "item": "E7-biot",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "mode": "meval",
+     "ft": "ft0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=biot",
+     "training.full_ft=False"
+    ],
+    "patches": [
+     "backbone_eval"
+    ],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-0c31-e7biot-b-meval-ft0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2339,
+     "smoke": false,
+     "best": [
+      49.889301101005266,
+      1.9776189355168567,
+      55.68914457437675
+     ],
+     "last": [
+      49.889301101005266,
+      1.9776189355168567,
+      55.68914457437675
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2637,
+     "smoke": false,
+     "best": [
+      49.85639061752035,
+      1.9405130793813237,
+      55.98322562629647
+     ],
+     "last": [
+      49.85639061752035,
+      1.9405130793813237,
+      55.98322562629647
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e7biot-b-meval-ft1": {
+   "cell": {
+    "id": "e7biot-b-meval-ft1",
+    "item": "E7-biot",
+    "entry": "main",
+    "levels": {
+     "model": "b",
+     "mode": "meval",
+     "ft": "ft1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=biot"
+    ],
+    "patches": [
+     "backbone_eval"
+    ],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-cbb6-e7biot-b-meval-ft1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2360,
+     "smoke": false,
+     "best": [
+      50.10865683436292,
+      3.2374342447063733,
+      56.128224087624524
+     ],
+     "last": [
+      50.10865683436292,
+      3.2374342447063733,
+      56.128224087624524
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2583,
+     "smoke": false,
+     "best": [
+      50.28014277356068,
+      2.9269212069188204,
+      56.35410967881648
+     ],
+     "last": [
+      50.28014277356068,
+      2.9269212069188204,
+      56.35410967881648
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 257,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    }
+   },
+   "failed": []
+  },
+  "e7cbramod-c-tenc-meval-ft0": {
+   "cell": {
+    "id": "e7cbramod-c-tenc-meval-ft0",
+    "item": "E7-cbramod",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "tap": "tenc",
+     "mode": "meval",
+     "ft": "ft0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=cbramod",
+     "training.full_ft=False"
+    ],
+    "patches": [
+     "encoder_tap",
+     "backbone_eval"
+    ],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-2df6-e7cbramod-c-tenc-meval-ft0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2493,
+     "smoke": false,
+     "best": [
+      55.70609845980837,
+      41.716121468430025,
+      91.99256593494268
+     ],
+     "last": [
+      56.102923856633765,
+      40.67543885194952,
+      91.93852245701217
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 5
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2714,
+     "smoke": false,
+     "best": [
+      55.90451115822107,
+      42.336731898125294,
+      92.02630749124287
+     ],
+     "last": [
+      56.102923856633765,
+      40.78468818374289,
+      91.89514045605476
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 4
+    }
+   },
+   "failed": []
+  },
+  "e7cbramod-c-tenc-meval-ft1": {
+   "cell": {
+    "id": "e7cbramod-c-tenc-meval-ft1",
+    "item": "E7-cbramod",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "tap": "tenc",
+     "mode": "meval",
+     "ft": "ft1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=cbramod"
+    ],
+    "patches": [
+     "encoder_tap",
+     "backbone_eval"
+    ],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-148d-e7cbramod-c-tenc-meval-ft1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2692,
+     "smoke": false,
+     "best": [
+      62.386309238870275,
+      46.280648384885104,
+      92.21322763986718
+     ],
+     "last": [
+      58.07209153008579,
+      35.48114312295661,
+      90.96842303220953
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2961,
+     "smoke": false,
+     "best": [
+      60.81097510010866,
+      35.425245053277735,
+      91.26739554127059
+     ],
+     "last": [
+      57.47685343484768,
+      35.12032985227615,
+      91.08885735561176
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 7
+    }
+   },
+   "failed": []
+  },
+  "e7cbramod-c-tenc-mtrain-ft0": {
+   "cell": {
+    "id": "e7cbramod-c-tenc-mtrain-ft0",
+    "item": "E7-cbramod",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "tap": "tenc",
+     "mode": "mtrain",
+     "ft": "ft0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=cbramod",
+     "training.full_ft=False"
+    ],
+    "patches": [
+     "encoder_tap"
+    ],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-956d-e7cbramod-c-tenc-mtrain-ft0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2761,
+     "smoke": false,
+     "best": [
+      59.4460211082997,
+      40.2432973447147,
+      85.59905153221334
+     ],
+     "last": [
+      64.73734299847273,
+      35.95627483978722,
+      84.45547159345627
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3000,
+     "smoke": false,
+     "best": [
+      64.93575569688542,
+      40.242273354822466,
+      86.6316476327247
+     ],
+     "last": [
+      63.96164337763188,
+      35.84448907899613,
+      85.184726116392
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 3
+    }
+   },
+   "failed": []
+  },
+  "e7cbramod-c-tenc-mtrain-ft1": {
+   "cell": {
+    "id": "e7cbramod-c-tenc-mtrain-ft1",
+    "item": "E7-cbramod",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "tap": "tenc",
+     "mode": "mtrain",
+     "ft": "ft1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=cbramod"
+    ],
+    "patches": [
+     "encoder_tap"
+    ],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-5bb4-e7cbramod-c-tenc-mtrain-ft1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2931,
+     "smoke": false,
+     "best": [
+      57.87667069380809,
+      40.43102209388612,
+      85.91246096332263
+     ],
+     "last": [
+      68.68379911402889,
+      9.598224091763392,
+      76.90510383186306
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 3154,
+     "smoke": false,
+     "best": [
+      56.893582788149565,
+      38.79848813524854,
+      86.60723783689318
+     ],
+     "last": [
+      65.4815568320834,
+      3.927795485491815,
+      74.97810716755188
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  },
+  "e7cbramod-c-tproj-meval-ft0": {
+   "cell": {
+    "id": "e7cbramod-c-tproj-meval-ft0",
+    "item": "E7-cbramod",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "tap": "tproj",
+     "mode": "meval",
+     "ft": "ft0"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=cbramod",
+     "training.full_ft=False"
+    ],
+    "patches": [
+     "backbone_eval"
+    ],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-b31d-e7cbramod-c-tproj-meval-ft0",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2587,
+     "smoke": false,
+     "best": [
+      57.08002803802229,
+      27.919431801548562,
+      82.4856628066896
+     ],
+     "last": [
+      57.08002803802229,
+      27.919431801548562,
+      82.4856628066896
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 10
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2792,
+     "smoke": false,
+     "best": [
+      57.08301990015728,
+      28.386686766994096,
+      82.60202487329701
+     ],
+     "last": [
+      57.08002803802229,
+      28.130885683134533,
+      82.49518452665892
+     ],
+     "ok": true,
+     "head_mlp": false,
+     "probe_trainable": 0,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 8
+    }
+   },
+   "failed": []
+  },
+  "e7cbramod-c-tproj-meval-ft1": {
+   "cell": {
+    "id": "e7cbramod-c-tproj-meval-ft1",
+    "item": "E7-cbramod",
+    "entry": "main",
+    "levels": {
+     "model": "c",
+     "tap": "tproj",
+     "mode": "meval",
+     "ft": "ft1"
+    },
+    "overrides": [
+     "dataset=chbmit",
+     "method=fm_freeze",
+     "model=cbramod"
+    ],
+    "patches": [
+     "backbone_eval"
+    ],
+    "seeds": [
+     42,
+     123
+    ],
+    "parallel": 1,
+    "hours_per_run": 3.5,
+    "stage_hours": 0.4,
+    "job_name": "anon-DX-rel-1101-2f13-e7cbramod-c-tproj-meval-ft1",
+    "max_run": 39960,
+    "smoke": false
+   },
+   "seeds": {
+    "123": {
+     "rc": 0,
+     "seconds": 2665,
+     "smoke": false,
+     "best": [
+      52.555430182285136,
+      26.20059516929568,
+      84.9402601115442
+     ],
+     "last": [
+      57.041133830267384,
+      19.115412108631713,
+      82.94139939364928
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 1
+    },
+    "42": {
+     "rc": 0,
+     "seconds": 2898,
+     "smoke": false,
+     "best": [
+      58.66433776318889,
+      31.478230139600694,
+      86.83357458189913
+     ],
+     "last": [
+      57.245530252950076,
+      19.50972060790871,
+      83.62644084281231
+     ],
+     "ok": true,
+     "head_mlp": true,
+     "probe_trainable": 64402401,
+     "nonfinite": 0,
+     "foundation_loaded": false,
+     "spt_kept": null,
+     "best_epoch": 1
+    }
+   },
+   "failed": []
+  }
+ }
+}

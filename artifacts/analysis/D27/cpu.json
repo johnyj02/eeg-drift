@@ -1,0 +1,7662 @@
+{
+ "notes": [],
+ "checks": [
+  "artifacts/tables/d24-chbmit-S1E+S1M.md: 8 verdict lines (means, per-rotation values, verdict)",
+  "artifacts/tables/d24-siena-S3E+S3M.md: 8 verdict lines (means, per-rotation values, verdict)",
+  "artifacts/tables/d24-siena-S3FE+S3FM.md: 8 verdict lines (means, per-rotation values, verdict)",
+  "artifacts/analysis/E32/e32.json S1R: 8 verdicts and means",
+  "artifacts/analysis/E32/e32.json S3R: 8 verdicts and means",
+  "artifacts/analysis/D27B/S1Z.md: 8 verdict lines (means, per-rotation values, verdict)",
+  "artifacts/analysis/D27B/S3Z.md: 8 verdict lines (means, per-rotation values, verdict)",
+  "artifacts/analysis/D27B/S3FZ.md: 8 verdict lines (means, per-rotation values, verdict)",
+  "artifacts/analysis/D26/S1RZ.md: 8 verdict lines (means, per-rotation values, verdict)",
+  "artifacts/analysis/D26/S3RZ.md: 8 verdict lines (means, per-rotation values, verdict)",
+  "artifacts/analysis/stats/stats.json E10(e) leave-one-out strings: 24 D24-A verdicts agree"
+ ],
+ "loro": [
+  {
+   "item": "D24-A",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1E,S1M",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    1.6548155305164869,
+    3.063488151775843,
+    0.8622286166948214,
+    -1.089111747921784,
+    5.048522351207438
+   ],
+   "mean": 1.907988580454561,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 1.9712818429390797,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 1.6191136876242407,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 2.169428571394496,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 2.6572636625486474,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 1.1228551377663418,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1E,S1M",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -8.321053139275705,
+    -4.671530323443832,
+    -5.7512323825864655,
+    24.37272008152889,
+    -4.872392885218147
+   ],
+   "mean": 0.15130227020094794,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 2.269391122570111,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 1.357010418612143,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 1.6269359333978013,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -5.9040521826310375,
+     "verdict": "second term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot4",
+     "mean": 1.4072260590557217,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "D24-A",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1E,S1M",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    6.499933039129104,
+    1.7683871689115094,
+    4.94093044405831,
+    -23.142761111930383,
+    0.1794695316463759
+   ],
+   "mean": -1.9508081856370167,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -4.063493491828547,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -2.8806070242741484,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -3.6737428430608485,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 3.347180045936325,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot4",
+     "mean": -2.483377614957865,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "D24-A",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1E,S1M",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -0.16630456963011397,
+    0.16034499724352003,
+    0.05192667816666585,
+    0.14084722167672226,
+    0.35559899763566705
+   ],
+   "mean": 0.10848266501849224,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.1771794736806438,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.0955170819622353,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.12262166173144884,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.10039152585393474,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.04670358186419854,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1E,S1M",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    -0.4314535816229039,
+    0.49703872117353853,
+    0.047707576375103145,
+    -0.08711477750695451,
+    -0.10278786727329248
+   ],
+   "mean": -0.015321985770901847,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.08871091319209867,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.14341216250701194,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.031079376307403095,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.002626212163111319,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.0065444846046958105,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1E,S1M",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -3.2081443420999136,
+    -7.932439539421097,
+    -3.712392875182445,
+    -1.6686638017597062,
+    -5.601828263288468
+   ],
+   "mean": -4.424693764350326,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -4.728831119912929,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -3.547757320582633,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -4.602768986642296,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -5.113701254997981,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -4.13041013961579,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1E,S1M",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    5.949660977685596,
+    9.267677701717162,
+    3.148349632751092,
+    4.094763010340884,
+    4.905249142302324
+   ],
+   "mean": 5.473140092959412,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 5.3540098717778655,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 4.524505690769974,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 6.0543377080114915,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 5.8177343636140435,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 5.6151128306236835,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1E,S1M",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    2.3100630539627787,
+    1.8322768834696035,
+    -0.5163356660562499,
+    2.3389844310742234,
+    -0.7993669882594361
+   ],
+   "mean": 1.033124342838184,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.7138896650570352,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.833336207680329,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 1.4204893450617924,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.706659320779174,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 1.491247175612589,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3E,S3M",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    7.4858730951016526,
+    18.320139691160264,
+    3.3736761709495866,
+    9.989009391974122,
+    6.993371013047742
+   ],
+   "mean": 9.232413872446674,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 9.669049066782929,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 6.960482417768276,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 10.697098297820945,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 9.043264992564811,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 9.792174587296406,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3E,S3M",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -7.684019497285547,
+    28.076388144513395,
+    6.3870846817072575,
+    15.48573037586064,
+    -6.30554604553199
+   ],
+   "mean": 7.191927531852751,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 10.910914289137326,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot1",
+     "mean": 1.9708123786875902,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 7.3931382443891245,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 5.118476820850779,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 10.566295926198936,
+     "verdict": "first term wins",
+     "changed": true
+    }
+   ],
+   "n_changed": 2
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3E,S3M",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    1.0998958583673684,
+    -45.65175533667608,
+    -9.105062235584839,
+    -26.455347248714737,
+    -0.3069234973662063
+   ],
+   "mean": -16.083838491994896,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -20.379772079585464,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -8.691859280824604,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -17.828532556097414,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -13.49096130281494,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -20.02806724065207,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3E,S3M",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    0.9017494561834738,
+    0.7447724989975768,
+    0.6556986170720052,
+    -0.980607480879975,
+    0.3809014701495457
+   ],
+   "mean": 0.3405029123045253,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.20019127633478817,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.23943551563126242,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.26170398611265533,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.6707805106006504,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.3304032728432702,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3E,S3M",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    -0.47948286592843203,
+    0.30873387351834936,
+    0.5244313878497167,
+    0.9681544861663411,
+    0.013013716457152213
+   ],
+   "mean": 0.26697011961262546,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.45358336599788984,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.2565291811361945,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.20260480255335267,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.09167402797419655,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.3304592204014938,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3E,S3M",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -6.570597551131073,
+    -2.8752413430783577,
+    -13.43528697732183,
+    -2.225843370210896,
+    -13.04615064277749
+   ],
+   "mean": -7.630623976903929,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -7.895630583347144,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -8.819469635360322,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -6.179458226799454,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -8.981819128577188,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -6.276742310435539,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3E,S3M",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    4.805489311617649,
+    0.2735497249449992,
+    14.698869533507256,
+    -0.04362635565969697,
+    15.210431795112044
+   ],
+   "mean": 6.98894280190445,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 7.5348061744761505,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 8.667791071144313,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 5.061461119003749,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 8.747085091295487,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 4.933570553602552,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3E,S3M",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -2.244591105441856,
+    -2.292957744615009,
+    1.7880139440351428,
+    -1.3013152397042518,
+    2.177294868791705
+   ],
+   "mean": -0.3747110553868538,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.09275895712689675,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.10485061692018505,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.9153923052423529,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.1430600093075043,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -1.0127125364314935,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FE,S3FM",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    1.322229000671669,
+    8.93459023617546,
+    0.8708646678856127,
+    5.011744509237559,
+    4.391028143663405
+   ],
+   "mean": 4.1060913115267414,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 4.802056889240509,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 2.8989665803645615,
+     "verdict": "no difference shown",
+     "changed": true
+    },
+    {
+     "rot": "rot2",
+     "mean": 4.914897972437023,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 3.8796780120990366,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 4.034857103492575,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FE,S3FM",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -24.312018190893447,
+    37.10857427941146,
+    -9.27400743103847,
+    -13.818028230421262,
+    -13.15286311772607
+   ],
+   "mean": -4.689668538133558,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.21591887505641338,
+     "verdict": "no difference shown",
+     "changed": true
+    },
+    {
+     "rot": "rot1",
+     "mean": -15.139229242519813,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -3.543583814907331,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -2.4075786150616327,
+     "verdict": "no difference shown",
+     "changed": true
+    },
+    {
+     "rot": "rot4",
+     "mean": -2.5738698932354307,
+     "verdict": "no difference shown",
+     "changed": true
+    }
+   ],
+   "n_changed": 3
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FE,S3FM",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    23.306558457964364,
+    -46.18302440095969,
+    9.171875278918947,
+    8.941477283049025,
+    9.633453660157812
+   ],
+   "mean": 0.9740680558260919,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -4.609054544708476,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 12.763341170022537,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot2",
+     "mean": -1.0753837499471217,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -1.0177842509796413,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -1.1907783452568381,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FE,S3FM",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    0.3167692677425862,
+    -0.13985988537277194,
+    0.7687325157660894,
+    0.1351935618653215,
+    0.8716186860951467
+   ],
+   "mean": 0.39049082921927436,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.4089212195884464,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.5230785078672859,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.2959304075825706,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.4543151460577626,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.2702088650003063,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FE,S3FM",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    0.32197634937359965,
+    -0.09246797862022049,
+    0.16205988182761644,
+    0.2004468908387338,
+    0.11231838357630863
+   ],
+   "mean": 0.1408667053992076,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.09558929440560959,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.19920037640406463,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.1355684112921054,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.12597165903932606,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.14800378585493235,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FE,S3FM",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -15.259337314131827,
+    -7.728768094941273,
+    -8.33913484759232,
+    -5.243428343052301,
+    -16.916229706110244
+   ],
+   "mean": -10.697379661165593,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -9.556890247924034,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -11.439532552721673,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -11.286940864558911,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -12.060867490693916,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -9.14266714992943,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FE,S3FM",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    16.23870001663802,
+    6.660539629228211,
+    7.251255294678671,
+    4.774992279324948,
+    12.319785053446324
+   ],
+   "mean": 9.449054454663235,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 7.751643064169539,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 10.146183161021991,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 9.998504244659376,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 10.617569998497807,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 8.731371804967463,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D24-A",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FE,S3FM",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    1.3013390518797934,
+    -1.1606964443332828,
+    -0.9258196710860318,
+    -0.267989172888619,
+    -4.484126269087611
+   ],
+   "mean": -1.1074585011031501,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -1.709657889348886,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -1.094149015295617,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -1.1528682086074298,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -1.317325833156783,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.26329155910703506,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1R",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    1.2948178557950243,
+    2.4294512079062827,
+    0.1061099301470847,
+    12.1193204754735,
+    2.1082745962549865
+   ],
+   "mean": 3.6115948131153757,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 4.190789052445464,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 3.907130714417649,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 4.4879660338574485,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 1.4846633975258445,
+     "verdict": "no difference shown",
+     "changed": true
+    },
+    {
+     "rot": "rot4",
+     "mean": 3.987424867330473,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "E32",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1R",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    4.94193898080259,
+    1.2266064635987703,
+    4.076211568933715,
+    18.322411892020178,
+    10.641940143876639
+   ],
+   "mean": 7.841821809846378,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 8.566792517107325,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 9.49562564640828,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 8.783224370074544,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 5.221674289302928,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 7.141792226338813,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1R",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    -6.256367835705227,
+    -4.1575772007310405,
+    -4.626841288829091,
+    -30.34351525677534,
+    -12.59697646295757
+   ],
+   "mean": -11.596255608999654,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -12.93122755232326,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -13.455925211066807,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -13.338609189042295,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -6.909440697055732,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -11.346075395510175,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1R",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -0.01961099910761277,
+    -0.5015195292259875,
+    -0.4445197897482913,
+    0.09821711071833761,
+    0.15323827717405436
+   ],
+   "mean": -0.14283898603789993,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -0.17364598277047172,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.05316885024087803,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.06741878511030208,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.2031030102269593,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.2168583018408885,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1R",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    -0.178679813775517,
+    0.010397849799332448,
+    -0.17619171897763408,
+    -0.03730490911669904,
+    0.22268102966577885
+   ],
+   "mean": -0.03181951248094776,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.004895562842694545,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.04237385305101782,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.0042735391432238146,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.030448163322009947,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.09544464801762942,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1R",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -4.751948408511666,
+    -2.5362803570751993,
+    -2.6677897729499023,
+    -3.9706560740704475,
+    -8.044653614918403
+   ],
+   "mean": -4.394265645505124,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -4.304844954753488,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -4.858761967612605,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -4.825884613643929,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -4.5001680383637925,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -3.4816686531518037,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1R",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    5.090641513166318,
+    3.1679187926462333,
+    1.0793840252687232,
+    5.165532330125686,
+    8.369276675426732
+   ],
+   "mean": 4.574550667326738,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 4.445527955866844,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 4.926208635996865,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 5.448342327841242,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 4.426805251627002,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 3.62586916530174,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1R",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    0.16001329087913518,
+    0.6420362853703665,
+    -1.7645974666588131,
+    1.1575713469385391,
+    0.5473040901741086
+   ],
+   "mean": 0.14846550934066727,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.1455785639560503,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.02507281533324246,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.6267312533405374,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.1038109500588007,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.048755864132306925,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3R",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    13.66619765601267,
+    0.6353086801794916,
+    12.338410631138075,
+    8.336754877116455,
+    10.213891474070635
+   ],
+   "mean": 9.038112663703465,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 7.881091415626164,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 11.138813659584459,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 8.213038171844813,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 9.213452110350218,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 8.744167961111673,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3R",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -13.328696523458547,
+    27.65114240033008,
+    -20.60129957616416,
+    18.27473412933987,
+    16.62304172483325
+   ],
+   "mean": 5.723784430976099,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 10.48690466958476,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.24194493863760336,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 12.305055432761163,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot3",
+     "mean": 2.586047006385156,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 2.998970107511811,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 2
+  },
+  {
+   "item": "E32",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3R",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    -0.05899274632386664,
+    -28.173397287121567,
+    8.678772029952313,
+    -26.825629702080136,
+    -27.020319528462856
+   ],
+   "mean": -14.679913446807223,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -18.33514362192806,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -11.306542486728636,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -20.519584815997106,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -11.643484382988994,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -11.594811926393314,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3R",
+   "model": "biot",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    0.2785083862302571,
+    0.11305379338800492,
+    0.4158830849262287,
+    -0.21414069562381144,
+    -0.18338632955897083
+   ],
+   "mean": 0.08198364787234169,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.03285246328286284,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.07421611149342588,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.001491211391130065,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.15601473374637997,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.14832614223016982,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3R",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    -0.07414898549798465,
+    -0.08602816029707583,
+    -0.049646335644311534,
+    0.8487172043938642,
+    0.500340382262209
+   ],
+   "mean": 0.22784682104334025,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.30334577267867147,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.30631556637844426,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.2972201102152532,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.07262922520570925,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.15972343073862305,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3R",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -12.782605567369643,
+    -17.688792614368978,
+    -5.398663778719637,
+    -5.374366287957699,
+    -8.471855988142622
+   ],
+   "mean": -9.943256847311716,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -9.233419667297234,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -8.0068729055474,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -11.079405114459735,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -11.08547948715022,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -10.31110706210399,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3R",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    15.742702354113703,
+    19.886120996441278,
+    10.427055946956571,
+    6.277886308274844,
+    9.489609723730254
+   ],
+   "mean": 12.36467506590333,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 11.520168243850737,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 10.484313583268843,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 12.84907984564002,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 13.886372255310452,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 13.0834414014466,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E32",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3R",
+   "model": "cbramod",
+   "probe": "linear",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    2.8859478012460755,
+    2.111300221775224,
+    4.978745832592622,
+    1.7522372247110098,
+    1.5180941178498415
+   ],
+   "mean": 2.6492650396349546,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 2.5900943492321744,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 2.7837562440998873,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 2.0668948413955377,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 2.873521993365941,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 2.932057770081233,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    -0.3639911850083237,
+    0.36950227117569057,
+    1.5671287743263065,
+    -1.0917198392048846,
+    0.09162018606325262
+   ],
+   "mean": 0.11450804147040827,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.23413284809009127,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.0507594840440877,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.24864714174356628,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.4160650116392315,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.12023000532219719,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    13.51054937808994,
+    -17.48592540804205,
+    -0.8493203434244521,
+    -0.8694907004975079,
+    6.252042278463676
+   ],
+   "mean": 0.1115710409179215,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -3.2381735433750833,
+     "verdict": "second term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot1",
+     "mean": 4.510945153157914,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.3517938870035149,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.35683647627177884,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -1.4235467684685172,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    -13.301494846221772,
+    17.186231355888623,
+    -0.6791854188220867,
+    1.974143955276027,
+    -6.3941480251671265
+   ],
+   "mean": -0.24289059580926703,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 3.021760466793859,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -4.6001710837337395,
+     "verdict": "second term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.13381689005606212,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.7971492335805905,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 1.2949237615301978,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -0.1549366531401546,
+    0.06980821902226353,
+    0.038623012079767705,
+    0.012933415573634477,
+    -0.05048556064019749
+   ],
+   "mean": -0.016811513420937275,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.017719771508867055,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.038466446531737475,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.03067014479611352,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.024247745669580212,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.00839300161612222,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1Z",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    1.5180306290460948,
+    -0.7468032171114487,
+    0.41604794793730093,
+    0.655139356060431,
+    0.22046930582048674
+   ],
+   "mean": 0.412576804350573,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.1362133481766925,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.7024218097160784,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.41170901845389096,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.35193616642310843,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.4606036789830945,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1Z",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -11.434109565050264,
+    -7.835566205326771,
+    -5.944688380503678,
+    3.383760685660789,
+    -6.022826370801013
+   ],
+   "mean": -5.570685967204187,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -4.104830067742668,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -5.004465907673541,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -5.477185363879315,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -7.809297630420431,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -5.457650866304981,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1Z",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    9.876295766983674,
+    8.503543388887266,
+    5.505212816276966,
+    -3.9807706891215275,
+    6.212327337022714
+   ],
+   "mean": 5.223321724009819,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 4.060078213266355,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 4.403266307790457,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 5.1528489509430315,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 7.524344827292655,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 4.976070320756595,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1Z",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -0.03978316902049528,
+    -0.07882603355095341,
+    -0.02342761628941048,
+    0.05812935259969265,
+    0.4099702720421874
+   ],
+   "mean": 0.06521256115620418,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.09146149370037904,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.10122220983299357,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.08737260551760784,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.06698336329533205,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.02097686656529163,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    0.8895174360206823,
+    -0.15340751944970066,
+    1.5036759924414582,
+    3.984458735262592,
+    2.046356860130601
+   ],
+   "mean": 1.6541203008811265,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 1.8452710170962376,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 2.1060022559638334,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 1.6917313779910437,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 1.0715356922857602,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 1.556061161068758,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -4.800990886066593,
+    11.075182587038995,
+    1.285258543526652,
+    2.1871128308536356,
+    2.930288524104398
+   ],
+   "mean": 2.5353703198914177,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 4.36946062138092,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.40041725310452314,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 2.847898263982609,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 2.622434692150863,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 2.4366407688381724,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    3.9189297444524627,
+    -10.897326467875402,
+    -2.846694666942085,
+    -6.146738241866032,
+    -4.834695769340897
+   ],
+   "mean": -4.16130508031439,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -6.181363786506104,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -2.477299733424138,
+     "verdict": "no difference shown",
+     "changed": true
+    },
+    {
+     "rot": "rot2",
+     "mean": -4.489957683657467,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -3.6649467899264803,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -3.992957408057764,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    0.007456294406551933,
+    0.02444859971389235,
+    -0.05776013097397481,
+    0.024833324250195687,
+    0.14194961489410218
+   ],
+   "mean": 0.02818554045815347,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.03336785197105385,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.02911977564421875,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.04967195831618554,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.029023594510142914,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.00025547815083371006,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3Z",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    0.26694766420791893,
+    -0.9863471608526027,
+    -0.1606573179408315,
+    -1.1573382745653618,
+    0.7373771955641217
+   ],
+   "mean": -0.260003578717351,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -0.39174138944866854,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.07841768318353814,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.28484014391148094,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.03566990475534837,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.5093487722877192,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3Z",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -9.04571756049765,
+    -3.1013991612707628,
+    -18.851351179046198,
+    -5.435082747470332,
+    -6.585741371405462
+   ],
+   "mean": -8.60385840393808,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -8.493393614798189,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -9.97947321460491,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -6.041985210161052,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -9.396052318055018,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -9.108387662071236,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3Z",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    8.643447396151075,
+    4.0710723109517915,
+    19.02310150227342,
+    6.524697077043243,
+    5.855171350603555
+   ],
+   "mean": 8.823497927404617,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 8.868510560218002,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 10.011604331517823,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 6.273597033687416,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 9.39819813999496,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 9.565579571604882,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3Z",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -0.1353225001386562,
+    -0.016674011171573966,
+    0.011093005286390678,
+    -0.06772394499245138,
+    0.006807174762215595
+   ],
+   "mean": -0.04036405525081506,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -0.016624444028854768,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.04628656627062533,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.05322832038511649,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.033524082815405976,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.05215686275407272,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    6.149316917161173,
+    3.689720472112711,
+    0.10391723342998205,
+    0.008992315657536665,
+    -0.29110682659523235
+   ],
+   "mean": 1.932168022353234,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.8778807986512493,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 1.4927799099133647,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 2.389230719584047,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 2.4129619490271583,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 2.4879867345903506,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -22.216768651519907,
+    9.754031868534696,
+    -2.2572353170686767,
+    -6.541637146438504,
+    10.483649766854278
+   ],
+   "mean": -2.1555918959276226,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 2.8597022929704483,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -5.132997837043202,
+     "verdict": "second term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot2",
+     "mean": -2.130181040642359,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -1.0590805832999024,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -5.315402311623098,
+     "verdict": "second term wins",
+     "changed": true
+    }
+   ],
+   "n_changed": 2
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    13.642307384196364,
+    -13.43723491961407,
+    2.183536960108526,
+    6.5208549058077665,
+    -10.137985436650226
+   ],
+   "mean": -0.24570422123032784,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -3.717707122587001,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 3.052178453365608,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.8530145165650413,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -1.9373440029898514,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 2.2273660826246466,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -2.4251443501623697,
+    0.0065174210333367455,
+    0.030218876469831457,
+    -0.011789924973200527,
+    0.0545575036088195
+   ],
+   "mean": -0.4691280948047165,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.019875969034696794,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.5880394737642298,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.5939648376233535,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.5834626372625955,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.6000494944081005,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    0.18985820716173407,
+    -0.010057340071753629,
+    0.848296139889186,
+    -0.002325285664966259,
+    0.6514866669469654
+   ],
+   "mean": 0.3354516776522331,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.3718500452748579,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.4218289320832298,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.2072405620929949,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.41989591848153296,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.25644293032855003,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -19.594032499584046,
+    -6.440733815291651,
+    -8.794585593373782,
+    -6.071248206078437,
+    -4.878341772227927
+   ],
+   "mean": -9.155788377311168,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -6.546227346742949,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -9.834552017816048,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -9.246089073295515,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -9.926923420119351,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -10.225150028581979,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    19.22158751286365,
+    6.471766002749902,
+    7.977400870609642,
+    5.849564917252522,
+    4.378014427206267
+   ],
+   "mean": 8.779666746136396,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 6.169186554454583,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 9.35664193198302,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 8.980233215018085,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 9.512192203357365,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 9.880079825868929,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "E26/D27-B",
+   "setting": "Siena filtered",
+   "dataset": "siena",
+   "tags": "S3FZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -0.18258677955866176,
+    0.020974847386497686,
+    0.031111417125046614,
+    -0.22400857449088107,
+    0.1511593219253058
+   ],
+   "mean": -0.04066995352253855,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -0.005190747013507746,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.05608115374979761,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.05861529618443484,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.005164701719547082,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.08862727238449963,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1RZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    0.7261907057506605,
+    1.2559121645361415,
+    -1.6036071106054663,
+    1.6967963090250322,
+    1.4832747842497156
+   ],
+   "mean": 0.7117133705912166,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.7080940368013557,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.5756636721049855,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 1.2905434908903874,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.4654426359827628,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.518823017176592,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1RZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -5.250608892007399,
+    1.3380944032467,
+    0.5723730896618093,
+    7.658789215926959,
+    8.803753838978025
+   ],
+   "mean": 2.6244803311612186,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 4.593252636953373,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot1",
+     "mean": 2.9460768131398485,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 3.137507141536071,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot3",
+     "mean": 1.3659031099697838,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 1.0796619542070172,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 2
+  },
+  {
+   "item": "D26",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1RZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    4.485514292876573,
+    -2.5547791743801014,
+    0.9939286747974307,
+    -9.427963833518803,
+    -10.318011410629353
+   ],
+   "mean": -3.3642622901708505,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -5.3267064359327065,
+     "verdict": "second term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot1",
+     "mean": -3.566633069118538,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -4.453810031412921,
+     "verdict": "second term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot3",
+     "mean": -1.8483369043338627,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -1.625825010056225,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 2
+  },
+  {
+   "item": "D26",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1RZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -0.038903893380165755,
+    0.03922739340274006,
+    -0.03730534614622627,
+    -0.07237830856681171,
+    -0.0309827874016122
+   ],
+   "mean": -0.028068588418415176,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -0.02535976217797753,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.044892583873703984,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.0257593989864624,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.01699115838131604,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.02734003867261592,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1RZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    0.40163850881373264,
+    1.9372261859348754,
+    -0.9328112577127001,
+    -0.39776361476606326,
+    -1.1186226291732027
+   ],
+   "mean": -0.0220665613806716,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -0.12799282892927266,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.5118897482095583,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.20561961270233553,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.07185770196567631,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.25207245556746116,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1RZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    0.3631084706004799,
+    -2.493554151192072,
+    5.652672285472178,
+    -2.270076938498292,
+    -5.53351254496458
+   ],
+   "mean": -0.8562725757164571,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -1.1611178372956914,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.4469521818475535,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -2.483508791013616,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.5028214850209984,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.3130374165955736,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1RZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    -0.7379081137458883,
+    0.5509853541135783,
+    -4.729710331025686,
+    2.6925593387230577,
+    6.440349066638689
+   ],
+   "mean": 0.8432550629407501,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 1.2385458571124097,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.9163224901475431,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 2.236496411432359,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.3809289939951732,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.5560184379837345,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "CHB-MIT",
+   "dataset": "chbmit",
+   "tags": "S1RZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    0.026838865668324274,
+    -0.0053426111436181145,
+    -0.009849303266207698,
+    0.02471878545870254,
+    -0.2117861074990941
+   ],
+   "mean": -0.03508407415637862,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -0.05056480911255434,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.042519439909568746,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.04139276687892135,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.05003478906014891,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.00909143417930025,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3RZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    1.7014960373929355,
+    -1.2388467687864448,
+    6.685004818442948,
+    0.8592506194374465,
+    0.4922078313772147
+   ],
+   "mean": 1.69982250757282,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 1.6994041251177912,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 2.4344898266626362,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.453526929855288,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 1.9099654796066634,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 2.0017261766217214,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3RZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    25.62523650395196,
+    0.3665996183403166,
+    -19.01737290382139,
+    -9.592323421462424,
+    2.1258811161091273
+   ],
+   "mean": -0.09839581737648188,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -6.529303897708592,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.21464467630568151,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 4.631348454234745,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot3",
+     "mean": 2.2750860836450038,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.6544650507478842,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "D26",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3RZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    -27.274768292747922,
+    0.8625509309402304,
+    12.390220588005974,
+    8.755185709192318,
+    -2.6031164365854806
+   ],
+   "mean": -1.573985500238976,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 4.8512101978882605,
+     "verdict": "first term wins",
+     "changed": true
+    },
+    {
+     "rot": "rot1",
+     "mean": -2.1831196080337776,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -5.0650370223002135,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -4.1562783025967995,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -1.3167027661523498,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 1
+  },
+  {
+   "item": "D26",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3RZ",
+   "model": "biot",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    0.051964248596974016,
+    -0.00969621950589783,
+    0.05785250262753294,
+    0.022112907167340268,
+    0.01497251090086138
+   ],
+   "mean": 0.027441189957362156,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 0.02131042529745919,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 0.03672554232317715,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.01983836178981946,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 0.028773260654867627,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 0.03055835972148735,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3RZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last",
+   "b": "lp",
+   "name": "SA helps? last - lp",
+   "per_rot": [
+    0.622505049859015,
+    -0.8300582804683216,
+    -1.338443377837649,
+    0.27029469444232745,
+    -0.011202454199192857
+   ],
+   "mean": -0.25738087364076423,
+   "verdict": "no difference shown",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -0.477352354515709,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.11421152193387485,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 0.01288475240845699,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.3892997656615371,
+     "verdict": "no difference shown",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.31892547850115704,
+     "verdict": "no difference shown",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3RZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "last",
+   "name": "random init beats pretrained? last_randinit - last",
+   "per_rot": [
+    -9.12179087454497,
+    -13.863015111661241,
+    -5.237639680267463,
+    -11.612211090218622,
+    -11.641881236750933
+   ],
+   "mean": -10.295307598688646,
+   "verdict": "second term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -10.588686779724565,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -9.403380720445497,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -11.559724578293942,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -9.966081725806152,
+     "verdict": "second term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -9.958664189173074,
+     "verdict": "second term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3RZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "lp",
+   "b": "lp_randinit",
+   "name": "pretrained features beat random? lp - lp_randinit",
+   "per_rot": [
+    8.421539314285098,
+    14.683170870080986,
+    6.612884110989469,
+    11.106636225823621,
+    11.544775347706931
+   ],
+   "mean": 10.473801173777222,
+   "verdict": "first term wins",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": 10.986866638650252,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": 9.42145874970128,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": 11.439030439474159,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": 10.315592410765621,
+     "verdict": "first term wins",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": 10.206057630294794,
+     "verdict": "first term wins",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  },
+  {
+   "item": "D26",
+   "setting": "Siena",
+   "dataset": "siena",
+   "tags": "S3RZ",
+   "model": "cbramod",
+   "probe": "linear_z",
+   "seeds_per_rot": 3,
+   "a": "last_randinit",
+   "b": "lp_randinit",
+   "name": "D17",
+   "per_rot": [
+    -0.077746510400857,
+    -0.009902522048577111,
+    0.03680105288435698,
+    -0.23528016995267365,
+    -0.10830834324319483
+   ],
+   "mean": -0.07888729855218912,
+   "verdict": "random features explain it",
+   "drop": [
+    {
+     "rot": "rot0",
+     "mean": -0.07917249559002215,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot1",
+     "mean": -0.09613349267809213,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot2",
+     "mean": -0.10780938641132565,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot3",
+     "mean": -0.03978908070206799,
+     "verdict": "random features explain it",
+     "changed": false
+    },
+    {
+     "rot": "rot4",
+     "mean": -0.0715320373794377,
+     "verdict": "random features explain it",
+     "changed": false
+    }
+   ],
+   "n_changed": 0
+  }
+ ],
+ "tost": [
+  {
+   "item": "E27",
+   "setting": "CHB-MIT",
+   "tags": "S1E,S1M,S1N",
+   "lp_tags": "S1E,S1M,S1N",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    -2.0363676804778734,
+    1.593257581993612,
+    -0.22001361003630393,
+    -1.454837369143604,
+    6.172608649713723
+   ],
+   "mean": 0.8109295144099107,
+   "sd": 3.3039099930138858,
+   "ci90": [
+    -2.3389880962320566,
+    3.9608471250518775
+   ],
+   "tost_p": 0.10629229232501385,
+   "equivalent": false,
+   "d19": "perturbation alone explains it",
+   "last": [
+    62.62043349856601,
+    66.64756468820336,
+    90.87459896632481,
+    39.805026753211656,
+    74.93625843672491
+   ],
+   "last_noise": [
+    64.65680117904388,
+    65.05430710620975,
+    91.09461257636111,
+    41.25986412235526,
+    68.76364978701119
+   ],
+   "lp": [
+    60.96561796804952,
+    63.58407653642752,
+    90.01237034962999,
+    40.89413850113344,
+    69.88773608551747
+   ],
+   "last_lp": [
+    1.6548155305164869,
+    3.063488151775843,
+    0.8622286166948214,
+    -1.089111747921784,
+    5.048522351207438
+   ],
+   "noise_lp": [
+    3.6911832109943603,
+    1.470230569782231,
+    1.0822422267311254,
+    0.36572562122182006,
+    -1.1240862985062847
+   ]
+  },
+  {
+   "item": "E27",
+   "setting": "Siena",
+   "tags": "S3E,S3M,S3N",
+   "lp_tags": "S3E,S3M,S3N",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    1.0063224446786023,
+    4.521998446405632,
+    2.810483017501447,
+    3.182207931404079,
+    -3.5993937610241176
+   ],
+   "mean": 1.5843236157931286,
+   "sd": 3.157991678718225,
+   "ci90": [
+    -1.4264768067635154,
+    4.5951240383497725
+   ],
+   "tost_p": 0.18643741853612605,
+   "equivalent": false,
+   "d19": "perturbation alone explains it",
+   "last": [
+    71.50093357735751,
+    54.59144040959841,
+    63.45976809243661,
+    45.026450124439116,
+    68.33182174011408
+   ],
+   "last_noise": [
+    70.49461113267891,
+    50.06944196319278,
+    60.649285074935165,
+    41.844242193035036,
+    71.9312155011382
+   ],
+   "lp": [
+    64.01506048225586,
+    36.27130071843815,
+    60.086091921487025,
+    35.037440732464994,
+    61.33845072706634
+   ],
+   "last_lp": [
+    7.4858730951016526,
+    18.320139691160264,
+    3.3736761709495866,
+    9.989009391974122,
+    6.993371013047742
+   ],
+   "noise_lp": [
+    6.47955065042305,
+    13.798141244754632,
+    0.5631931534481396,
+    6.806801460570043,
+    10.59276477407186
+   ]
+  },
+  {
+   "item": "E27",
+   "setting": "Siena",
+   "tags": "S3E,S3M,S3N",
+   "lp_tags": "S3E,S3M,S3N",
+   "model": "cbramod",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    -0.06864720635448407,
+    -0.0930303956637033,
+    -0.05827015420551618,
+    -0.13048849165259924,
+    -0.02002110224175624
+   ],
+   "mean": -0.0740914700236118,
+   "sd": 0.041057476987150045,
+   "ci90": [
+    -0.11323529357928203,
+    -0.034947646467941566
+   ],
+   "tost_p": 4.65150278875697e-09,
+   "equivalent": true,
+   "d19": "perturbation alone explains it",
+   "last": [
+    81.27632041114377,
+    80.15567703763695,
+    75.56657205735722,
+    81.74532672080221,
+    89.65910069212951
+   ],
+   "last_noise": [
+    81.34496761749826,
+    80.24870743330065,
+    75.62484221156274,
+    81.87581521245481,
+    89.67912179437127
+   ],
+   "lp": [
+    81.7558032770722,
+    79.8469431641186,
+    75.0421406695075,
+    80.77717223463587,
+    89.64608697567236
+   ],
+   "last_lp": [
+    -0.47948286592843203,
+    0.30873387351834936,
+    0.5244313878497167,
+    0.9681544861663411,
+    0.013013716457152213
+   ],
+   "noise_lp": [
+    -0.41083565957394796,
+    0.40176426918205266,
+    0.5827015420552328,
+    1.0986429778189404,
+    0.03303481869890845
+   ]
+  },
+  {
+   "item": "E27",
+   "setting": "Siena filtered",
+   "tags": "S3FE,S3FM,S3FN",
+   "lp_tags": "S3FE,S3FM,S3FN",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.019657503435425383,
+    4.133732186267224,
+    -1.0259117302793186,
+    2.6962686431594705,
+    0.4540785988431537
+   ],
+   "mean": 1.255565040285191,
+   "sd": 2.1056149459022793,
+   "ci90": [
+    -0.7519090172263532,
+    3.263039097796735
+   ],
+   "tost_p": 0.06879429460977077,
+   "equivalent": false,
+   "d19": "perturbation alone explains it",
+   "last": [
+    86.3445670727574,
+    53.22073082455631,
+    74.14271470065461,
+    77.91910549167075,
+    77.73973768351841
+   ],
+   "last_noise": [
+    86.32490956932197,
+    49.08699863828909,
+    75.16862643093393,
+    75.22283684851128,
+    77.28565908467526
+   ],
+   "lp": [
+    85.02233807208573,
+    44.28614058838085,
+    73.271850032769,
+    72.90736098243319,
+    73.34870953985501
+   ],
+   "last_lp": [
+    1.322229000671669,
+    8.93459023617546,
+    0.8708646678856127,
+    5.011744509237559,
+    4.391028143663405
+   ],
+   "noise_lp": [
+    1.3025714972362437,
+    4.800858049908236,
+    1.8967763981649313,
+    2.3154758660780885,
+    3.9369495448202514
+   ]
+  },
+  {
+   "item": "E27",
+   "setting": "Siena filtered",
+   "tags": "S3FE,S3FM,S3FN",
+   "lp_tags": "S3FE,S3FM,S3FN",
+   "model": "cbramod",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    -0.011831475421942628,
+    -0.017765761903078214,
+    -0.05106607605975455,
+    0.0024161171362635514,
+    -0.01801899201758772
+   ],
+   "mean": -0.01925323765321991,
+   "sd": 0.01962419505028643,
+   "ci90": [
+    -0.03796276597399047,
+    -0.0005437093324493561
+   ],
+   "tost_p": 2.2543597977895325e-10,
+   "equivalent": true,
+   "d19": "perturbation alone explains it",
+   "last": [
+    92.21587512863648,
+    89.2760964816513,
+    81.25996139124138,
+    90.72474430940832,
+    94.62953953466955
+   ],
+   "last_noise": [
+    92.22770660405843,
+    89.29386224355437,
+    81.31102746730113,
+    90.72232819227206,
+    94.64755852668713
+   ],
+   "lp": [
+    91.89389877926288,
+    89.36856446027151,
+    81.09790150941376,
+    90.52429741856959,
+    94.51722115109324
+   ],
+   "last_lp": [
+    0.32197634937359965,
+    -0.09246797862022049,
+    0.16205988182761644,
+    0.2004468908387338,
+    0.11231838357630863
+   ],
+   "noise_lp": [
+    0.3338078247955423,
+    -0.07470221671714228,
+    0.213125957887371,
+    0.19803077370247024,
+    0.13033737559389635
+   ]
+  },
+  {
+   "item": "A1",
+   "setting": "CHB-MIT paper split, q95",
+   "tags": "P1QN",
+   "lp_tags": "P1QN",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "seed",
+   "n_seeds": null,
+   "registered": true,
+   "per_unit": [
+    6.520169899777365,
+    10.56280488499852,
+    11.19596364555077,
+    7.113769594322484,
+    7.489165184982561
+   ],
+   "mean": 8.57637464192634,
+   "sd": 2.1422749315086773,
+   "ci90": [
+    6.5339492889764665,
+    10.618799994876213
+   ],
+   "tost_p": 0.9978307757438565,
+   "equivalent": false,
+   "d19": "the gain needs EEG data",
+   "last": [
+    39.59575193568731,
+    43.85676911182536,
+    43.345861162400176,
+    40.94187619199586,
+    41.541602080436455
+   ],
+   "last_noise": [
+    33.075582035909946,
+    33.29396422682684,
+    32.14989751684941,
+    33.828106597673376,
+    34.052436895453894
+   ],
+   "lp": [
+    32.65396692425175,
+    33.159282940877,
+    33.045319112965124,
+    33.1004192406179,
+    33.33575531696642
+   ],
+   "last_lp": [
+    6.941785011435563,
+    10.697486170948359,
+    10.300542049435052,
+    7.841456951377957,
+    8.205846763470035
+   ],
+   "noise_lp": [
+    0.4216151116581983,
+    0.13468128594983853,
+    -0.8954215961157175,
+    0.7276873570554727,
+    0.7166815784874743
+   ]
+  },
+  {
+   "item": "A1",
+   "setting": "CHB-MIT paper split, q95",
+   "tags": "P1QN",
+   "lp_tags": "P1QN",
+   "model": "biot",
+   "probe": "mlp_fullft",
+   "unit": "seed",
+   "n_seeds": null,
+   "registered": true,
+   "per_unit": [
+    7.263410190947287,
+    9.908216318280935,
+    12.633897703009719,
+    6.5348205262638075,
+    8.940681346736863
+   ],
+   "mean": 9.056205217047722,
+   "sd": 2.403676713384889,
+   "ci90": [
+    6.764561792804704,
+    11.34784864129074
+   ],
+   "tost_p": 0.9975579239702231,
+   "equivalent": false,
+   "d19": "the gain needs EEG data",
+   "last": [
+    38.85344956955177,
+    42.87891696490308,
+    43.51380910589862,
+    39.537078194928846,
+    40.871472452073206
+   ],
+   "last_noise": [
+    31.590039378604484,
+    32.97070064662214,
+    30.879911402888904,
+    33.00225766866504,
+    31.930791105336343
+   ],
+   "lp": [
+    32.02315891251985,
+    32.70745239614914,
+    32.48495045856223,
+    32.60935018654023,
+    32.768275053758536
+   ],
+   "last_lp": [
+    6.830290657031924,
+    10.17146456875394,
+    11.028858647336392,
+    6.927728008388613,
+    8.10319739831467
+   ],
+   "noise_lp": [
+    -0.43311953391536306,
+    0.26324825047300493,
+    -1.605039055673327,
+    0.3929074821248051,
+    -0.837483948422193
+   ]
+  },
+  {
+   "item": "A1",
+   "setting": "CHB-MIT paper split, q95",
+   "tags": "P1QN",
+   "lp_tags": "P1QN",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "seed",
+   "n_seeds": null,
+   "registered": true,
+   "per_unit": [
+    1.1069415000721818,
+    -0.018461688967903456,
+    -0.4323596959128082,
+    0.5819171852561027,
+    1.042533356888299
+   ],
+   "mean": 0.4561141314671744,
+   "sd": 0.6704286187381011,
+   "ci90": [
+    -0.18306639018956017,
+    1.095294653123909
+   ],
+   "tost_p": 0.0005289507391151239,
+   "equivalent": true,
+   "d19": "perturbation alone explains it",
+   "last": [
+    66.10945608896184,
+    67.37163011845875,
+    72.31804491782353,
+    72.91749773948195,
+    75.48865894291336
+   ],
+   "last_noise": [
+    65.00251458888965,
+    67.39009180742666,
+    72.75040461373634,
+    72.33558055422584,
+    74.44612558602506
+   ],
+   "lp": [
+    68.1807151215361,
+    66.8236088315971,
+    72.04645032179138,
+    70.5865403246028,
+    73.47629922800459
+   ],
+   "last_lp": [
+    -2.071259032574261,
+    0.5480212868616547,
+    0.27159459603214486,
+    2.330957414879151,
+    2.0123597149087686
+   ],
+   "noise_lp": [
+    -3.178200532646443,
+    0.5664829758295582,
+    0.7039542919449531,
+    1.7490402296230485,
+    0.9698263580204696
+   ]
+  },
+  {
+   "item": "A2",
+   "setting": "Siena filtered, q95",
+   "tags": "S3FQN",
+   "lp_tags": "S3FQN",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.387634875738712,
+    6.648364954404517,
+    3.0735912520815276,
+    -2.925627191309246,
+    -0.016617514860669758
+   ],
+   "mean": 1.4334692752109681,
+   "sd": 3.6084408107302424,
+   "ci90": [
+    -2.006785235569404,
+    4.8737237859913405
+   ],
+   "tost_p": 0.19332305185086907,
+   "equivalent": false,
+   "d19": "perturbation alone explains it",
+   "last": [
+    71.6819489890867,
+    35.25805678956471,
+    62.15748752355669,
+    50.276218504187334,
+    70.08627092955975
+   ],
+   "last_noise": [
+    71.294314113348,
+    28.609691835160195,
+    59.08389627147516,
+    53.20184569549658,
+    70.10288844442042
+   ],
+   "lp": [
+    67.86965657910143,
+    28.101299911204276,
+    57.219123831090506,
+    52.22970370774067,
+    65.31464163228041
+   ],
+   "last_lp": [
+    3.8122924099852753,
+    7.1567568783604365,
+    4.938363692466183,
+    -1.9534852035533348,
+    4.771629297279333
+   ],
+   "noise_lp": [
+    3.4246575342465633,
+    0.5083919239559194,
+    1.8647724403846553,
+    0.9721419877559114,
+    4.788246812140002
+   ]
+  },
+  {
+   "item": "A2",
+   "setting": "Siena filtered, q95",
+   "tags": "S3FQN",
+   "lp_tags": "S3FQN",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.24260686841797963,
+    0.6496909352929308,
+    -0.6760357934303727,
+    -0.4853125510926972,
+    2.060171420677392
+   ],
+   "mean": 0.3582241759730465,
+   "sd": 1.0927250971276559,
+   "ci90": [
+    -0.6835699510797335,
+    1.4000183030258264
+   ],
+   "tost_p": 0.002834900871874685,
+   "equivalent": true,
+   "d19": "perturbation alone explains it",
+   "last": [
+    84.00680309836763,
+    58.53983963835923,
+    77.42713680608152,
+    63.14569367994623,
+    75.93964038096154
+   ],
+   "last_noise": [
+    83.76419622994965,
+    57.8901487030663,
+    78.1031725995119,
+    63.631006231038924,
+    73.87946896028414
+   ],
+   "lp": [
+    84.20374786632897,
+    58.373562693620336,
+    77.67908828247126,
+    63.619879375806136,
+    73.38174435855392
+   ],
+   "last_lp": [
+    -0.19694476796134097,
+    0.16627694473889676,
+    -0.2519514763897348,
+    -0.47418569585990866,
+    2.5578960224076184
+   ],
+   "noise_lp": [
+    -0.4395516363793206,
+    -0.483413990554034,
+    0.42408431704063787,
+    0.011126855232788557,
+    0.49772460173022637
+   ]
+  },
+  {
+   "item": "A3",
+   "setting": "CHB-MIT, E32 partition",
+   "tags": "S1R,S1RN",
+   "lp_tags": "S1R,S1RN",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.35169604971513735,
+    1.1647018149649284,
+    -2.1349436245340314,
+    4.616445425013083,
+    3.085084015603883
+   ],
+   "mean": 1.4165967361526,
+   "sd": 2.5900668374664653,
+   "ci90": [
+    -1.0527493299710229,
+    3.885942802276223
+   ],
+   "tost_p": 0.12170750595611396,
+   "equivalent": false,
+   "d19": "perturbation alone explains it",
+   "last": [
+    54.65530028899661,
+    78.40839188075812,
+    56.078604652333645,
+    56.66206300596796,
+    77.2292617481426
+   ],
+   "last_noise": [
+    54.30360423928147,
+    77.24369006579319,
+    58.21354827686768,
+    52.045617580954875,
+    74.14417773253872
+   ],
+   "lp": [
+    53.36048243320158,
+    75.97894067285183,
+    55.97249472218656,
+    44.54274253049446,
+    75.12098715188762
+   ],
+   "last_lp": [
+    1.2948178557950243,
+    2.4294512079062827,
+    0.1061099301470847,
+    12.1193204754735,
+    2.1082745962549865
+   ],
+   "noise_lp": [
+    0.9431218060798869,
+    1.2647493929413542,
+    2.241053554681116,
+    7.502875050460418,
+    -0.9768094193488963
+   ]
+  },
+  {
+   "item": "A3",
+   "setting": "CHB-MIT, E32 partition",
+   "tags": "S1RZ,S1RN",
+   "lp_tags": "S1RZ,S1RN",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.7144241062860957,
+    0.4429207130076236,
+    -2.2370860344786934,
+    1.1261895702408822,
+    1.438639818410124
+   ],
+   "mean": 0.2970176346932064,
+   "sd": 1.4669717606309087,
+   "ci90": [
+    -1.1015798431123374,
+    1.69561511249875
+   ],
+   "tost_p": 0.007305697912673157,
+   "equivalent": true,
+   "d19": "perturbation alone explains it",
+   "last": [
+    64.59568613114078,
+    82.35582637650687,
+    65.87315490426654,
+    73.60739221245744,
+    80.00437125382871
+   ],
+   "last_noise": [
+    63.881262024854685,
+    81.91290566349925,
+    68.11024093874524,
+    72.48120264221656,
+    78.56573143541858
+   ],
+   "lp": [
+    63.86949542539012,
+    81.09991421197073,
+    67.47676201487201,
+    71.91059590343241,
+    78.52109646957899
+   ],
+   "last_lp": [
+    0.7261907057506605,
+    1.2559121645361415,
+    -1.6036071106054663,
+    1.6967963090250322,
+    1.4832747842497156
+   ],
+   "noise_lp": [
+    0.01176659946456482,
+    0.8129914515285179,
+    0.633478923873227,
+    0.57060673878415,
+    0.0446349658395917
+   ]
+  },
+  {
+   "item": "A3",
+   "setting": "Siena, E32 partition",
+   "tags": "S3R,S3RN",
+   "lp_tags": "S3R,S3RN",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.19493255307016,
+    -0.13688173706741225,
+    2.527187557501655,
+    2.2645970612789057,
+    3.25975259810766
+   ],
+   "mean": 1.6219176065781937,
+   "sd": 1.503721674642721,
+   "ci90": [
+    0.18828309641397256,
+    3.055552116742415
+   ],
+   "tost_p": 0.054892529611921405,
+   "equivalent": false,
+   "d19": "perturbation alone explains it",
+   "last": [
+    78.2328424710466,
+    44.508123162617984,
+    64.1954213876492,
+    48.49396863919029,
+    63.44472235148131
+   ],
+   "last_noise": [
+    78.03790991797644,
+    44.6450048996854,
+    61.66823383014755,
+    46.22937157791139,
+    60.18496975337365
+   ],
+   "lp": [
+    64.56664481503392,
+    43.87281448243849,
+    51.85701075651113,
+    40.15721376207384,
+    53.230830877410675
+   ],
+   "last_lp": [
+    13.66619765601267,
+    0.6353086801794916,
+    12.338410631138075,
+    8.336754877116455,
+    10.213891474070635
+   ],
+   "noise_lp": [
+    13.47126510294251,
+    0.7721904172469038,
+    9.81122307363642,
+    6.072157815837549,
+    6.954138875962975
+   ]
+  },
+  {
+   "item": "A3",
+   "setting": "Siena, E32 partition",
+   "tags": "S3RZ,S3RN",
+   "lp_tags": "S3RZ,S3RN",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.7862590537710048,
+    -1.3732528753417057,
+    2.1094332325982634,
+    0.5062722491151135,
+    0.1091700704892844
+   ],
+   "mean": 0.42757634612639206,
+   "sd": 1.2557724074988497,
+   "ci90": [
+    -0.7696655974201806,
+    1.6248182896729646
+   ],
+   "tost_p": 0.00508965417125278,
+   "equivalent": true,
+   "d19": "perturbation alone explains it",
+   "last": [
+    52.559905451715885,
+    72.7633194079117,
+    69.84239481292279,
+    81.95302009717476,
+    78.26029117763646
+   ],
+   "last_noise": [
+    51.77364639794488,
+    74.1365722832534,
+    67.73296158032453,
+    81.44674784805964,
+    78.15112110714718
+   ],
+   "lp": [
+    50.85840941432295,
+    74.00216617669814,
+    63.15738999447984,
+    81.09376947773731,
+    77.76808334625925
+   ],
+   "last_lp": [
+    1.7014960373929355,
+    -1.2388467687864448,
+    6.685004818442948,
+    0.8592506194374465,
+    0.4922078313772147
+   ],
+   "noise_lp": [
+    0.9152369836219307,
+    0.13440610655526086,
+    4.575571585844685,
+    0.35297837032233303,
+    0.3830377608879303
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR1",
+   "tags": "S1LRN1",
+   "lp_tags": "S1E,S1M,S1Z",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    -3.927978999279631,
+    -0.2283547463721476,
+    -0.381082911316625,
+    -1.658733705193221,
+    15.37180249895846
+   ],
+   "mean": 1.835130427359367,
+   "sd": 7.7108945693560536,
+   "ci90": [
+    -5.516366026592627,
+    9.186626881311362
+   ],
+   "tost_p": 0.3762494495020818,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    64.24026023421115,
+    71.49446227246253,
+    91.9676257097005,
+    40.83863370763869,
+    85.7538720475911
+   ],
+   "last_noise": [
+    68.16823923349078,
+    71.72281701883468,
+    92.34870862101712,
+    42.49736741283191,
+    70.38206954863264
+   ],
+   "lp": [
+    60.754365951658905,
+    64.20733282967687,
+    90.11428935907014,
+    40.93133931065863,
+    68.67243290607213
+   ],
+   "last_lp": [
+    3.4858942825522448,
+    7.287129442785655,
+    1.8533363506303573,
+    -0.09270560301993669,
+    17.08143914151897
+   ],
+   "noise_lp": [
+    7.413873281831876,
+    7.515484189157803,
+    2.2344192619469823,
+    1.5660281021732843,
+    1.7096366425605112
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR1",
+   "tags": "S1LRN1",
+   "lp_tags": "S1E,S1M,S1Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    -5.665382125387069,
+    3.8996747920793666,
+    1.553027219741196,
+    -2.4975304442680795,
+    8.371456905174327
+   ],
+   "mean": 1.1322492694679482,
+   "sd": 5.468658854099306,
+   "ci90": [
+    -4.081520133313759,
+    6.346018672249656
+   ],
+   "tost_p": 0.24380302717514807,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    48.30468418675311,
+    84.52838421581332,
+    91.7430189136509,
+    63.07507177705993,
+    83.56613153945212
+   ],
+   "last_noise": [
+    53.970066312140176,
+    80.62870942373395,
+    90.1899916939097,
+    65.57260222132801,
+    75.19467463427779
+   ],
+   "lp": [
+    49.914429725761195,
+    81.35189485833054,
+    88.25742998741515,
+    67.7373632728215,
+    77.02850178539309
+   ],
+   "last_lp": [
+    -1.6097455390080881,
+    3.1764893574827795,
+    3.4855889262357493,
+    -4.662291495761565,
+    6.537629754059026
+   ],
+   "noise_lp": [
+    4.055636586378981,
+    -0.7231854345965871,
+    1.9325617064945533,
+    -2.1647610514934854,
+    -1.833827151115301
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR3",
+   "tags": "S1LRN3",
+   "lp_tags": "S1E,S1M,S1Z",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    -2.8539695965572776,
+    2.167952004981956,
+    0.3822619869014545,
+    0.5053665749491429,
+    19.69472149508681
+   ],
+   "mean": 3.979266493072417,
+   "sd": 8.97156513115569,
+   "ci90": [
+    -4.5741417599985805,
+    12.532674746143416
+   ],
+   "tost_p": 0.5904085174339042,
+   "equivalent": null,
+   "d19": "the gain needs EEG data",
+   "last": [
+    63.67821328668282,
+    70.17728838741675,
+    92.44779358733462,
+    42.3962323435102,
+    86.65210497929996
+   ],
+   "last_noise": [
+    66.5321828832401,
+    68.0093363824348,
+    92.06553160043316,
+    41.890865768561056,
+    66.95738348421315
+   ],
+   "lp": [
+    60.754365951658905,
+    64.20733282967687,
+    90.11428935907014,
+    40.93133931065863,
+    68.67243290607213
+   ],
+   "last_lp": [
+    2.9238473350239147,
+    5.96995555773988,
+    2.3335042282644736,
+    1.4648930328515704,
+    17.97967207322783
+   ],
+   "noise_lp": [
+    5.777816931581192,
+    3.802003552757924,
+    1.951242241363019,
+    0.9595264579024274,
+    -1.7150494218589785
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR3",
+   "tags": "S1LRN3",
+   "lp_tags": "S1E,S1M,S1Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    -3.9893716486280866,
+    1.652443687679451,
+    1.7477238514063629,
+    -5.18791966700087,
+    -2.245007338530044
+   ],
+   "mean": -1.6044262230146373,
+   "sd": 3.1931115643063204,
+   "ci90": [
+    -4.648709623718866,
+    1.4398571776895916
+   ],
+   "tost_p": 0.1918808621511931,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    47.950602484444985,
+    83.79918902695267,
+    91.2950128085964,
+    63.21687824935856,
+    73.69245045021962
+   ],
+   "last_noise": [
+    51.93997413307307,
+    82.14674533927322,
+    89.54728895719003,
+    68.40479791635943,
+    75.93745778874967
+   ],
+   "lp": [
+    49.914429725761195,
+    81.35189485833054,
+    88.25742998741515,
+    67.7373632728215,
+    77.02850178539309
+   ],
+   "last_lp": [
+    -1.96382724131621,
+    2.447294168622136,
+    3.037582821181246,
+    -4.520485023462939,
+    -3.3360513351734653
+   ],
+   "noise_lp": [
+    2.0255444073118767,
+    0.7948504809426851,
+    1.2898589697748832,
+    0.6674346435379306,
+    -1.091043996643421
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR4",
+   "tags": "S1LRN4",
+   "lp_tags": "S1E,S1M,S1Z",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    -8.754957615856526,
+    0.9883340101734319,
+    0.4114689676539882,
+    0.41469268944808846,
+    18.103023507344616
+   ],
+   "mean": 2.23251231175272,
+   "sd": 9.7566165716652,
+   "ci90": [
+    -7.069356814329222,
+    11.53438143783466
+   ],
+   "tost_p": 0.434460559256655,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    59.43061943011428,
+    73.0596340148781,
+    92.77630109215072,
+    43.49667601133217,
+    87.74812723455074
+   ],
+   "last_noise": [
+    68.1855770459708,
+    72.07130000470467,
+    92.36483212449673,
+    43.08198332188408,
+    69.64510372720612
+   ],
+   "lp": [
+    60.754365951658905,
+    64.20733282967687,
+    90.11428935907014,
+    40.93133931065863,
+    68.67243290607213
+   ],
+   "last_lp": [
+    -1.3237465215446278,
+    8.852301185201227,
+    2.6620117330805755,
+    2.565336700673541,
+    19.075694328478605
+   ],
+   "noise_lp": [
+    7.431211094311898,
+    7.8639671750277955,
+    2.2505427654265873,
+    2.1506440112254523,
+    0.9726708211339883
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR4",
+   "tags": "S1LRN4",
+   "lp_tags": "S1E,S1M,S1Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    -5.327092810127176,
+    3.606527382547668,
+    2.6382739583541905,
+    -0.9031262265954183,
+    13.110991343224072
+   ],
+   "mean": 2.625114729480667,
+   "sd": 6.83013618672212,
+   "ci90": [
+    -3.8866747269909325,
+    9.136904185952266
+   ],
+   "tost_p": 0.4541197616663841,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    48.658570725203475,
+    84.15908990929792,
+    92.98880460629316,
+    64.40707566313654,
+    88.04886799493649
+   ],
+   "last_noise": [
+    53.98566353533065,
+    80.55256252675025,
+    90.35053064793897,
+    65.31020188973196,
+    74.93787665171241
+   ],
+   "lp": [
+    49.914429725761195,
+    81.35189485833054,
+    88.25742998741515,
+    67.7373632728215,
+    77.02850178539309
+   ],
+   "last_lp": [
+    -1.2558590005577202,
+    2.8071950509673798,
+    4.731374618878007,
+    -3.3302876096849587,
+    11.020366209543397
+   ],
+   "noise_lp": [
+    4.071233809569456,
+    -0.7993323315802883,
+    2.0931006605238167,
+    -2.4271613830895404,
+    -2.0906251336806747
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR5",
+   "tags": "S1LRN5",
+   "lp_tags": "S1E,S1M,S1Z",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    -12.157560048741942,
+    2.433409344416674,
+    1.8597289291024595,
+    -0.9266608024753111,
+    16.775997316759813
+   ],
+   "mean": 1.5969829478123387,
+   "sd": 10.328690050083322,
+   "ci90": [
+    -8.250295807484909,
+    11.444261703109587
+   ],
+   "tost_p": 0.3882348352739247,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    57.7634821008418,
+    75.5032548485316,
+    92.84349419475743,
+    44.21155650805437,
+    88.1580675396487
+   ],
+   "last_noise": [
+    69.92104214958374,
+    73.06984550411492,
+    90.98376526565497,
+    45.13821731052968,
+    71.38207022288888
+   ],
+   "lp": [
+    60.754365951658905,
+    64.20733282967687,
+    90.11428935907014,
+    40.93133931065863,
+    68.67243290607213
+   ],
+   "last_lp": [
+    -2.990883850817106,
+    11.295922018854725,
+    2.729204835687284,
+    3.280217197395743,
+    19.485634633576566
+   ],
+   "noise_lp": [
+    9.166676197924836,
+    8.862512674438051,
+    0.8694759065848245,
+    4.206877999871054,
+    2.709637316816753
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR5",
+   "tags": "S1LRN5",
+   "lp_tags": "S1E,S1M,S1Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    -8.168102164920896,
+    6.49387689438565,
+    4.033020935126274,
+    2.0159825151254935,
+    15.385534851144072
+   ],
+   "mean": 3.952062606172119,
+   "sd": 8.482901359510329,
+   "ci90": [
+    -4.1354580702871715,
+    12.039583282631408
+   ],
+   "tost_p": 0.592895587061508,
+   "equivalent": null,
+   "d19": "the gain needs EEG data",
+   "last": [
+    47.54971322713515,
+    86.00742675755232,
+    93.87977378227419,
+    65.64108777538418,
+    88.89490225569429
+   ],
+   "last_noise": [
+    55.717815392056046,
+    79.51354986316667,
+    89.84675284714791,
+    63.625105260258685,
+    73.50936740455022
+   ],
+   "lp": [
+    49.914429725761195,
+    81.35189485833054,
+    88.25742998741515,
+    67.7373632728215,
+    77.02850178539309
+   ],
+   "last_lp": [
+    -2.364716498626045,
+    4.655531899221785,
+    5.6223437948590345,
+    -2.0962754974373183,
+    11.866400470301201
+   ],
+   "noise_lp": [
+    5.803385666294851,
+    -1.8383449951638653,
+    1.5893228597327607,
+    -4.112258012562812,
+    -3.5191343808428712
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR1",
+   "tags": "S3LRN1",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    7.158412363891813,
+    -5.088650159395613,
+    4.7550740936249625,
+    10.227505586135464,
+    -0.7646058946129131
+   ],
+   "mean": 3.257547197928743,
+   "sd": 6.161906799176318,
+   "ci90": [
+    -2.617158463817892,
+    9.132252859675377
+   ],
+   "tost_p": 0.5349839430130995,
+   "equivalent": null,
+   "d19": "unclear",
+   "last": [
+    74.97032887804336,
+    67.78729916749043,
+    61.34661433828311,
+    75.13635620469779,
+    75.63411836075224
+   ],
+   "last_noise": [
+    67.81191651415155,
+    72.87594932688604,
+    56.59154024465815,
+    64.90885061856233,
+    76.39872425536515
+   ],
+   "lp": [
+    63.88904294455844,
+    42.01324789887608,
+    60.29583897546533,
+    33.96626519156357,
+    60.941432269612186
+   ],
+   "last_lp": [
+    11.08128593348492,
+    25.77405126861435,
+    1.050775362817781,
+    41.17009101313422,
+    14.692686091140054
+   ],
+   "noise_lp": [
+    3.922873569593108,
+    30.862701428009963,
+    -3.7042987308071815,
+    30.942585426998754,
+    15.457291985752967
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR1",
+   "tags": "S3LRN1",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    1.6100049914036703,
+    1.6853157541615644,
+    1.0710487862722147,
+    7.297400403291718,
+    -2.173090437320937
+   ],
+   "mean": 1.898135899561646,
+   "sd": 3.410986880466539,
+   "ci90": [
+    -1.3538678375768134,
+    5.150139636700105
+   ],
+   "tost_p": 0.25503333490375096,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    70.15824598376868,
+    78.50883722592094,
+    72.65268182965734,
+    75.54820426181263,
+    73.94273564336811
+   ],
+   "last_noise": [
+    68.54824099236501,
+    76.82352147175938,
+    71.58163304338512,
+    68.25080385852091,
+    76.11582608068905
+   ],
+   "lp": [
+    68.32011535688537,
+    76.50790626029719,
+    74.25734242194733,
+    68.10834377895254,
+    64.1548191794151
+   ],
+   "last_lp": [
+    1.8381306268833129,
+    2.000930965623752,
+    -1.6046605922899886,
+    7.439860482860084,
+    9.78791646395301
+   ],
+   "noise_lp": [
+    0.2281256354796426,
+    0.3156152114621875,
+    -2.6757093785622033,
+    0.14246007956836593,
+    11.961006901273947
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR2",
+   "tags": "S3LRN2",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    7.500231083504346,
+    -9.893147378408742,
+    2.378493340371641,
+    5.593765327810772,
+    4.47471635103399
+   ],
+   "mean": 2.0108117448624014,
+   "sd": 6.9079942734038005,
+   "ci90": [
+    -4.575206900324414,
+    8.596830390049217
+   ],
+   "tost_p": 0.3824250448042297,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    72.85304937792321,
+    76.18286229251774,
+    61.900499567755304,
+    79.22480789143822,
+    76.5422755584386
+   ],
+   "last_noise": [
+    65.35281829441887,
+    86.07600967092648,
+    59.52200622738366,
+    73.63104256362745,
+    72.06755920740461
+   ],
+   "lp": [
+    63.88904294455844,
+    42.01324789887608,
+    60.29583897546533,
+    33.96626519156357,
+    60.941432269612186
+   ],
+   "last_lp": [
+    8.964006433364773,
+    34.16961439364166,
+    1.6046605922899744,
+    45.258542699874646,
+    15.600843288826418
+   ],
+   "noise_lp": [
+    1.463775349860427,
+    44.0627617720504,
+    -0.7738327480816665,
+    39.664777372063874,
+    11.126126937792428
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR2",
+   "tags": "S3LRN2",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    1.0918233412826197,
+    -6.132562358816756,
+    -8.502979810730395,
+    8.612349446836348,
+    -0.6276615552792606
+   ],
+   "mean": -1.1118061873414888,
+   "sd": 6.698638331526382,
+   "ci90": [
+    -7.498226789722467,
+    5.27461441503949
+   ],
+   "tost_p": 0.28135743626937026,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    69.95692603479193,
+    76.10663824144763,
+    66.17857443406547,
+    79.03155485312551,
+    76.32124258968953
+   ],
+   "last_noise": [
+    68.86510269350931,
+    82.23920060026438,
+    74.68155424479586,
+    70.41920540628917,
+    76.9489041449688
+   ],
+   "lp": [
+    68.32011535688537,
+    76.50790626029719,
+    74.25734242194733,
+    68.10834377895254,
+    64.1548191794151
+   ],
+   "last_lp": [
+    1.636810677906567,
+    -0.40126801884956365,
+    -8.07876798788186,
+    10.923211074172968,
+    12.166423410274433
+   ],
+   "noise_lp": [
+    0.5449873366239473,
+    5.731294339967192,
+    0.42421182284853387,
+    2.310861627336621,
+    12.794084965553694
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR3",
+   "tags": "S3LRN3",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    3.7222930878302094,
+    5.607579132078023,
+    1.4428557220781428,
+    4.09123112976183,
+    -2.0037119123556266
+   ],
+   "mean": 2.572049431878516,
+   "sd": 2.960493386822298,
+   "ci90": [
+    -0.25045792306123627,
+    5.394556786818268
+   ],
+   "tost_p": 0.3813559221734848,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    73.94561218641968,
+    59.74208877719948,
+    52.66232126873379,
+    50.63295002452449,
+    73.59677099663044
+   ],
+   "last_noise": [
+    70.22331909858947,
+    54.134509645121454,
+    51.21946554665565,
+    46.54171889476266,
+    75.60048290898607
+   ],
+   "lp": [
+    63.88904294455844,
+    42.01324789887608,
+    60.29583897546533,
+    33.96626519156357,
+    60.941432269612186
+   ],
+   "last_lp": [
+    10.05656924186124,
+    17.728840878323396,
+    -7.6335177067315385,
+    16.666684832960918,
+    12.655338727018254
+   ],
+   "noise_lp": [
+    6.334276154031031,
+    12.121261746245374,
+    -9.076373428809681,
+    12.575453703199088,
+    14.65905063937388
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR3",
+   "tags": "S3LRN3",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    0.11498715175716256,
+    1.8421804842609362,
+    3.131670147575207,
+    -0.11363017058148728,
+    1.4042801112372558
+   ],
+   "mean": 1.2758975448498149,
+   "sd": 1.3284907429663153,
+   "ci90": [
+    0.009326604451064036,
+    2.5424684852485657
+   ],
+   "tost_p": 0.022015950059065533,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    68.15484443458489,
+    77.0979479056251,
+    73.94712079135203,
+    64.96588369938416,
+    69.91248776210126
+   ],
+   "last_noise": [
+    68.03985728282773,
+    75.25576742136417,
+    70.81545064377683,
+    65.07951386996565,
+    68.50820765086401
+   ],
+   "lp": [
+    68.32011535688537,
+    76.50790626029719,
+    74.25734242194733,
+    68.10834377895254,
+    64.1548191794151
+   ],
+   "last_lp": [
+    -0.16527092230047913,
+    0.5900416453279149,
+    -0.3102216305952936,
+    -3.14246007956838,
+    5.757668582686165
+   ],
+   "noise_lp": [
+    -0.2802580740576417,
+    -1.2521388389330212,
+    -3.4418917781705005,
+    -3.028829908986893,
+    4.353388471448909
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR4",
+   "tags": "S3LRN4",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    7.334590427596922,
+    -7.205257077522262,
+    4.1962161376450595,
+    10.144858030410376,
+    -0.015616459748585498
+   ],
+   "mean": 2.8909582116763017,
+   "sd": 6.790625295035753,
+   "ci90": [
+    -3.5831619215394532,
+    9.365078344892057
+   ],
+   "tost_p": 0.48653882892266853,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    74.6172332834193,
+    68.23670346859132,
+    60.90710181848783,
+    76.29151452395226,
+    75.31157840363743
+   ],
+   "last_noise": [
+    67.28264285582237,
+    75.44196054611358,
+    56.71088568084277,
+    66.14665649354188,
+    75.32719486338601
+   ],
+   "lp": [
+    63.88904294455844,
+    42.01324789887608,
+    60.29583897546533,
+    33.96626519156357,
+    60.941432269612186
+   ],
+   "last_lp": [
+    10.728190338860855,
+    26.223455569715235,
+    0.6112628430225016,
+    42.32524933238869,
+    14.37014613402524
+   ],
+   "noise_lp": [
+    3.3935999112639337,
+    33.4287126472375,
+    -3.584953294622558,
+    32.18039130197831,
+    14.385762593773826
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR4",
+   "tags": "S3LRN4",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    1.8185347457157235,
+    2.5829829805985725,
+    -0.49076985456689215,
+    7.416752956564395,
+    -1.5916776282201397
+   ],
+   "mean": 1.9471646400183318,
+   "sd": 3.4929978587090282,
+   "ci90": [
+    -1.3830276147184357,
+    5.2773568947550995
+   ],
+   "tost_p": 0.2686331662364654,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    70.6137577875141,
+    79.40809245342193,
+    70.96845761324427,
+    76.51419695896234,
+    75.31578283510821
+   ],
+   "last_noise": [
+    68.79522304179838,
+    76.82510947282336,
+    71.45922746781116,
+    69.09744400239795,
+    76.90746046332835
+   ],
+   "lp": [
+    68.32011535688537,
+    76.50790626029719,
+    74.25734242194733,
+    68.10834377895254,
+    64.1548191794151
+   ],
+   "last_lp": [
+    2.2936424306287364,
+    2.900186193124739,
+    -3.2888848087030595,
+    8.4058531800098,
+    11.16096365569311
+   ],
+   "noise_lp": [
+    0.4751076849130129,
+    0.31720321252616657,
+    -2.7981149541361674,
+    0.9891002234454049,
+    12.752641283913249
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR5",
+   "tags": "S3LRN5",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    7.627049710683437,
+    -11.02717863820969,
+    2.9897561833941424,
+    5.638454411684549,
+    4.803262638821323
+   ],
+   "mean": 2.0062688612747523,
+   "sd": 7.474073930192057,
+   "ci90": [
+    -5.119444958330816,
+    9.13198268088032
+   ],
+   "tost_p": 0.3905185136478173,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    72.89945094559368,
+    76.63325909428359,
+    62.68121762946301,
+    79.50525914218758,
+    76.72486801088347
+   ],
+   "last_noise": [
+    65.27240123491025,
+    87.66043773249328,
+    59.69146144606887,
+    73.86680473050303,
+    71.92160537206215
+   ],
+   "lp": [
+    63.88904294455844,
+    42.01324789887608,
+    60.29583897546533,
+    33.96626519156357,
+    60.941432269612186
+   ],
+   "last_lp": [
+    9.010408001035245,
+    34.62001119540751,
+    2.385378653997684,
+    45.53899395062401,
+    15.783435741271283
+   ],
+   "noise_lp": [
+    1.3833582903518078,
+    45.6471898336172,
+    -0.6043775293964586,
+    39.90053953893946,
+    10.98017310244996
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR5",
+   "tags": "S3LRN5",
+   "lp_tags": "S3M,S3Z",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    0.7433494167452608,
+    -6.525493372080561,
+    -8.553854628078298,
+    8.889312769088264,
+    1.5063877326702482
+   ],
+   "mean": -0.7880596163310173,
+   "sd": 6.972929026171418,
+   "ci90": [
+    -7.435986461716354,
+    5.85986722905432
+   ],
+   "tost_p": 0.2586410907718625,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    69.67518902630655,
+    76.31000162770108,
+    66.2489576400205,
+    78.94321216415065,
+    78.36699881675287
+   ],
+   "last_noise": [
+    68.9318396095613,
+    82.83549499978164,
+    74.8028122680988,
+    70.05389939506239,
+    76.86061108408262
+   ],
+   "lp": [
+    68.32011535688537,
+    76.50790626029719,
+    74.25734242194733,
+    68.10834377895254,
+    64.1548191794151
+   ],
+   "last_lp": [
+    1.3550736694211878,
+    -0.19790463259610647,
+    -8.008384781926821,
+    10.834868385198106,
+    14.21217963733777
+   ],
+   "noise_lp": [
+    0.611724252675927,
+    6.3275887394844545,
+    0.5454698461514766,
+    1.9455556161098428,
+    12.705791904667521
+   ]
+  },
+  {
+   "item": "A6",
+   "setting": "Siena",
+   "tags": "S3L,S3NM",
+   "lp_tags": "S3L,S3NM",
+   "model": "biot",
+   "probe": "mlp_fullft",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.9627863124618727,
+    4.190337807526333,
+    3.8202015101787907,
+    1.4695805402655964,
+    -0.5273558330480341
+   ],
+   "mean": 1.9831100674769118,
+   "sd": 1.990852295083474,
+   "ci90": [
+    0.08504967305621647,
+    3.8811704618976073
+   ],
+   "tost_p": 0.15855988949744945,
+   "equivalent": false,
+   "d19": "perturbation alone explains it",
+   "last": [
+    73.47759106230627,
+    65.35795528983004,
+    63.38772731097901,
+    42.04127382055335,
+    71.87185293299137
+   ],
+   "last_noise": [
+    72.5148047498444,
+    61.16761748230371,
+    59.56752580080022,
+    40.571693280287754,
+    72.39920876603941
+   ],
+   "lp": [
+    66.086123281509,
+    36.826902590691404,
+    59.37639459477379,
+    34.344451105419004,
+    60.06731094573681
+   ],
+   "last_lp": [
+    7.391467780797271,
+    28.53105269913864,
+    4.011332716205217,
+    7.696822715134346,
+    11.804541987254566
+   ],
+   "noise_lp": [
+    6.428681468335398,
+    24.340714891612308,
+    0.19113120602642653,
+    6.227242174868749,
+    12.3318978203026
+   ]
+  },
+  {
+   "item": "A6",
+   "setting": "Siena",
+   "tags": "S3Z,S3NM",
+   "lp_tags": "S3Z,S3NM",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.23157648247770624,
+    -0.06543887717737107,
+    0.6004248493518958,
+    2.3255218268025715,
+    -1.1037633665883817
+   ],
+   "mean": 0.39766418297328415,
+   "sd": 1.2504080571818215,
+   "ci90": [
+    -0.7944634379770346,
+    1.5897918039236028
+   ],
+   "tost_p": 0.004817458976102094,
+   "equivalent": true,
+   "d19": "perturbation alone explains it",
+   "last": [
+    66.92486396884378,
+    74.88159467066843,
+    68.72690551054602,
+    70.95503842171236,
+    69.72969509863397
+   ],
+   "last_noise": [
+    66.69328748636607,
+    74.9470335478458,
+    68.12648066119412,
+    68.62951659490979,
+    70.83345846522235
+   ],
+   "lp": [
+    66.0353465328231,
+    75.03500219011813,
+    67.22322951810456,
+    66.97057968644977,
+    67.68333823850337
+   ],
+   "last_lp": [
+    0.8895174360206823,
+    -0.15340751944970066,
+    1.5036759924414582,
+    3.984458735262592,
+    2.046356860130601
+   ],
+   "noise_lp": [
+    0.6579409535429761,
+    -0.08796864227232959,
+    0.9032511430895624,
+    1.6589369084600207,
+    3.1501202267189825
+   ]
+  },
+  {
+   "item": "A6",
+   "setting": "Siena filtered",
+   "tags": "S3FL,S3FNM",
+   "lp_tags": "S3FL,S3FNM",
+   "model": "biot",
+   "probe": "mlp_fullft",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.3229006833909409,
+    5.476469794234767,
+    -0.7878583869495372,
+    0.5852725852453347,
+    -0.2210329687490571
+   ],
+   "mean": 1.0751503414344896,
+   "sd": 2.5163647085263263,
+   "ci90": [
+    -1.3239287881257151,
+    3.474229470994694
+   ],
+   "tost_p": 0.08117838676855775,
+   "equivalent": false,
+   "d19": "perturbation alone explains it",
+   "last": [
+    86.76347524941612,
+    55.102892543938005,
+    74.19970979678124,
+    77.5811034207132,
+    77.33931563868317
+   ],
+   "last_noise": [
+    86.44057456602518,
+    49.62642274970324,
+    74.98756818373077,
+    76.99583083546787,
+    77.56034860743223
+   ],
+   "lp": [
+    85.11095089321476,
+    44.18933869019025,
+    72.12869671213524,
+    73.29280433084455,
+    75.94004080300637
+   ],
+   "last_lp": [
+    1.6525243562013543,
+    10.913553853747757,
+    2.0710130846459975,
+    4.288299089868659,
+    1.399274835676806
+   ],
+   "noise_lp": [
+    1.3296236728104134,
+    5.437084059512991,
+    2.858871471595535,
+    3.703026504623324,
+    1.6203078044258632
+   ]
+  },
+  {
+   "item": "A6",
+   "setting": "Siena filtered",
+   "tags": "S3FZ,S3FNM",
+   "lp_tags": "S3FZ,S3FNM",
+   "model": "biot",
+   "probe": "linear_z",
+   "unit": "rotation",
+   "n_seeds": 3,
+   "registered": true,
+   "per_unit": [
+    0.47125629317412177,
+    5.39930286753291,
+    -0.1365587202497096,
+    -0.09773466310605272,
+    0.029831442340224612
+   ],
+   "mean": 1.1332194439382988,
+   "sd": 2.397014427991985,
+   "ci90": [
+    -1.1520722182619865,
+    3.4185111061385838
+   ],
+   "tost_p": 0.0782874795446141,
+   "equivalent": false,
+   "d19": "perturbation alone explains it",
+   "last": [
+    82.78609678393384,
+    77.87216459101694,
+    76.6744700221095,
+    77.51403346231403,
+    61.16987304619068
+   ],
+   "last_noise": [
+    82.31484049075972,
+    72.47286172348403,
+    76.81102874235921,
+    77.61176812542008,
+    61.140041603850456
+   ],
+   "lp": [
+    76.63677986677267,
+    74.18244411890423,
+    76.57055278867952,
+    77.5050411466565,
+    61.46097987278591
+   ],
+   "last_lp": [
+    6.149316917161173,
+    3.689720472112711,
+    0.10391723342998205,
+    0.008992315657536665,
+    -0.29110682659523235
+   ],
+   "noise_lp": [
+    5.678060623987051,
+    -1.709582395420199,
+    0.24047595367969166,
+    0.10672697876358939,
+    -0.32093826893545696
+   ]
+  },
+  {
+   "item": "A7",
+   "setting": "Siena, ssl_seed 11",
+   "tags": "S3D11,S3DN11",
+   "lp_tags": "S3M",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    1.941286303218547,
+    3.696469476634533,
+    3.7234246019906294,
+    5.0955365415009055,
+    -0.8901382056687765
+   ],
+   "mean": 2.713315743535168,
+   "sd": 2.304495439344968,
+   "ci90": [
+    0.5162308400765689,
+    4.910400646993766
+   ],
+   "tost_p": 0.3973337615527286,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    71.76788124156546,
+    53.73567325290107,
+    54.71108458990308,
+    46.413701019129114,
+    68.6727811112913
+   ],
+   "last_noise": [
+    69.82659493834691,
+    50.03920377626654,
+    50.98765998791245,
+    41.31816447762821,
+    69.56291931696008
+   ],
+   "lp": [
+    63.88904294455844,
+    42.01324789887608,
+    60.29583897546533,
+    33.96626519156357,
+    60.941432269612186
+   ],
+   "last_lp": [
+    7.878838297007022,
+    11.722425354024992,
+    -5.584754385562249,
+    12.447435827565542,
+    7.7313488416791145
+   ],
+   "noise_lp": [
+    5.937551993788475,
+    8.025955877390459,
+    -9.308178987552878,
+    7.351899286064636,
+    8.621487047347891
+   ]
+  },
+  {
+   "item": "A7",
+   "setting": "Siena, ssl_seed 12",
+   "tags": "S3D12,S3DN12",
+   "lp_tags": "S3M",
+   "model": "biot",
+   "probe": "linear",
+   "unit": "rotation",
+   "n_seeds": 1,
+   "registered": false,
+   "per_unit": [
+    1.945538239698294,
+    3.6916062233761764,
+    3.6951183126391456,
+    5.180936290806038,
+    -0.840886294154032
+   ],
+   "mean": 2.7344625544731245,
+   "sd": 2.3037870016023576,
+   "ci90": [
+    0.538053069087721,
+    4.930872039858528
+   ],
+   "tost_p": 0.4046650668776069,
+   "equivalent": null,
+   "d19": "perturbation alone explains it",
+   "last": [
+    71.7693601759932,
+    53.75075926300871,
+    54.65294194150544,
+    46.45686413428525,
+    68.69800770011592
+   ],
+   "last_noise": [
+    69.8238219362949,
+    50.059153039632534,
+    50.957823628866294,
+    41.27592784347921,
+    69.53889399426996
+   ],
+   "lp": [
+    63.88904294455844,
+    42.01324789887608,
+    60.29583897546533,
+    33.96626519156357,
+    60.941432269612186
+   ],
+   "last_lp": [
+    7.880317231434759,
+    11.73751136413263,
+    -5.6428970339598905,
+    12.490598942721675,
+    7.756575430503737
+   ],
+   "noise_lp": [
+    5.934778991736465,
+    8.045905140756453,
+    -9.338015346599036,
+    7.309662651915637,
+    8.59746172465777
+   ]
+  }
+ ],
+ "repro": [
+  {
+   "check": "P1QN vs P1Q (lp/last; linear/mlp_fullft)",
+   "n_records": 20,
+   "n_paired": 20,
+   "n_identical": 20,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S3FQN vs S3FQ (lp/last; linear)",
+   "n_records": 30,
+   "n_paired": 30,
+   "n_identical": 30,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S1LRN1 last linear vs E29 cell 1 (S_r)",
+   "n_records": 5,
+   "n_paired": 5,
+   "n_identical": 5,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S1LRN3 last linear vs E29 cell 3 (S_r)",
+   "n_records": 5,
+   "n_paired": 5,
+   "n_identical": 5,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S1LRN4 last linear vs E29 cell 4 (S_r)",
+   "n_records": 5,
+   "n_paired": 5,
+   "n_identical": 5,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S1LRN5 last linear vs E29 cell 5 (S_r)",
+   "n_records": 5,
+   "n_paired": 5,
+   "n_identical": 5,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S3LRN1 last linear vs E29 cell 1 (S_r)",
+   "n_records": 5,
+   "n_paired": 5,
+   "n_identical": 5,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S3LRN2 last linear vs E29 cell 2 (S_r)",
+   "n_records": 5,
+   "n_paired": 5,
+   "n_identical": 5,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S3LRN3 last linear vs E29 cell 3 (S_r)",
+   "n_records": 5,
+   "n_paired": 5,
+   "n_identical": 5,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S3LRN4 last linear vs E29 cell 4 (S_r)",
+   "n_records": 5,
+   "n_paired": 5,
+   "n_identical": 5,
+   "max_abs_diff": 0.0
+  },
+  {
+   "check": "S3LRN5 last linear vs E29 cell 5 (S_r)",
+   "n_records": 5,
+   "n_paired": 5,
+   "n_identical": 5,
+   "max_abs_diff": 0.0
+  }
+ ],
+ "provenance": [
+  {
+   "item": "E27",
+   "setting": "CHB-MIT",
+   "tags": "S1E,S1M,S1N",
+   "lp_tags": "S1E,S1M,S1N",
+   "probes": [
+    "linear"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "S1M biot last": 15,
+    "S1M biot lp": 15,
+    "S1N biot last_noise": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "E27",
+   "setting": "Siena",
+   "tags": "S3E,S3M,S3N",
+   "lp_tags": "S3E,S3M,S3N",
+   "probes": [
+    "linear"
+   ],
+   "n_triples": 30,
+   "counts": {
+    "S3E cbramod last": 5,
+    "S3E cbramod lp": 5,
+    "S3M biot last": 15,
+    "S3M biot lp": 15,
+    "S3M cbramod last": 10,
+    "S3M cbramod lp": 10,
+    "S3N biot last_noise": 15,
+    "S3N cbramod last_noise": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "E27",
+   "setting": "Siena filtered",
+   "tags": "S3FE,S3FM,S3FN",
+   "lp_tags": "S3FE,S3FM,S3FN",
+   "probes": [
+    "linear"
+   ],
+   "n_triples": 30,
+   "counts": {
+    "S3FE cbramod last": 5,
+    "S3FE cbramod lp": 5,
+    "S3FM biot last": 15,
+    "S3FM biot lp": 15,
+    "S3FM cbramod last": 10,
+    "S3FM cbramod lp": 10,
+    "S3FN biot last_noise": 15,
+    "S3FN cbramod last_noise": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A1",
+   "setting": "CHB-MIT paper split, q95",
+   "tags": "P1QN",
+   "lp_tags": "P1QN",
+   "probes": [
+    "linear",
+    "mlp_fullft",
+    "linear_z"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "P1QN biot last": 5,
+    "P1QN biot last_noise": 5,
+    "P1QN biot lp": 5
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A2",
+   "setting": "Siena filtered, q95",
+   "tags": "S3FQN",
+   "lp_tags": "S3FQN",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 30,
+   "counts": {
+    "S3FQN biot last": 15,
+    "S3FQN biot last_noise": 15,
+    "S3FQN biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A3",
+   "setting": "CHB-MIT, E32 partition",
+   "tags": "S1R,S1RN",
+   "lp_tags": "S1R,S1RN",
+   "probes": [
+    "linear"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "S1R biot last": 15,
+    "S1R biot lp": 15,
+    "S1RN biot last_noise": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A3",
+   "setting": "CHB-MIT, E32 partition",
+   "tags": "S1RZ,S1RN",
+   "lp_tags": "S1RZ,S1RN",
+   "probes": [
+    "linear_z"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "S1RN biot last_noise": 15,
+    "S1RZ biot last": 15,
+    "S1RZ biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A3",
+   "setting": "Siena, E32 partition",
+   "tags": "S3R,S3RN",
+   "lp_tags": "S3R,S3RN",
+   "probes": [
+    "linear"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "S3R biot last": 15,
+    "S3R biot lp": 15,
+    "S3RN biot last_noise": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A3",
+   "setting": "Siena, E32 partition",
+   "tags": "S3RZ,S3RN",
+   "lp_tags": "S3RZ,S3RN",
+   "probes": [
+    "linear_z"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "S3RN biot last_noise": 15,
+    "S3RZ biot last": 15,
+    "S3RZ biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR1",
+   "tags": "S1LRN1",
+   "lp_tags": "S1E,S1M,S1Z",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 10,
+   "counts": {
+    "S1LRN1 biot last": 5,
+    "S1LRN1 biot last_noise": 5,
+    "S1M biot lp": 15,
+    "S1Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 0.0003, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR3",
+   "tags": "S1LRN3",
+   "lp_tags": "S1E,S1M,S1Z",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 10,
+   "counts": {
+    "S1LRN3 biot last": 5,
+    "S1LRN3 biot last_noise": 5,
+    "S1M biot lp": 15,
+    "S1Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, whole pool, 3 ep"
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR4",
+   "tags": "S1LRN4",
+   "lp_tags": "S1E,S1M,S1Z",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 10,
+   "counts": {
+    "S1LRN4 biot last": 5,
+    "S1LRN4 biot last_noise": 5,
+    "S1M biot lp": 15,
+    "S1Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 0.0003, whole pool, 3 ep"
+   ]
+  },
+  {
+   "item": "A4",
+   "setting": "CHB-MIT, E29 cell S1LR5",
+   "tags": "S1LRN5",
+   "lp_tags": "S1E,S1M,S1Z",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 10,
+   "counts": {
+    "S1LRN5 biot last": 5,
+    "S1LRN5 biot last_noise": 5,
+    "S1M biot lp": 15,
+    "S1Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 0.001, whole pool, 3 ep"
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR1",
+   "tags": "S3LRN1",
+   "lp_tags": "S3M,S3Z",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 10,
+   "counts": {
+    "S3LRN1 biot last": 5,
+    "S3LRN1 biot last_noise": 5,
+    "S3M biot lp": 15,
+    "S3Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 0.0003, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR2",
+   "tags": "S3LRN2",
+   "lp_tags": "S3M,S3Z",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 10,
+   "counts": {
+    "S3LRN2 biot last": 5,
+    "S3LRN2 biot last_noise": 5,
+    "S3M biot lp": 15,
+    "S3Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 0.001, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR3",
+   "tags": "S3LRN3",
+   "lp_tags": "S3M,S3Z",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 10,
+   "counts": {
+    "S3LRN3 biot last": 5,
+    "S3LRN3 biot last_noise": 5,
+    "S3M biot lp": 15,
+    "S3Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, whole pool, 3 ep"
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR4",
+   "tags": "S3LRN4",
+   "lp_tags": "S3M,S3Z",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 10,
+   "counts": {
+    "S3LRN4 biot last": 5,
+    "S3LRN4 biot last_noise": 5,
+    "S3M biot lp": 15,
+    "S3Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 0.0003, whole pool, 3 ep"
+   ]
+  },
+  {
+   "item": "A5",
+   "setting": "Siena, E29 cell S3LR5",
+   "tags": "S3LRN5",
+   "lp_tags": "S3M,S3Z",
+   "probes": [
+    "linear",
+    "linear_z"
+   ],
+   "n_triples": 10,
+   "counts": {
+    "S3LRN5 biot last": 5,
+    "S3LRN5 biot last_noise": 5,
+    "S3M biot lp": 15,
+    "S3Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 0.001, whole pool, 3 ep"
+   ]
+  },
+  {
+   "item": "A6",
+   "setting": "Siena",
+   "tags": "S3L,S3NM",
+   "lp_tags": "S3L,S3NM",
+   "probes": [
+    "mlp_fullft"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "S3L biot last": 15,
+    "S3L biot lp": 15,
+    "S3NM biot last_noise": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A6",
+   "setting": "Siena",
+   "tags": "S3Z,S3NM",
+   "lp_tags": "S3Z,S3NM",
+   "probes": [
+    "linear_z"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "S3NM biot last_noise": 15,
+    "S3Z biot last": 15,
+    "S3Z biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A6",
+   "setting": "Siena filtered",
+   "tags": "S3FL,S3FNM",
+   "lp_tags": "S3FL,S3FNM",
+   "probes": [
+    "mlp_fullft"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "S3FL biot last": 15,
+    "S3FL biot lp": 15,
+    "S3FNM biot last_noise": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A6",
+   "setting": "Siena filtered",
+   "tags": "S3FZ,S3FNM",
+   "lp_tags": "S3FZ,S3FNM",
+   "probes": [
+    "linear_z"
+   ],
+   "n_triples": 15,
+   "counts": {
+    "S3FNM biot last_noise": 15,
+    "S3FZ biot last": 15,
+    "S3FZ biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep"
+   ]
+  },
+  {
+   "item": "A7",
+   "setting": "Siena, ssl_seed 11",
+   "tags": "S3D11,S3DN11",
+   "lp_tags": "S3M",
+   "probes": [
+    "linear"
+   ],
+   "n_triples": 5,
+   "counts": {
+    "S3D11 biot last": 5,
+    "S3DN11 biot last_noise": 5,
+    "S3M biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep, ssl_seed 11"
+   ]
+  },
+  {
+   "item": "A7",
+   "setting": "Siena, ssl_seed 12",
+   "tags": "S3D12,S3DN12",
+   "lp_tags": "S3M",
+   "probes": [
+    "linear"
+   ],
+   "n_triples": 5,
+   "counts": {
+    "S3D12 biot last": 5,
+    "S3DN12 biot last_noise": 5,
+    "S3M biot lp": 15
+   },
+   "gaps": [],
+   "ssl": [
+    "lr 3e-05, N sample, 3 ep, ssl_seed 12"
+   ]
+  }
+ ],
+ "step0": [
+  {
+   "setting": "CHB-MIT rotations",
+   "tag": "S1L",
+   "model": "biot",
+   "arm": "all",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 0.9928406715393067,
+    "min": 0.8986944556236267,
+    "max": 1.069432258605957
+   },
+   "epoch1": {
+    "mean": 0.41538042437796496,
+    "min": 0.3623857533230501,
+    "max": 0.49028531242819395
+   }
+  },
+  {
+   "setting": "CHB-MIT rotations",
+   "tag": "S1L",
+   "model": "biot",
+   "arm": "last",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 0.9928406715393067,
+    "min": 0.8986944556236267,
+    "max": 1.069432258605957
+   },
+   "epoch1": {
+    "mean": 0.6432432448162754,
+    "min": 0.5726090915062848,
+    "max": 0.7150385204483481
+   }
+  },
+  {
+   "setting": "CHB-MIT rotations",
+   "tag": "S1L",
+   "model": "biot",
+   "arm": "last_randinit",
+   "init": "random",
+   "n": 15,
+   "step0": {
+    "mean": 0.975529420375824,
+    "min": 0.8509521484375,
+    "max": 1.1152691841125488
+   },
+   "epoch1": {
+    "mean": 0.8017220948256697,
+    "min": 0.6871043794295367,
+    "max": 0.9521789024857914
+   }
+  },
+  {
+   "setting": "CHB-MIT rotations",
+   "tag": "S1L",
+   "model": "cbramod",
+   "arm": "all",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 0.0292325172573328,
+    "min": 0.028427856042981148,
+    "max": 0.03055202215909958
+   },
+   "epoch1": {
+    "mean": 0.012649741885708828,
+    "min": 0.012071223025593688,
+    "max": 0.01354777325383004
+   }
+  },
+  {
+   "setting": "CHB-MIT rotations",
+   "tag": "S1L",
+   "model": "cbramod",
+   "arm": "last",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 0.0292325172573328,
+    "min": 0.028427856042981148,
+    "max": 0.03055202215909958
+   },
+   "epoch1": {
+    "mean": 0.027762979773037568,
+    "min": 0.02701664058601155,
+    "max": 0.028816612656502164
+   }
+  },
+  {
+   "setting": "CHB-MIT rotations",
+   "tag": "S1L",
+   "model": "cbramod",
+   "arm": "last_randinit",
+   "init": "random",
+   "n": 15,
+   "step0": {
+    "mean": 64.60848744710286,
+    "min": 50.05589294433594,
+    "max": 76.29639434814453
+   },
+   "epoch1": {
+    "mean": 59.85130408791934,
+    "min": 46.573698829202094,
+    "max": 70.45784894157859
+   }
+  },
+  {
+   "setting": "Siena",
+   "tag": "S3L",
+   "model": "biot",
+   "arm": "all",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 1.0070474425951639,
+    "min": 0.9243701696395874,
+    "max": 1.1227059364318848
+   },
+   "epoch1": {
+    "mean": 0.40785095995547727,
+    "min": 0.3600812839234577,
+    "max": 0.48334764207110686
+   }
+  },
+  {
+   "setting": "Siena",
+   "tag": "S3L",
+   "model": "biot",
+   "arm": "last",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 1.0070474425951639,
+    "min": 0.9243701696395874,
+    "max": 1.1227059364318848
+   },
+   "epoch1": {
+    "mean": 0.6312141898800345,
+    "min": 0.5748520861653721,
+    "max": 0.7372084295048433
+   }
+  },
+  {
+   "setting": "Siena",
+   "tag": "S3L",
+   "model": "biot",
+   "arm": "last_randinit",
+   "init": "random",
+   "n": 15,
+   "step0": {
+    "mean": 0.986213994026184,
+    "min": 0.8678470253944397,
+    "max": 1.0958982706069946
+   },
+   "epoch1": {
+    "mean": 0.8024673312318089,
+    "min": 0.678228869157679,
+    "max": 0.9233615012729869
+   }
+  },
+  {
+   "setting": "Siena",
+   "tag": "S3L",
+   "model": "cbramod",
+   "arm": "all",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 0.025632865851124127,
+    "min": 0.025482716038823128,
+    "max": 0.02588867023587227
+   },
+   "epoch1": {
+    "mean": 0.009244704513134909,
+    "min": 0.00917987500810448,
+    "max": 0.009362933308105259
+   }
+  },
+  {
+   "setting": "Siena",
+   "tag": "S3L",
+   "model": "cbramod",
+   "arm": "last",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 0.025632865851124127,
+    "min": 0.025482716038823128,
+    "max": 0.02588867023587227
+   },
+   "epoch1": {
+    "mean": 0.02419720543365853,
+    "min": 0.024107323849902433,
+    "max": 0.02429766350370996
+   }
+  },
+  {
+   "setting": "Siena",
+   "tag": "S3L",
+   "model": "cbramod",
+   "arm": "last_randinit",
+   "init": "random",
+   "n": 15,
+   "step0": {
+    "mean": 65.99591878255208,
+    "min": 50.64151382446289,
+    "max": 77.73998260498047
+   },
+   "epoch1": {
+    "mean": 60.94739305084828,
+    "min": 46.96658841301413,
+    "max": 71.65433457318474
+   }
+  },
+  {
+   "setting": "Siena filtered",
+   "tag": "S3FL",
+   "model": "biot",
+   "arm": "all",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 1.0070474425951639,
+    "min": 0.9243701696395874,
+    "max": 1.1227059364318848
+   },
+   "epoch1": {
+    "mean": 0.4078509599554772,
+    "min": 0.3600812839234577,
+    "max": 0.48334764207110686
+   }
+  },
+  {
+   "setting": "Siena filtered",
+   "tag": "S3FL",
+   "model": "biot",
+   "arm": "last",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 1.0070474425951639,
+    "min": 0.9243701696395874,
+    "max": 1.1227059364318848
+   },
+   "epoch1": {
+    "mean": 0.6312141898800345,
+    "min": 0.5748520861653721,
+    "max": 0.7372084295048433
+   }
+  },
+  {
+   "setting": "Siena filtered",
+   "tag": "S3FL",
+   "model": "biot",
+   "arm": "last_randinit",
+   "init": "random",
+   "n": 15,
+   "step0": {
+    "mean": 0.986213994026184,
+    "min": 0.8678470253944397,
+    "max": 1.0958982706069946
+   },
+   "epoch1": {
+    "mean": 0.8024673312318092,
+    "min": 0.678228869157679,
+    "max": 0.9233615012729869
+   }
+  },
+  {
+   "setting": "Siena filtered",
+   "tag": "S3FL",
+   "model": "cbramod",
+   "arm": "all",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 0.025632865851124127,
+    "min": 0.025482716038823128,
+    "max": 0.02588867023587227
+   },
+   "epoch1": {
+    "mean": 0.009244704513134909,
+    "min": 0.00917987500810448,
+    "max": 0.009362933308105259
+   }
+  },
+  {
+   "setting": "Siena filtered",
+   "tag": "S3FL",
+   "model": "cbramod",
+   "arm": "last",
+   "init": "pretrained",
+   "n": 15,
+   "step0": {
+    "mean": 0.025632865851124127,
+    "min": 0.025482716038823128,
+    "max": 0.02588867023587227
+   },
+   "epoch1": {
+    "mean": 0.024197205433658518,
+    "min": 0.024107323849902433,
+    "max": 0.02429766350370996
+   }
+  },
+  {
+   "setting": "Siena filtered",
+   "tag": "S3FL",
+   "model": "cbramod",
+   "arm": "last_randinit",
+   "init": "random",
+   "n": 15,
+   "step0": {
+    "mean": 65.99591878255208,
+    "min": 50.64151382446289,
+    "max": 77.73998260498047
+   },
+   "epoch1": {
+    "mean": 60.94739305084828,
+    "min": 46.96658841301413,
+    "max": 71.65433457318474
+   }
+  },
+  {
+   "setting": "CHB-MIT paper split",
+   "tag": "P1L",
+   "model": "biot",
+   "arm": "last",
+   "init": "pretrained",
+   "n": 5,
+   "step0": {
+    "mean": 1.0235516667366027,
+    "min": 0.9687198996543884,
+    "max": 1.0637239217758179
+   },
+   "epoch1": {
+    "mean": 0.66979220123852,
+    "min": 0.6211750419700847,
+    "max": 0.715206174289479
+   }
+  },
+  {
+   "setting": "CHB-MIT paper split",
+   "tag": "P1L",
+   "model": "biot",
+   "arm": "last_randinit",
+   "init": "random",
+   "n": 5,
+   "step0": {
+    "mean": 1.0065026044845582,
+    "min": 0.8576580286026001,
+    "max": 1.1180529594421387
+   },
+   "epoch1": {
+    "mean": 0.8278480606920577,
+    "min": 0.7002434064360226,
+    "max": 0.9532658177263597
+   }
+  },
+  {
+   "setting": "CHB-MIT paper split",
+   "tag": "P1L",
+   "model": "cbramod",
+   "arm": "last",
+   "init": "pretrained",
+   "n": 5,
+   "step0": {
+    "mean": 0.02916485145688057,
+    "min": 0.02899603359401226,
+    "max": 0.02949068509042263
+   },
+   "epoch1": {
+    "mean": 0.027758025662863957,
+    "min": 0.027742467053672847,
+    "max": 0.027773377649924335
+   }
+  },
+  {
+   "setting": "CHB-MIT paper split",
+   "tag": "P1L",
+   "model": "cbramod",
+   "arm": "last_randinit",
+   "init": "random",
+   "n": 5,
+   "step0": {
+    "mean": 63.250745391845705,
+    "min": 50.000030517578125,
+    "max": 74.5839614868164
+   },
+   "epoch1": {
+    "mean": 58.493908511891085,
+    "min": 46.548836427576404,
+    "max": 68.50479485006893
+   }
+  }
+ ]
+}

@@ -1,0 +1,246 @@
+{
+  "draft": {
+    "n_eval_windows": 326993,
+    "test_pos": 252,
+    "test_s_files": 206,
+    "test_ictal_grid": 114,
+    "test_ictal_grid_labelled_0": 70,
+    "eval_cases_absent": [
+      "chb12",
+      "chb13",
+      "chb17"
+    ],
+    "n_ssl_windows": 81993
+  },
+  "rel_tol": 1e-05,
+  "seed": 2025,
+  "process1": {
+    "chb01": 42,
+    "chb02": 35,
+    "chb03": 38,
+    "chb04": 42,
+    "chb05": 39,
+    "chb06": 18,
+    "chb07": 19,
+    "chb08": 20,
+    "chb09": 19,
+    "chb10": 25,
+    "chb11": 35,
+    "chb14": 26,
+    "chb15": 40,
+    "chb16": 19,
+    "chb18": 36,
+    "chb19": 30,
+    "chb20": 29,
+    "chb21": 33,
+    "chb22": 31,
+    "chb23": 9,
+    "chb24": 20
+  },
+  "process1_total_recordings": 605,
+  "released_eval": {
+    "total": 326993,
+    "by_split": {
+      "train": {
+        "files": 286964,
+        "pos": 1894,
+        "s_files": 1673,
+        "short": 0
+      },
+      "val": {
+        "files": 23065,
+        "pos": 100,
+        "s_files": 86,
+        "short": 0
+      },
+      "test": {
+        "files": 16964,
+        "pos": 252,
+        "s_files": 206,
+        "short": 2
+      }
+    },
+    "dtypes": {
+      "float64": 326993
+    },
+    "cases": [
+      "chb01",
+      "chb02",
+      "chb03",
+      "chb04",
+      "chb05",
+      "chb06",
+      "chb07",
+      "chb08",
+      "chb09",
+      "chb10",
+      "chb11",
+      "chb14",
+      "chb15",
+      "chb16",
+      "chb18",
+      "chb19",
+      "chb20",
+      "chb21",
+      "chb22",
+      "chb23",
+      "chb24"
+    ]
+  },
+  "eval_keys": {
+    "ours_total": 326993,
+    "released_total": 326993,
+    "common": 326993,
+    "only_ours": [],
+    "n_only_ours": 0,
+    "only_released": [],
+    "n_only_released": 0,
+    "split_mismatch": 0,
+    "label_mismatch": 0
+  },
+  "released_test_ictal_grid": 114,
+  "released_test_ictal_grid_labelled_0": 70,
+  "eval_values": {
+    "n": 2002,
+    "max_abs": 0.0005208541729189164,
+    "max_rel": 4.3401519575722104e-07,
+    "n_rel_over_tol": 0,
+    "worst": [
+      [
+        "chb04_19-grid-3443200",
+        0.0003937714077437704,
+        4.3401519575722104e-07
+      ],
+      [
+        "chb21_08-grid-867840",
+        5.674061432614508e-05,
+        4.116639977679599e-07
+      ],
+      [
+        "chb10_21-grid-903680",
+        0.00013540557063151937,
+        4.0301844673034145e-07
+      ],
+      [
+        "chb09_05-grid-2693120",
+        0.0003082426744640543,
+        3.718496400122784e-07
+      ],
+      [
+        "chb05_15-grid-757760",
+        0.0001063153405311823,
+        3.698542929026338e-07
+      ]
+    ]
+  },
+  "ssl": {
+    "released_len_keys": 81993,
+    "released_lmdb_entries_minus_keys": 81993,
+    "released_duplicate_keys": 0,
+    "ours_n": 81993,
+    "common": 81993,
+    "n_only_ours": 0,
+    "n_only_released": 0,
+    "only_ours": [],
+    "only_released": [],
+    "released_files": 652,
+    "our_files": 652,
+    "per_file_count_mismatch": [],
+    "released_log": {
+      "skipping": [
+        "Skipping $WORK/datasets/physionet.org/files/chbmit/1.0.0/chb12/chb12_27.edf: Only 0 of 16 required channels present (<12)",
+        "Skipping $WORK/datasets/physionet.org/files/chbmit/1.0.0/chb12/chb12_28.edf: Only 0 of 16 required channels present (<12)",
+        "Skipping $WORK/datasets/physionet.org/files/chbmit/1.0.0/chb12/chb12_29.edf: Only 0 of 16 required channels present (<12)"
+      ],
+      "insufficient": [],
+      "failed": [],
+      "stored_line": [
+        "Stored 81993 segment keys in metadata"
+      ]
+    }
+  },
+  "ssl_values": {
+    "n": 2000,
+    "released_dtype": "float32",
+    "max_abs": 0.0,
+    "max_rel": 0.0,
+    "n_rel_over_tol": 0,
+    "worst": [
+      [
+        "chb01_01_33",
+        0.0,
+        0.0
+      ],
+      [
+        "chb01_01_49",
+        0.0,
+        0.0
+      ],
+      [
+        "chb01_01_82",
+        0.0,
+        0.0
+      ],
+      [
+        "chb01_02_86",
+        0.0,
+        0.0
+      ],
+      [
+        "chb01_03_20",
+        0.0,
+        0.0
+      ]
+    ]
+  },
+  "checks": {
+    "326,993 eval windows": {
+      "released": 326993,
+      "draft": 326993,
+      "match": true
+    },
+    "252 test positives": {
+      "released": 252,
+      "draft": 252,
+      "match": true
+    },
+    "206 test -s- files": {
+      "released": 206,
+      "draft": 206,
+      "match": true
+    },
+    "114 truly ictal test grid windows": {
+      "released": 114,
+      "draft": 114,
+      "match": true
+    },
+    "70 of them labelled 0": {
+      "released": 70,
+      "draft": 70,
+      "match": true
+    },
+    "chb12, chb13, chb17 absent from eval": {
+      "released": [
+        "chb12",
+        "chb13",
+        "chb17"
+      ],
+      "draft": [
+        "chb12",
+        "chb13",
+        "chb17"
+      ],
+      "match": true
+    },
+    "81,993 SSL windows": {
+      "released": 81993,
+      "draft": 81993,
+      "match": true
+    }
+  },
+  "verdict": {
+    "counts_exact": true,
+    "values_within_tol": true,
+    "draft_reproduces_claims_stand": true
+  }
+}

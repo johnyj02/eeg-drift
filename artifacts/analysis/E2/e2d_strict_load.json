@@ -1,0 +1,6 @@
+{
+  "pretrained_load_before_identity": "ok",
+  "strict_load": "raised",
+  "error": "Error(s) in loading state_dict for CBraMod:\n\tUnexpected key(s) in state_dict: \"proj_out.0.weight\", \"proj_out.0.bias\". ",
+  "traceback": "Traceback (most recent call last):\n  File \"~/released/scripts/e2d_strict_load_check.py\", line 40, in <module>\n    backbone.load_state_dict(spt.state_dict())                             # trainer.py:309\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"~/released/eea-env/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 2215, in load_state_dict\n    raise RuntimeError('Error(s) in loading state_dict for {}:\\n\\t{}'.format(\nRuntimeError: Error(s) in loading state_dict for CBraMod:\n\tUnexpected key(s) in state_dict: \"proj_out.0.weight\", \"proj_out.0.bias\". \n"
+}

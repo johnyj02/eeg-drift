@@ -1,0 +1,158 @@
+[
+  {
+    "model": "biot",
+    "arm": "last",
+    "probe": "linear",
+    "n_seeds": 1,
+    "test_at_best.bal_acc": [
+      50.0,
+      NaN
+    ],
+    "test_at_best.roc_auc": [
+      62.43,
+      NaN
+    ],
+    "test_at_best.pr_auc_trapz": [
+      3.91,
+      NaN
+    ],
+    "test_at_best.avg_precision": [
+      4.03,
+      NaN
+    ],
+    "test_last.bal_acc": [
+      50.0,
+      NaN
+    ],
+    "test_last.roc_auc": [
+      62.43,
+      NaN
+    ],
+    "test_last.pr_auc_trapz": [
+      3.91,
+      NaN
+    ],
+    "test_last.avg_precision": [
+      4.03,
+      NaN
+    ],
+    "paper": null
+  },
+  {
+    "model": "biot",
+    "arm": "last_randinit",
+    "probe": "linear",
+    "n_seeds": 1,
+    "test_at_best.bal_acc": [
+      59.05,
+      NaN
+    ],
+    "test_at_best.roc_auc": [
+      90.1,
+      NaN
+    ],
+    "test_at_best.pr_auc_trapz": [
+      38.06,
+      NaN
+    ],
+    "test_at_best.avg_precision": [
+      38.32,
+      NaN
+    ],
+    "test_last.bal_acc": [
+      55.9,
+      NaN
+    ],
+    "test_last.roc_auc": [
+      89.83,
+      NaN
+    ],
+    "test_last.pr_auc_trapz": [
+      39.09,
+      NaN
+    ],
+    "test_last.avg_precision": [
+      39.34,
+      NaN
+    ],
+    "paper": null
+  },
+  {
+    "model": "cbramod",
+    "arm": "last",
+    "probe": "linear",
+    "n_seeds": 1,
+    "test_at_best.bal_acc": [
+      60.83,
+      NaN
+    ],
+    "test_at_best.roc_auc": [
+      92.23,
+      NaN
+    ],
+    "test_at_best.pr_auc_trapz": [
+      43.92,
+      NaN
+    ],
+    "test_at_best.avg_precision": [
+      44.12,
+      NaN
+    ],
+    "test_last.bal_acc": [
+      56.49,
+      NaN
+    ],
+    "test_last.roc_auc": [
+      92.0,
+      NaN
+    ],
+    "test_last.pr_auc_trapz": [
+      40.17,
+      NaN
+    ],
+    "test_last.avg_precision": [
+      40.36,
+      NaN
+    ],
+    "paper": null
+  },
+  {
+    "model": "cbramod",
+    "arm": "last_randinit",
+    "probe": "linear",
+    "n_seeds": 1,
+    "test_at_best.bal_acc": [
+      60.54,
+      NaN
+    ],
+    "test_at_best.roc_auc": [
+      82.73,
+      NaN
+    ],
+    "test_at_best.pr_auc_trapz": [
+      19.3,
+      NaN
+    ],
+    "test_at_best.avg_precision": [
+      19.49,
+      NaN
+    ],
+    "test_last.bal_acc": [
+      58.46,
+      NaN
+    ],
+    "test_last.roc_auc": [
+      81.43,
+      NaN
+    ],
+    "test_last.pr_auc_trapz": [
+      12.11,
+      NaN
+    ],
+    "test_last.avg_precision": [
+      12.31,
+      NaN
+    ],
+    "paper": null
+  }
+]

@@ -1,0 +1,20 @@
+\begin{table}[!htbp]
+\caption{BIOT on Siena with two larger-dose SSL recipes (learning rate $10^{-3}$, 4,174 windows in cell 2; full SSL pool in cell 5), the same 30-configuration probe search for LP, EEG and matched noise adaptation, and five rotation means of three seeds. average precision $\times100$; NB = dependence-adjusted interval. No equivalence margin or practical-importance classification is applied.}
+\label{tab:d32-avg_precision}
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lllrrr}
+\toprule
+Cell & Features & Contrast & Mean & 95\% $t$ & 95\% NB\\
+\midrule
+Cell 2 & raw & EEG$-$LP & +0.3 & [-1.6, +2.3] & [-2.9, +3.6]\\
+Cell 2 & raw & EEG$-$noise & -1.1 & [-4.4, +2.3] & [-6.6, +4.5]\\
+Cell 2 & std & EEG$-$LP & -0.6 & [-2.3, +1.0] & [-3.3, +2.0]\\
+Cell 2 & std & EEG$-$noise & -1.0 & [-4.2, +2.1] & [-6.3, +4.2]\\
+Cell 5 & raw & EEG$-$LP & +1.2 & [-1.5, +3.9] & [-3.2, +5.6]\\
+Cell 5 & raw & EEG$-$noise & -0.3 & [-2.4, +1.9] & [-3.8, +3.3]\\
+Cell 5 & std & EEG$-$LP & -0.4 & [-1.7, +1.0] & [-2.6, +1.9]\\
+Cell 5 & std & EEG$-$noise & -1.3 & [-4.2, +1.7] & [-6.1, +3.6]\\
+\bottomrule
+\end{tabular}
+\end{table}

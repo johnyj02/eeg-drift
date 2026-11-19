@@ -1,0 +1,7 @@
+einops==0.8.1
+linear-attention-transformer==0.19.1
+mne==1.9.0
+pyedflib==0.1.38
+seaborn==0.13.2
+matplotlib==3.9.4
+umap-learn==0.5.7

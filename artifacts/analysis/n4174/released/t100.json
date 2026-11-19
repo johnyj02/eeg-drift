@@ -1,0 +1,3297 @@
+{
+ "variant": "t100",
+ "returncode": 0,
+ "seconds": 1409,
+ "patch": {
+  "135": "        permissible_amplitude = 100.0"
+ },
+ "python": "~/released/eea-env/bin/python",
+ "lmdb_shim": "keys-only: window puts are no-ops, __keys__ written; sync off",
+ "versions": {
+  "mne": "1.9.0",
+  "numpy": "1.26.4",
+  "scipy": "1.11.4",
+  "python": "3.12.15"
+ },
+ "released_sha256": "088d8c5db2d80cb3d95ff9d0ae0c92b3b541f4a6cbf8963d0c60c06af7170a05",
+ "n_keys": 4325,
+ "n_unique_keys": 4325,
+ "files_in_order": [
+  [
+   "chb16_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_23",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_28",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_03",
+   69,
+   "ok, 407 rejected"
+  ],
+  [
+   "chb08_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_31",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_09",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb21_33",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_15",
+   42,
+   "ok, 74 rejected"
+  ],
+  [
+   "chb07_02",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb15_07",
+   66,
+   "ok, 50 rejected"
+  ],
+  [
+   "chb19_20",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_02",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb17b_68",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_12",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_34",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_39",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_26",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_11",
+   37,
+   "ok, 79 rejected"
+  ],
+  [
+   "chb18_30",
+   25,
+   "ok, 91 rejected"
+  ],
+  [
+   "chb09_10",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb21_27",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_13",
+   13,
+   "ok, 103 rejected"
+  ],
+  [
+   "chb03_07",
+   20,
+   "ok, 96 rejected"
+  ],
+  [
+   "chb06_05",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb17c_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_14",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb04_06",
+   26,
+   "ok, 450 rejected"
+  ],
+  [
+   "chb03_23",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_03",
+   18,
+   "ok, 458 rejected"
+  ],
+  [
+   "chb05_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_01",
+   0,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb02_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_28",
+   224,
+   "ok, 252 rejected"
+  ],
+  [
+   "chb12_35",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_36",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_12",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb01_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_29",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_12",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_02",
+   6,
+   "ok, 110 rejected"
+  ],
+  [
+   "chb21_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_04",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb13_15",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_26",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_53",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_42",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_38",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_19",
+   14,
+   "ok, 462 rejected"
+  ],
+  [
+   "chb08_29",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_60",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_33",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb15_62",
+   34,
+   "ok, 82 rejected"
+  ],
+  [
+   "chb04_12",
+   21,
+   "ok, 455 rejected"
+  ],
+  [
+   "chb20_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_32",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_37",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_26",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_12",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb01_12",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_25",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_15",
+   14,
+   "ok, 102 rejected"
+  ],
+  [
+   "chb12_42",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_25",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_59",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_20",
+   3,
+   "ok, 113 rejected"
+  ],
+  [
+   "chb18_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_02",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb05_23",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_18",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb18_34",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb14_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_13",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb04_39",
+   53,
+   "ok, 423 rejected"
+  ],
+  [
+   "chb14_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_31",
+   61,
+   "ok, 415 rejected"
+  ],
+  [
+   "chb02_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_31",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb04_10",
+   43,
+   "ok, 433 rejected"
+  ],
+  [
+   "chb02_35",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_20",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17b_69",
+   69,
+   "ok, 47 rejected"
+  ],
+  [
+   "chb05_30",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_12",
+   73,
+   "ok, 43 rejected"
+  ],
+  [
+   "chb13_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_04",
+   63,
+   "ok, 413 rejected"
+  ],
+  [
+   "chb17a_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_51",
+   52,
+   "ok, 64 rejected"
+  ],
+  [
+   "chb15_15",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb20_30",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_14",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb21_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_36",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_10",
+   55,
+   "ok, 61 rejected"
+  ],
+  [
+   "chb03_21",
+   3,
+   "ok, 113 rejected"
+  ],
+  [
+   "chb15_61",
+   53,
+   "ok, 63 rejected"
+  ],
+  [
+   "chb17c_08",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb02_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_17",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb11_15",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_23",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_20",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_02",
+   78,
+   "ok, 398 rejected"
+  ],
+  [
+   "chb07_17",
+   6,
+   "ok, 470 rejected"
+  ],
+  [
+   "chb11_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_32",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_23",
+   0,
+   "ok, 94 rejected"
+  ],
+  [
+   "chb15_01",
+   35,
+   "ok, 81 rejected"
+  ],
+  [
+   "chb12_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_14",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_11",
+   7,
+   "ok, 469 rejected"
+  ],
+  [
+   "chb12_34",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_14",
+   48,
+   "ok, 68 rejected"
+  ],
+  [
+   "chb21_25",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_12",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb04_21",
+   17,
+   "ok, 459 rejected"
+  ],
+  [
+   "chb13_09",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_08",
+   39,
+   "ok, 77 rejected"
+  ],
+  [
+   "chb21_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_14",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_17",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb16_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_10",
+   55,
+   "ok, 61 rejected"
+  ],
+  [
+   "chb14_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_28",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_20",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_92",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_14",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb21_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_13",
+   30,
+   "ok, 86 rejected"
+  ],
+  [
+   "chb20_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_32",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb11_82",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_09",
+   23,
+   "ok, 453 rejected"
+  ],
+  [
+   "chb19_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_59",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17c_07",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb09_18",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb12_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_09",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb20_25",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_24",
+   17,
+   "ok, 459 rejected"
+  ],
+  [
+   "chb05_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_26",
+   75,
+   "ok, 401 rejected"
+  ],
+  [
+   "chb11_62",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb16_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_26",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb12_32",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_40",
+   4,
+   "ok, 112 rejected"
+  ],
+  [
+   "chb10_04",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb18_09",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb01_43",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_14",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_34",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_26",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_63",
+   49,
+   "ok, 67 rejected"
+  ],
+  [
+   "chb13_55",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_08",
+   8,
+   "ok, 108 rejected"
+  ],
+  [
+   "chb14_12",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_16",
+   0,
+   "ok, 449 rejected"
+  ],
+  [
+   "chb08_23",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb12_36",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_09",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_15",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb17a_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_40",
+   96,
+   "ok, 380 rejected"
+  ],
+  [
+   "chb04_16",
+   1,
+   "ok, 475 rejected"
+  ],
+  [
+   "chb19_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_29",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_01",
+   3,
+   "ok, 113 rejected"
+  ],
+  [
+   "chb13_12",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_45",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb01_41",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_02",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb09_13",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb20_15",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17b_58",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_11",
+   37,
+   "ok, 79 rejected"
+  ],
+  [
+   "chb22_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17b_63",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_17",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb13_56",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_29",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_27",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_06",
+   0,
+   "ok, 160 rejected"
+  ],
+  [
+   "chb18_14",
+   20,
+   "ok, 96 rejected"
+  ],
+  [
+   "chb09_17",
+   0,
+   "ok, 28 rejected"
+  ],
+  [
+   "chb03_14",
+   64,
+   "ok, 52 rejected"
+  ],
+  [
+   "chb16_07",
+   7,
+   "ok, 109 rejected"
+  ],
+  [
+   "chb05_35",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_27",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_03",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb08_15",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_06",
+   38,
+   "ok, 78 rejected"
+  ],
+  [
+   "chb12_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_61",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17b_59",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_39",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_07",
+   10,
+   "ok, 106 rejected"
+  ],
+  [
+   "chb02_15",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_29",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_09",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_33",
+   21,
+   "ok, 95 rejected"
+  ],
+  [
+   "chb06_10",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb04_34",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb15_46",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_25",
+   14,
+   "ok, 462 rejected"
+  ],
+  [
+   "chb01_26",
+   0,
+   "ok, 73 rejected"
+  ],
+  [
+   "chb13_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_20",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_41",
+   140,
+   "ok, 336 rejected"
+  ],
+  [
+   "chb10_14",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb03_18",
+   27,
+   "ok, 89 rejected"
+  ],
+  [
+   "chb14_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_32",
+   44,
+   "ok, 72 rejected"
+  ],
+  [
+   "chb22_23",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_01",
+   1,
+   "ok, 474 rejected"
+  ],
+  [
+   "chb13_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_27",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_15",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb02_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_29",
+   217,
+   "ok, 259 rejected"
+  ],
+  [
+   "chb12_09",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_27",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_11",
+   12,
+   "ok, 145 rejected"
+  ],
+  [
+   "chb03_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_43",
+   35,
+   "ok, 441 rejected"
+  ],
+  [
+   "chb19_06",
+   22,
+   "ok, 94 rejected"
+  ],
+  [
+   "chb19_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_25",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_12",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_16",
+   0,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb22_54",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_13",
+   0,
+   "ok, 475 rejected"
+  ],
+  [
+   "chb19_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_19",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb10_31",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb10_16",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb01_34",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_15",
+   12,
+   "ok, 104 rejected"
+  ],
+  [
+   "chb05_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_04",
+   0,
+   "ok, 438 rejected"
+  ],
+  [
+   "chb17c_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_20",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_56",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_25",
+   57,
+   "ok, 59 rejected"
+  ],
+  [
+   "chb01_14",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_24",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb05_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_29",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_28",
+   42,
+   "ok, 74 rejected"
+  ],
+  [
+   "chb12_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_36",
+   63,
+   "ok, 413 rejected"
+  ],
+  [
+   "chb10_05",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb12_23",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_08",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb02_11",
+   6,
+   "ok, 110 rejected"
+  ],
+  [
+   "chb15_31",
+   58,
+   "ok, 58 rejected"
+  ],
+  [
+   "chb22_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_12",
+   6,
+   "ok, 110 rejected"
+  ],
+  [
+   "chb02_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_16",
+   0,
+   "ok, 111 rejected"
+  ],
+  [
+   "chb18_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb12_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_07",
+   5,
+   "ok, 240 rejected"
+  ],
+  [
+   "chb18_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_31",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_63",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_16",
+   0,
+   "ok, 97 rejected"
+  ],
+  [
+   "chb02_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb12_27",
+   0,
+   "Only 0 of 16 required channels present (<12)"
+  ],
+  [
+   "chb01_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_09",
+   4,
+   "ok, 112 rejected"
+  ],
+  [
+   "chb01_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_12",
+   56,
+   "ok, 60 rejected"
+  ],
+  [
+   "chb04_27",
+   4,
+   "ok, 472 rejected"
+  ],
+  [
+   "chb22_15",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb12_28",
+   0,
+   "Only 0 of 16 required channels present (<12)"
+  ],
+  [
+   "chb13_40",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_29",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_62",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_46",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_29",
+   20,
+   "ok, 96 rejected"
+  ],
+  [
+   "chb16_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_12",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb10_27",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb15_37",
+   55,
+   "ok, 61 rejected"
+  ],
+  [
+   "chb15_05",
+   33,
+   "ok, 83 rejected"
+  ],
+  [
+   "chb11_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_28",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb13_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_52",
+   7,
+   "ok, 109 rejected"
+  ],
+  [
+   "chb02_33",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_58",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_40",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_13",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb13_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_27",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_13",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb21_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_12",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_22",
+   0,
+   "ok, 20 rejected"
+  ],
+  [
+   "chb04_35",
+   20,
+   "ok, 456 rejected"
+  ],
+  [
+   "chb18_10",
+   34,
+   "ok, 82 rejected"
+  ],
+  [
+   "chb20_12",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_24",
+   38,
+   "ok, 78 rejected"
+  ],
+  [
+   "chb05_31",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_15",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb17a_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_77",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_27",
+   31,
+   "ok, 85 rejected"
+  ],
+  [
+   "chb18_33",
+   45,
+   "ok, 71 rejected"
+  ],
+  [
+   "chb03_09",
+   35,
+   "ok, 81 rejected"
+  ],
+  [
+   "chb02_26",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_35",
+   12,
+   "ok, 104 rejected"
+  ],
+  [
+   "chb22_30",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_01",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb12_37",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_08",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb21_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_22",
+   48,
+   "ok, 428 rejected"
+  ],
+  [
+   "chb03_32",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_05",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb05_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_27",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_19",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb20_26",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_16",
+   22,
+   "ok, 94 rejected"
+  ],
+  [
+   "chb03_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17b_67",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_30",
+   72,
+   "ok, 404 rejected"
+  ],
+  [
+   "chb06_09",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb11_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_09",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_09",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_28",
+   12,
+   "ok, 104 rejected"
+  ],
+  [
+   "chb09_05",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb04_37",
+   0,
+   "ok, 183 rejected"
+  ],
+  [
+   "chb06_03",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb21_14",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_12",
+   4,
+   "ok, 112 rejected"
+  ],
+  [
+   "chb08_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_22",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb21_12",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17c_03",
+   4,
+   "ok, 112 rejected"
+  ],
+  [
+   "chb16_06",
+   10,
+   "ok, 106 rejected"
+  ],
+  [
+   "chb10_28",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb03_28",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_09",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_60",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_36",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_07",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb11_25",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17a_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_13",
+   45,
+   "ok, 71 rejected"
+  ],
+  [
+   "chb03_10",
+   9,
+   "ok, 107 rejected"
+  ],
+  [
+   "chb19_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_22",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb03_34",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_04",
+   40,
+   "ok, 76 rejected"
+  ],
+  [
+   "chb11_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_20",
+   0,
+   "ok, 84 rejected"
+  ],
+  [
+   "chb22_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17c_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_20",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb06_18",
+   0,
+   "ok, 260 rejected"
+  ],
+  [
+   "chb03_04",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb13_38",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_54",
+   19,
+   "ok, 97 rejected"
+  ],
+  [
+   "chb05_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_42",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_30",
+   9,
+   "ok, 107 rejected"
+  ],
+  [
+   "chb01_39",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_42",
+   50,
+   "ok, 140 rejected"
+  ],
+  [
+   "chb01_25",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_30",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_31",
+   11,
+   "ok, 105 rejected"
+  ],
+  [
+   "chb22_51",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_38",
+   59,
+   "ok, 417 rejected"
+  ],
+  [
+   "chb13_30",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17a_03",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb11_55",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb12_11",
+   0,
+   "ok, 77 rejected"
+  ],
+  [
+   "chb18_13",
+   26,
+   "ok, 90 rejected"
+  ],
+  [
+   "chb14_30",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_30",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb12_29",
+   0,
+   "Only 0 of 16 required channels present (<12)"
+  ],
+  [
+   "chb06_06",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb01_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_99",
+   0,
+   "ok, 91 rejected"
+  ],
+  [
+   "chb09_15",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb03_37",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_16",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb09_11",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb12_41",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_26",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_54",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_26",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_20",
+   0,
+   "ok, 95 rejected"
+  ],
+  [
+   "chb10_06",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb07_04",
+   15,
+   "ok, 461 rejected"
+  ],
+  [
+   "chb12_33",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_06",
+   0,
+   "ok, 475 rejected"
+  ],
+  [
+   "chb13_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_14",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb03_05",
+   5,
+   "ok, 111 rejected"
+  ],
+  [
+   "chb13_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_32",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_07",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb22_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_38",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_03",
+   24,
+   "ok, 92 rejected"
+  ],
+  [
+   "chb22_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_09",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_30",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb21_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_28",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_14",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb02_14",
+   3,
+   "ok, 113 rejected"
+  ],
+  [
+   "chb19_22",
+   22,
+   "ok, 94 rejected"
+  ],
+  [
+   "chb22_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_25",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_01",
+   1,
+   "ok, 475 rejected"
+  ],
+  [
+   "chb05_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_01",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb05_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_16",
+   0,
+   "ok, 27 rejected"
+  ],
+  [
+   "chb08_14",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_01",
+   0,
+   "ok, 263 rejected"
+  ],
+  [
+   "chb05_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_07",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb20_11",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_14",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_29",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_89",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb19_29",
+   2,
+   "ok, 114 rejected"
+  ],
+  [
+   "chb05_32",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_35",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb19_26",
+   44,
+   "ok, 72 rejected"
+  ],
+  [
+   "chb09_02",
+   0,
+   "ok, 475 rejected"
+  ],
+  [
+   "chb10_18",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb01_15",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_08",
+   28,
+   "ok, 88 rejected"
+  ],
+  [
+   "chb01_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_08",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb02_30",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb01_36",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_38",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_16",
+   25,
+   "ok, 91 rejected"
+  ],
+  [
+   "chb05_28",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_24",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_30",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_14",
+   15,
+   "ok, 101 rejected"
+  ],
+  [
+   "chb12_20",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_02",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb12_40",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_68",
+   0,
+   "ok, 68 rejected"
+  ],
+  [
+   "chb13_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_08",
+   45,
+   "ok, 71 rejected"
+  ],
+  [
+   "chb18_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_28",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17c_06",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb02_16+",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_26",
+   12,
+   "ok, 104 rejected"
+  ],
+  [
+   "chb06_15",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb18_36",
+   17,
+   "ok, 99 rejected"
+  ],
+  [
+   "chb04_17",
+   21,
+   "ok, 432 rejected"
+  ],
+  [
+   "chb18_29",
+   23,
+   "ok, 93 rejected"
+  ],
+  [
+   "chb14_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_03",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb21_23",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb12_38",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_31",
+   0,
+   "ok, 71 rejected"
+  ],
+  [
+   "chb14_39",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_34",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb06_08",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb01_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_18",
+   14,
+   "ok, 384 rejected"
+  ],
+  [
+   "chb18_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_15",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_19",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb02_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17b_57",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_32",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb13_37",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_33",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_25",
+   22,
+   "ok, 94 rejected"
+  ],
+  [
+   "chb15_50",
+   17,
+   "ok, 99 rejected"
+  ],
+  [
+   "chb03_11",
+   43,
+   "ok, 73 rejected"
+  ],
+  [
+   "chb13_47",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_30",
+   1,
+   "ok, 106 rejected"
+  ],
+  [
+   "chb13_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_20",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_09",
+   58,
+   "ok, 58 rejected"
+  ],
+  [
+   "chb14_37",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_20",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17c_05",
+   4,
+   "ok, 112 rejected"
+  ],
+  [
+   "chb01_38",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb14_18",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_16",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_21",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb11_13",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_37",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_24",
+   18,
+   "ok, 98 rejected"
+  ],
+  [
+   "chb22_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_17",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb12_21",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_08",
+   19,
+   "ok, 457 rejected"
+  ],
+  [
+   "chb11_06",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb05_33",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_25",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_08",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_11",
+   34,
+   "ok, 82 rejected"
+  ],
+  [
+   "chb22_07",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb10_38",
+   0,
+   "ok, 236 rejected"
+  ],
+  [
+   "chb16_15",
+   12,
+   "ok, 104 rejected"
+  ],
+  [
+   "chb07_10",
+   5,
+   "ok, 471 rejected"
+  ],
+  [
+   "chb08_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb12_39",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_05",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb22_29",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_49",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb07_13",
+   0,
+   "ok, 120 rejected"
+  ],
+  [
+   "chb19_09",
+   16,
+   "ok, 100 rejected"
+  ],
+  [
+   "chb22_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_17",
+   74,
+   "ok, 42 rejected"
+  ],
+  [
+   "chb07_07",
+   0,
+   "ok, 151 rejected"
+  ],
+  [
+   "chb14_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_10",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb19_23",
+   55,
+   "ok, 61 rejected"
+  ],
+  [
+   "chb01_27",
+   0,
+   "ok, 16 rejected"
+  ],
+  [
+   "chb01_23",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_33",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb11_58",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_27",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_15",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb08_02",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb09_19",
+   0,
+   "ok, 186 rejected"
+  ],
+  [
+   "chb16_01",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_03",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb21_32",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb15_35",
+   30,
+   "ok, 86 rejected"
+  ],
+  [
+   "chb14_14",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb01_31",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb18_04",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb03_19",
+   4,
+   "ok, 112 rejected"
+  ],
+  [
+   "chb06_24",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb13_60",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb17b_60",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb16_05",
+   1,
+   "ok, 115 rejected"
+  ],
+  [
+   "chb18_12",
+   11,
+   "ok, 105 rejected"
+  ],
+  [
+   "chb04_05",
+   1,
+   "ok, 312 rejected"
+  ],
+  [
+   "chb09_08",
+   0,
+   "ok, 476 rejected"
+  ],
+  [
+   "chb02_22",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb20_27",
+   0,
+   "ok, 116 rejected"
+  ],
+  [
+   "chb04_23",
+   11,
+   "ok, 341 rejected"
+  ]
+ ],
+ "log_vs_keys_mismatch": []
+}

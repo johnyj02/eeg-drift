@@ -1,0 +1,5 @@
+e30cn-c-N896-fd1	 	exit 0 after 200 s	torch 2.4.1+cu121 cuda=False
+e4-b-lp	 	exit 0 after 12 s	torch 2.4.1+cu121 cuda=False
+e4-c-sa	 	exit 0 after 275 s	torch 2.4.1+cu121 cuda=False
+e6-b-last1	 	exit 0 after 303 s	torch 2.4.1+cu121 cuda=False
+e7cbramod-c-tenc-meval-ft0	1	1	src/model_factory.py 1	0	src/trainer.py 	exit 0 after 12 s	torch 2.4.1+cu121 cuda=False

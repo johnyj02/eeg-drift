@@ -1,0 +1,318 @@
+{
+  "a_main_biot_stepup": {
+    "model": "biot",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      3186945
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "a_main_cbramod_stepup": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      69326201
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "b_main_biot_fmfreeze": {
+    "model": "biot",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      257
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "b_main_biot_stepup_key": {
+    "model": "biot",
+    "n_names": 17,
+    "sum_numel_printed_names": 920576,
+    "trainable_lines": [
+      3186945,
+      257
+    ],
+    "layer_trainable_line": null,
+    "mode": "last1",
+    "paper": 920576,
+    "match": true
+  },
+  "b_main_cbramod_fmfreeze": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      64402401
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "b_main_cbramod_stepup_key": {
+    "model": "cbramod",
+    "n_names": 18,
+    "sum_numel_printed_names": 442800,
+    "trainable_lines": [
+      69326201,
+      64402401
+    ],
+    "layer_trainable_line": null,
+    "mode": "last1",
+    "paper": 442800,
+    "match": true
+  },
+  "c_divN_biot_N": {
+    "model": "biot",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      3186945
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divN_biot_N_key": {
+    "model": "biot",
+    "n_names": 17,
+    "sum_numel_printed_names": 920576,
+    "trainable_lines": [
+      3186945,
+      257
+    ],
+    "layer_trainable_line": null,
+    "mode": "last1",
+    "paper": 920576,
+    "match": true
+  },
+  "c_divN_biot_plusN": {
+    "model": "biot",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divN_biot_plusN_key": {
+    "model": "biot",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divN_cbramod_N": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      69326201
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divN_cbramod_N_key": {
+    "model": "cbramod",
+    "n_names": 18,
+    "sum_numel_printed_names": 442800,
+    "trainable_lines": [
+      69326201,
+      64402401
+    ],
+    "layer_trainable_line": null,
+    "mode": "last1",
+    "paper": 442800,
+    "match": true
+  },
+  "c_divN_cbramod_plusN": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divN_cbramod_plusN_key": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divP_biot": {
+    "model": "biot",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divP_biot_NP": {
+    "model": "biot",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      3186945
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divP_biot_NP_key": {
+    "model": "biot",
+    "n_names": 17,
+    "sum_numel_printed_names": 920576,
+    "trainable_lines": [
+      3186945,
+      257
+    ],
+    "layer_trainable_line": null,
+    "mode": "last1",
+    "paper": 920576,
+    "match": true
+  },
+  "c_divP_biot_key": {
+    "model": "biot",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divP_cbramod": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divP_cbramod_NP": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      69326201
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_divP_cbramod_NP_key": {
+    "model": "cbramod",
+    "n_names": 18,
+    "sum_numel_printed_names": 442800,
+    "trainable_lines": [
+      69326201,
+      64402401
+    ],
+    "layer_trainable_line": null,
+    "mode": "last1",
+    "paper": 442800,
+    "match": true
+  },
+  "c_divP_cbramod_key": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_layer_biot": {
+    "model": "biot",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      3186945
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_layer_biot_key": {
+    "model": "biot",
+    "n_names": 17,
+    "sum_numel_printed_names": 920576,
+    "trainable_lines": [
+      3186945,
+      257
+    ],
+    "layer_trainable_line": 920576,
+    "mode": "last1",
+    "paper": 920576,
+    "match": true
+  },
+  "c_layer_biot_key_last2": {
+    "model": "biot",
+    "n_names": 30,
+    "sum_numel_printed_names": 1709568,
+    "trainable_lines": [
+      3186945,
+      257
+    ],
+    "layer_trainable_line": 1709568,
+    "mode": "last2",
+    "paper": 1709568,
+    "match": true
+  },
+  "c_layer_cbramod": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      69326201
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "c_layer_cbramod_key": {
+    "model": "cbramod",
+    "n_names": 18,
+    "sum_numel_printed_names": 442800,
+    "trainable_lines": [
+      69326201,
+      64402401
+    ],
+    "layer_trainable_line": 442800,
+    "mode": "last1",
+    "paper": 442800,
+    "match": true
+  },
+  "c_layer_cbramod_key_last2": {
+    "model": "cbramod",
+    "n_names": 34,
+    "sum_numel_printed_names": 845400,
+    "trainable_lines": [
+      69326201,
+      64402401
+    ],
+    "layer_trainable_line": 845400,
+    "mode": "last2",
+    "paper": 845400,
+    "match": true
+  },
+  "d_l29_cbramod_fmfreeze": {
+    "model": "cbramod",
+    "n_names": 0,
+    "sum_numel_printed_names": null,
+    "trainable_lines": [
+      64402401
+    ],
+    "layer_trainable_line": null,
+    "mode": null
+  },
+  "d_l29_cbramod_stepup_key": {
+    "model": "cbramod",
+    "n_names": 18,
+    "sum_numel_printed_names": 442800,
+    "trainable_lines": [
+      69286001
+    ],
+    "layer_trainable_line": null,
+    "mode": "last1",
+    "paper": 442800,
+    "match": true
+  }
+}

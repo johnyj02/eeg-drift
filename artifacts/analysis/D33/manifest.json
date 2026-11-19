@@ -1,0 +1,1101 @@
+{
+ "experiment": "D33",
+ "why_this_manifest": "the run tag S3L was ALSO used by E25, the shipped-MLP-head wave (notes/decisions.md:454), so the tag alone does not identify these records. Select on this manifest, or on the presence of the 'logreg' probe.",
+ "selection_rule": "record has probes['logreg'] and probes['logreg_z'] and smoke is false",
+ "n_records": 60,
+ "n_fits": 120,
+ "by_tag": {
+  "P1QL": 15,
+  "S3L": 45
+ },
+ "by_unit": {
+  "arms-biot-chb-lq": 15,
+  "arms-biot-sie-rot0-ld0": 9,
+  "arms-biot-sie-rot1-ld1": 9,
+  "arms-biot-sie-rot2-ld2": 9,
+  "arms-biot-sie-rot3-ld3": 9,
+  "arms-biot-sie-rot4-ld4": 9
+ },
+ "records": [
+  {
+   "key": "biot-chbmit-last-s123-paper-a46c0bea54a0b9b7",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last-s123-paper-a46c0bea54a0b9b7.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last",
+   "seed": 123,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-last-s2021-paper-fdef50577194024c",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last-s2021-paper-fdef50577194024c.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last",
+   "seed": 2021,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-last-s3407-paper-32406b270adb81c7",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last-s3407-paper-32406b270adb81c7.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last",
+   "seed": 3407,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-last-s42-paper-a90462d8bcc88cbb",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last-s42-paper-a90462d8bcc88cbb.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last",
+   "seed": 42,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-last-s8888-paper-d53f81b63b5e77cd",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last-s8888-paper-d53f81b63b5e77cd.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last",
+   "seed": 8888,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-last_noise-s123-paper-947fb968322b35de",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last_noise-s123-paper-947fb968322b35de.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last_noise",
+   "seed": 123,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-last_noise-s2021-paper-f69709e246cd221a",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last_noise-s2021-paper-f69709e246cd221a.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last_noise",
+   "seed": 2021,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-last_noise-s3407-paper-6efd1f4076fbf7ab",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last_noise-s3407-paper-6efd1f4076fbf7ab.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last_noise",
+   "seed": 3407,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-last_noise-s42-paper-5aff81dfdd9939ef",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last_noise-s42-paper-5aff81dfdd9939ef.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last_noise",
+   "seed": 42,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-last_noise-s8888-paper-48ecce8b08972e39",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-last_noise-s8888-paper-48ecce8b08972e39.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "last_noise",
+   "seed": 8888,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-lp-s123-paper-67dbc5f661a232a4",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-lp-s123-paper-67dbc5f661a232a4.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "lp",
+   "seed": 123,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-lp-s2021-paper-416c78fc94c4e5d2",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-lp-s2021-paper-416c78fc94c4e5d2.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "lp",
+   "seed": 2021,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-lp-s3407-paper-cdbcdaebb8815285",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-lp-s3407-paper-cdbcdaebb8815285.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "lp",
+   "seed": 3407,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-lp-s42-paper-e909330851477a4a",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-lp-s42-paper-e909330851477a4a.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "lp",
+   "seed": 42,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-chbmit-lp-s8888-paper-9fd7c03ea8534700",
+   "unit": "arms-biot-chb-lq",
+   "path": "artifacts/s3-results/arms-biot-chb-lq/results/biot-chbmit-lp-s8888-paper-9fd7c03ea8534700.json",
+   "run_tag": "P1QL",
+   "model": "biot",
+   "dataset": "chbmit",
+   "split": "paper",
+   "arm": "lp",
+   "seed": 8888,
+   "labels": "upstream",
+   "input_norm": "q95",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s1000-rot0-f7ef0c608b791406",
+   "unit": "arms-biot-sie-rot0-ld0",
+   "path": "artifacts/s3-results/arms-biot-sie-rot0-ld0/results/biot-siena-last-s1000-rot0-f7ef0c608b791406.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot0",
+   "arm": "last",
+   "seed": 1000,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s2000-rot0-a6b537936cf548d3",
+   "unit": "arms-biot-sie-rot0-ld0",
+   "path": "artifacts/s3-results/arms-biot-sie-rot0-ld0/results/biot-siena-last-s2000-rot0-a6b537936cf548d3.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot0",
+   "arm": "last",
+   "seed": 2000,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s42-rot0-9a22c559d6347613",
+   "unit": "arms-biot-sie-rot0-ld0",
+   "path": "artifacts/s3-results/arms-biot-sie-rot0-ld0/results/biot-siena-last-s42-rot0-9a22c559d6347613.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot0",
+   "arm": "last",
+   "seed": 42,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s1000-rot0-ac0d076d2072a672",
+   "unit": "arms-biot-sie-rot0-ld0",
+   "path": "artifacts/s3-results/arms-biot-sie-rot0-ld0/results/biot-siena-last_noise-s1000-rot0-ac0d076d2072a672.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot0",
+   "arm": "last_noise",
+   "seed": 1000,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s2000-rot0-38a7243e24ff8ff8",
+   "unit": "arms-biot-sie-rot0-ld0",
+   "path": "artifacts/s3-results/arms-biot-sie-rot0-ld0/results/biot-siena-last_noise-s2000-rot0-38a7243e24ff8ff8.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot0",
+   "arm": "last_noise",
+   "seed": 2000,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s42-rot0-e5c9b60b7dac6984",
+   "unit": "arms-biot-sie-rot0-ld0",
+   "path": "artifacts/s3-results/arms-biot-sie-rot0-ld0/results/biot-siena-last_noise-s42-rot0-e5c9b60b7dac6984.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot0",
+   "arm": "last_noise",
+   "seed": 42,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s1000-rot0-f440a6f0ba6cf5f8",
+   "unit": "arms-biot-sie-rot0-ld0",
+   "path": "artifacts/s3-results/arms-biot-sie-rot0-ld0/results/biot-siena-lp-s1000-rot0-f440a6f0ba6cf5f8.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot0",
+   "arm": "lp",
+   "seed": 1000,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s2000-rot0-6497aee9b7ee5800",
+   "unit": "arms-biot-sie-rot0-ld0",
+   "path": "artifacts/s3-results/arms-biot-sie-rot0-ld0/results/biot-siena-lp-s2000-rot0-6497aee9b7ee5800.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot0",
+   "arm": "lp",
+   "seed": 2000,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s42-rot0-f1a3adb700d659a8",
+   "unit": "arms-biot-sie-rot0-ld0",
+   "path": "artifacts/s3-results/arms-biot-sie-rot0-ld0/results/biot-siena-lp-s42-rot0-f1a3adb700d659a8.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot0",
+   "arm": "lp",
+   "seed": 42,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s1001-rot1-bd1ebfcf851163b1",
+   "unit": "arms-biot-sie-rot1-ld1",
+   "path": "artifacts/s3-results/arms-biot-sie-rot1-ld1/results/biot-siena-last-s1001-rot1-bd1ebfcf851163b1.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot1",
+   "arm": "last",
+   "seed": 1001,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s123-rot1-0a9c48585e9a2c5d",
+   "unit": "arms-biot-sie-rot1-ld1",
+   "path": "artifacts/s3-results/arms-biot-sie-rot1-ld1/results/biot-siena-last-s123-rot1-0a9c48585e9a2c5d.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot1",
+   "arm": "last",
+   "seed": 123,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s2001-rot1-c31aaf89cfa3ce24",
+   "unit": "arms-biot-sie-rot1-ld1",
+   "path": "artifacts/s3-results/arms-biot-sie-rot1-ld1/results/biot-siena-last-s2001-rot1-c31aaf89cfa3ce24.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot1",
+   "arm": "last",
+   "seed": 2001,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s1001-rot1-97e30d4d1bd03910",
+   "unit": "arms-biot-sie-rot1-ld1",
+   "path": "artifacts/s3-results/arms-biot-sie-rot1-ld1/results/biot-siena-last_noise-s1001-rot1-97e30d4d1bd03910.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot1",
+   "arm": "last_noise",
+   "seed": 1001,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s123-rot1-2632b3ead2c0f815",
+   "unit": "arms-biot-sie-rot1-ld1",
+   "path": "artifacts/s3-results/arms-biot-sie-rot1-ld1/results/biot-siena-last_noise-s123-rot1-2632b3ead2c0f815.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot1",
+   "arm": "last_noise",
+   "seed": 123,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s2001-rot1-d02cd89588e7cc66",
+   "unit": "arms-biot-sie-rot1-ld1",
+   "path": "artifacts/s3-results/arms-biot-sie-rot1-ld1/results/biot-siena-last_noise-s2001-rot1-d02cd89588e7cc66.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot1",
+   "arm": "last_noise",
+   "seed": 2001,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s1001-rot1-0a1eff4035298012",
+   "unit": "arms-biot-sie-rot1-ld1",
+   "path": "artifacts/s3-results/arms-biot-sie-rot1-ld1/results/biot-siena-lp-s1001-rot1-0a1eff4035298012.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot1",
+   "arm": "lp",
+   "seed": 1001,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s123-rot1-31ba1f6b1f8cee43",
+   "unit": "arms-biot-sie-rot1-ld1",
+   "path": "artifacts/s3-results/arms-biot-sie-rot1-ld1/results/biot-siena-lp-s123-rot1-31ba1f6b1f8cee43.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot1",
+   "arm": "lp",
+   "seed": 123,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s2001-rot1-ab4526fb6d379a2d",
+   "unit": "arms-biot-sie-rot1-ld1",
+   "path": "artifacts/s3-results/arms-biot-sie-rot1-ld1/results/biot-siena-lp-s2001-rot1-ab4526fb6d379a2d.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot1",
+   "arm": "lp",
+   "seed": 2001,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s1002-rot2-a1463cdeda377923",
+   "unit": "arms-biot-sie-rot2-ld2",
+   "path": "artifacts/s3-results/arms-biot-sie-rot2-ld2/results/biot-siena-last-s1002-rot2-a1463cdeda377923.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot2",
+   "arm": "last",
+   "seed": 1002,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s2002-rot2-de321d4ac0adc433",
+   "unit": "arms-biot-sie-rot2-ld2",
+   "path": "artifacts/s3-results/arms-biot-sie-rot2-ld2/results/biot-siena-last-s2002-rot2-de321d4ac0adc433.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot2",
+   "arm": "last",
+   "seed": 2002,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s2021-rot2-5d79a1516b6dffad",
+   "unit": "arms-biot-sie-rot2-ld2",
+   "path": "artifacts/s3-results/arms-biot-sie-rot2-ld2/results/biot-siena-last-s2021-rot2-5d79a1516b6dffad.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot2",
+   "arm": "last",
+   "seed": 2021,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s1002-rot2-19d44ea77927b646",
+   "unit": "arms-biot-sie-rot2-ld2",
+   "path": "artifacts/s3-results/arms-biot-sie-rot2-ld2/results/biot-siena-last_noise-s1002-rot2-19d44ea77927b646.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot2",
+   "arm": "last_noise",
+   "seed": 1002,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s2002-rot2-46cf53593de7aeab",
+   "unit": "arms-biot-sie-rot2-ld2",
+   "path": "artifacts/s3-results/arms-biot-sie-rot2-ld2/results/biot-siena-last_noise-s2002-rot2-46cf53593de7aeab.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot2",
+   "arm": "last_noise",
+   "seed": 2002,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s2021-rot2-726f42a83f48702c",
+   "unit": "arms-biot-sie-rot2-ld2",
+   "path": "artifacts/s3-results/arms-biot-sie-rot2-ld2/results/biot-siena-last_noise-s2021-rot2-726f42a83f48702c.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot2",
+   "arm": "last_noise",
+   "seed": 2021,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s1002-rot2-2e5d38290c71f457",
+   "unit": "arms-biot-sie-rot2-ld2",
+   "path": "artifacts/s3-results/arms-biot-sie-rot2-ld2/results/biot-siena-lp-s1002-rot2-2e5d38290c71f457.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot2",
+   "arm": "lp",
+   "seed": 1002,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s2002-rot2-25fadb8b8b6efa7e",
+   "unit": "arms-biot-sie-rot2-ld2",
+   "path": "artifacts/s3-results/arms-biot-sie-rot2-ld2/results/biot-siena-lp-s2002-rot2-25fadb8b8b6efa7e.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot2",
+   "arm": "lp",
+   "seed": 2002,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s2021-rot2-9398209e8cbe409d",
+   "unit": "arms-biot-sie-rot2-ld2",
+   "path": "artifacts/s3-results/arms-biot-sie-rot2-ld2/results/biot-siena-lp-s2021-rot2-9398209e8cbe409d.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot2",
+   "arm": "lp",
+   "seed": 2021,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s1003-rot3-36b6469a7f350e8a",
+   "unit": "arms-biot-sie-rot3-ld3",
+   "path": "artifacts/s3-results/arms-biot-sie-rot3-ld3/results/biot-siena-last-s1003-rot3-36b6469a7f350e8a.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot3",
+   "arm": "last",
+   "seed": 1003,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s2003-rot3-a82b86b5a51c4857",
+   "unit": "arms-biot-sie-rot3-ld3",
+   "path": "artifacts/s3-results/arms-biot-sie-rot3-ld3/results/biot-siena-last-s2003-rot3-a82b86b5a51c4857.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot3",
+   "arm": "last",
+   "seed": 2003,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s3407-rot3-6e7e993b41445907",
+   "unit": "arms-biot-sie-rot3-ld3",
+   "path": "artifacts/s3-results/arms-biot-sie-rot3-ld3/results/biot-siena-last-s3407-rot3-6e7e993b41445907.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot3",
+   "arm": "last",
+   "seed": 3407,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s1003-rot3-4ebc3e96f238a87c",
+   "unit": "arms-biot-sie-rot3-ld3",
+   "path": "artifacts/s3-results/arms-biot-sie-rot3-ld3/results/biot-siena-last_noise-s1003-rot3-4ebc3e96f238a87c.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot3",
+   "arm": "last_noise",
+   "seed": 1003,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s2003-rot3-b0f72542b00f1696",
+   "unit": "arms-biot-sie-rot3-ld3",
+   "path": "artifacts/s3-results/arms-biot-sie-rot3-ld3/results/biot-siena-last_noise-s2003-rot3-b0f72542b00f1696.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot3",
+   "arm": "last_noise",
+   "seed": 2003,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s3407-rot3-d271dcce48105034",
+   "unit": "arms-biot-sie-rot3-ld3",
+   "path": "artifacts/s3-results/arms-biot-sie-rot3-ld3/results/biot-siena-last_noise-s3407-rot3-d271dcce48105034.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot3",
+   "arm": "last_noise",
+   "seed": 3407,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s1003-rot3-e303f7cbf3a8293e",
+   "unit": "arms-biot-sie-rot3-ld3",
+   "path": "artifacts/s3-results/arms-biot-sie-rot3-ld3/results/biot-siena-lp-s1003-rot3-e303f7cbf3a8293e.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot3",
+   "arm": "lp",
+   "seed": 1003,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s2003-rot3-aa5bba26c7991929",
+   "unit": "arms-biot-sie-rot3-ld3",
+   "path": "artifacts/s3-results/arms-biot-sie-rot3-ld3/results/biot-siena-lp-s2003-rot3-aa5bba26c7991929.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot3",
+   "arm": "lp",
+   "seed": 2003,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s3407-rot3-ae95d37caa8b8f77",
+   "unit": "arms-biot-sie-rot3-ld3",
+   "path": "artifacts/s3-results/arms-biot-sie-rot3-ld3/results/biot-siena-lp-s3407-rot3-ae95d37caa8b8f77.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot3",
+   "arm": "lp",
+   "seed": 3407,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s1004-rot4-5b837df4951f1495",
+   "unit": "arms-biot-sie-rot4-ld4",
+   "path": "artifacts/s3-results/arms-biot-sie-rot4-ld4/results/biot-siena-last-s1004-rot4-5b837df4951f1495.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot4",
+   "arm": "last",
+   "seed": 1004,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s2004-rot4-78e26794235df3b8",
+   "unit": "arms-biot-sie-rot4-ld4",
+   "path": "artifacts/s3-results/arms-biot-sie-rot4-ld4/results/biot-siena-last-s2004-rot4-78e26794235df3b8.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot4",
+   "arm": "last",
+   "seed": 2004,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last-s8888-rot4-aa73cc6d1efae034",
+   "unit": "arms-biot-sie-rot4-ld4",
+   "path": "artifacts/s3-results/arms-biot-sie-rot4-ld4/results/biot-siena-last-s8888-rot4-aa73cc6d1efae034.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot4",
+   "arm": "last",
+   "seed": 8888,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s1004-rot4-9c9db9cc726bee46",
+   "unit": "arms-biot-sie-rot4-ld4",
+   "path": "artifacts/s3-results/arms-biot-sie-rot4-ld4/results/biot-siena-last_noise-s1004-rot4-9c9db9cc726bee46.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot4",
+   "arm": "last_noise",
+   "seed": 1004,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s2004-rot4-28adb508e5c835d4",
+   "unit": "arms-biot-sie-rot4-ld4",
+   "path": "artifacts/s3-results/arms-biot-sie-rot4-ld4/results/biot-siena-last_noise-s2004-rot4-28adb508e5c835d4.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot4",
+   "arm": "last_noise",
+   "seed": 2004,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-last_noise-s8888-rot4-0c109f6fe5a6ca1c",
+   "unit": "arms-biot-sie-rot4-ld4",
+   "path": "artifacts/s3-results/arms-biot-sie-rot4-ld4/results/biot-siena-last_noise-s8888-rot4-0c109f6fe5a6ca1c.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot4",
+   "arm": "last_noise",
+   "seed": 8888,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s1004-rot4-593459ba1e0e12fa",
+   "unit": "arms-biot-sie-rot4-ld4",
+   "path": "artifacts/s3-results/arms-biot-sie-rot4-ld4/results/biot-siena-lp-s1004-rot4-593459ba1e0e12fa.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot4",
+   "arm": "lp",
+   "seed": 1004,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s2004-rot4-69be0cc77bc1469f",
+   "unit": "arms-biot-sie-rot4-ld4",
+   "path": "artifacts/s3-results/arms-biot-sie-rot4-ld4/results/biot-siena-lp-s2004-rot4-69be0cc77bc1469f.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot4",
+   "arm": "lp",
+   "seed": 2004,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  },
+  {
+   "key": "biot-siena-lp-s8888-rot4-1fd5697582f206c8",
+   "unit": "arms-biot-sie-rot4-ld4",
+   "path": "artifacts/s3-results/arms-biot-sie-rot4-ld4/results/biot-siena-lp-s8888-rot4-1fd5697582f206c8.json",
+   "run_tag": "S3L",
+   "model": "biot",
+   "dataset": "siena",
+   "split": "rot4",
+   "arm": "lp",
+   "seed": 8888,
+   "labels": "overlap",
+   "input_norm": "",
+   "probes": [
+    "logreg",
+    "logreg_z"
+   ],
+   "logreg_version": 1
+  }
+ ]
+}
