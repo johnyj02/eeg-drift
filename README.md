@@ -1,34 +1,66 @@
 # EEGDrift
 
-Does distribution shift in an EEG foundation model live in the **early** layers, not the last one?
+A reproduction and controlled evaluation of self-supervised adaptation for EEG encoders, on CHB-MIT and
+Siena Scalp EEG, with BIOT and CBraMod.
 
-Dani and Liebe (MICCAI 2026, arXiv:2608.24727) adapt the final encoder layer of BIOT and CBraMod
-with each model's own SSL objective, and report up to +36.2 AUCROC over linear probing. The shift
-they correct (recording hardware, channel montage, sampling rate, filtering) is a low-level signal
-statistic, so it should concentrate in the patch embedding and the early blocks. Their own Table 2
-is the first hint: unfreezing all layers *hurts* CBraMod, 31.25 to 29.41 AUCPR, which cannot happen
-if drift were uniform.
+The starting claim, from Dani and Liebe (MICCAI 2026, arXiv:2608.24727): adapting the final encoder block
+with each model's own SSL objective improves CHB-MIT seizure detection by +36.2 and +29.5 ROC-AUC over
+linear probing. This repository holds the code and the analysis outputs that test it.
 
-Three deliverables: a per-layer drift diagnostic, drift-targeted adaptation measured against their
-last-layer method under their own fixed-compute protocol, and a patient-level leak audit of their
-CHB-MIT split.
+## What the analyses show
 
-## Where things are
-
-| document | holds |
+| finding | read it in |
 |---|---|
-| `EXECUTOR-PLAN.md` §5 | package architecture, artifact schemas, the layer registry, data staging, toolchain |
-| `EXECUTOR-PLAN.md` §6 | compute, <JOB_LIBRARY> job submission, quota and the single job slot, cost model |
-| `EXECUTOR-PLAN.md` Appendix A | facts verified 2026-10-14, do not re-derive |
-| `EXECUTOR-PLAN.md` Appendix B | assumptions that are load-bearing and still unverified |
+| No shipped configuration sets `foundation_dir`, so the SSL step adapts a **randomly initialised** encoder | `artifacts/analysis/E2/` |
+| The CBraMod probe reads the reconstruction head with **dropout active** | `artifacts/analysis/E2/`, `tests/test_released_differential.py` |
+| From the pretrained weights with a probe on the encoder output, the adaptation gain is **-0.6** (BIOT) and **+0.01** (CBraMod) over five seeds | `artifacts/analysis/stats/`, `artifacts/tables/` |
+| Under equal-budget probe tuning, 18 related comparisons run **-1.1 to +5.7** points and none meets the registered gain criterion | `artifacts/analysis/D31/` |
+| Two larger fixed-probe gains of about **+21** shrink to **+2.4** and **+3.1** under the same tuning | `artifacts/analysis/D32/` |
+| With a convex probe, all 840 candidate fits converged numerically and no contrast showed a gain | `artifacts/analysis/D33/` |
+| The CHB-MIT pipeline is **inherited**: of 12 papers carrying its fingerprint, 10 state its 326,993-window segmentation and only 3 have the two-patient split in their own code | `artifacts/analysis/C1/verdicts.json` |
 
-Scientific design, analysis plan, and schedule are not written yet.
+Each analysis directory holds its reader's output and an independent re-check. Every figure in
+`artifacts/figures/` has an entry in `captions.md`.
 
-## Status (2026-10-20)
+## What is in here
 
-Package built and tested; CHB-MIT runs done (wave 1, reproduction screen, 5-seed confirmation;
-~$293). The paper's headline result does not reproduce with the pretrained BIOT checkpoint and is
-matched only by the released code's random-init path (notes/results-wave1.md). Replication search
-closed (notes/decisions.md D14); next: the C2/C3 audit test, then our own experiments.
-Where to look: NEXT-STEPS.md (what is next), notes/WORKLOG.md (what was done), notes/RUNLOG.md
-(jobs and cost), notes/decisions.md (decisions, each marked before/after data), CLAUDE.md (rules).
+| path | contents |
+|---|---|
+| `src/eegdrift/` | 25 modules: the models, the adaptation arms, the probes (`probe.py` for the fixed recipe, `probe_grid.py` for the tuned and convex probes) |
+| `scripts/` | job submission and readers; `scripts/analysis/` holds 42 readers, one per experiment |
+| `tests/` | 14 test files, including a differential test against the released modules |
+| `configs/` | data, model and job configuration, and the CHB-MIT and Siena seizure tables |
+| `artifacts/analysis/` | the analysis outputs: 185 files across the experiment directories |
+| `artifacts/tables/` | 61 generated tables |
+| `artifacts/figures/` | 21 figures with `captions.md` |
+| `notes/decisions.md` | the dated decision log: every choice, and whether it was made before or after seeing the data |
+| `notes/RUNLOG.md` | one row per job: status, billable seconds, cost |
+| `docs/REPRODUCE.md` | how to re-derive the numbers, at three levels of cost |
+
+## What is NOT in here, and where to get it
+
+| not included | size | how to obtain |
+|---|---|---|
+| the per-run **result records** and released-code run outputs | about 2.6 GB | the supplement archive that accompanies the paper |
+| the CHB-MIT and Siena **window stores** | about 172 GB | rebuilt by `scripts/preprocess_chbmit.py` and `scripts/preprocess_siena.py` from PhysioNet |
+| the two **pretrained checkpoints** | 32 MB | public URLs and SHA-256 in `docs/REPRODUCE.md` |
+| most **per-window score archives** | over 1.6 GB | regenerated by re-running the command in each record |
+
+The readers in `scripts/analysis/` need the result records, so they run against the supplement archive
+rather than this repository alone. `artifacts/analysis/` here is their saved output.
+
+## Checking it yourself
+
+```bash
+.venv/bin/python -m pytest -q && .venv/bin/python -m ruff check src tests scripts sm_entry.py
+```
+
+With the supplement archive's records in place, `docs/REPRODUCE.md` gives three levels: CPU from the saved
+records, CPU from per-window scores, and GPU retraining.
+
+## How the evidence is organised
+
+Protocols are frozen in `notes/decisions.md` before their runs, and every later change is appended as a
+dated amendment that records what was wrong, rather than by editing the original. That is why the log holds
+corrections alongside results: the equivalence count for the convex probe, for instance, is 5 of 8 under
+the planned inference and 6 of 8 under ordinary t, and the log states both and which was planned.
