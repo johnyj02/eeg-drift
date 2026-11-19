@@ -15,3 +15,23 @@ build/
 
 # Build artifacts
 *.egg-info/
+
+# macOS archive metadata
+._*
+.DS_Store
+
+# Manuscript sources and private working files
+paper/
+notes/WORKLOG.md
+notes/author-email-draft.md
+notes/review-r*.md
+notes/jobs-*.txt
+notes/results-*.md
+notes/siena-spec.md
+notes/cbramod-check.md
+CLAUDE.md
+NEXT-STEPS.md
+EXECUTOR-PLAN.md
+OVERVIEW.md
+CHECKLIST.md
+.claude/
